@@ -15,27 +15,27 @@ class CreateBedrijfsTable extends Migration
     {
         Schema::create('bedrijfs', function (Blueprint $table) {
             $table->id();
-            $table->string('naam');
+            $table->string('bedrijfsnaam');
             $table->string('standaardWachtwoord');
             $table->timestamps();
         });
         DB::table('bedrijfs')->insert(
             [
                 [
-                    'naam' => 'apple',
+                    'bedrijfsnaam' => 'Apple',
                     'standaardWachtwoord'  =>'apple123'
 
                 ],
                 [
-                    'naam' => 'samsung',
+                    'bedrijfsnaam' => 'Samsung',
                     'standaardWachtwoord'  =>'samsung123'
                 ],
                 [
-                    'naam' => 'aldi',
+                    'bedrijfsnaam' => 'Aldi',
                     'standaardWachtwoord'  =>'aldi123'
                 ],
                 [
-                    'naam' => 'dopper',
+                    'bedrijfsnaam' => 'Dopper',
                     'standaardWachtwoord'  =>'dopper123'
                 ],
 

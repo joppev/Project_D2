@@ -8,7 +8,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    public function Bedrijf()
+
+    public function bedrijf()
     {
         return $this->belongsTo('App\Bedrijf')->withDefault();
     }
@@ -19,6 +20,7 @@ class User extends Authenticatable
     }
 
     use Notifiable;
+
 
     /**
      * The attributes that are mass assignable.

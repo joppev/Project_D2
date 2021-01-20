@@ -10903,3 +10903,15 @@ a.text-dark:focus {
   }
 }
 
+.size {
+  min-height: 500px;
+}
+
+.bg-nav {
+  background-color: #ffffff;
+}
+
+.bg-bg {
+  background-color: grey;
+}
+

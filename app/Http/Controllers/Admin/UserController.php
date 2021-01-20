@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Bedrijf;
+use App\Gebruiker;
 use App\Http\Controllers\Controller;
 use App\User;
 use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,10 +20,21 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('naam')
+
             ->get();
-        $user = compact('users');
-        Json::dump($user);
-        return view('admin.users', $user);
+
+
+        $bedrijven = Bedrijf::orderBy('bedrijfsnaam')
+            ->get();
+
+        $result = compact('users','bedrijven');
+        Json::dump($result);
+
+
+
+        return view('admin.user.users');
+
+
     }
 
     /**
@@ -63,7 +77,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $result = compact('user');
+        Json::dump($result);
+        return view('admin.user.edit', $result);
     }
 
     /**
@@ -87,5 +103,19 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function qryUsers(){
+
+        $users = DB::table('users')
+            ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+            ->get();
+
+
+        Json::dump($users);
+
+        return $users;
+
+
     }
 }

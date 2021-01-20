@@ -19,9 +19,8 @@ Route::redirect('home', '/');
 Route::view('/', 'home');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    route::redirect('/', 'records');
     Route::resource('users', 'Admin\UserController');
-    Route::get('records', 'Admin\RecordController@index');
+    Route::get('qryUsers', 'Admin\UserController@qryUsers');
 });
 
 

@@ -17,5 +17,8 @@
 {{--  Footer  --}}
 @include('shared.footer')
 <script src="{{ mix('js/app.js') }}"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js%22%3E"> </script>
+@yield('script_after')
 </body>
 </html>

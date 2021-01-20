@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateGebruikersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,28 +13,32 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('gebruikers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bedrijfs_id');
             $table->string('naam');
             $table->string('voornaam');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('wachtwoord');
             $table->boolean('isAdmin');
             $table->boolean('isChauffeur');
             $table->boolean('isReceptionist');
             $table->boolean('isLogistiek');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('bedrijfs_id')->references('id')->on('bedrijfs')->onDelete('cascade')->onUpdate('cascade');
+
         });
 
-        DB::table('users')->insert(
+        DB::table('gebruikers')->insert(
             [
                 [
+                    'bedrijfs_id' => 1,
                     'naam' => 'Doe',
                     'voornaam' => 'Joe',
                     'email' => 'john.doe@example.com',
-                    'password' => Hash::make('user1234'),
+                    'wachtwoord' => Hash::make('user1234'),
                     'isAdmin' => false,
                     'isChauffeur' => true,
                     'isReceptionist' => false,
@@ -43,10 +47,11 @@ class CreateUsersTable extends Migration
                     'email_verified_at' => now()
                 ],
                 [
+                    'bedrijfs_id' => 1,
                     'naam' => 'admin',
                     'voornaam' => 'admin',
                     'email' => 'admin@example.com',
-                    'password' => Hash::make('admin1234'),
+                    'wachtwoord' => Hash::make('admin1234'),
                     'isAdmin' => true,
                     'isChauffeur' => false,
                     'isReceptionist' => false,
@@ -55,10 +60,11 @@ class CreateUsersTable extends Migration
                     'email_verified_at' => now()
                 ],
                 [
+                    'bedrijfs_id' => 1,
                     'naam' => 'chauffeur',
                     'voornaam' => 'chauffeur',
                     'email' => 'chauffeur@example.com',
-                    'password' => Hash::make('user1234'),
+                    'wachtwoord' => Hash::make('user1234'),
                     'isAdmin' => false,
                     'isChauffeur' => true,
                     'isReceptionist' => false,
@@ -67,10 +73,11 @@ class CreateUsersTable extends Migration
                     'email_verified_at' => now()
                 ],
                 [
+                    'bedrijfs_id' => 1,
                     'naam' => 'logistiek',
                     'voornaam' => 'logistiek',
                     'email' => 'logistiek@example.com',
-                    'password' => Hash::make('admin1234'),
+                    'wachtwoord' => Hash::make('admin1234'),
                     'isAdmin' => false,
                     'isChauffeur' => false,
                     'isReceptionist' => false,
@@ -80,10 +87,11 @@ class CreateUsersTable extends Migration
                 ],
 
                 [
+                    'bedrijfs_id' => 1,
                     'naam' => 'receptionist',
                     'voornaam' => 'receptionist',
                     'email' => 'receptionist@example.com',
-                    'password' => Hash::make('user1234'),
+                    'wachtwoord' => Hash::make('user1234'),
                     'isAdmin' => false,
                     'isChauffeur' => false,
                     'isReceptionist' => true,
@@ -103,6 +111,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('gebruikers');
     }
 }

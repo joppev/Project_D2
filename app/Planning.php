@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Planning extends Model
 {
-    public function user()
+    public function gebruiker()
     {
-        return $this->belongsTo('App\User')->withDefault();
+        return $this->belongsTo('App\Gebruiker')->withDefault();
     }
 
     public function kade()
     {
         return $this->belongsTo('App\Kade')->withDefault();
     }
-    public function TijdTabel()
+    public function tijdTabel()
     {
-        return $this->belongsTo('App\Tijdtabel')->withDefault();
+        return $this->belongsTo('App\TijdTabel')->withDefault();
     }
 }
