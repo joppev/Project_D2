@@ -8,6 +8,16 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function Bedrijf()
+    {
+        return $this->belongsTo('App\Bedrijf')->withDefault();
+    }
+
+    public function Plannings()
+    {
+        return $this->hasMany('App\Planning');
+    }
+
     use Notifiable;
 
     /**

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title>Project2D</title>
 </head>
-<body>
+<body class="">
 {{--  Navigation  --}}
 
 @include('shared.navigation')

@@ -19,7 +19,7 @@ class CreateBedrijfsTable extends Migration
             $table->string('standaardWachtwoord');
             $table->timestamps();
         });
-        DB::table('tijd_tabels')->insert(
+        DB::table('bedrijfs')->insert(
             [
                 [
                     'naam' => 'apple',

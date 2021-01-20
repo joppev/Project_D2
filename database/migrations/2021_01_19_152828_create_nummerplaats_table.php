@@ -26,15 +26,15 @@ class CreateNummerplaatsTable extends Migration
             [
                 [
                     'bedrijfID' => 1,
-                    'plaatscombinatie' => "plaatscombinatie1",
+                    'plaatcombinatie' => "plaatcombinatie1",
                 ],
                 [
                 'bedrijfID' => 2,
-                'plaatscombinatie' => "plaatscombinatie2",
+                'plaatcombinatie' => "plaatcombinatie2",
             ],
                 [
                     'bedrijfID' => 3,
-                    'plaatscombinatie' => "plaatscombinatie3",
+                    'plaatcombinatie' => "plaatcombinatie3",
                 ]
             ]);
     }
