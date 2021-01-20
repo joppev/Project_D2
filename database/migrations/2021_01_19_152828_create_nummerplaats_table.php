@@ -22,6 +22,21 @@ class CreateNummerplaatsTable extends Migration
             $table->foreign('bedrijfID')->references('id')->on('bedrijfs')->onDelete('cascade')->onUpdate('cascade');
 
         });
+        DB::table('nummerplaats')->insert(
+            [
+                [
+                    'bedrijfID' => 1,
+                    'plaatscombinatie' => "plaatscombinatie1",
+                ],
+                [
+                'bedrijfID' => 2,
+                'plaatscombinatie' => "plaatscombinatie2",
+            ],
+                [
+                    'bedrijfID' => 3,
+                    'plaatscombinatie' => "plaatscombinatie3",
+                ]
+            ]);
     }
 
     /**

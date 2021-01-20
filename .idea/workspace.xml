@@ -3,10 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="627a060e-04d4-4d0a-9107-5743a6d64627" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_152711_create_statuses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_152711_create_statuses_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_152739_create_tijd_tabels_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_152739_create_tijd_tabels_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_152790_create_bedrijfs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_152790_create_bedrijfs_table.php" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_152828_create_nummerplaats_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_152828_create_nummerplaats_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_242657_create_kades_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_242657_create_kades_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_19_252613_create_plannings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_19_252613_create_plannings_table.php" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +21,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -140,6 +148,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1nHsqabNIfreCHH8tqOGHtfczw7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -152,13 +161,28 @@
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="627a060e-04d4-4d0a-9107-5743a6d64627" name="Default Changelist" comment="" />

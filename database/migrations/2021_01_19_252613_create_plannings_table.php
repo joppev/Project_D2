@@ -20,7 +20,7 @@ class CreatePlanningsTable extends Migration
             $table->foreignId('tijdTabelID');
             $table->string('proces');
             $table->string('ladingDetails');
-            $table->string('aantal');
+            $table->integer('aantal');
             $table->boolean('isAanwezig');
             $table->boolean('isAfgewerkt');
             $table->timestamps();
@@ -30,6 +30,41 @@ class CreatePlanningsTable extends Migration
             $table->foreign('tijdTabelID')->references('id')->on('tijd_tabels')->onDelete('cascade')->onUpdate('cascade');
 
         });
+        DB::table('plannings')->insert(
+            [
+                [
+                    'gebruikerID' => 1,
+                    'kadeID' => 1,
+                    'tijdTabelID' => 1,
+                    'proces' => "proces1",
+                    'ladingDetails' => "ladingDetails1",
+                    'aantal' => 2,
+                    'isAanwezig' => true,
+                    'isAfgewerkt' => false
+                ],
+                [
+                    'gebruikerID' => 2,
+                    'kadeID' => 2,
+                    'tijdTabelID' => 2,
+                    'proces' => "proces2",
+                    'ladingDetails' => "ladingDetails2",
+                    'aantal' => 3,
+                    'isAanwezig' => false,
+                    'isAfgewerkt' => false
+                ],
+                [
+                    'gebruikerID' => 3,
+                    'kadeID' => 3,
+                    'tijdTabelID' => 3,
+                    'proces' => "proces3",
+                    'ladingDetails' => "ladingDetails3",
+                    'aantal' => 3,
+                    'isAanwezig' => true,
+                    'isAfgewerkt' => true
+                ],
+
+            ]
+        );
     }
 
     /**
