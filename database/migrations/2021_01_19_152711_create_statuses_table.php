@@ -18,6 +18,29 @@ class CreateStatusesTable extends Migration
             $table->string('status');
             $table->timestamps();
         });
+
+        DB::table('statuses')->insert(
+            [
+                [
+                    'status' => 'status1',
+
+                ],
+                [
+                    'status' => 'status2',
+                ],
+                [
+                    'status' => 'status3',
+                ],
+                [
+                    'status' => 'status4',
+                ],
+
+                [
+                    'status' => 'status5',
+                ],
+            ]
+        );
+
     }
 
     /**

@@ -20,7 +20,32 @@ class CreateTijdTabelsTable extends Migration
 
             $table->timestamps();
         });
-    }
+        DB::table('tijd_tabels')->insert(
+            [
+                [
+                    'startTijd' => '8:30',
+                    'stopTijd'  =>'9:00'
+
+                ],
+                [
+                    'startTijd' => '9:00',
+                    'stopTijd'  =>'9:30'
+                ],
+                [
+                    'startTijd' => '9:00',
+                    'stopTijd'  =>'9:30'
+                ],
+                [
+                    'startTijd' => '9:30',
+                    'stopTijd'  =>'10:00'
+                ],
+
+                [
+                    'startTijd' => '10:30',
+                    'stopTijd'  =>'11:00'
+                ],
+            ]
+        );}
 
     /**
      * Reverse the migrations.
