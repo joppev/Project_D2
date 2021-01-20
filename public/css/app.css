@@ -10903,3 +10903,7 @@ a.text-dark:focus {
   }
 }
 
+.size {
+  min-height: 500px;
+}
+
