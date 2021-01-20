@@ -1,10 +1,14 @@
 .size {
     min-height: 500px;
 }
-.bg-nav {
-    background-color: $nav;
-}
+
 .bg-bg {
-    background-color: $bg;
+    background-color: $navbar;
 }
 
+.navbar {
+   background-color: $navbar;}
+
+.container {
+    !important;background-color: $achtergrondkleur;
+}
