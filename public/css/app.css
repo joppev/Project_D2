@@ -1,6 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css);
-@import url(https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css);@import url(https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
@@ -10905,21 +10903,27 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background-color: #eaf2f8 !important;
+}
+
 .size {
   min-height: 500px;
 }
 
-
 .bg-bg {
-  background-color: #012340;
+  background-color: #012340 !important;
 }
 
 .navbar {
-  background-color: #012340;
+  background-color: #012340 !important;
 }
 
-.body {
-  background-color: #eaf2f8;
+.navbar a {
+  color: #eaf2f8 !important;
+}
 
+.navbar a:hover {
+  color: #7eafd7 !important;
 }
 

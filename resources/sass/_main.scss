@@ -1,14 +1,23 @@
+body {
+    background-color: $achtergrondkleur !important;
+}
+
 .size {
     min-height: 500px;
 }
 
 .bg-bg {
-    background-color: $achtergrondkleur;
+    background-color: $navbar!important;
 }
 
 .navbar {
-   background-color: $navbar;}
+    background-color: $navbar!important;
 
-.container {
-    !important;background-color: $achtergrondkleur;
+}
+.navbar a {
+    color: $achtergrondkleur!important;
+}
+
+.navbar a:hover {
+    color: $accentkleur!important;
 }
