@@ -1,4 +1,4 @@
-<div class="modal" id="model-home">
+<div class="modal " id="model-home">
     <div class="modal-dialog-centered modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

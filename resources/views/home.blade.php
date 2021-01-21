@@ -2,6 +2,8 @@
 
 @section('main')
     <h1>Homepage</h1>
+    <br>
+    <hr>
     @auth
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
@@ -13,6 +15,7 @@
                 <tr>
                     <th>Tijdstip</th>
                     <th>Bedrijf</th>
+                    <th>chauffeur</th>
                     <th>Nummerplaat</th>
                     <th>loscade</th>
                     <th>Details</th>
@@ -183,7 +186,7 @@
                         let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -202,7 +205,7 @@
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -222,7 +225,7 @@
                             tr = `<tr class="table-warning">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -244,7 +247,7 @@
                             tr = `<tr class="table-success">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
