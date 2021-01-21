@@ -16,12 +16,13 @@ body {
     background-color: $navbar!important;
 
 }
-.navbar a {
+.navbar a ,navbar-toggler {
     color: $achtergrondkleur!important;
     background-color: inherit;
 }
 
-.navbar a:hover {
+.navbar a:hover, navbar-toggler:hover
+{
     color: $accentkleur!important;
     background-color: inherit;
 }

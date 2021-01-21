@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md shadow-sm">
+<nav class="navbar navbar-expand-md shadow-sm navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsNav">
@@ -9,9 +9,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact-us">Contact</a>
+                @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
+
+
+                    <li class="nav-item">
+                    <a class="nav-link" href="/OverzichtGebruiker">Overzicht gebruiker</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/OverzichtBedrijven">Overzicht bedrijven</a>
+                </li>
+                @endif
+                @if(auth()->user()->isLogistiek)
+                <li class="nav-item">
+                    <a class="nav-link" href="/OverzichtKades">Overzicht Kades</a>
+                </li>
+                @endif
             </ul>
             {{--  Auth navigation  --}}
             <ul class="navbar-nav ml-auto">
@@ -35,13 +48,7 @@
                             <a class="dropdown-item" href="/user/history"><i class="fas fa-box-open"></i>Order history</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                            @if(auth()->user()->isAdmin)
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/admin/genres"><i class="fas fa-microphone-alt"></i>Genres</a>
-                                <a class="dropdown-item" href="/admin/records"><i class="fas fa-compact-disc"></i>Records</a>
-                                <a class="dropdown-item" href="/admin/users"><i class="fas fa-users-cog"></i>Users</a>
-                                <a class="dropdown-item" href="/admin/orders"><i class="fas fa-box-open"></i>Orders</a>
-                            @endif
+
                         </div>
                     </li>
                 @endauth
