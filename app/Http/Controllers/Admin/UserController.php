@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('admin/users');
     }
 
     /**
@@ -55,7 +55,45 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bedrijven = DB::table('bedrijfs')
+            ->get();
+        $this->validate($request,[
+            'naam' => 'required|min:3'
+        ]);
+
+        $user = new User();
+
+        $user->naam = $request->naam;
+        $user->voornaam = $request->voornaam;
+        $user->email = $request->email;
+        $user->bedrijfsID = (int)$request->bedrijf_id;
+        $rol = $request->rol;
+
+        foreach( $bedrijven as $bedrijf){
+            if($user->bedrijfsID === $bedrijf->id){
+                $user->password = $bedrijf->standaardWachtwoord;
+            }
+
+        }
+        if($rol === "1"){
+            $user->isChauffeur = true;
+            $user->isLogistiek = false;
+            $user->isReceptionist = false;
+        } elseif($rol === "2"){
+            $user->isChauffeur = false;
+            $user->isLogistiek = true;
+            $user->isReceptionist = false;
+        } else{
+            $user->isChauffeur = false;
+            $user->isLogistiek = false;
+            $user->isReceptionist = true;
+        }
+        $user->isAdmin = false;
+        $user->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "<b>$user->voornaam $user->naam</b> is toegevoegd."
+        ]);
     }
 
     /**
@@ -66,7 +104,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return redirect('admin/users');
     }
 
     /**
@@ -77,9 +115,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $result = compact('user');
-        Json::dump($result);
-        return view('admin.user.edit', $result);
+        return redirect('admin/users');
     }
 
     /**
@@ -91,7 +127,39 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+
+        $this->validate($request,[
+            'naam' => 'required|min:3,' . $user->id
+
+        ]);
+
+        $user->naam = $request->naam;
+        $user->voornaam = $request->voornaam;
+        $user->email = $request->email;
+        $user->bedrijfsID = (int)$request->bedrijf_id;
+        $rol = $request->rol;
+
+
+
+        if($rol === "1"){
+            $user->isChauffeur = true;
+            $user->isLogistiek = false;
+            $user->isReceptionist = false;
+        } elseif($rol === "2"){
+            $user->isChauffeur = false;
+            $user->isLogistiek = true;
+            $user->isReceptionist = false;
+        } else{
+            $user->isChauffeur = false;
+            $user->isLogistiek = false;
+            $user->isReceptionist = true;
+        }
+        $user->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "<b>$user->voornaam $user->naam</b> is aangepast. "
+        ]);
     }
 
     /**
@@ -102,13 +170,18 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json([
+            'type' => 'success',
+            'text' => "<b>$user->voornaam $user->naam</b> is verwijderd."
+        ]);
     }
 
     public function qryUsers(){
 
         $users = DB::table('users')
             ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+            ->select('users.*', 'bedrijfs.bedrijfsnaam')
             ->get();
 
 
@@ -116,6 +189,14 @@ class UserController extends Controller
 
         return $users;
 
+    }
 
+    public function qryUsers2()
+    {
+        $bedrijven = DB::table('bedrijfs')
+            ->get();
+
+        Json::dump($bedrijven);
+        return $bedrijven;
     }
 }
