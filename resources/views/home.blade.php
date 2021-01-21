@@ -51,8 +51,17 @@
 @section('script_after')
     <script>
 
+
+
+        loadTable();
+        loadTable2();
+        setInterval(function(){
+            loadTable();
+            loadTable2();
+        }, 10000);
+
         $('tbody').on('click', '.btn-info-home', function () {
-            console.log("help clicked");
+
             // Update the modal
             let id = $(this).closest('a').data('id');
             $.ajax({
@@ -67,14 +76,9 @@
             $('.modal-title').text();
             // Show the modal
             $('#model-home').modal('show');
-            console.log("help modal shown");
+
         });
 
-        $(function () {
-            loadTable();
-            loadTable2();
-        });
-        // Load genres with AJAX
         function loadTable() {
             $.getJSON('home/kade')
                 .done(function (data) {
@@ -121,13 +125,13 @@
         function loadTable2() {
             $.getJSON('home/dagplanning')
                 .done(function (data) {
-                    console.log('data', data);
+
                     // Clear tbody tag
-                    $('.tablplanning tbody').empty();
+                    $('.tableplanning tbody').empty();
 
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
-                        console.log(value)
+
 
                         let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
