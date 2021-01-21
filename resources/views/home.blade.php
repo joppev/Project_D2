@@ -103,9 +103,10 @@
                     console.log('data', data);
                     // Clear tbody tag
                     $('.tablplanning tbody').empty();
+
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
-
+                        console.log(value)
                         let tr = `<tr class="">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -124,7 +125,66 @@
                                </td>
 
                            </tr>`;
+                        if (value.isAfgewerkt == 0 && data[0].dt2 >= value.startTijd){
+                            tr = `<tr class="table-danger">
+                               <td>${value.startTijd} - ${value.stopTijd}</td>
+                               <td>${value.bedrijfsnaam}</td>
 
+                               <td>
+
+                                ${value.plaatcombinatie}
+
+                               </td>
+                               <td>${value.naam}</td>
+                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                                        data-toggle="tooltip"
+                                        title="info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                               </td>
+
+                           </tr>`;
+                        }
+                        if (value.isAanwezig == 0 && value.status == "Niet-vrij"){
+                            tr = `<tr class="table-warning">
+                               <td>${value.startTijd} - ${value.stopTijd}</td>
+                               <td>${value.bedrijfsnaam}</td>
+
+                               <td>
+
+                                ${value.plaatcombinatie}
+
+                               </td>
+                               <td>${value.naam}</td>
+                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                                        data-toggle="tooltip"
+                                        title="info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                               </td>
+
+                           </tr>`;
+                        }
+                        if (value.isAfgewerkt == 1 ){
+                            tr = `<tr class="table-success">
+                               <td>${value.startTijd} - ${value.stopTijd}</td>
+                               <td>${value.bedrijfsnaam}</td>
+
+                               <td>
+
+                                ${value.plaatcombinatie}
+
+                               </td>
+                               <td>${value.naam}</td>
+                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                                        data-toggle="tooltip"
+                                        title="info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                               </td>
+
+                           </tr>`;
+                        }
                         // Append row to tbody
                         $('.tableplanning tbody').append(tr);
                     });
