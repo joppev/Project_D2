@@ -5,9 +5,10 @@
     @auth
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
-        <h2>Dagplanning</h2>
-        <div class="table-responsive">
-            <table class="table1">
+<div class="row">
+        <div class="table-responsive col-8">
+            <h2>Dagplanning</h2>
+            <table class="table tableplanning">
                 <thead>
                 <tr>
                     <th>Tijdstip</th>
@@ -24,9 +25,10 @@
         </div>
 
 
-        <h2>Kade status</h2>
-        <div class="table-responsive">
-            <table class="table">
+
+        <div class="table-responsive col-4 ">
+            <h2>kade status</h2>
+            <table class="table tablekade">
                 <thead>
                 <tr>
                     <th>Kade naam</th>
@@ -39,6 +41,7 @@
                 </tbody>
             </table>
         </div>
+</div>
     @endif
     @endauth
 
@@ -55,7 +58,7 @@
             $.getJSON('home/kade')
                 .done(function (data) {
                     // Clear tbody tag
-                    $('.table tbody').empty();
+                    $('.tablekade tbody').empty();
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
                     let tr = ''
@@ -85,7 +88,7 @@
 
                         }
                         // Append row to tbody
-                        $('.table tbody').append(tr);
+                        $('.tablekade tbody').append(tr);
                     });
                 })
                 .fail(function (e) {
@@ -99,19 +102,31 @@
                 .done(function (data) {
                     console.log('data', data);
                     // Clear tbody tag
-                    $('.table1 tbody').empty();
+                    $('.tablplanning tbody').empty();
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
 
-                        let tr = `<tr class="table-success">
-                               <td>${value.startTijd} - {value.stopTijd}</td>
-                               <td>${value.bedrijf}</td>
-                               <td>${value.nummerplaar}</td>
-                               <td>${value.loskadeID}</td>
+                        let tr = `<tr class="">
+                               <td>${value.startTijd} - ${value.stopTijd}</td>
+                               <td>${value.bedrijfsnaam}</td>
+
+                               <td>
+
+                                ${value.plaatcombinatie}
+
+                               </td>
+                               <td>${value.naam}</td>
+                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                                        data-toggle="tooltip"
+                                        title="info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                               </td>
+
                            </tr>`;
 
                         // Append row to tbody
-                        $('.table1 tbody').append(tr);
+                        $('.tableplanning tbody').append(tr);
                     });
                 })
                 .fail(function (e) {

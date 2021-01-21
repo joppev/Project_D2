@@ -10922,6 +10922,16 @@ body {
   background-color: #012340 !important;
 }
 
+a {
+  background-color: inherit !important;
+  color: #1a2601 !important;
+}
+
+a:hover {
+  color: #7eafd7 !important;
+  background-color: inherit;
+}
+
 .navbar a,
 navbar-toggler {
   color: #eaf2f8 !important;

@@ -16,6 +16,16 @@ body {
     background-color: $navbar!important;
 
 }
+
+a{
+    background-color: inherit !important;
+    color: $tekstkleur !important;
+}
+a:hover{
+    color: $accentkleur!important;
+    background-color: inherit;
+}
+
 .navbar a ,navbar-toggler {
     color: $achtergrondkleur!important;
     background-color: inherit;
@@ -26,5 +36,7 @@ body {
     color: $accentkleur!important;
     background-color: inherit;
 }
+
+
 
 

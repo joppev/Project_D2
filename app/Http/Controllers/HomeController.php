@@ -42,8 +42,11 @@ class HomeController extends Controller
     }
     public function dagplanning(){
         $kades = Planning::orderBy('startTijd')
-            ->LeftJoin('tijd_tabels', 'kade.startTijd', '=', 'tijd_tabels.startTijd')
-            ->LestJoin('tijd_tabels', 'kade.stopTijd', '=', 'tijd_tabels.stopTijd')
+            ->LeftJoin('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+            ->LeftJoin('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
+            ->LeftJoin('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->LeftJoin('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+            ->LeftJoin('kades', 'plannings.kadeID', '=', 'kades.id')
             ->get();
 
 
