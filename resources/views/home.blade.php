@@ -65,17 +65,64 @@
             // Update the modal
             let id = $(this).closest('a').data('id');
             $.ajax({
-                url: '/home/getinfo',
-                type: 'GET',
-                data: {id:id},
-                success: function (data) {
-                    console.log(data);
-                    console.log("success");
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/getinfo', // This is the url we gave in the route
+                data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+                success: function(data){ // What to do if we succeed
+                    console.log(data)
+                    var startTijd = data.startTijd;
+                    var stopTijd = data.stopTijd;
+                    var bedrijf = data.bedrijfsnaam;
+                    var nummerplaat = data.plaatcombinatie;
+                    var kade = data.naam;
+                    var kadeStatus = data.status;
+                    var ladingDetails = data.ladingDetails;
+                    var aantal = data.aantal;
+                    var vrachtwagenstatus = ""
+                    if(data.isAanwezig){
+                        vrachtwagenstatus = "aanwezig";
+                    }
+                    else{
+                        vrachtwagenstatus = "niet-aanwezig";
+                    }
+                    var verwerkingsstatus = ""
+                    if(data.isAfgewerkt){
+                        verwerkingsstatus = "afgewerkt";
+                    }
+                    else{
+                        verwerkingsstatus = "niet-afgewerkt";
+                    }
+
+
+                    var proces = data.proces;
+                    var voornaam = data.voornaam;
+
+                    $('.modal-title').text('extra info');
+                    var tijd = startTijd && ' - ' && stopTijd
+                    $('#tijd').text(tijd);
+                    $('#bedrijf').text(bedrijf);
+                    $('#nummerplaat').text(nummerplaat);
+                    $('#kade').text(kade);
+                    $('#kadeStatus').text(kadeStatus);
+                    $('#ladingDetails').text(ladingDetails);
+                    $('#aantal').text(aantal);
+                    $('#vrachtwagenstatus').text(vrachtwagenstatus);
+                    $('#verwerkingsstatus').text(verwerkingsstatus);
+                    $('#voornaam').text(voornaam);
+
+                    // Show the modal
+                    $('#model-home').modal('show');
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if($(this).is(':checked')) {
+                        $(this).prop( "checked", false );
+                    }else {
+                        $(this).prop( "checked", true );
+                    }
                 }
-            });
-            $('.modal-title').text();
-            // Show the modal
-            $('#model-home').modal('show');
+            })
 
         });
 

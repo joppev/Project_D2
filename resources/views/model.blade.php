@@ -8,7 +8,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h1>...</h1>
+                <h1 id="tijd"></h1>
+                <div class="form-group">
+                    <div id="tijd"></div>
+                </div>
+
+
+
+
             </div>
         </div>
     </div>
