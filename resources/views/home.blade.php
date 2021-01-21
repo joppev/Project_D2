@@ -100,8 +100,8 @@
 
                     var proces = data.proces;
                     var voornaam = data.voornaam;
-
-                    $('.modal-title').text('extra info');
+                    var title = "extra info chauffeur: " + voornaam + ", bedrijf: " + bedrijf
+                    $('.modal-title').text(title);
                     $('#startTijd').text(startTijd);
                     $('#stopTijd').text(stopTijd);
                     $('#bedrijf').text(bedrijf);
