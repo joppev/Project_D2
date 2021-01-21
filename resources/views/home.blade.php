@@ -46,9 +46,30 @@
     @endauth
 
 @endsection
+@include('model')
 
 @section('script_after')
     <script>
+
+        $('tbody').on('click', '.btn-info-home', function () {
+            console.log("help clicked");
+            // Update the modal
+            let id = $(this).closest('a').data('id');
+            $.ajax({
+                url: '/home/getinfo',
+                type: 'GET',
+                data: {id:id},
+                success: function (data) {
+                    console.log(data);
+                    console.log("success");
+                }
+            });
+            $('.modal-title').text();
+            // Show the modal
+            $('#model-home').modal('show');
+            console.log("help modal shown");
+        });
+
         $(function () {
             loadTable();
             loadTable2();
@@ -107,8 +128,9 @@
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
                         console.log(value)
+
                         let tr = `<tr class="">
-                               <td>${value.startTijd} - ${value.stopTijd}</td>
+                               <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
 
                                <td>
@@ -117,7 +139,7 @@
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
@@ -136,7 +158,7 @@
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
@@ -156,11 +178,13 @@
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}'class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
+
                                         </a>
+
                                </td>
 
                            </tr>`;
@@ -176,7 +200,7 @@
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>

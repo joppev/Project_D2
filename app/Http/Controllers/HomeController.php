@@ -42,6 +42,24 @@ class HomeController extends Controller
 
 
     }
+    public function getinfo(Request $request){
+        $id = $request->request->get('id');
+        $planningen = Planning::orderBy('startTijd')
+            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
+            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+            ->where('id',$id)
+            ->get();
+
+
+
+        return $planningen;
+
+
+    }
+
     public function dagplanning(Request $request){
         //12 uur voor huidig uur
         $dt = date('Y-m-d H:i',time()-43200);
