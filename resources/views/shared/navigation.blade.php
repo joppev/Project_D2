@@ -9,6 +9,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                @auth
                 @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
 
@@ -25,6 +26,7 @@
                     <a class="nav-link" href="/OverzichtKades">Overzicht Kades</a>
                 </li>
                 @endif
+                @endauth
             </ul>
             {{--  Auth navigation  --}}
             <ul class="navbar-nav ml-auto">

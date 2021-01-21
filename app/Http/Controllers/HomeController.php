@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Kade;
+use App\Planning;
+use App\TijdTabel;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -37,5 +39,14 @@ class HomeController extends Controller
         return $kades;
 
 
+    }
+    public function dagplanning(){
+        $kades = Planning::orderBy('naam')
+            ->LeftJoin('tijd_tabels', 'kade.startTijd', '=', 'tijd_tabels.startTijd')
+            ->LestJoin('tijd_tabels', 'kade.stopTijd', '=', 'tijd_tabels.stopTijd')
+            ->get();
+
+
+        return $kades;
     }
 }

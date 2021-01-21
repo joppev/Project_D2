@@ -18,6 +18,8 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::view('/', 'home');
+
+Route::get('home/dagplanning', 'HomeController@dagplanning');
 Route::get('home/kade', 'HomeController@kade');
 
 
