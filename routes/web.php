@@ -21,6 +21,7 @@ Route::view('/', 'home');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('users', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
+    Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
 });
 
 

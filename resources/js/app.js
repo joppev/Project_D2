@@ -1,4 +1,7 @@
 require('./bootstrap');
+
+
+
 window.Noty = require('noty');
 Noty.overrideDefaults({
     theme: 'bootstrap-v4',
@@ -6,6 +9,12 @@ Noty.overrideDefaults({
     layout: 'center',
     modal: true,
 });
+
+import Project2d from "./project2d";
+window.Project2d = Project2d;
+
+
+
 
 $(function () {
     $('nav i.fas').addClass('fa-fw mr-1');
