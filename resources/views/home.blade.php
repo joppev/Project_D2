@@ -99,8 +99,8 @@
                     var voornaam = data.voornaam;
 
                     $('.modal-title').text('extra info');
-                    var tijd = startTijd && ' - ' && stopTijd
-                    $('#tijd').text(tijd);
+                    $('#startTijd').text(startTijd);
+                    $('#stopTijd').text(stopTijd);
                     $('#bedrijf').text(bedrijf);
                     $('#nummerplaat').text(nummerplaat);
                     $('#kade').text(kade);
