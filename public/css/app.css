@@ -10912,18 +10912,23 @@ body {
 }
 
 .bg-bg {
+  color: inherit;
   background-color: #012340 !important;
 }
 
-.navbar {
+.navbar,
+.dropdown-menu {
+  color: inherit;
   background-color: #012340 !important;
 }
 
 .navbar a {
   color: #eaf2f8 !important;
+  background-color: inherit;
 }
 
 .navbar a:hover {
   color: #7eafd7 !important;
+  background-color: inherit;
 }
 
