@@ -11235,18 +11235,35 @@ body {
 }
 
 .bg-bg {
+  color: inherit;
   background-color: #012340 !important;
 }
 
-.navbar {
+.navbar,
+.dropdown-menu {
+  color: inherit;
   background-color: #012340 !important;
 }
 
-.navbar a {
-  color: #eaf2f8 !important;
+a {
+  background-color: inherit !important;
+  color: #1a2601 !important;
 }
 
-.navbar a:hover {
+a:hover {
   color: #7eafd7 !important;
+  background-color: inherit;
+}
+
+.navbar a,
+navbar-toggler {
+  color: #eaf2f8 !important;
+  background-color: inherit;
+}
+
+.navbar a:hover,
+navbar-toggler:hover {
+  color: #7eafd7 !important;
+  background-color: inherit;
 }
 

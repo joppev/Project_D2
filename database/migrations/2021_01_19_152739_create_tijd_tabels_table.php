@@ -15,34 +15,34 @@ class CreateTijdTabelsTable extends Migration
     {
         Schema::create('tijd_tabels', function (Blueprint $table) {
             $table->id();
-            $table->string('startTijd');
-            $table->string('stopTijd');
+            $table->dateTime('startTijd');
+            $table->dateTime('stopTijd');
 
             $table->timestamps();
         });
         DB::table('tijd_tabels')->insert(
             [
                 [
-                    'startTijd' => '8:30',
-                    'stopTijd'  =>'9:00'
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-20 8:30'),
+                    'stopTijd'  => DateTime::createFromFormat('Y-m-d H:i','2021-01-20 9:00')
 
                 ],
                 [
-                    'startTijd' => '9:00',
-                    'stopTijd'  =>'9:30'
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-21 9:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-21 9:30')
                 ],
                 [
-                    'startTijd' => '9:00',
-                    'stopTijd'  =>'9:30'
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-21 14:30'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-21 15:30')
                 ],
                 [
-                    'startTijd' => '9:30',
-                    'stopTijd'  =>'10:00'
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 9:30'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-22 10:00')
                 ],
 
                 [
-                    'startTijd' => '10:30',
-                    'stopTijd'  =>'11:00'
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-23 10:30'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-23 11:00')
                 ],
             ]
         );}

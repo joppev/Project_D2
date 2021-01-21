@@ -7,17 +7,36 @@ body {
 }
 
 .bg-bg {
+    color:inherit;
     background-color: $navbar!important;
 }
 
-.navbar {
+.navbar, .dropdown-menu {
+    color:inherit;
     background-color: $navbar!important;
 
 }
-.navbar a {
-    color: $achtergrondkleur!important;
-}
 
-.navbar a:hover {
+a{
+    background-color: inherit !important;
+    color: $tekstkleur !important;
+}
+a:hover{
     color: $accentkleur!important;
+    background-color: inherit;
 }
+
+.navbar a ,navbar-toggler {
+    color: $achtergrondkleur!important;
+    background-color: inherit;
+}
+
+.navbar a:hover, navbar-toggler:hover
+{
+    color: $accentkleur!important;
+    background-color: inherit;
+}
+
+
+
+
