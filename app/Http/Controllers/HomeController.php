@@ -41,7 +41,7 @@ class HomeController extends Controller
 
     }
     public function dagplanning(){
-        $kades = Planning::orderBy('naam')
+        $kades = Planning::orderBy('startTijd')
             ->LeftJoin('tijd_tabels', 'kade.startTijd', '=', 'tijd_tabels.startTijd')
             ->LestJoin('tijd_tabels', 'kade.stopTijd', '=', 'tijd_tabels.stopTijd')
             ->get();

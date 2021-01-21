@@ -13,16 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('home', '/');
 Route::view('/', 'home');
-
 Route::get('home/dagplanning', 'HomeController@dagplanning');
 Route::get('home/kade', 'HomeController@kade');
 
-
+Route::get('home\kade', 'HomeController@kade');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('users', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
