@@ -152,7 +152,7 @@
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
                     var nummerplaat = data.plaatcombinatie;
-                    var kade = data.naam;
+                    var kade = data.kadenaam;
                     var kadeStatus = data.status;
                     var ladingDetails = data.ladingDetails;
                     var aantal = data.aantal;
@@ -204,7 +204,7 @@
                     $('#voornaam').text(voornaam);
                     $('#proces').text(proces);
 
-                    
+
 
                     $('#vrachtwagenstatus').text(vrachtwagenstatus);
                     if ( data.isAanwezig== 0){
