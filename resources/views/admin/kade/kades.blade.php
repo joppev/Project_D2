@@ -18,8 +18,7 @@
                 <th>Land</th>
                 <th>gemeente</th>
                 <th>status</th>
-                <th> lat</th>
-                <th>lon</th>
+                
             </tr>
             </thead>
             <tbody>
@@ -192,8 +191,7 @@
                                <td>${value.land}</td>
                                <td>${value.gemeente}</td>
                                <td>${value.status}</td>
-<td>${value.longitude}</td>
-<td>${value.latitude}</td>
+
                                <td data-id="${value.id}"
                                     data-naam="${value.naam}"
                                    data-land="${value.land}"

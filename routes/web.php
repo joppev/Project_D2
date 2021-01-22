@@ -31,11 +31,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
     Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
 
-    Route::resource('kades', 'Admin\KadeController');
+    Route::resource('OverzichtKades', 'Admin\KadeController');
 
     Route::get('qryKades', 'Admin\KadeController@qryKades');
 
-    Route::resource('plannings', 'Admin\PlanningController');
+    Route::resource('OverzichtPlannings', 'Admin\PlanningController');
     Route::get('qryPlannings', 'Admin\PlanningController@qryPlannings');
 });
 

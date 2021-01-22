@@ -14,12 +14,20 @@
 
 
                     <li class="nav-item">
-                    <a class="nav-link" href="/admin/OverzichtGebruiker">Overzicht gebruiker</a>
+                    <a class="nav-link" href="/admin/OverzichtGebruiker">Overzicht gebruikers</a>
                 </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/OverzichtKades">Overzicht kades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/OverzichtPlanning">Overzicht planning</a>
+                        </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/OverzichtBedrijven">Overzicht bedrijven</a>
                 </li>
+
                 @endif
                 @if(auth()->user()->isLogistiek )
                 <li class="nav-item">
@@ -50,9 +58,8 @@
                             <a class="dropdown-item" href="/user/history"><i class="fas fa-box-open"></i>Order history</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/admin/kades"><i class="fas fa-user-cog"></i>Kades beheren</a>
-                            <a class="dropdown-item" href="/admin/plannings"><i class="fas fa-user-cog"></i>Planning beheren</a>
+
+
                         </div>
                     </li>
                 @endauth
