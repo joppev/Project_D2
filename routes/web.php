@@ -36,7 +36,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('qryBedrijven', 'Admin\BedrijfController@qryBedrijven');
     Route::resource('OverzichtKades', 'Admin\KadeController');
     Route::get('qryKades', 'Admin\KadeController@qryKades');
-
     Route::resource('OverzichtPlanning', 'Admin\PlanningController');
     Route::get('qryPlannings', 'Admin\PlanningController@qryPlannings');
 });
