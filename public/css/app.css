@@ -11245,12 +11245,12 @@ body {
   background-color: #012340 !important;
 }
 
-a {
+a.info {
   background-color: inherit !important;
   color: #1a2601 !important;
 }
 
-a:hover {
+a.info:hover {
   color: #7eafd7 !important;
   background-color: inherit;
 }
@@ -11276,5 +11276,13 @@ navbar-toggler:hover {
 .modal-body {
   color: #1a2601 !important;
   background-color: #eaf2f8 !important;
+}
+
+.qvplaceholder,
+.qvobject {
+  flex: 1 1 auto;
+  height: 300px;
+  min-width: 400px;
+  margin: 45px 0 0 45px;
 }
 

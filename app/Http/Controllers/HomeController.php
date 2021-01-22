@@ -8,6 +8,7 @@ use App\TijdTabel;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function Sodium\add;
 
 class HomeController extends Controller
@@ -72,6 +73,34 @@ class HomeController extends Controller
 
     }
 
+    public function planningChauffeur(Request $request){
+        $user = Auth::user();
+        //huidig uur
+        $dt = date('Y-m-d H:i',time());
+        //24 uur na huidig uur
+        $dt2= date('Y-m-d H:i',time()+86400);
+        $planningen = Planning::orderBy('startTijd')
+            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
+            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+            ->where('startTijd','<',$dt2)
+            ->where('startTijd','>',$dt)
+            ->where('gebruikerID',$user->id)
+            ->get();
+
+
+
+        foreach($planningen as $planning){
+            if($planning->gebruikerID == $user->id){
+                return $planning;
+            }
+        }
+
+        return $planningen;
+
+    }
     public function dagplanning(Request $request){
         //12 uur voor huidig uur
         $dt = date('Y-m-d H:i',time()-43200);

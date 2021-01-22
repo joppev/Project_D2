@@ -18,6 +18,10 @@ Route::get('logout', 'Auth\LoginController@logout');
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::redirect('home', '/');
 Route::view('/', 'home');
+
+
+Route::get('home/getPlanningChauffeur', 'HomeController@planningChauffeur');
+
 Route::get('home/dagplanning', 'HomeController@dagplanning');
 Route::get('home/kade', 'HomeController@kade');
 
@@ -28,6 +32,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
 
     Route::resource('kades', 'Admin\KadeController');
+
     Route::get('qryKades', 'Admin\KadeController@qryKades');
 
     Route::resource('plannings', 'Admin\PlanningController');

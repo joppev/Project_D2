@@ -17,11 +17,11 @@ body {
 
 }
 
-a{
+a.info {
     background-color: inherit !important;
     color: $tekstkleur !important;
 }
-a:hover{
+a.info:hover{
     color: $accentkleur!important;
     background-color: inherit;
 }
@@ -44,5 +44,12 @@ a:hover{
 .modal-body {
     color: $tekstkleur !important;
     background-color: $achtergrondkleur!important;
+}
+
+.qvplaceholder, .qvobject {
+    flex: 1 1 auto;
+    height: 300px;
+    min-width: 400px;
+    margin: 45px 0 0 45px;
 }
 
