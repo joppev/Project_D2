@@ -18,7 +18,7 @@
                 <th>Land</th>
                 <th>gemeente</th>
                 <th>status</th>
-                
+
             </tr>
             </thead>
             <tbody>
@@ -187,13 +187,13 @@
                         console.log(value)
 
                         let tr = `<tr>
-                               <td> ${value.naam} </td>
+                               <td> ${value.kadenaam} </td>
                                <td>${value.land}</td>
                                <td>${value.gemeente}</td>
                                <td>${value.status}</td>
 
                                <td data-id="${value.id}"
-                                    data-naam="${value.naam}"
+                                    data-naam="${value.kadenaam}"
                                    data-land="${value.land}"
                                    data-gemeente="${value.gemeente}"
                                    data-adres="${value.adres}"
