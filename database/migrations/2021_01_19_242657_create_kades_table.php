@@ -15,7 +15,7 @@ class CreateKadesTable extends Migration
     {
         Schema::create('kades', function (Blueprint $table) {
             $table->id();
-            $table->string('naam');
+            $table->string('kadenaam');
             $table->string('land');
             $table->string('gemeente');
             $table->string('adres');
@@ -29,7 +29,7 @@ class CreateKadesTable extends Migration
         DB::table('kades')->insert(
             [
                 [
-                'naam' => "kade1",
+                'kadenaam' => "kade1",
                 'land' => "België",
                 'gemeente' => "Geel",
                 'adres' => "Larumseweg 90",
@@ -39,7 +39,7 @@ class CreateKadesTable extends Migration
             ],
                 [
 
-                    'naam' => "kade2",
+                    'kadenaam' => "kade2",
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
@@ -48,7 +48,7 @@ class CreateKadesTable extends Migration
                     'status' => 'Buiten gebruik'
                 ],
                 [
-                    'naam' => "kade3",
+                    'kadenaam' => "kade3",
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
