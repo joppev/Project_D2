@@ -25,7 +25,7 @@
                         </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/OverzichtBedrijven">Overzicht bedrijven</a>
+                    <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>
                 </li>
 
                 @endif
