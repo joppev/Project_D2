@@ -35,7 +35,7 @@ class HomeController extends Controller
         return view('home');
     }
     public function kade(){
-        $kades = Kade::orderBy('naam')->get();
+        $kades = Kade::orderBy('kadeNaam')->get();
 
 
 
