@@ -23,9 +23,12 @@ Route::get('home/kade', 'HomeController@kade');
 
 Route::get('home\kade', 'HomeController@kade');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::resource('users', 'Admin\UserController');
+    Route::resource('OverzichtGebruiker', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
     Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
+
+    Route::resource('kades', 'Admin\KadeController');
+    Route::get('qryKades', 'Admin\UserController@qryKades');
 });
 
 

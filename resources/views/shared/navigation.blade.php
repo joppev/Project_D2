@@ -14,14 +14,14 @@
 
 
                     <li class="nav-item">
-                    <a class="nav-link" href="/OverzichtGebruiker">Overzicht gebruiker</a>
+                    <a class="nav-link" href="/admin/OverzichtGebruiker">Overzicht gebruiker</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/OverzichtBedrijven">Overzicht bedrijven</a>
                 </li>
                 @endif
-                @if(auth()->user()->isLogistiek)
+                @if(auth()->user()->isLogistiek )
                 <li class="nav-item">
                     <a class="nav-link" href="/OverzichtKades">Overzicht Kades</a>
                 </li>
