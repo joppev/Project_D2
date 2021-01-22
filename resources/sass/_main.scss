@@ -11,7 +11,7 @@ body {
     background-color: $navbar!important;
 }
 
-.navbar, .dropdown-menu {
+.navbar, .dropdown-menu,  {
     color:inherit;
     background-color: $navbar!important;
 
@@ -37,6 +37,12 @@ a:hover{
     background-color: inherit;
 }
 
-
-
+.modal-header ,.close{
+    color: $achtergrondkleur !important;
+    background-color: $navbar !important;
+}
+.modal-body {
+    color: $tekstkleur !important;
+    background-color: $achtergrondkleur!important;
+}
 

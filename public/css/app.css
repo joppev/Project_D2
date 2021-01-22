@@ -11267,3 +11267,14 @@ navbar-toggler:hover {
   background-color: inherit;
 }
 
+.modal-header,
+.close {
+  color: #eaf2f8 !important;
+  background-color: #012340 !important;
+}
+
+.modal-body {
+  color: #1a2601 !important;
+  background-color: #eaf2f8 !important;
+}
+
