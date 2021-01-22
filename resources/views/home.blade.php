@@ -127,12 +127,14 @@
     <script>
 
 
-        loadChauffeur()
+        loadChauffeur();
         loadTable();
         loadTable2();
+
         setInterval(function(){
             loadTable();
             loadTable2();
+            loadChauffeur();
         }, 10000);
 
         $('tbody').on('click', '.btn-info-home', function () {
@@ -145,6 +147,7 @@
                 data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 success: function(data){ // What to do if we succeed
+
                     var startTijd = data.startTijd;
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
@@ -199,6 +202,10 @@
                     $('#status').text(status);
                     $('#aantal').text(aantal);
                     $('#voornaam').text(voornaam);
+                    $('#proces').text(proces);
+
+                    
+
                     $('#vrachtwagenstatus').text(vrachtwagenstatus);
                     if ( data.isAanwezig== 0){
                         $('#vrachtwagenstatus').addClass('table-warning');
@@ -240,12 +247,11 @@
                 url: 'home/getPlanningChauffeur', // This is the url we gave in the route
                 // a JSON object to send back
                 success: function (data) {
-                        console.log(data);
                     var startTijd = data.startTijd;
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
                     var nummerplaat = data.plaatcombinatie;
-                    var kade = data.naam;
+                    var kade = data.kadenaam;
                     var kadeStatus = data.status;
                     var ladingDetails = data.ladingDetails;
                     var aantal = data.aantal;
@@ -327,7 +333,7 @@
 
                         if (value.status === "Vrij"){
                             tr = `<tr class="table-success">
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
@@ -335,7 +341,7 @@
                         }
                         if (value.status == "Niet-vrij"){
                             tr = `<tr class="table-danger">
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
@@ -343,7 +349,7 @@
                         }
                         if (value.status === "Buiten gebruik"){
                             tr = `<tr class="table-warning">
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
@@ -379,7 +385,7 @@
                                 ${value.plaatcombinatie}
 
                                </td>
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
                                         data-toggle="tooltip"
                                         title="info">
@@ -398,7 +404,7 @@
                                 ${value.plaatcombinatie}
 
                                </td>
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>te laat</td>
                                <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
                                         data-toggle="tooltip"
@@ -419,7 +425,7 @@
                                 ${value.plaatcombinatie}
 
                                </td>
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>Vorige planning nog niet afgewerkt</td>
 
                                <td><a data-id='${value.id}'class="btn btn-outline-info btn-info-home info"
@@ -443,7 +449,7 @@
                                 ${value.plaatcombinatie}
 
                                </td>
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>afgewerkt</td>
 
                                <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
@@ -465,7 +471,7 @@
                                 ${value.plaatcombinatie}
 
                                </td>
-                               <td>${value.naam}</td>
+                               <td>${value.kadenaam}</td>
                                <td>Bezig</td>
 
                                <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
