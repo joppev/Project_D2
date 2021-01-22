@@ -24,8 +24,9 @@ class BedrijfController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('admin/bedrijven');
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -58,7 +59,7 @@ class BedrijfController extends Controller
      */
     public function show(Bedrijf $bedrijf)
     {
-        //
+        return redirect('admin/bedrijven');
     }
 
     /**
@@ -69,7 +70,7 @@ class BedrijfController extends Controller
      */
     public function edit(Bedrijf $bedrijf)
     {
-        //
+        return redirect('admin/bedrijven');
     }
 
     /**
@@ -88,7 +89,6 @@ class BedrijfController extends Controller
 
         $bedrijf->bedrijfsnaam = $request->bedrijfsnaam;
         $bedrijf->standaardWachtwoord = $request->standaardWachtwoord;
-
         $bedrijf->save();
         return response()->json([
             'type' => 'success',
@@ -114,9 +114,8 @@ class BedrijfController extends Controller
     public function qryBedrijven()
     {
         $bedrijven = Bedrijf::orderBy('bedrijfsnaam')
-            ->LeftJoin('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+//            ->LeftJoin('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->get();
-        Json::dump($bedrijven);
 
         return $bedrijven;
     }
