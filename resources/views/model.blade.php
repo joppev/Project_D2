@@ -51,19 +51,24 @@
 
                 </div>
                 <div class="row">
-                    <label class="col-6" for="aantal">aantal: </label>
+                    <label class="col-6" for="aantal">Aantal: </label>
                     <p id="aantal" name="aantal" class="col-6"></p>
+
+                </div>
+                <div class="row">
+                    <label class="col-6" for="proces">Proces: </label>
+                    <p id="proces" name="proces" class="col-6"></p>
 
                 </div>
 
                 <div class=" row">
-                    <label class="col-6" for="vrachtwagenstatus">vrachtwagenstatus: </label>
+                    <label class="col-6" for="vrachtwagenstatus">Vrachtwagenstatus: </label>
                     <p id="vrachtwagenstatus" name="vrachtwagenstatus" class="col-6"></p>
 
                 </div>
 
                 <div class=" row">
-                    <label class="col-6" for="verwerkingsstatus">verwerkingsstatus: </label>
+                    <label class="col-6" for="verwerkingsstatus">Verwerkingsstatus: </label>
                     <p id="verwerkingsstatus" name="verwerkingsstatus" class="col-6"></p>
 
                 </div>

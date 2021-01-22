@@ -22,6 +22,7 @@ class CreatePlanningsTable extends Migration
             $table->string('ladingDetails');
             $table->integer('aantal');
             $table->boolean('isAanwezig');
+            $table->boolean('isBezig');
             $table->boolean('isAfgewerkt');
             $table->timestamps();
 
@@ -40,6 +41,7 @@ class CreatePlanningsTable extends Migration
                     'ladingDetails' => "ladingDetails1",
                     'aantal' => 2,
                     'isAanwezig' => true,
+                    'isBezig' => true,
                     'isAfgewerkt' => false
                 ],
                 [
@@ -50,16 +52,18 @@ class CreatePlanningsTable extends Migration
                     'ladingDetails' => "ladingDetails2",
                     'aantal' => 3,
                     'isAanwezig' => false,
+                    'isBezig' => false,
                     'isAfgewerkt' => false
                 ],
                 [
-                    'gebruikerID' => 3,
+                    'gebruikerID' => 1,
                     'kadeID' => 3,
-                    'tijdTabelID' => 3,
+                    'tijdTabelID' => 4,
                     'proces' => "proces3",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
+                    'isBezig' => false,
                     'isAfgewerkt' => true
                 ],
                 [
@@ -70,7 +74,20 @@ class CreatePlanningsTable extends Migration
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
-                    'isAfgewerkt' => true
+                    'isBezig' => false,
+                    'isAfgewerkt' => false
+                ],
+
+                [
+                    'gebruikerID' => 3,
+                    'kadeID' => 1,
+                    'tijdTabelID' => 4,
+                    'proces' => "proces3",
+                    'ladingDetails' => "ladingDetails3",
+                    'aantal' => 3,
+                    'isAanwezig' => true,
+                    'isBezig' => true,
+                    'isAfgewerkt' => false
                 ],
                 [
                     'gebruikerID' => 3,
@@ -80,6 +97,7 @@ class CreatePlanningsTable extends Migration
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
+                    'isBezig' => false,
                     'isAfgewerkt' => true
                 ],
 

@@ -36,8 +36,8 @@ class CreateTijdTabelsTable extends Migration
                     'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-21 15:30')
                 ],
                 [
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 9:30'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-22 10:00')
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 14:30'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-22 15:00')
                 ],
 
                 [
