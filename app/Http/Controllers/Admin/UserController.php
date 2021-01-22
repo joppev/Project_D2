@@ -19,17 +19,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('naam')
-
-            ->get();
-
-
-        $bedrijven = Bedrijf::orderBy('bedrijfsnaam')
-            ->get();
-
-        $result = compact('users','bedrijven');
-        Json::dump($result);
-
 
 
         return view('admin.user.users');
