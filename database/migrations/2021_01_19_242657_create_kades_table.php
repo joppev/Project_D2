@@ -19,8 +19,8 @@ class CreateKadesTable extends Migration
             $table->string('land');
             $table->string('gemeente');
             $table->string('adres');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('status');
             $table->timestamps();
 
@@ -33,8 +33,8 @@ class CreateKadesTable extends Migration
                 'land' => "België",
                 'gemeente' => "Geel",
                 'adres' => "Larumseweg 90",
-                'latitude' => "51,15",
-                'longitude' => "80,10",
+                'latitude' => 51.15,
+                'longitude' => 80.10,
                 'status' => 'Vrij',
             ],
                 [
@@ -43,8 +43,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => "55,15",
-                    'longitude' => "90,20",
+                    'latitude' => 55.15,
+                    'longitude' => 90.20,
                     'status' => 'Buiten gebruik'
                 ],
                 [
@@ -52,8 +52,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => "50,15",
-                    'longitude' => "75,20",
+                    'latitude' => 50.15,
+                    'longitude' => 75.20,
                     'status' => 'Niet-vrij',
                 ]
           ]);

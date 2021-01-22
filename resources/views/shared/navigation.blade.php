@@ -50,7 +50,8 @@
                             <a class="dropdown-item" href="/user/history"><i class="fas fa-box-open"></i>Order history</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/admin/kades"><i class="fas fa-user-cog"></i>Kades beheren</a>
                         </div>
                     </li>
                 @endauth
