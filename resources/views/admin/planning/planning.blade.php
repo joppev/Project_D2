@@ -54,6 +54,7 @@
                                <td>${value.startTijd}</td>
 
                                <td>${value.kadenaam}</td>
+                               <td>${value.proces}</td>
                                <td data-id="${value.id}"
 
                                    data-naam="${value.naam}"
