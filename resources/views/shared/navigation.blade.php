@@ -55,7 +55,6 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/profile"><i class="fas fa-user-cog"></i>Update Profile</a>
                             <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>New Password</a>
-                            <a class="dropdown-item" href="/user/history"><i class="fas fa-box-open"></i>Order history</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 

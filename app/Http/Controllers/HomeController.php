@@ -101,6 +101,42 @@ class HomeController extends Controller
         return $planningen;
 
     }
+    public function getPlanninglogistiek(Request $request){
+
+        //huidig uur
+        $dt = date('Y-m-d H:i',time()-7200);
+        //24 uur na huidig uur
+        $dt2= date('Y-m-d H:i',time()+7200);
+        $planningen = Planning::orderBy('startTijd')
+            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
+            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+            ->where('startTijd','<',$dt2)
+            ->where('startTijd','>',$dt)
+            ->where('isAanwezig', '=',1)
+            ->where('isAfgewerkt', '=', 0)
+            ->get();
+
+
+
+        foreach($planningen as $planning){
+            if($planning->isBezig == 1){
+                return $planning;
+            }
+
+        }
+        foreach($planningen as $planning){
+            return $planning;
+
+
+        }
+        return '';
+
+    }
+
+
     public function dagplanning(Request $request){
         //12 uur voor huidig uur
         $dt = date('Y-m-d H:i',time()-43200);
@@ -121,17 +157,6 @@ class HomeController extends Controller
         $planningen[0]->dt2 =$dt2;
 
 
-        foreach($planningen as $planning){
-            if($planning->startTijd < $dt ) {
-                $request->startTijd = $planning->startTijd;
-                $request->stopTijd = $planning->stopTijd;
-                $request->bedrijfsnaam = $planning->bedrijfsnaam;
-                $request->plaatcombinatie = $planning->plaatcombinatie;
-                $request->naam = $planning->naam;
-
-
-            }
-        }
 
         return $planningen;
     }

@@ -26,6 +26,8 @@ Route::get('home/dagplanning', 'HomeController@dagplanning');
 Route::get('home/kade', 'HomeController@kade');
 
 
+Route::get('home/getPlanninglogistiek', 'HomeController@getPlanninglogistiek');
+
 
 Route::get('home/getinfo', 'HomeController@getinfo');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {

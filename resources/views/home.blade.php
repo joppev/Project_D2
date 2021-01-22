@@ -118,6 +118,54 @@
 
 
     @endif
+    @if(auth()->user()->isLogistiek)
+        <div class="row">
+            <h2 id="info" name="info" class="col-12"></h2>
+        </div>
+        <div class="row">
+            <label class="col-4" for="startTijd">Tijdstip: </label>
+            <p id="startTijd" name="startTijd" class="col-4"></p>
+        </div>
+        <div class="row">
+            <label class="col-4" for="stopTijd"></label>
+            <p id="stopTijd" name="stopTijd" class="col-4"></p>
+        </div>
+        <div class="row">
+            <label class="col-4" for="bedrijf">Bedrijf: </label>
+            <p id="bedrijf" name="bedrijf" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="naam">Chauffeur: </label>
+            <p id="naam" name="naam" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="nummerplaat">Nummerplaat: </label>
+            <p id="nummerplaat" name="nummerplaat" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="ladingDetails">Lading details: </label>
+            <p id="ladingDetails" name="ladingDetails" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="aantal">Aantal: </label>
+            <p id="aantal" name="aantal" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="proces">proces: </label>
+            <p id="proces" name="proces" class="col-4"></p>
+            <label class="col-4"></label>
+    @endif
+
     @endauth
 
 @endsection
@@ -125,17 +173,38 @@
 
 @section('script_after')
     <script>
-
-
-        loadChauffeur();
-        loadTable();
-        loadTable2();
-
-        setInterval(function(){
+@auth
+        @if(auth()->user()->isChauffeur){
+            loadChauffeur();
+        }
+            @endif
+        @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
             loadTable();
             loadTable2();
-            loadChauffeur();
+        }
+        @endif
+        @if(auth()->user()->isLogistiek){
+            loadLogistiek()
+        }
+
+        @endif
+
+        setInterval(function(){
+            @if(auth()->user()->isChauffeur)
+                loadChauffeur();
+            }
+            @endif
+                @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
+                loadTable();
+                loadTable2();
+            }
+            @endif
+            @if(auth()->user()->isLogistiek){
+                loadLogistiek()
+        }
+        @endif
         }, 10000);
+@endauth
 
         $('tbody').on('click', '.btn-info-home', function () {
 
@@ -241,6 +310,67 @@
             })
         });
 
+        function loadLogistiek() {
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/getPlanninglogistiek', // This is the url we gave in the route
+                // a JSON object to send back
+                success: function (data) {
+
+                    console.log(data);
+                    if(data != '') {
+                        var startTijd = data.startTijd;
+                        var stopTijd = data.stopTijd;
+                        var bedrijf = data.bedrijfsnaam;
+                        var nummerplaat = data.plaatcombinatie;
+                        var kade = data.kadenaam;
+                        var kadeStatus = data.status;
+                        var ladingDetails = data.ladingDetails;
+                        var aantal = data.aantal;
+                        var status = data.status;
+                        var voornaam = data.voornaam;
+                        var naam = voornaam + " " + data.naam
+                        var proces = data.proces;
+                        var adres = data.land + " - " + data.gemeente + " - " + data.adres
+                        var verwerkingsstatus = '';
+                        if (data.isAfgewerkt) {
+                            verwerkingsstatus = "afgewerkt";
+                        } else {
+                            verwerkingsstatus = "niet-afgewerkt";
+                        }
+
+                        $('#startTijd').text(startTijd);
+                        $('#stopTijd').text(stopTijd);
+                        $('#bedrijf').text(bedrijf);
+                        $('#nummerplaat').text(nummerplaat);
+                        $('#ladingDetails').text(ladingDetails);
+                        $('#aantal').text(aantal);
+                        $('#naam').text(naam);
+                        $('#proces').text(proces);
+                    }
+                    else{
+                        $text = 'Er is nog geen planning die in het kort moet beginnen'
+                        $('#info').text($text);
+
+                    }
+
+
+
+
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
+        }
+
         function loadChauffeur() {
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
@@ -256,7 +386,7 @@
                     var ladingDetails = data.ladingDetails;
                     var aantal = data.aantal;
                     var status = data.status;
-                    var voornaam = data.voornaam;
+                    var voornaam = data.voornaam + " " + data.naam;
                     var proces = data.proces;
                     var adres = data.land + " - " + data.gemeente + " - " + data.adres
                     var verwerkingsstatus = '';
@@ -322,6 +452,8 @@
             });
         }
 
+
+
         function loadTable() {
             $.getJSON('home/kade')
                 .done(function (data) {
@@ -379,7 +511,7 @@
                         let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -398,7 +530,7 @@
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -419,7 +551,7 @@
                             tr = `<tr class="table-warning">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -443,7 +575,7 @@
                             tr = `<tr class="table-success">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -465,7 +597,7 @@
                             tr = `<tr class="table-info">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -492,14 +624,5 @@
 
                 });
         }
-
-
-
-
-
-
-
-
-
     </script>
 @endsection
