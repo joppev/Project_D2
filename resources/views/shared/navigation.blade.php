@@ -52,6 +52,7 @@
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/admin/kades"><i class="fas fa-user-cog"></i>Kades beheren</a>
+                            <a class="dropdown-item" href="/admin/plannings"><i class="fas fa-user-cog"></i>Planning beheren</a>
                         </div>
                     </li>
                 @endauth
