@@ -2,6 +2,8 @@
 
 @section('main')
     <h1>Homepage</h1>
+    <br>
+    <hr>
     @auth
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
@@ -13,6 +15,7 @@
                 <tr>
                     <th>Tijdstip</th>
                     <th>Bedrijf</th>
+                    <th>chauffeur</th>
                     <th>Nummerplaat</th>
                     <th>loscade</th>
                     <th>Details</th>
@@ -46,14 +49,86 @@
     @endauth
 
 @endsection
+@include('model')
 
 @section('script_after')
     <script>
-        $(function () {
+
+
+
+        loadTable();
+        loadTable2();
+        setInterval(function(){
             loadTable();
             loadTable2();
+        }, 10000);
+
+        $('tbody').on('click', '.btn-info-home', function () {
+
+            // Update the modal
+            let id = $(this).closest('a').data('id');
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/getinfo', // This is the url we gave in the route
+                data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+                success: function(data){ // What to do if we succeed
+                    console.log(data)
+                    var startTijd = data.startTijd;
+                    var stopTijd = data.stopTijd;
+                    var bedrijf = data.bedrijfsnaam;
+                    var nummerplaat = data.plaatcombinatie;
+                    var kade = data.naam;
+                    var kadeStatus = data.status;
+                    var ladingDetails = data.ladingDetails;
+                    var aantal = data.aantal;
+                    var vrachtwagenstatus = ""
+                    if(data.isAanwezig){
+                        vrachtwagenstatus = "aanwezig";
+                    }
+                    else{
+                        vrachtwagenstatus = "niet-aanwezig";
+                    }
+                    var verwerkingsstatus = ""
+                    if(data.isAfgewerkt){
+                        verwerkingsstatus = "afgewerkt";
+                    }
+                    else{
+                        verwerkingsstatus = "niet-afgewerkt";
+                    }
+
+
+                    var proces = data.proces;
+                    var voornaam = data.voornaam;
+                    var title = "extra info chauffeur: " + voornaam + ", bedrijf: " + bedrijf
+                    $('.modal-title').text(title);
+                    $('#startTijd').text(startTijd);
+                    $('#stopTijd').text(stopTijd);
+                    $('#bedrijf').text(bedrijf);
+                    $('#nummerplaat').text(nummerplaat);
+                    $('#kade').text(kade);
+                    $('#kadeStatus').text(kadeStatus);
+                    $('#ladingDetails').text(ladingDetails);
+                    $('#aantal').text(aantal);
+                    $('#vrachtwagenstatus').text(vrachtwagenstatus);
+                    $('#verwerkingsstatus').text(verwerkingsstatus);
+                    $('#voornaam').text(voornaam);
+
+                    // Show the modal
+                    $('#model-home').modal('show');
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if($(this).is(':checked')) {
+                        $(this).prop( "checked", false );
+                    }else {
+                        $(this).prop( "checked", true );
+                    }
+                }
+            })
+
         });
-        // Load genres with AJAX
+
         function loadTable() {
             $.getJSON('home/kade')
                 .done(function (data) {
@@ -100,24 +175,25 @@
         function loadTable2() {
             $.getJSON('home/dagplanning')
                 .done(function (data) {
-                    console.log('data', data);
+
                     // Clear tbody tag
-                    $('.tablplanning tbody').empty();
+                    $('.tableplanning tbody').empty();
 
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
-                        console.log(value)
-                        let tr = `<tr class="">
-                               <td>${value.startTijd} - ${value.stopTijd}</td>
-                               <td>${value.bedrijfsnaam}</td>
 
+
+                        let tr = `<tr class="">
+                               <td class=>${value.startTijd} - ${value.stopTijd}</td>
+                               <td>${value.bedrijfsnaam}</td>
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
@@ -129,14 +205,14 @@
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
@@ -149,18 +225,20 @@
                             tr = `<tr class="table-warning">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}'class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
+
                                         </a>
+
                                </td>
 
                            </tr>`;
@@ -169,14 +247,14 @@
                             tr = `<tr class="table-success">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-
+<td>${value.voornaam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
 
                                </td>
                                <td>${value.naam}</td>
-                               <td><a href="#!" class="btn btn-outline-info btn-info"
+                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home"
                                         data-toggle="tooltip"
                                         title="info">
                                             <i class="fas fa-info-circle"></i>

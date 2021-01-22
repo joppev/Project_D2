@@ -21,7 +21,7 @@ Route::view('/', 'home');
 Route::get('home/dagplanning', 'HomeController@dagplanning');
 Route::get('home/kade', 'HomeController@kade');
 
-Route::get('home\kade', 'HomeController@kade');
+Route::get('home/getinfo', 'HomeController@getinfo');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('OverzichtGebruiker', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
