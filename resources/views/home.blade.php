@@ -6,8 +6,7 @@
     <hr>
     @auth
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
-
-<div class="row">
+        <div class="row">
         <div class="table-responsive col-lg-9 col-12">
             <h2>Dagplanning</h2>
             <table class="table tableplanning">
@@ -118,7 +117,19 @@
 
 
     @endif
+
     @if(auth()->user()->isLogistiek)
+        <form method="get" action="/kadeID" id="searchForm">
+
+        <select class="form-control" name="kade_id" id="kade_id">
+            <option value="%">Alle kades</option>
+            @foreach($kades as $kade)
+                <option value="{{ $kade->id }}"
+                    {{ (request()->kade_id ==  $kade->id ? 'selected' : '') }}>{{ $kade->kadenaam }}</option>
+            @endforeach
+        </select>
+        </form>
+
         <div class="row">
             <h2 id="info" name="info" class="col-12"></h2>
         </div>
@@ -184,6 +195,13 @@
         }
         @endif
         @if(auth()->user()->isLogistiek){
+
+            $('#kade_id').change(function () {
+                $('#searchForm').submit();
+                loadLogistiek()
+
+            });
+
             loadLogistiek()
         }
 
@@ -200,7 +218,7 @@
             }
             @endif
             @if(auth()->user()->isLogistiek){
-                loadLogistiek()
+                //loadLogistiek()
         }
         @endif
         }, 10000);
@@ -314,9 +332,9 @@
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getPlanninglogistiek', // This is the url we gave in the route
+
                 // a JSON object to send back
                 success: function (data) {
-
                     console.log(data);
                     if(data != '') {
                         var startTijd = data.startTijd;

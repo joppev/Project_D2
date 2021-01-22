@@ -100,6 +100,48 @@ class CreatePlanningsTable extends Migration
                     'isBezig' => false,
                     'isAfgewerkt' => true
                 ],
+                [
+                    'gebruikerID' => 3,
+                    'kadeID' => 3,
+                    'tijdTabelID' => 5,
+                    'proces' => "proces3",
+                    'ladingDetails' => "ladingDetails3",
+                    'aantal' => 3,
+                    'isAanwezig' => true,
+                    'isBezig' => false,
+                    'isAfgewerkt' => true
+                ],
+                [
+                    'gebruikerID' => 3,
+                    'kadeID' => 3,
+                    'tijdTabelID' => 6,
+                    'proces' => "proces3",
+                    'ladingDetails' => "ladingDetails3",
+                    'aantal' => 3,
+                    'isAanwezig' => true,
+                    'isBezig' => true,
+                    'isAfgewerkt' => false
+                ],[
+                'gebruikerID' => 3,
+                'kadeID' => 2,
+                'tijdTabelID' => 6,
+                'proces' => "proces3",
+                'ladingDetails' => "ladingDetails3",
+                'aantal' => 3,
+                'isAanwezig' => true,
+                'isBezig' => true,
+                'isAfgewerkt' => false
+            ],[
+                'gebruikerID' => 3,
+                'kadeID' => 1,
+                'tijdTabelID' => 6,
+                'proces' => "proces3",
+                'ladingDetails' => "ladingDetails3",
+                'aantal' => 3,
+                'isAanwezig' => true,
+                'isBezig' => true,
+                'isAfgewerkt' => false
+            ],
 
             ]
         );

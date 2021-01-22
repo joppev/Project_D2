@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::redirect('home', '/');
-Route::view('/', 'home');
+Route::get('home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+Route::get('kadeID', 'HomeController@index');
 
 
 Route::get('home/getPlanningChauffeur', 'HomeController@planningChauffeur');

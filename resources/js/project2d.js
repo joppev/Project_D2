@@ -24,4 +24,24 @@ let Project2d = (function () {
         toast: toast,
     };
 })();
+
+/*
+ * Basic responsive mashup template
+ * @owner Enter you name here (xxx)
+ */
+/*
+ *    Fill in host and port for Qlik engine
+ */
+
+/*
+ * Basic responsive mashup template
+ * @owner Enter you name here (xxx)
+ */
+/*
+ *    Fill in host and port for Qlik engine
+ */
+
+
+
+
 export default Project2d;

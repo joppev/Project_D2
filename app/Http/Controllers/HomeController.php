@@ -7,8 +7,11 @@ use App\Planning;
 use App\TijdTabel;
 use App\User;
 use Carbon\Carbon;
+use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use function Sodium\add;
 
 class HomeController extends Controller
@@ -30,10 +33,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $kades = Kade::get();
+        $result = compact('kades');
 
-
-        return view('home');
+        Json::dump($result);
+        return view('home', $result);
     }
+
     public function kade(){
         $kades = Kade::orderBy('kadeNaam')->get();
 
@@ -102,7 +108,7 @@ class HomeController extends Controller
 
     }
     public function getPlanninglogistiek(Request $request){
-
+        $kade_id = $request->kade_id; //OR $genre_id = $request->genre_id ?? '%';
         //huidig uur
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
@@ -117,11 +123,12 @@ class HomeController extends Controller
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
             ->where('isAfgewerkt', '=', 0)
+            ->where('genre_id', 'like', $kade_id)
             ->get();
 
 
 
-        foreach($planningen as $planning){
+        /*foreach($planningen as $planning){
             if($planning->isBezig == 1){
                 return $planning;
             }
@@ -131,8 +138,8 @@ class HomeController extends Controller
             return $planning;
 
 
-        }
-        return '';
+        }*/
+        return $planningen;
 
     }
 
