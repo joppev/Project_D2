@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Kade;
+use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KadeController extends Controller
 {
@@ -36,7 +38,26 @@ class KadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+            $this->validate($request,[
+                'naam' => 'required|min:3,'
+
+            ]);
+            $kade = new Kade();
+            $kade->naam = $request->naam;
+            $kade->land = $request->land;
+            $kade->gemeente = $request->gemeente;
+            $kade->adres = $request->adres;
+            $kade->latitude = $request->latitude;
+            $kade->longitude = $request->longitude;
+            $kade->status = $request->status;
+
+            $kade->save();
+            return response()->json([
+                'type' => 'success',
+                'text' => "De kade <b> $kade->naam</b> is Toegevoegd. "
+            ]);
+        }
     }
 
     /**
@@ -70,7 +91,24 @@ class KadeController extends Controller
      */
     public function update(Request $request, Kade $kade)
     {
-        //
+        $this->validate($request,[
+            'naam' => 'required|min:3,' . $kade->id
+
+        ]);
+
+        $kade->naam = $request->naam;
+        $kade->land = $request->land;
+        $kade->gemeente = $request->gemeente;
+        $kade->adres = $request->adres;
+        $kade->latitude = $request->latitude;
+        $kade->longitude = $request->longitude;
+        $kade->status = $request->status;
+
+        $kade->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "De kade <b>$kade->naam</b> is aangepast. "
+        ]);
     }
 
     /**
@@ -81,6 +119,24 @@ class KadeController extends Controller
      */
     public function destroy(Kade $kade)
     {
-        //
+        $kade->delete();
+        return response()->json([
+            'type' => 'success',
+            'text' => "<b> $kade->naam</b> is verwijderd."
+        ]);
+    }
+
+
+    public function qryKades(){
+
+        $kades = DB::table('kades')
+
+            ->get();
+
+
+        Json::dump($kades);
+
+        return $kades;
+
     }
 }
