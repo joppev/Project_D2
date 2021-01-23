@@ -234,21 +234,27 @@
 
         @endif
 
-        setInterval(function(){
+
             @if(auth()->user()->isChauffeur)
+            setInterval(function(){
                 loadChauffeur();
-            }
+            }, 5000);
+
             @endif
-                @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
+                @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
+                setInterval(function(){
                 loadTable();
                 loadTable2();
-            }
+            }, 5000);
+
             @endif
-            @if(auth()->user()->isLogistiek){
+            @if(auth()->user()->isLogistiek)
+                setInterval(function(){
                 loadLogistiek()
-        }
+            }, 5000);
+
         @endif
-        }, 5000);
+
 @endauth
 $('div').on('click', '#btn-begin', function () {
     let id2 = $(`div#logistiekKleur`).data('id');
@@ -348,7 +354,7 @@ $('div').on('click', '#btn-afgewerkt', function () {
 
                     var proces = data.proces;
                     var voornaam = data.voornaam;
-                    var title = "extra info chauffeur: " + voornaam + ", bedrijf: " + bedrijf
+                    var title = "extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
                     $('.modal-title').text(title);
                     $('#startTijd').text(startTijd);
                     $('#stopTijd').text(stopTijd);
@@ -375,7 +381,7 @@ $('div').on('click', '#btn-afgewerkt', function () {
                     $('#ladingDetails').text(ladingDetails);
                     $('#status').text(status);
                     $('#aantal').text(aantal);
-                    $('#voornaam').text(voornaam);
+                    $('#voornaam').text(voornaam + " " + data.naam);
                     $('#proces').text(proces);
 
 
@@ -449,7 +455,7 @@ $('div').on('click', '#btn-afgewerkt', function () {
                         } else {
                             verwerkingsstatus = "niet-afgewerkt";
                         }
-                        var text = 'planning voor kade: ' + data.kadenaam + " id" + data.id;
+                        var text = 'planning voor kade: ' + data.kadenaam ;
                         $('#startTijd').text(startTijd);
                         $('#stopTijd').text(stopTijd);
                         $('#bedrijf').text(bedrijf);

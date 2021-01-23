@@ -58,7 +58,7 @@ class HomeController extends Controller
             ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->get();
 
 
@@ -92,7 +92,7 @@ class HomeController extends Controller
             ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.land as land','kades.gemeente as gemeente','kades.adres as adres','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('gebruikerID',$user->id)
@@ -240,7 +240,7 @@ class HomeController extends Controller
             ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -281,7 +281,7 @@ class HomeController extends Controller
             ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
 
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)

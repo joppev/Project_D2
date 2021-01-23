@@ -62,7 +62,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 1,
                     'kadeID' => 3,
-                    'tijdTabelID' => 4,
+                    'tijdTabelID' => 6,
                     'proces' => "proces3",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
