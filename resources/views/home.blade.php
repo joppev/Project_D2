@@ -119,20 +119,26 @@
     @endif
 
     @if(auth()->user()->isLogistiek)
-        <form method="get" action="/kadeID" id="searchForm">
+    <div id="logistiekKleur">
+        <br>
+        <div class="row">
+        <form class="col-4" method="get" action="/kadeID" id="searchForm">
 
         <select class="form-control" name="kade_id" id="kade_id">
-            <option value="%">Alle kades</option>
+            <option value="%" data-id="%" >Alle kades</option>
             @foreach($kades as $kade)
                 <option value="{{ $kade->id }}"
-                    {{ (request()->kade_id ==  $kade->id ? 'selected' : '') }}>{{ $kade->kadenaam }}</option>
+                    {{ (request()->kade_id ==  $kade->id ? 'selected' : '') }} data-id="{{ $kade->id }}" class="{{ (request()->kade_id ==  $kade->id ? 'selected' : '') }}">{{ $kade->kadenaam }}</option>
             @endforeach
         </select>
         </form>
-
+        </div>
+        <br>
         <div class="row">
             <h2 id="info" name="info" class="col-12"></h2>
         </div>
+
+        <br>
         <div class="row">
             <label class="col-4" for="startTijd">Tijdstip: </label>
             <p id="startTijd" name="startTijd" class="col-4"></p>
@@ -175,6 +181,8 @@
             <label class="col-4" for="proces">proces: </label>
             <p id="proces" name="proces" class="col-4"></p>
             <label class="col-4"></label>
+        </div>
+    </div>
     @endif
 
     @endauth
@@ -218,7 +226,7 @@
             }
             @endif
             @if(auth()->user()->isLogistiek){
-                //loadLogistiek()
+                loadLogistiek()
         }
         @endif
         }, 10000);
@@ -228,6 +236,7 @@
 
             // Update the modal
             let id = $(this).closest('a').data('id');
+            console.log(id);
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getinfo', // This is the url we gave in the route
@@ -329,14 +338,16 @@
         });
 
         function loadLogistiek() {
+            let id = $(`option.selected`).data('id');
+            if(id != null){
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getPlanninglogistiek', // This is the url we gave in the route
+                data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 // a JSON object to send back
                 success: function (data) {
-                    console.log(data);
-                    if(data != '') {
+                    if (data.kadeID == id) {
                         var startTijd = data.startTijd;
                         var stopTijd = data.stopTijd;
                         var bedrijf = data.bedrijfsnaam;
@@ -356,7 +367,7 @@
                         } else {
                             verwerkingsstatus = "niet-afgewerkt";
                         }
-
+                        var text = 'planning voor kade: ' + data.kadenaam;
                         $('#startTijd').text(startTijd);
                         $('#stopTijd').text(stopTijd);
                         $('#bedrijf').text(bedrijf);
@@ -365,29 +376,59 @@
                         $('#aantal').text(aantal);
                         $('#naam').text(naam);
                         $('#proces').text(proces);
-                    }
-                    else{
-                        $text = 'Er is nog geen planning die in het kort moet beginnen'
-                        $('#info').text($text);
+                        $('#info').text(text);
 
-                    }
+                        if (data.isAanwezig == 1 && data.isBezig == 0) {
+                            $('body').addClass('table-warning');
+                            $('body').removeClass('table-info');
+                            $('body').removeClass('normal_body');
+                        }
+                        if (data.isAanwezig == 1 && data.isBezig == 1) {
+                            $('body').removeClass('normal_body');
+                            $('body').addClass('table-info');
+                            $('body').removeClass('table-warning');
+                        }
 
-
-
-
-
-
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                    if ($(this).is(':checked')) {
-                        $(this).prop("checked", false);
                     } else {
-                        $(this).prop("checked", true);
+
+                        var text = 'Er is nog geen planning die in het kort moet beginnen voor kade: ' + data.kadenaam;
+
+
+                        $('#info').text(text);
+                        $('body').addClass('normal_body');
+                        $('body').removeClass('table-warning');
+                        $('body').removeClass('table-info');
+
+                    }}
+                ,
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        if ($(this).is(':checked')) {
+                            $(this).prop("checked", false);
+                        } else {
+                            $(this).prop("checked", true);
+                        }
                     }
+                });
+            }
+                else
+                    {
+                        var text = 'selecteer een kade voor de live planning te krijgen';
+
+
+
+                        $('#info').text(text);
+                        $('body').addClass('normal_body');
+                        $('body').removeClass('table-warning');
+                        $('body').removeClass('table-info');
+                    }
+
+
+
+
+
+
                 }
-            });
-        }
 
         function loadChauffeur() {
             $.ajax({

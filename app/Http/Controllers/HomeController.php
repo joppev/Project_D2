@@ -108,7 +108,7 @@ class HomeController extends Controller
 
     }
     public function getPlanninglogistiek(Request $request){
-        $kade_id = $request->kade_id; //OR $genre_id = $request->genre_id ?? '%';
+        $id = $request->request->get('id');
         //huidig uur
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
@@ -123,12 +123,12 @@ class HomeController extends Controller
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
             ->where('isAfgewerkt', '=', 0)
-            ->where('genre_id', 'like', $kade_id)
+            ->where('kadeID', 'like', $id)
             ->get();
 
 
 
-        /*foreach($planningen as $planning){
+        foreach($planningen as $planning){
             if($planning->isBezig == 1){
                 return $planning;
             }
@@ -138,8 +138,9 @@ class HomeController extends Controller
             return $planning;
 
 
-        }*/
-        return $planningen;
+        }
+        $kade = Kade::orderBy('kadeNaam')->find($id);
+        return $kade;
 
     }
 
