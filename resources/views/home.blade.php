@@ -229,7 +229,7 @@
                 loadLogistiek()
         }
         @endif
-        }, 10000);
+        }, 5000);
 @endauth
 
         $('tbody').on('click', '.btn-info-home', function () {
@@ -338,6 +338,7 @@
         });
 
         function loadLogistiek() {
+            console.log('reload')
             let id = $(`option.selected`).data('id');
             if(id != null){
             $.ajax({
