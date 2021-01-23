@@ -256,7 +256,7 @@
         @endif
 
 @endauth
-$('div').on('click', '#btn-begin', function () {
+$('p').on('click', '#btn-begin', function () {
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
     if(id2 != 'geenProcess') {
@@ -282,10 +282,10 @@ $('div').on('click', '#btn-begin', function () {
             }
 
         });
-        console.log('begin')
+        loadLogistiek();
     }
 });
-$('div').on('click', '#btn-afgewerkt', function () {
+$('p').on('click', '#btn-afgewerkt', function () {
 
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
@@ -312,8 +312,8 @@ $('div').on('click', '#btn-afgewerkt', function () {
             }
 
         });
-        console.log('begin')
     }
+    loadLogistiek();
 
 });
         $('tbody').on('click', '.btn-info-home', function () {
@@ -510,7 +510,15 @@ $('div').on('click', '#btn-afgewerkt', function () {
                         $('a#btn-begin').addClass('disabled');
                         var text = 'Er is nog geen planning die in het kort moet beginnen voor kade: ' + data.kadenaam;
                         $('div#logistiekKleur').attr('data-id' , 'geenProcess');
-
+                        $('#startTijd').text('');
+                        $('#stopTijd').text('');
+                        $('#bedrijf').text('');
+                        $('#nummerplaat').text('');
+                        $('#ladingDetails').text('');
+                        $('#aantal').text('');
+                        $('#naam').text('');
+                        $('#proces').text('');
+                        $('#info').text('');
 
                         $('#info').text(text);
                         $('body').addClass('normal_body');
@@ -550,7 +558,15 @@ $('div').on('click', '#btn-afgewerkt', function () {
 
                         var text = 'selecteer een kade voor de live planning te krijgen';
                         $('div#logistiekKleur').attr('data-id' , 'geenProcess');
-
+                        $('#startTijd').text('');
+                        $('#stopTijd').text('');
+                        $('#bedrijf').text('');
+                        $('#nummerplaat').text('');
+                        $('#ladingDetails').text('');
+                        $('#aantal').text('');
+                        $('#naam').text('');
+                        $('#proces').text('');
+                        $('#info').text('');
 
 
                         $('#info').text(text);

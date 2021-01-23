@@ -109,7 +109,7 @@ class HomeController extends Controller
         return $planningen;
 
     }
-    public function begin(Request $request, Planning $planningBegin){
+    public function begin(Request $request){
         $id = $request->request->get('id');
         $idkade = $request->request->get('idKade');
 
@@ -136,13 +136,7 @@ class HomeController extends Controller
 
 
         if ($planning != null){
-            $planningBegin->gebruikerID = $planning->gebruikerID;
-            $planningBegin->kadeID = $planning->kadeID;
-            $planningBegin->tijdTabelID = $planning->tijdTabelID;
-            $planningBegin->proces = $planning->proces ;
-            $planningBegin->ladingDetails = $planning->ladingDetails;
-            $planningBegin->aantal = $planning->aantal;
-            $planningBegin->isAanwezig = $planning->isAanwezig ;
+            $planningBegin = Planning::findOrFail($id);
             $planningBegin->isBezig = 1  ;
             $planningBegin->isAfgewerkt = 0 ;
 
@@ -184,29 +178,23 @@ class HomeController extends Controller
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
+            ->where('isBezig', '=', 1)
             ->where('isAfgewerkt', '=', 0)
-            ->where('isBezig','=',1)
             ->where('kadeID', 'like',$idkade)
             ->where('plannings.id','like',$id)
+
             ->first();
 
 
 
         if ($planning != null){
             $planningBegin = Planning::findOrFail($id);
-            $planningBegin->gebruikerID = $planning->gebruikerID;
-            $planningBegin->kadeID = $planning->kadeID;
-            $planningBegin->tijdTabelID = $planning->tijdTabelID;
-            $planningBegin->proces = $planning->proces ;
-            $planningBegin->ladingDetails = $planning->ladingDetails;
-            $planningBegin->aantal = $planning->aantal;
-            $planningBegin->isAanwezig = $planning->isAanwezig ;
             $planningBegin->isBezig = 0  ;
             $planningBegin->isAfgewerkt = 1 ;
-            $planningBegin->updated_ad = date('Y-m-d H:i',time());
 
 
-            $planningBegin->update();
+            //$planningBegin->update();
+            $planningBegin->save();
 
 
             return response()->json([
