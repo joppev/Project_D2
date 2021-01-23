@@ -19,6 +19,8 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::get('home', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 Route::get('kadeID', 'HomeController@index');
+Route::get('home/begin', 'HomeController@begin');
+Route::get('home/afgewerkt', 'HomeController@afgewerkt');
 
 
 Route::get('home/getPlanningChauffeur', 'HomeController@planningChauffeur');

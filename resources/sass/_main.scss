@@ -1,6 +1,12 @@
-.normal_body {
+.normal_bodyn, .form-control{
     background-color: $achtergrondkleur !important;
+    color: $tekstkleur!important;
 }
+
+
+
+
+
 
 .size {
     min-height: 500px;

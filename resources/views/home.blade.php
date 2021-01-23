@@ -119,16 +119,16 @@
     @endif
 
     @if(auth()->user()->isLogistiek)
-    <div id="logistiekKleur">
+    <div id="logistiekKleur" >
         <br>
         <div class="row">
         <form class="col-4" method="get" action="/kadeID" id="searchForm">
 
-        <select class="form-control" name="kade_id" id="kade_id">
+        <select class="table-secondary select-color" name="kade_id" id="kade_id">
             <option value="%" data-id="%" >Alle kades</option>
             @foreach($kades as $kade)
                 <option value="{{ $kade->id }}"
-                    {{ (request()->kade_id ==  $kade->id ? 'selected' : '') }} data-id="{{ $kade->id }}" class="{{ (request()->kade_id ==  $kade->id ? 'selected' : '') }}">{{ $kade->kadenaam }}</option>
+                    {{ (request()->kade_id ==  $kade->id ? 'selected' : '') }} data-id="{{ $kade->id }}" class="{{ (request()->kade_id ==  $kade->id ? 'selected' : '') }} select-color">{{ $kade->kadenaam }}</option>
             @endforeach
         </select>
         </form>
@@ -182,7 +182,26 @@
             <p id="proces" name="proces" class="col-4"></p>
             <label class="col-4"></label>
         </div>
+
+        <br>
+        <div class="row">
+            <div class="col-6">
+            <p class="align-content-center">
+                <a href="#!" class="btn btn-outline-success" id="btn-begin">
+                    <i class="fas fa-play"></i> Begin proces
+                </a>
+            </p>
+            </div>
+            <div class="col-6">
+            <p class="align-content-center">
+                <a href="#!" class="btn btn-outline-danger" id="btn-afgewerkt">
+                    <i class="fas fa-stop"></i> Proces afgewerkt
+                </a>
+            </p>
+            </div>
+        </div>
     </div>
+
     @endif
 
     @endauth
@@ -231,7 +250,66 @@
         @endif
         }, 5000);
 @endauth
+$('div').on('click', '#btn-begin', function () {
+    let id2 = $(`div#logistiekKleur`).data('id');
+    let id = $(`option.selected`).data('id');
+    if(id2 != 'geenProcess') {
+        $.ajax({
+            method: 'GET', // Type of response and matches what we said in the route
+            url: 'home/begin', // This is the url we gave in the route
+            data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
+            success: function (data) { // What to do if we succeed
+                console.log(data)
+                new Noty({
+                    type: data.type,
+                    text: data.text
+                }).show();
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                if ($(this).is(':checked')) {
+                    $(this).prop("checked", false);
+                } else {
+                    $(this).prop("checked", true);
+                }
+            }
+
+        });
+        console.log('begin')
+    }
+});
+$('div').on('click', '#btn-afgewerkt', function () {
+
+    let id2 = $(`div#logistiekKleur`).data('id');
+    let id = $(`option.selected`).data('id');
+    if(id2 != 'geenProcess') {
+        $.ajax({
+            method: 'GET', // Type of response and matches what we said in the route
+            url: 'home/afgewerkt', // This is the url we gave in the route
+            data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+            success: function (data) { // What to do if we succeed
+                console.log(data)
+                new Noty({
+                    type: data.type,
+                    text: data.text
+                }).show();
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                if ($(this).is(':checked')) {
+                    $(this).prop("checked", false);
+                } else {
+                    $(this).prop("checked", true);
+                }
+            }
+
+        });
+        console.log('begin')
+    }
+
+});
         $('tbody').on('click', '.btn-info-home', function () {
 
             // Update the modal
@@ -338,8 +416,9 @@
         });
 
         function loadLogistiek() {
-            console.log('reload')
+
             let id = $(`option.selected`).data('id');
+
             if(id != null){
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
@@ -349,6 +428,8 @@
                 // a JSON object to send back
                 success: function (data) {
                     if (data.kadeID == id) {
+                        $('div#logistiekKleur').attr('data-id' , data.id);
+
                         var startTijd = data.startTijd;
                         var stopTijd = data.stopTijd;
                         var bedrijf = data.bedrijfsnaam;
@@ -368,7 +449,7 @@
                         } else {
                             verwerkingsstatus = "niet-afgewerkt";
                         }
-                        var text = 'planning voor kade: ' + data.kadenaam;
+                        var text = 'planning voor kade: ' + data.kadenaam + " id" + data.id;
                         $('#startTijd').text(startTijd);
                         $('#stopTijd').text(stopTijd);
                         $('#bedrijf').text(bedrijf);
@@ -379,26 +460,64 @@
                         $('#proces').text(proces);
                         $('#info').text(text);
 
+                        if(data.isBezig == 0){
+                            $('a#btn-afgewerkt').addClass('disabled');
+                            $('a#btn-begin').removeClass('disabled');
+                        }
+                        else{
+                            $('a#btn-begin').addClass('disabled');
+                            $('a#btn-afgewerkt').removeClass('disabled');
+
+                        }
+
+
                         if (data.isAanwezig == 1 && data.isBezig == 0) {
                             $('body').addClass('table-warning');
                             $('body').removeClass('table-info');
                             $('body').removeClass('normal_body');
+
+                            $('form select option').removeClass('table-secondary');
+                            $('form select option').removeClass('table-info');
+                            $('form select option').addClass('table-warning');
+
+                            $('form select').removeClass('table-secondary');
+                            $('form select').removeClass('table-info');
+                            $('form select').addClass('table-warning');
                         }
                         if (data.isAanwezig == 1 && data.isBezig == 1) {
                             $('body').removeClass('normal_body');
                             $('body').addClass('table-info');
                             $('body').removeClass('table-warning');
+
+                            $('form select option').removeClass('table-secondary');
+                            $('form select option').addClass('table-info');
+                            $('form select option').removeClass('table-warning');
+
+                            $('form select').removeClass('table-secondary');
+                            $('form select').addClass('table-info');
+                            $('form select').removeClass('table-warning');
                         }
 
-                    } else {
 
+                    } else {
+                        $('a#btn-afgewerkt').addClass('disabled');
+                        $('a#btn-begin').addClass('disabled');
                         var text = 'Er is nog geen planning die in het kort moet beginnen voor kade: ' + data.kadenaam;
+                        $('div#logistiekKleur').attr('data-id' , 'geenProcess');
 
 
                         $('#info').text(text);
                         $('body').addClass('normal_body');
                         $('body').removeClass('table-warning');
                         $('body').removeClass('table-info');
+
+                        $('form select option').addClass('table-secondary');
+                        $('form select option').removeClass('table-info');
+                        $('form select option').removeClass('table-warning');
+
+                        $('form select').addClass('table-secondary');
+                        $('form select').removeClass('table-info');
+                        $('form select').removeClass('table-warning');
 
                     }}
                 ,
@@ -414,7 +533,17 @@
             }
                 else
                     {
+                        $('a#btn-afgewerkt').addClass('disabled');
+                        $('a#btn-begin').addClass('disabled');
+                        $('form select option').addClass('table-secondary');
+                        $('form select option').removeClass('table-info');
+                        $('form select option').removeClass('table-warning');
+                        $('form select').addClass('table-secondary');
+                        $('form select').removeClass('table-info');
+                        $('form select').removeClass('table-warning');
+
                         var text = 'selecteer een kade voor de live planning te krijgen';
+                        $('div#logistiekKleur').attr('data-id' , 'geenProcess');
 
 
 
@@ -684,5 +813,11 @@
 
                 });
         }
+
+
+
+
+
+
     </script>
 @endsection

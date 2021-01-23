@@ -42,7 +42,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 2,
                     'isAanwezig' => true,
                     'isBezig' => true,
-                    'isAfgewerkt' => false
+                    'isAfgewerkt' => false,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'gebruikerID' => 2,
@@ -53,7 +55,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => false,
                     'isBezig' => false,
-                    'isAfgewerkt' => false
+                    'isAfgewerkt' => false,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'gebruikerID' => 1,
@@ -64,7 +68,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => true,
                     'isBezig' => false,
-                    'isAfgewerkt' => true
+                    'isAfgewerkt' => true,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'gebruikerID' => 3,
@@ -75,7 +81,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => true,
                     'isBezig' => false,
-                    'isAfgewerkt' => false
+                    'isAfgewerkt' => false,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
 
                 [
@@ -87,7 +95,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => true,
                     'isBezig' => true,
-                    'isAfgewerkt' => false
+                    'isAfgewerkt' => false,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'gebruikerID' => 3,
@@ -98,7 +108,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => true,
                     'isBezig' => false,
-                    'isAfgewerkt' => true
+                    'isAfgewerkt' => true,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'gebruikerID' => 3,
@@ -109,7 +121,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => true,
                     'isBezig' => false,
-                    'isAfgewerkt' => true
+                    'isAfgewerkt' => true,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'gebruikerID' => 3,
@@ -120,7 +134,9 @@ class CreatePlanningsTable extends Migration
                     'aantal' => 3,
                     'isAanwezig' => true,
                     'isBezig' => true,
-                    'isAfgewerkt' => false
+                    'isAfgewerkt' => false,
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],[
                 'gebruikerID' => 3,
                 'kadeID' => 2,
@@ -130,7 +146,9 @@ class CreatePlanningsTable extends Migration
                 'aantal' => 3,
                 'isAanwezig' => true,
                 'isBezig' => false,
-                'isAfgewerkt' => false
+                'isAfgewerkt' => false,
+                'created_at' => now(),
+                'updated_at'=> now()
             ],
 
             ]
