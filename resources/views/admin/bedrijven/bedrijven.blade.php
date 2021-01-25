@@ -21,7 +21,10 @@
                     <th>Bewerken</th>
                 </tr>
                 </thead>
+{{--                @foreach($bedrijven as $bedrijf)--}}
+
                 <tbody>
+{{--                <td>{{ $bedrijf->id }}</td>--}}
 
 
                 </tbody>

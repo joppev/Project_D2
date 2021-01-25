@@ -436,6 +436,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 // a JSON object to send back
                 success: function (data) {
                     if (data.kadeID == id) {
+                        console.log(data);
                         $('div#logistiekKleur').attr('data-id' , data.id);
 
                         var startTijd = data.startTijd;
