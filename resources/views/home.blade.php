@@ -835,11 +835,5 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                 });
         }
-
-
-
-
-
-
     </script>
 @endsection
