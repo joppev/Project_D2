@@ -21,10 +21,8 @@
                     <th>Bewerken</th>
                 </tr>
                 </thead>
-{{--                @foreach($bedrijven as $bedrijf)--}}
 
                 <tbody>
-{{--                <td>{{ $bedrijf->id }}</td>--}}
 
 
                 </tbody>
@@ -183,10 +181,10 @@
                                    data-bedrijfsnaam="${value.bedrijfsnaam}"
                                    data-standaardWachtwoord="${value.standaardWachtwoord}">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit">
+                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.bedrijfsnaam}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete">
+                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.bedrijfsnaam}">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
@@ -202,11 +200,5 @@
                 }
 
             </script>
-
-
-
-
-
-
 
 @endsection

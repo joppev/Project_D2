@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Bedrijf;
-use App\Gebruiker;
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Http\Controllers\Controller;
 use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

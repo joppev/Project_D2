@@ -169,11 +169,11 @@ class PlanningController extends Controller
 
         $planningen  = DB::table('plannings')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->join('bedrijfs', 'users.bedrijfs_id', '=', 'bedrijfs.id')
             ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
 
             ->get();
 

@@ -26,6 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/nummerplaats">Overzicht nummerplaten</a>
+                        </li>
                    {{--     <li class="nav-item">
                             <a class="nav-link" href="/admin/nummerplaten">Overzicht nummerplaten</a>
                         </li>--}}
