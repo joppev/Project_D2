@@ -4,9 +4,8 @@ require('./bootstrap');
 
 window.Noty = require('noty');
 Noty.overrideDefaults({
-    layout: 'topRight',
-    theme: 'bootstrap-v4',
-    timeout: 3000
+    layout: 'center',
+    theme: 'bootstrap-v4'
 });
 
 import Project2d from "./project2d";

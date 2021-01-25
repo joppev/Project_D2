@@ -13,53 +13,79 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="voornaam">Voornaam</label>
-                        <input type="text" name="voornaam" id="voornaam"
-                               class="form-control"
-                               placeholder="Voornaam"
-                               minlength="3"
-                               required
-                               value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="naam">Naam</label>
-                        <input type="text" name="naam" id="naam"
-                               class="form-control"
-                               placeholder="Naam"
-                               minlength="3"
-                               required
-                               value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email"
-                               class="form-control"
-                               placeholder="Email"
-                               minlength="3"
-                               required
-                               value="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Bedrijf</label>
-                        <select class="form-control " name="bedrijf_id" id="bedrijf_id">
-                            <option value="%">alle bedrijven</option>
+                        <label for="exampleFormControlSelect1">Chauffeur</label>
+                        <select class="form-control " name="user_id" id="user_id">
+                            <option value="%">alle chauffeurs</option>
                         </select>
 
                     </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Kade</label>
+                        <select class="form-control " name="kade_id" id="kade_id">
+                            <option value="%">alle kades</option>
+                        </select>
+
+                    </div>
+                    <div class="container">
+
+                        <h1>Laravel Bootstrap Timepicker</h1>
+
+                        <div style="position: relative">
+
+                            <strong>Timepicker:</strong>
+
+                            <input class="timepicker form-control" type="text">
+
+                        </div>
+
+                    </div>
+
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Rol</label>
-                        <select class="form-control" name="rol" id="exampleFormControlSelect1">
-                            <option value="%">alle rollen</option>
-                            <option value="1">Chauffeur</option>
-                            <option value="2">Logistiek</option>
-                            <option value="3">Receptionist</option>
+                        <label for="proces">Proces</label>
+                        <input type="text" name="proces" id="proces"
+                               class="form-control"
+                               placeholder="Proces"
+                               minlength="3"
+                               required
+                               value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lading">Lading details</label>
+                        <input type="text" name="lading" id="lading"
+                               class="form-control"
+                               placeholder="Lading details"
+                               minlength="3"
+                               required
+                               value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lading">Aantal goederen</label>
+                        <input type="text" name="aantal" id="aantal"
+                               class="form-control"
+                               placeholder="Aantal goederen "
+                               required
+                               value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Status</label>
+                        <select class="form-control" name="status" id="exampleFormControlSelect1">
+                            <option value="%">alle statusen</option>
+                            <option value="1">Afgewerkt</option>
+                            <option value="2">Bezig</option>
+                            <option value="3">Aanwezig</option>
+                            <option value="4">Niet afgewerkt</option>
                         </select>
                     </div>
 
 
-                    <button type="submit" class="btn btn-success">Gebruiker aanpassen</button>
+
+
+
+                    <button type="submit" class="btn btn-success">Planning aanpassen</button>
                 </form>
             </div>
         </div>

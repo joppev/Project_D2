@@ -14,14 +14,14 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/OverzichtGebruiker">Overzicht gebruikers</a>
+                            <a class="nav-link" href="/admin/users">Overzicht gebruikers</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/OverzichtKades">Overzicht kades</a>
+                            <a class="nav-link" href="/admin/kades">Overzicht kades</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/OverzichtPlanning">Overzicht planning</a>
+                            <a class="nav-link" href="/admin/plannings">Overzicht planning</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>

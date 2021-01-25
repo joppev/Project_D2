@@ -38,7 +38,44 @@ class PlanningController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+
+
+        ]);
+        $planning = new Planning();
+        $planning->gebruikerID = (int)$request->user_id;
+        $planning->kadeID = (int)$request->kade_id;
+        $planning->tijdTabelID = (int)$request->tijd_id;
+        $planning->proces = $request->proces;
+        $planning->ladingDetails = $request->lading;
+        $planning->aantal = $request->aantal;
+
+        $status = $request->status;
+
+        if($status === "1"){
+            $planning->isAanwezig = false;
+            $planning->isBezig = false;
+            $planning->isAfgewerkt = true;
+        } elseif($status === "2"){
+            $planning->isAanwezig = false;
+            $planning->isBezig = true;
+            $planning->isAfgewerkt = false;
+        }
+        elseif($status === "3"){
+            $planning->isAanwezig = false;
+            $planning->isBezig = false;
+            $planning->isAfgewerkt = true;
+        } else{
+            $planning->isAanwezig = false;
+            $planning->isBezig = false;
+            $planning->isAfgewerkt = false;
+        }
+
+        $planning->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "planning is toegevoegd. "
+        ]);
     }
 
     /**
@@ -72,7 +109,45 @@ class PlanningController extends Controller
      */
     public function update(Request $request, Planning $planning)
     {
-        //
+
+        $this->validate($request,[
+
+
+        ]);
+
+        $planning->gebruikerID = (int)$request->user_id;
+        $planning->kadeID = (int)$request->kade_id;
+        $planning->tijdTabelID = (int)$request->tijd_id;
+        $planning->proces = $request->proces;
+        $planning->ladingDetails = $request->lading;
+        $planning->aantal = $request->aantal;
+
+        $status = $request->status;
+
+        if($status === "1"){
+            $planning->isAanwezig = false;
+            $planning->isBezig = false;
+            $planning->isAfgewerkt = true;
+        } elseif($status === "2"){
+            $planning->isAanwezig = false;
+            $planning->isBezig = true;
+            $planning->isAfgewerkt = false;
+        }
+        elseif($status === "3"){
+            $planning->isAanwezig = false;
+            $planning->isBezig = false;
+            $planning->isAfgewerkt = true;
+        } else{
+            $planning->isAanwezig = false;
+            $planning->isBezig = false;
+            $planning->isAfgewerkt = false;
+        }
+
+        $planning->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "planning is aangepast. "
+        ]);
     }
 
     /**
@@ -83,17 +158,23 @@ class PlanningController extends Controller
      */
     public function destroy(Planning $planning)
     {
-        //
+        $planning->delete();
+        return response()->json([
+            'type' => 'success',
+            'text' => "planning is verwijderd."
+        ]);
     }
 
     public function qryPlannings(){
 
-        $planningen = Planning::orderBy('startTijd')
-            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
-            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+        $planningen  = DB::table('plannings')
+            ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+            ->join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
+            ->join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+            ->join('kades', 'plannings.kadeID', '=', 'kades.id')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+
             ->get();
 
 
@@ -102,4 +183,31 @@ class PlanningController extends Controller
         return $planningen;
 
     }
+
+    public function qryPlanningsUsers()
+    {
+        $users = DB::table('users')
+            ->where('isChauffeur','=',true)
+            ->get();
+
+        Json::dump($users);
+        return $users;
+    }
+    public function qryPlanningsKades()
+    {
+        $kades = DB::table('kades')
+            ->get();
+
+        Json::dump($kades);
+        return $kades;
+    }
+    public function qryPlanningsTijdtabels()
+    {
+        $tijdtabels = DB::table('tijd_tabels')
+            ->get();
+
+        Json::dump($tijdtabels);
+        return $tijdtabels;
+    }
+
 }
