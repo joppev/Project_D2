@@ -41447,7 +41447,7 @@ Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_
 
   /*   app.theme.getApplied().then(function(qtheme){
      alert('Current theme background color: ' + qtheme.id);
-      });*/
+       });*/
 }).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}).catch(__webpack_require__.oe);
 /*
  * Basic responsive mashup template
@@ -41490,8 +41490,8 @@ Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\sites_laravel\project2D\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\sites_laravel\project2D\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\sites_laravel\Project2D\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\sites_laravel\Project2D\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
