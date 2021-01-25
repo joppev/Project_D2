@@ -13,10 +13,10 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="naam">Naam</label>
+                        <label for="naam">Plaatcombinatie</label>
                         <input type="text" name="naam" id="naam"
                                class="form-control"
-                               placeholder="Nummerplaat"
+                               placeholder="Plaatcombinatie"
                                minlength="3"
                                required
                                value="">
@@ -33,7 +33,7 @@
 
 
 
-                    <button type="submit" class="btn btn-success">Nummerplaat aanpassen</button>
+                    <button type="submit" class="btn btn-success">Nummerplaat opslaan</button>
                 </form>
             </div>
         </div>

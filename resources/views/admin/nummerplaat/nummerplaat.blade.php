@@ -1,14 +1,16 @@
 @extends('layouts.template')
 
 @section('main')
-    <h1>Alle Nummerplaten</h1>
+    <div class="row justify-content-around">
+
+    <h1>Nummerplaten</h1>
 
     <p>
         <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Nummerplaat aanmaken
+            <i class="fas fa-plus-circle mr-1"></i>Nummerplaat toevoegen
         </a>
     </p>
-
+    </div>
 
     <div class="table-responsive">
         <table class="table">
@@ -16,7 +18,7 @@
             <tr>
                 <th>Nummerplaat</th>
                 <th>Bedrijf</th>
-
+<th>Bewerken</th>
 
             </tr>
             </thead>
@@ -180,10 +182,10 @@
 
                                    >
                                     <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit">
+                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.plaatcombinatie}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete">
+                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.plaatcombinatie}">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>

@@ -31,7 +31,7 @@
                                value="">
                     </div>
 
-                <button type="submit" class="btn btn-success">Opslaan</button>
+                <button type="submit" class="btn btn-success">Bedrijf opslaan</button>
                 </form>
             </div>
         </div>

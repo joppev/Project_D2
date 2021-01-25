@@ -16,7 +16,7 @@
                     <th>Bedrijf</th>
                     <th>Chauffeur</th>
                     <th>Nummerplaat</th>
-                    <th>Loscade</th>
+                    <th>Loskade</th>
                     <th>Opmerkingen</th>
                     <th>Details</th>
                 </tr>
@@ -30,12 +30,12 @@
 
 
         <div class="table-responsive col-lg-3 col-12">
-            <h2>kade status</h2>
+            <h2>Kadestatus</h2>
             <table class="table tablekade">
                 <thead>
                 <tr>
-                    <th>Kade naam</th>
-                    <th>Kade status</th>
+                    <th>Kadenaam</th>
+                    <th>Kadestatus</th>
 
                 </tr>
                 </thead>

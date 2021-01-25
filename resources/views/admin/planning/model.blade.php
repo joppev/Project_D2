@@ -85,7 +85,7 @@
 
 
 
-                    <button type="submit" class="btn btn-success">Planning aanpassen</button>
+                    <button type="submit" class="btn btn-success">Planning opslaan</button>
                 </form>
             </div>
         </div>

@@ -1,23 +1,25 @@
 @extends('layouts.template')
 
 @section('main')
-    <h1>Alle gebruikers</h1>
+    <div class="row justify-content-around">
+
+    <h1>Gebruikers</h1>
 
     <p>
         <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Gebruiker aanmaken
+            <i class="fas fa-plus-circle mr-1"></i>Gebruiker toevoegen
         </a>
     </p>
-
+    </div>
 
     <div class="table-responsive">
         <table class="table">
             <thead>
             <tr>
-                <th>Naam</th>
+                <th>Voor- & achternaam</th>
                 <th>Bedrijf</th>
                 <th>Rol</th>
-                <th>Actions</th>
+                <th>Bewerken</th>
             </tr>
             </thead>
             <tbody>
@@ -192,10 +194,10 @@
                                    data-naam="${value.naam}"
                                    data-email="${value.email}">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit">
+                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.voornaam} ${value.naam}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete">
+                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.voornaam} ${value.naam}">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
