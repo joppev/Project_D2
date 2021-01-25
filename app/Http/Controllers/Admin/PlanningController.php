@@ -173,7 +173,8 @@ class PlanningController extends Controller
             ->join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
             ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*',)
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+
             ->get();
 
 

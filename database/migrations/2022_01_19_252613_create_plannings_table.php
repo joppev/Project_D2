@@ -26,7 +26,7 @@ class CreatePlanningsTable extends Migration
             $table->boolean('isAfgewerkt');
             $table->timestamps();
 
-            $table->foreign('gebruikerID')->references('id')->on('gebruikers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('gebruikerID')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('kadeID')->references('id')->on('kades')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('tijdTabelID')->references('id')->on('tijd_tabels')->onDelete('cascade')->onUpdate('cascade');
 

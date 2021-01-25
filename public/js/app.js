@@ -40454,9 +40454,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Noty = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 Noty.overrideDefaults({
-  layout: 'topRight',
-  theme: 'bootstrap-v4',
-  timeout: 3000
+  layout: 'center',
+  theme: 'bootstrap-v4'
 });
 
 window.Project2d = _project2d__WEBPACK_IMPORTED_MODULE_0__["default"];
@@ -40603,8 +40602,8 @@ var Project2d = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\sites_laravel\Project2D\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\sites_laravel\Project2D\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\sites_laravel\project2D\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\sites_laravel\project2D\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

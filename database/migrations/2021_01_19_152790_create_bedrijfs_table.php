@@ -14,7 +14,7 @@ class CreateBedrijfsTable extends Migration
     public function up()
     {
         Schema::create('bedrijfs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('bedrijfsnaam');
             $table->string('standaardWachtwoord');
             $table->timestamps();
@@ -23,20 +23,28 @@ class CreateBedrijfsTable extends Migration
             [
                 [
                     'bedrijfsnaam' => 'Apple',
-                    'standaardWachtwoord'  =>'apple123'
+                    'standaardWachtwoord'  =>'apple123',
+                    'created_at' => now(),
+                    'updated_at'=> now()
 
                 ],
                 [
                     'bedrijfsnaam' => 'Samsung',
-                    'standaardWachtwoord'  =>'samsung123'
+                    'standaardWachtwoord'  =>'samsung123',
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'bedrijfsnaam' => 'Aldi',
-                    'standaardWachtwoord'  =>'aldi123'
+                    'standaardWachtwoord'  =>'aldi123',
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
                 [
                     'bedrijfsnaam' => 'Dopper',
-                    'standaardWachtwoord'  =>'dopper123'
+                    'standaardWachtwoord'  =>'dopper123',
+                    'created_at' => now(),
+                    'updated_at'=> now()
                 ],
 
             ]

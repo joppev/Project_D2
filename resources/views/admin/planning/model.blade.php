@@ -26,13 +26,20 @@
                         </select>
 
                     </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Tijdstip</label>
-                        <select class="form-control " name="tijd_id" id="tijd_id">
-                            <option value="%">alle uren</option>
-                        </select>
+                    <div class="container">
+
+                        <h1>Laravel Bootstrap Timepicker</h1>
+
+                        <div style="position: relative">
+
+                            <strong>Timepicker:</strong>
+
+                            <input class="timepicker form-control" type="text">
+
+                        </div>
 
                     </div>
+
 
                     <div class="form-group">
                         <label for="proces">Proces</label>

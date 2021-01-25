@@ -34,7 +34,7 @@ Route::get('home/getPlanninglogistiek', 'HomeController@getPlanninglogistiek');
 
 Route::get('home/getinfo', 'HomeController@getinfo');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::resource('OverzichtGebruiker', 'Admin\UserController');
+    Route::resource('users', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
     Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
 
@@ -42,7 +42,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('bedrijven', 'Admin\BedrijfController');
     Route::get('qryBedrijven', 'Admin\BedrijfController@qryBedrijven');
 
-    Route::resource('OverzichtKades', 'Admin\KadeController');
+    Route::resource('kades', 'Admin\KadeController');
     Route::get('qryKades', 'Admin\KadeController@qryKades');
 
     Route::resource('plannings', 'Admin\PlanningController');

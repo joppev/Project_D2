@@ -73,7 +73,7 @@
                 let email = $(this).closest('td').data('email');
                 // Update the modal
                 $('.modal-title').text(`Edit ${naam}`);
-                $('form').attr('action', `/admin/OverzichtGebruiker/${id}`);
+                $('form').attr('action', `/admin/users/${id}`);
 
                 $('#naam').val(naam);
                 $('#voornaam').val(voornaam);
@@ -87,7 +87,7 @@
             $('#btn-create').click(function () {
                 // Update the modal
                 $('.modal-title').text(`Nieuwe gebruiker`);
-                $('form').attr('action', `/admin/OverzichtGebruiker`);
+                $('form').attr('action', `/admin/users`);
 
                 $('#naam').val();
                 $('#voornaam').val();
@@ -146,7 +146,7 @@
                 '_token': '{{ csrf_token() }}',
                 '_method': 'delete'
             };
-            $.post(`/admin/OverzichtGebruiker/${id}`, pars, 'json')
+            $.post(`/admin/users/${id}`, pars, 'json')
                 .done(function (data) {
                     console.log('data', data);
 
