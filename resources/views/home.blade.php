@@ -31,7 +31,7 @@
 
         <div class="table-responsive col-lg-3 col-12">
             <h2>Kadestatus</h2>
-            <table class="table tablekade">
+            <table class="table tablekade" id="tablekade">
                 <thead>
                 <tr>
                     <th>Kadenaam</th>
@@ -215,12 +215,17 @@
 @section('script_after')
 
     <script>
+
+
 @auth
         @if(auth()->user()->isChauffeur){
             loadChauffeur();
         }
             @endif
         @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
+
+
+
             loadTable();
             loadTable2();
         }
@@ -261,6 +266,8 @@
 
 @endauth
 $('p').on('click', '#btn-begin', function () {
+
+
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
     if(id2 != 'geenProcess') {
@@ -674,39 +681,20 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
         function loadTable() {
 
-            var table = $(".tablekade").DataTable({
-                ajax: {
-                    type: 'GET',
-                    url: 'home/kade',
-                    dataSrc:function (data) {
-                        console.log("success");
-                        console.log(data);
-                        var result = data;
-                        return result;
-                    },
-                    columns: [
-                        {data: 'kadenaam', name: 'kadenaam'},
-                        {data: 'status', name: 'status'},
 
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: true,
-                            searchable: true
-                        },
-                    ]
-                },
-
-            });
-            /*$.getJSON('home/kade')
-                .done(function (data) {
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/kade', // This is the url we gave in the route
+                data: {'text': text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
                     // Clear tbody tag
                     $('.tablekade tbody').empty();
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
-                    let tr = ''
+                        let tr = ''
 
-                        if (value.status === "Vrij"){
+                        if (value.status === "Vrij") {
                             tr = `<tr class="table-success">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
@@ -714,7 +702,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
 
                         }
-                        if (value.status == "Niet-vrij"){
+                        if (value.status == "Niet-vrij") {
                             tr = `<tr class="table-danger">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
@@ -722,7 +710,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
 
                         }
-                        if (value.status === "Buiten gebruik"){
+                        if (value.status === "Buiten gebruik") {
                             tr = `<tr class="table-warning">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
@@ -733,12 +721,18 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         // Append row to tbody
                         $('.tablekade tbody').append(tr);
                     });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
-*/
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
 
+
+            });
         }
         function loadTable2() {
             $.getJSON('home/dagplanning')

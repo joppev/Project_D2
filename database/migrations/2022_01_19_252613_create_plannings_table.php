@@ -149,32 +149,7 @@ class CreatePlanningsTable extends Migration
 
                     'created_at' => now(),
                     'updated_at'=> now()
-                ],[
-                'gebruikerID' => 3,
-                'kadeID' => 2,
-                'proces' => "proces3",
-                'ladingDetails' => "ladingDetails3",
-                'aantal' => 3,
-                'isAanwezig' => true,
-                'isBezig' => false,
-                'isAfgewerkt' => false,
-                'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-25 11:30'),
-                'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-01-25 12:00'),
-                'created_at' => now(),
-                'updated_at'=> now()
-            ],[
-                'gebruikerID' => 1,
-                'kadeID' => 1,
-                'tijdTabelID' => 7,
-                'proces' => "proces 1",
-                'ladingDetails' => "ladingDetails 1",
-                'aantal' => 56363,
-                'isAanwezig' => true,
-                'isBezig' => false,
-                'isAfgewerkt' => false,
-                'created_at' => now(),
-                'updated_at'=> now()
-            ],
+                ],
 
             ]
         );
