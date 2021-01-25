@@ -1,14 +1,16 @@
 @extends('layouts.template')
 
 @section('main')
-    <h1>Alle Kades</h1>
+    <div class="row justify-content-around">
+
+    <h1>Kades</h1>
 
     <p>
         <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Kade aanmaken
+            <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
         </a>
     </p>
-
+    </div>
 
     <div class="table-responsive">
         <table class="table">
@@ -16,8 +18,9 @@
             <tr>
                 <th>Naam</th>
                 <th>Land</th>
-                <th>gemeente</th>
-                <th>status</th>
+                <th>Gemeente</th>
+                <th>Status</th>
+                <th>Bewerken</th>
 
             </tr>
             </thead>
@@ -201,10 +204,10 @@
                                     data-lon="${value.longitude}"
                                     data-status="${value.status}">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit">
+                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete">
+                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.kadenaam}">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>

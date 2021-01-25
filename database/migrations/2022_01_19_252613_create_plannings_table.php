@@ -149,6 +149,18 @@ class CreatePlanningsTable extends Migration
                 'isAfgewerkt' => false,
                 'created_at' => now(),
                 'updated_at'=> now()
+            ],[
+                'gebruikerID' => 1,
+                'kadeID' => 1,
+                'tijdTabelID' => 7,
+                'proces' => "proces 1",
+                'ladingDetails' => "ladingDetails 1",
+                'aantal' => 56363,
+                'isAanwezig' => true,
+                'isBezig' => false,
+                'isAfgewerkt' => false,
+                'created_at' => now(),
+                'updated_at'=> now()
             ],
 
             ]

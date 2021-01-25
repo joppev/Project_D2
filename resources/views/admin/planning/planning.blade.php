@@ -1,14 +1,16 @@
 @extends('layouts.template')
 
 @section('main')
-    <h1>Alle Planningen</h1>
+    <div class="row justify-content-around">
+
+    <h1>Planningen</h1>
 
     <p>
         <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Planning aanmaken
+            <i class="fas fa-plus-circle mr-1"></i>Planning toevoegen
         </a>
     </p>
-
+    </div>
 
     <div class="table-responsive">
         <table class="table">
@@ -18,8 +20,8 @@
                 <th>Bedrijf</th>
                 <th>Chauffeur</th>
                 <th>Nummerplaat</th>
-                <th>Loscade</th>
-                <th>Actions</th>
+                <th>Loskade</th>
+                <th>Bewerken</th>
             </tr>
             </thead>
             <tbody>

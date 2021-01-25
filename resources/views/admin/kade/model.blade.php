@@ -79,7 +79,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-success">Kade aapassen</button>
+                    <button type="submit" class="btn btn-success">Kade opslaan</button>
                 </form>
             </div>
         </div>
