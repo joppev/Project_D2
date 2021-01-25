@@ -31,35 +31,15 @@
 
         @include('admin.bedrijven.modal')
         @endsection
+
+
+
+
+
         @section('script_after')
+
             <script>
-                $(document).ready(function () {
-                    $('#bedrijventable').DataTable({
-                        language: {
-                            "sProcessing": "Bezig...",
-                            "sLengthMenu": "_MENU_ resultaten weergeven",
-                            "sZeroRecords": "Geen resultaten gevonden",
-                            "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
-                            "sInfoEmpty": "Geen resultaten om weer te geven",
-                            "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
-                            "sInfoPostFix": "",
-                            "sSearch": "Zoeken:",
-                            "sEmptyTable": "Geen resultaten aanwezig in de tabel",
-                            "sInfoThousands": ".",
-                            "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
-                            "oPaginate": {
-                                "sFirst": "Eerste",
-                                "sLast": "Laatste",
-                                "sNext": "Volgende",
-                                "sPrevious": "Vorige"
-                            },
-                            "oAria": {
-                                "sSortAscending": ": activeer om kolom oplopend te sorteren",
-                                "sSortDescending": ": activeer om kolom aflopend te sorteren"
-                            }
-                        }
-                    });
-                });
+
                 $(function () {
                     loadTable();
 
@@ -161,9 +141,9 @@
                                 Project2d.toast({
                                     type: 'error',
                                     text: msg
-                                    }).show();
+                                }).show();
 
-                    });
+                            });
                     });
                 });
 
@@ -201,22 +181,22 @@
                             $.each(data, function (key, value) {
                                 console.log(value)
                                 let tr = `<tr class="">
-                               <td>${value.bedrijfsnaam}</td>
-                               <td>${value.standaardWachtwoord}</td>
+                                   <td>${value.bedrijfsnaam}</td>
+                                   <td>${value.standaardWachtwoord}</td>
 
-                              <td data-id="${value.id}"
-                                   data-bedrijfsnaam="${value.bedrijfsnaam}"
-                                   data-standaardWachtwoord="${value.standaardWachtwoord}">
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.bedrijfsnaam}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.bedrijfsnaam}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                               </td>
-                           </tr>`;
+                                  <td data-id="${value.id}"
+                                       data-bedrijfsnaam="${value.bedrijfsnaam}"
+                                       data-standaardWachtwoord="${value.standaardWachtwoord}">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.bedrijfsnaam}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.bedrijfsnaam}">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                   </td>
+                               </tr>`;
                                 // Append row to tbody
                                 $('tbody').append(tr);
                             });
