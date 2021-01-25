@@ -301,7 +301,9 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 console.log(data)
                 new Noty({
                     type: data.type,
-                    text: data.text
+                    text: data.text,
+                    layout: 'topRight',
+                    timeout: 3000,
                 }).show();
             },
             error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail

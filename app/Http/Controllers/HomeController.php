@@ -54,11 +54,11 @@ class HomeController extends Controller
 
         $planningen = Planning::orderBy('startTijd')
             ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->get();
 
 
@@ -88,11 +88,11 @@ class HomeController extends Controller
         $dt2= date('Y-m-d H:i',time()+86400);
         $planningen = Planning::orderBy('startTijd')
             ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.land as land','kades.gemeente as gemeente','kades.adres as adres','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.land as land','kades.gemeente as gemeente','kades.adres as adres','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('gebruikerID',$user->id)
@@ -120,11 +120,11 @@ class HomeController extends Controller
         $dt2= date('Y-m-d H:i',time()+7200);
         $planning = Planning::orderBy('id')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -171,11 +171,11 @@ class HomeController extends Controller
         $dt2= date('Y-m-d H:i',time()+7200);
         $planning = Planning::orderBy('id')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -225,18 +225,17 @@ class HomeController extends Controller
         $dt2= date('Y-m-d H:i',time()+7200);
         $planningen = Planning::orderBy('id')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
             ->where('isAfgewerkt', '=', 0)
             ->where('kadeID', 'like', $id)
         ->get();
-
 
         foreach($planningen as $planning){
             if($planning->isBezig == 1){
@@ -251,7 +250,8 @@ class HomeController extends Controller
         }
         $kade = Kade::orderBy('kadeNaam')->find($id);
         return $kade;
-        return $planningen;
+
+
 
     }
 
@@ -266,12 +266,11 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('startTijd')
 
             ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
-            ->Join('gebruikers', 'plannings.gebruikerID', '=', 'gebruikers.id')
-            ->Join('bedrijfs', 'gebruikers.bedrijfs_id', '=', 'bedrijfs.id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'gebruikers.voornaam as voornaam', 'gebruikers.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
-
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->get();
