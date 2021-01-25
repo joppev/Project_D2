@@ -129,8 +129,6 @@ class UserController extends Controller
         $user->bedrijfsID = (int)$request->bedrijf_id;
         $rol = $request->rol;
 
-
-
         if($rol === "1"){
             $user->isChauffeur = true;
             $user->isLogistiek = false;
