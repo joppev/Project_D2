@@ -33,11 +33,7 @@
                             <a class="nav-link" href="/admin/nummerplaten">Overzicht nummerplaten</a>
                         </li>--}}
                     @endif
-                    @if(auth()->user()->isLogistiek )
-                        <li class="nav-item">
-                            <a class="nav-link" href="/OverzichtKades">Overzicht Kades</a>
-                        </li>
-                    @endif
+                   
                 @endauth
             </ul>
             {{--  Auth navigation  --}}
