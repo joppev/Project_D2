@@ -54,6 +54,9 @@
         <h1>Dagplanning</h1>
         <hr>
         <div class="row">
+            <h2 id="info" name="info" class="col-12"></h2>
+        </div>
+        <div class="row">
             <label class="col-4" for="startTijd">Tijdstip: </label>
             <p id="startTijd" name="startTijd" class="col-4"></p>
         </div>
@@ -210,6 +213,7 @@
 
 
 @section('script_after')
+
     <script>
 @auth
         @if(auth()->user()->isChauffeur){
@@ -266,7 +270,6 @@ $('p').on('click', '#btn-begin', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) { // What to do if we succeed
-                console.log(data)
                 new Noty({
                     type: data.type,
                     text: data.text,
@@ -298,7 +301,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) { // What to do if we succeed
-                console.log(data)
                 new Noty({
                     type: data.type,
                     text: data.text,
@@ -324,7 +326,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
             // Update the modal
             let id = $(this).closest('a').data('id');
-            console.log(id);
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getinfo', // This is the url we gave in the route
@@ -438,7 +439,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 // a JSON object to send back
                 success: function (data) {
                     if (data.kadeID == id) {
-                        console.log(data);
                         $('div#logistiekKleur').attr('data-id' , data.id);
 
                         var startTijd = data.startTijd;
@@ -593,68 +593,71 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 url: 'home/getPlanningChauffeur', // This is the url we gave in the route
                 // a JSON object to send back
                 success: function (data) {
-                    var startTijd = data.startTijd;
-                    var stopTijd = data.stopTijd;
-                    var bedrijf = data.bedrijfsnaam;
-                    var nummerplaat = data.plaatcombinatie;
-                    var kade = data.kadenaam;
-                    var kadeStatus = data.status;
-                    var ladingDetails = data.ladingDetails;
-                    var aantal = data.aantal;
-                    var status = data.status;
-                    var voornaam = data.voornaam + " " + data.naam;
-                    var proces = data.proces;
-                    var adres = data.land + " - " + data.gemeente + " - " + data.adres
-                    var verwerkingsstatus = '';
-                    if(data.isAfgewerkt){
-                        verwerkingsstatus = "afgewerkt";
+                    if(data.id != null) {
+                        var startTijd = data.startTijd;
+                        var stopTijd = data.stopTijd;
+                        var bedrijf = data.bedrijfsnaam;
+                        var nummerplaat = data.plaatcombinatie;
+                        var kade = data.kadenaam;
+                        var kadeStatus = data.status;
+                        var ladingDetails = data.ladingDetails;
+                        var aantal = data.aantal;
+                        var status = data.status;
+                        var voornaam = data.voornaam + " " + data.naam;
+                        var proces = data.proces;
+                        var adres = data.land + " - " + data.gemeente + " - " + data.adres
+                        var verwerkingsstatus = '';
+                        if (data.isAfgewerkt) {
+                            verwerkingsstatus = "afgewerkt";
+                        } else {
+                            verwerkingsstatus = "niet-afgewerkt";
+                        }
+
+                        $('#startTijd').text(startTijd);
+                        $('#stopTijd').text(stopTijd);
+                        $('#bedrijf').text(bedrijf);
+                        $('#nummerplaat').text(nummerplaat);
+                        $('#kade').text(kade);
+                        $('#kadeStatus').text(kadeStatus);
+                        if (kadeStatus == 'Niet-vrij' && data.isBezig == 0) {
+                            $('#kadeStatus').addClass('table-warning');
+                            $('#kadeStatus').removeClass('table-danger');
+                            $('#kadeStatus').removeClass('table-success');
+                        }
+                        if (kadeStatus == 'Buiten gebruik') {
+                            $('#kadeStatus').addClass('table-danger');
+                            $('#kadeStatus').removeClass('table-warning');
+                            $('#kadeStatus').removeClass('table-success');
+                        }
+                        if (kadeStatus == 'Vrij') {
+                            $('#kadeStatus').addClass('table-success');
+                            $('#kadeStatus').removeClass('table-danger');
+                            $('#kadeStatus').removeClass('table-warning');
+                        }
+                        $('#ladingDetails').text(ladingDetails);
+                        $('#status').text(status);
+                        $('#aantal').text(aantal);
+                        $('#voornaam').text(voornaam);
+                        $('#proces').text(proces);
+                        $('#adres').text(adres);
+                        $('#verwerkingsstatus').text(verwerkingsstatus);
+                        if (data.isAfgewerkt == 0) {
+                            $('#verwerkingsstatus').addClass('table-warning');
+                            $('#verwerkingsstatus').removeClass('table-success');
+                        }
+
+                        if (data.isAfgewerkt == 1) {
+                            $('#verwerkingsstatus').addClass('table-success');
+                            $('#verwerkingsstatus').removeClass('table-warning');
+                        }
+
+
                     }
                     else{
-                        verwerkingsstatus = "niet-afgewerkt";
+                        var text = 'geen planning vandaag';
+                        $('#info').text(text);
+
                     }
-
-                    $('#startTijd').text(startTijd);
-                    $('#stopTijd').text(stopTijd);
-                    $('#bedrijf').text(bedrijf);
-                    $('#nummerplaat').text(nummerplaat);
-                    $('#kade').text(kade);
-                    $('#kadeStatus').text(kadeStatus);
-                    if (kadeStatus == 'Niet-vrij' && data.isBezig == 0){
-                        $('#kadeStatus').addClass('table-warning');
-                        $('#kadeStatus').removeClass('table-danger');
-                        $('#kadeStatus').removeClass('table-success');
-                    }
-                    if (kadeStatus == 'Buiten gebruik'){
-                        $('#kadeStatus').addClass('table-danger');
-                        $('#kadeStatus').removeClass('table-warning');
-                        $('#kadeStatus').removeClass('table-success');
-                    }
-                    if (kadeStatus == 'Vrij'){
-                        $('#kadeStatus').addClass('table-success');
-                        $('#kadeStatus').removeClass('table-danger');
-                        $('#kadeStatus').removeClass('table-warning');
-                    }
-                    $('#ladingDetails').text(ladingDetails);
-                    $('#status').text(status);
-                    $('#aantal').text(aantal);
-                    $('#voornaam').text(voornaam);
-                    $('#proces').text(proces);
-                    $('#adres').text(adres);
-                    $('#verwerkingsstatus').text(verwerkingsstatus);
-                    if (data.isAfgewerkt == 0){
-                        $('#verwerkingsstatus').addClass('table-warning');
-                        $('#verwerkingsstatus').removeClass('table-success');
-                    }
-
-                    if (data.isAfgewerkt == 1){
-                        $('#verwerkingsstatus').addClass('table-success');
-                        $('#verwerkingsstatus').removeClass('table-warning');
-                    }
-
-
-
-
-
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
@@ -669,9 +672,33 @@ $('p').on('click', '#btn-afgewerkt', function () {
         }
 
 
-
         function loadTable() {
-            $.getJSON('home/kade')
+
+            var table = $(".tablekade").DataTable({
+                ajax: {
+                    type: 'GET',
+                    url: 'home/kade',
+                    dataSrc:function (data) {
+                        console.log("success");
+                        console.log(data);
+                        var result = data;
+                        return result;
+                    },
+                    columns: [
+                        {data: 'kadenaam', name: 'kadenaam'},
+                        {data: 'status', name: 'status'},
+
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: true,
+                            searchable: true
+                        },
+                    ]
+                },
+
+            });
+            /*$.getJSON('home/kade')
                 .done(function (data) {
                     // Clear tbody tag
                     $('.tablekade tbody').empty();
@@ -710,7 +737,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 .fail(function (e) {
                     console.log('error', e);
                 })
-
+*/
 
         }
         function loadTable2() {
