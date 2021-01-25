@@ -41225,8 +41225,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Noty = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 Noty.overrideDefaults({
+  theme: 'bootstrap-v4',
+  type: 'warning',
   layout: 'center',
-  theme: 'bootstrap-v4'
+  modal: true
 });
 
 window.Project2d = _project2d__WEBPACK_IMPORTED_MODULE_0__["default"];
@@ -41447,7 +41449,7 @@ Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_
 
   /*   app.theme.getApplied().then(function(qtheme){
      alert('Current theme background color: ' + qtheme.id);
-      });*/
+       });*/
 }).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}).catch(__webpack_require__.oe);
 /*
  * Basic responsive mashup template

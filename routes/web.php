@@ -50,6 +50,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('qryPlanningsUsers', 'Admin\PlanningController@qryPlanningsUsers');
     Route::get('qryPlanningsKades', 'Admin\PlanningController@qryPlanningsKades');
     Route::get('qryPlanningsTijdtabels', 'Admin\PlanningController@qryPlanningsTijdtabels');
+
+    Route::resource('nummerplaats', 'Admin\NummerplaatController');
+    Route::get('qryNummerplaats', 'Admin\NummerplaatController@qryNummerplaats');
+    Route::get('qryNummerplaats2', 'Admin\NummerplaatController@qryNummerplaats2');
+
 });
 
 

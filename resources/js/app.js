@@ -4,8 +4,10 @@ require('./bootstrap');
 
 window.Noty = require('noty');
 Noty.overrideDefaults({
+    theme: 'bootstrap-v4',
+    type: 'warning',
     layout: 'center',
-    theme: 'bootstrap-v4'
+    modal: true,
 });
 
 import Project2d from "./project2d";
