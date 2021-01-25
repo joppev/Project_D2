@@ -41426,7 +41426,7 @@ var config1 = {
 
 undefined;
 
-Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [!(function webpackMissingModule() { var e = new Error("Cannot find module 'js/qlik'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())]; (function (qlik) {
+Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [!(function webpackMissingModule() { var e = new Error("Cannot find module 'resources/js/qlik'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())]; (function (qlik) {
   qlik.on("error", function (error) {
     $('#popupText').append(error.message + "<br>");
     $('#popup').fadeIn(1000);
