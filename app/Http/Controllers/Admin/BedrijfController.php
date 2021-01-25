@@ -80,8 +80,9 @@ class BedrijfController extends Controller
      * @param  \App\Bedrijf  $bedrijf
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bedrijf $bedrijf)
+    public function update($id, Request $request)
     {
+        $bedrijf=Bedrijf::find($id);
         $this->validate($request, [
             'bedrijfsnaam' => 'required|min:3,' . $bedrijf->id,
             'standaardWachtwoord' => 'required|min:8'
@@ -102,8 +103,9 @@ class BedrijfController extends Controller
      * @param  \App\Bedrijf  $bedrijf
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bedrijf $bedrijf)
+    public function destroy($id)
     {
+        $bedrijf=Bedrijf::find($id);
         $bedrijf->delete();
         return response()->json([
             'type' => 'success',
