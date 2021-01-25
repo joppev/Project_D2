@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Kade;
 use App\Planning;
-use App\TijdTabel;
 use App\User;
 use Carbon\Carbon;
 use Facades\App\Helpers\Json;
@@ -52,13 +51,12 @@ class HomeController extends Controller
     public function getinfo(Request $request){
         $id = $request->request->get('id');
 
-        $planningen = Planning::orderBy('startTijd','id')
-            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+        $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->get();
 
 
@@ -86,13 +84,12 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time());
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+86400);
-        $planningen = Planning::orderBy('startTijd','id')
-            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+        $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.land as land','kades.gemeente as gemeente','kades.adres as adres','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.land as land','kades.gemeente as gemeente','kades.adres as adres','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('gebruikerID',$user->id)
@@ -118,13 +115,12 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+7200);
-        $planning = Planning::orderBy('startTijd','id')
-            ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+        $planning = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -169,13 +165,12 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+7200);
-        $planning = Planning::orderBy('startTijd','id')
-            ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+        $planning = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -223,13 +218,12 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+7200);
-        $planningen = Planning::orderBy('startTijd','id')
-            ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
+        $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -263,14 +257,13 @@ class HomeController extends Controller
         $dt2= date('Y-m-d H:i',time()+43200);
 
         //geeft alle planningen terug die 12 uur voor het huidig uur zijn en 12 uur na het huidig uur zijn
-        $planningen = Planning::orderBy('startTijd','id')
+        $planningen = Planning::orderBy('id')
 
-            ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->get();
