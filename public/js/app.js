@@ -41415,7 +41415,7 @@ var config1 = {
   //the address of your Qlik Engine Instance
   prefix: "/",
   //or the virtual proxy to be used. for example "/anonymous/"
-  port: 8090,
+  port: 443,
   //or the port to be used if different from the default port
   isSecure: true,
   //should be true if connecting over HTTPS
