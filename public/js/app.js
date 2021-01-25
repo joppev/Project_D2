@@ -41417,7 +41417,7 @@ var config1 = {
   //or the virtual proxy to be used. for example "/anonymous/"
   port: 443,
   //or the port to be used if different from the default port
-  isSecure: true,
+  isSecure: false,
   //should be true if connecting over HTTPS
   webIntegrationId: 'Fyml_Ta_M3TY9YBzn0n2TCNaeykh5SK5' //only needed in SaaS editions and QSEoK
 
