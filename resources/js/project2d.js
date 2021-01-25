@@ -82,7 +82,7 @@ require.config( {
     webIntegrationId: config1.webIntegrationId
 } );
 
-require( ["js/qlik"], function ( qlik ) {
+require( ["resources/js/qlik"], function ( qlik ) {
     qlik.on( "error", function ( error ) {
         $( '#popupText' ).append( error.message + "<br>" );
         $( '#popup' ).fadeIn( 1000 );
