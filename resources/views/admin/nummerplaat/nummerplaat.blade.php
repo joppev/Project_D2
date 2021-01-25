@@ -60,7 +60,7 @@
                             deleteNummerplaat(id);
                             modal.close();
                         }),
-                        Noty.button('Cancel', 'btn btn-secondary ml-2', function () {
+                        Noty.button('Annuleren', 'btn btn-secondary ml-2', function () {
                             modal.close();
                         })
                     ]
@@ -73,7 +73,7 @@
                 let naam = $(this).closest('td').data('plaat');
 
                 // Update the modal
-                $('.modal-title').text(`Edit ${naam}`);
+                $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/nummerplaats/${id}`);
 
                 $('#naam').val(naam);

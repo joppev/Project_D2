@@ -29,7 +29,7 @@ class CreateKadesTable extends Migration
         DB::table('kades')->insert(
             [
                 [
-                'kadenaam' => "kade1",
+                'kadenaam' => "Kade 1",
                 'land' => "België",
                 'gemeente' => "Geel",
                 'adres' => "Larumseweg 90",
@@ -39,7 +39,7 @@ class CreateKadesTable extends Migration
             ],
                 [
 
-                    'kadenaam' => "kade2",
+                    'kadenaam' => "Kade 2",
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
@@ -48,7 +48,7 @@ class CreateKadesTable extends Migration
                     'status' => 'Buiten gebruik'
                 ],
                 [
-                    'kadenaam' => "kade3",
+                    'kadenaam' => "Kade 3",
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",

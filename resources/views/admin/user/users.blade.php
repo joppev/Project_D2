@@ -60,7 +60,7 @@
                             deleteUser(id);
                             modal.close();
                         }),
-                        Noty.button('Cancel', 'btn btn-secondary ml-2', function () {
+                        Noty.button('Annuleren', 'btn btn-secondary ml-2', function () {
                             modal.close();
                         })
                     ]
@@ -74,7 +74,7 @@
                 let voornaam = $(this).closest('td').data('voornaam');
                 let email = $(this).closest('td').data('email');
                 // Update the modal
-                $('.modal-title').text(`Edit ${naam}`);
+                $('.modal-title').text(`Bewerk ${voornaam} ${naam}`);
                 $('form').attr('action', `/admin/users/${id}`);
 
                 $('#naam').val(naam);

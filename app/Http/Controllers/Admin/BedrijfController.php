@@ -16,7 +16,9 @@ class BedrijfController extends Controller
      */
     public function index()
     {
-        return view('admin.bedrijven.bedrijven');    }
+        return view('admin.bedrijven.bedrijven');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,14 +32,14 @@ class BedrijfController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request,
             ['bedrijfsnaam' => 'required|min:3',
-            'standaardWachtwoord' => 'required|min:8'
+                'standaardWachtwoord' => 'required|min:8'
             ]);
 
         $bedrijf = new Bedrijf();
@@ -54,7 +56,7 @@ class BedrijfController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Bedrijf  $bedrijf
+     * @param \App\Bedrijf $bedrijf
      * @return \Illuminate\Http\Response
      */
     public function show(Bedrijf $bedrijf)
@@ -65,7 +67,7 @@ class BedrijfController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Bedrijf  $bedrijf
+     * @param \App\Bedrijf $bedrijf
      * @return \Illuminate\Http\Response
      */
     public function edit(Bedrijf $bedrijf)
@@ -76,17 +78,17 @@ class BedrijfController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Bedrijf  $bedrijf
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Bedrijf $bedrijf
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request)
     {
-        $bedrijf=Bedrijf::find($id);
+        $bedrijf = Bedrijf::find($id);
         $this->validate($request, [
             'bedrijfsnaam' => 'required|min:3,' . $bedrijf->id,
             'standaardWachtwoord' => 'required|min:8'
-            ]);
+        ]);
 
         $bedrijf->bedrijfsnaam = $request->bedrijfsnaam;
         $bedrijf->standaardWachtwoord = $request->standaardWachtwoord;
@@ -100,12 +102,12 @@ class BedrijfController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Bedrijf  $bedrijf
+     * @param \App\Bedrijf $bedrijf
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $bedrijf=Bedrijf::find($id);
+        $bedrijf = Bedrijf::find($id);
         $bedrijf->delete();
         return response()->json([
             'type' => 'success',

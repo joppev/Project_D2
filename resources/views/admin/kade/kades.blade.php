@@ -62,7 +62,7 @@
                             deleteKade(id);
                             modal.close();
                         }),
-                        Noty.button('Cancel', 'btn btn-secondary ml-2', function () {
+                        Noty.button('Annuleren', 'btn btn-secondary ml-2', function () {
                             modal.close();
                         })
                     ]
@@ -80,7 +80,7 @@
                 let lon = $(this).closest('td').data('lon');
                 let status = $(this).closest('td').data('status');
                 // Update the modal
-                $('.modal-title').text(`Edit ${naam}`);
+                $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/kades/${id}`);
 
                 $('#naam').val(naam);
