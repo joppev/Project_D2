@@ -37,6 +37,7 @@
             loadTable();
             loadDropdown();
 
+
             $('tbody').on('click', '.btn-delete', function () {
                 // Get data attributes from td tag
                 let id = $(this).closest('td').data('id');
@@ -234,6 +235,8 @@
                 });
 
         }
+
+
 
     </script>
 @endsection

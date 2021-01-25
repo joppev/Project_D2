@@ -40,11 +40,11 @@ class KadeController extends Controller
     {
         {
             $this->validate($request,[
-                'naam' => 'required|min:3,'
+
 
             ]);
             $kade = new Kade();
-            $kade->naam = $request->naam;
+            $kade->kadenaam = $request->naam;
             $kade->land = $request->land;
             $kade->gemeente = $request->gemeente;
             $kade->adres = $request->adres;
@@ -96,7 +96,7 @@ class KadeController extends Controller
 
         ]);
 
-        $kade->naam = $request->naam;
+        $kade->kadenaam = $request->naam;
         $kade->land = $request->land;
         $kade->gemeente = $request->gemeente;
         $kade->adres = $request->adres;
@@ -107,7 +107,7 @@ class KadeController extends Controller
         $kade->save();
         return response()->json([
             'type' => 'success',
-            'text' => "De kade <b>$kade->naam</b> is aangepast. "
+            'text' => "De kade <b>$kade->kadenaam</b> is aangepast. "
         ]);
     }
 
@@ -122,7 +122,7 @@ class KadeController extends Controller
         $kade->delete();
         return response()->json([
             'type' => 'success',
-            'text' => "<b> $kade->naam</b> is verwijderd."
+            'text' => "<b> $kade->kadenaam</b> is verwijderd."
         ]);
     }
 
