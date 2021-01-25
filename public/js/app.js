@@ -41416,7 +41416,7 @@ var config1 = {
   //the address of your Qlik Engine Instance
   prefix: "/",
   //or the virtual proxy to be used. for example "/anonymous/"
-  port: 443,
+  port: 8090,
   //or the port to be used if different from the default port
   isSecure: true,
   //should be true if connecting over HTTPS
@@ -41426,7 +41426,7 @@ var config1 = {
 
 undefined;
 
-Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [!(function webpackMissingModule() { var e = new Error("Cannot find module 'resources/js/qlik'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())]; (function (qlik) {
+Promise.resolve(/*! AMD require */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [!(function webpackMissingModule() { var e = new Error("Cannot find module 'js/qlik'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())]; (function (qlik) {
   qlik.on("error", function (error) {
     $('#popupText').append(error.message + "<br>");
     $('#popup').fadeIn(1000);
