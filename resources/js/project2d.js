@@ -17,11 +17,29 @@ let Project2d = (function () {
             text: toastObj.text || '...',       // if no text specified, use '...'
         }).show();
     }
+        /*
+ * Basic responsive mashup template
+ * @owner Enter you name here (xxx)
+ */
+        /*
+         *    Fill in host and port for Qlik engine
+         */
+
+
+
+
 
     // Return all functions that are public available. E.g. VinylShop.hello()
     return {
 
         toast: toast,
     };
+
 })();
+
+
+
+
+
+
 export default Project2d;

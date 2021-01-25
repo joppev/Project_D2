@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::redirect('home', '/');
-Route::view('/', 'home');
+Route::get('home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+Route::get('kadeID', 'HomeController@index');
+Route::get('home/begin', 'HomeController@begin');
+Route::get('home/afgewerkt', 'HomeController@afgewerkt');
 
 
 Route::get('home/getPlanningChauffeur', 'HomeController@planningChauffeur');
@@ -26,12 +29,15 @@ Route::get('home/dagplanning', 'HomeController@dagplanning');
 Route::get('home/kade', 'HomeController@kade');
 
 
+Route::get('home/getPlanninglogistiek', 'HomeController@getPlanninglogistiek');
+
 
 Route::get('home/getinfo', 'HomeController@getinfo');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('OverzichtGebruiker', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
     Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
+
 
     Route::resource('bedrijven', 'Admin\BedrijfController');
     Route::get('qryBedrijven', 'Admin\BedrijfController@qryBedrijven');

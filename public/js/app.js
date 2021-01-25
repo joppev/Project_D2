@@ -40454,10 +40454,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Noty = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 Noty.overrideDefaults({
+  layout: 'topRight',
   theme: 'bootstrap-v4',
-  type: 'warning',
-  layout: 'center',
-  modal: true
+  timeout: 3000
 });
 
 window.Project2d = _project2d__WEBPACK_IMPORTED_MODULE_0__["default"];
@@ -40547,7 +40546,16 @@ var Project2d = function () {
       text: toastObj.text || '...' // if no text specified, use '...'
 
     }).show();
-  } // Return all functions that are public available. E.g. VinylShop.hello()
+  }
+  /*
+  * Basic responsive mashup template
+  * @owner Enter you name here (xxx)
+  */
+
+  /*
+   *    Fill in host and port for Qlik engine
+   */
+  // Return all functions that are public available. E.g. VinylShop.hello()
 
 
   return {
@@ -40577,8 +40585,8 @@ var Project2d = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\sites_laravel\project2D\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\sites_laravel\project2D\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\sites_laravel\Project2D\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\sites_laravel\Project2D\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

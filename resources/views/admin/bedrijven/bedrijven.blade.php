@@ -18,21 +18,18 @@
                 <tr>
                     <th>Bedrijf</th>
                     <th>Standaard wachtwoord</th>
-                    <th>Nummerplaten</th>
                     <th>Bewerken</th>
                 </tr>
                 </thead>
                 <tbody>
+
 
                 </tbody>
             </table>
         </div>
 
         @include('admin.bedrijven.modal')
-
         @endsection
-
-
         @section('script_after')
             <script>
                 $(function () {
@@ -92,8 +89,8 @@
                         $('.modal-title').text(`Bedrijf toevoegen`);
                         $('form').attr('action', `/admin/bedrijven`);
 
-                        $('#bedrijfsnaam').val();
-                        $('#standaardWachtwoord').val();
+                        $('#bedrijfsnaam').val('');
+                        $('#standaardWachtwoord').val('');
 
                         $('input[name="_method"]').val('post');
                         // Show the modal
@@ -136,8 +133,9 @@
                                 Project2d.toast({
                                     type: 'error',
                                     text: msg
-                                });
-                            });
+                                    }).show();
+
+                    });
                     });
                 });
 
@@ -173,13 +171,10 @@
 
                             // Loop over each item in the array
                             $.each(data, function (key, value) {
-
                                 console.log(value)
-
                                 let tr = `<tr class="">
                                <td>${value.bedrijfsnaam}</td>
                                <td>${value.standaardWachtwoord}</td>
-                               <td>${value.plaatcombinatie}</td>
 
                               <td data-id="${value.id}"
                                    data-bedrijfsnaam="${value.bedrijfsnaam}"
@@ -204,4 +199,11 @@
                 }
 
             </script>
+
+
+
+
+
+
+
 @endsection

@@ -1,6 +1,12 @@
-body {
+.normal_bodyn, .form-control{
     background-color: $achtergrondkleur !important;
+    color: $tekstkleur!important;
 }
+
+
+
+
+
 
 .size {
     min-height: 500px;
@@ -52,4 +58,6 @@ a.info:hover{
     min-width: 400px;
     margin: 45px 0 0 45px;
 }
+
+
 

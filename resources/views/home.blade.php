@@ -6,8 +6,7 @@
     <hr>
     @auth
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
-
-<div class="row">
+        <div class="row">
         <div class="table-responsive col-lg-9 col-12">
             <h2>Dagplanning</h2>
             <table class="table tableplanning">
@@ -118,6 +117,93 @@
 
 
     @endif
+
+    @if(auth()->user()->isLogistiek)
+    <div id="logistiekKleur" >
+        <br>
+        <div class="row">
+        <form class="col-4" method="get" action="/kadeID" id="searchForm">
+
+        <select class="table-secondary select-color" name="kade_id" id="kade_id">
+            <option value="%" data-id="%" >Alle kades</option>
+            @foreach($kades as $kade)
+                <option value="{{ $kade->id }}"
+                    {{ (request()->kade_id ==  $kade->id ? 'selected' : '') }} data-id="{{ $kade->id }}" class="{{ (request()->kade_id ==  $kade->id ? 'selected' : '') }} select-color">{{ $kade->kadenaam }}</option>
+            @endforeach
+        </select>
+        </form>
+        </div>
+        <br>
+        <div class="row">
+            <h2 id="info" name="info" class="col-12"></h2>
+        </div>
+
+        <br>
+        <div class="row">
+            <label class="col-4" for="startTijd">Tijdstip: </label>
+            <p id="startTijd" name="startTijd" class="col-4"></p>
+        </div>
+        <div class="row">
+            <label class="col-4" for="stopTijd"></label>
+            <p id="stopTijd" name="stopTijd" class="col-4"></p>
+        </div>
+        <div class="row">
+            <label class="col-4" for="bedrijf">Bedrijf: </label>
+            <p id="bedrijf" name="bedrijf" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="naam">Chauffeur: </label>
+            <p id="naam" name="naam" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="nummerplaat">Nummerplaat: </label>
+            <p id="nummerplaat" name="nummerplaat" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="ladingDetails">Lading details: </label>
+            <p id="ladingDetails" name="ladingDetails" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="aantal">Aantal: </label>
+            <p id="aantal" name="aantal" class="col-4"></p>
+            <label class="col-4"></label>
+
+        </div>
+        <div class="row">
+            <label class="col-4" for="proces">proces: </label>
+            <p id="proces" name="proces" class="col-4"></p>
+            <label class="col-4"></label>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-6">
+            <p class="align-content-center">
+                <a href="#!" class="btn btn-outline-success" id="btn-begin">
+                    <i class="fas fa-play"></i> Begin proces
+                </a>
+            </p>
+            </div>
+            <div class="col-6">
+            <p class="align-content-center">
+                <a href="#!" class="btn btn-outline-danger" id="btn-afgewerkt">
+                    <i class="fas fa-stop"></i> Proces afgewerkt
+                </a>
+            </p>
+            </div>
+        </div>
+    </div>
+
+    @endif
+
     @endauth
 
 @endsection
@@ -125,22 +211,116 @@
 
 @section('script_after')
     <script>
-
-
-        loadChauffeur();
-        loadTable();
-        loadTable2();
-
-        setInterval(function(){
+@auth
+        @if(auth()->user()->isChauffeur){
+            loadChauffeur();
+        }
+            @endif
+        @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
             loadTable();
             loadTable2();
-            loadChauffeur();
-        }, 10000);
+        }
+        @endif
+        @if(auth()->user()->isLogistiek){
 
+            $('#kade_id').change(function () {
+                $('#searchForm').submit();
+                loadLogistiek()
+
+            });
+
+            loadLogistiek()
+        }
+
+        @endif
+
+
+            @if(auth()->user()->isChauffeur)
+            setInterval(function(){
+                loadChauffeur();
+            }, 5000);
+
+            @endif
+                @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
+                setInterval(function(){
+                loadTable();
+                loadTable2();
+            }, 5000);
+
+            @endif
+            @if(auth()->user()->isLogistiek)
+                setInterval(function(){
+                loadLogistiek()
+            }, 5000);
+
+        @endif
+
+@endauth
+$('p').on('click', '#btn-begin', function () {
+    let id2 = $(`div#logistiekKleur`).data('id');
+    let id = $(`option.selected`).data('id');
+    if(id2 != 'geenProcess') {
+        $.ajax({
+            method: 'GET', // Type of response and matches what we said in the route
+            url: 'home/begin', // This is the url we gave in the route
+            data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+            success: function (data) { // What to do if we succeed
+                console.log(data)
+                new Noty({
+                    type: data.type,
+                    text: data.text
+                }).show();
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                if ($(this).is(':checked')) {
+                    $(this).prop("checked", false);
+                } else {
+                    $(this).prop("checked", true);
+                }
+            }
+
+        });
+        loadLogistiek();
+    }
+});
+$('p').on('click', '#btn-afgewerkt', function () {
+
+    let id2 = $(`div#logistiekKleur`).data('id');
+    let id = $(`option.selected`).data('id');
+    if(id2 != 'geenProcess') {
+        $.ajax({
+            method: 'GET', // Type of response and matches what we said in the route
+            url: 'home/afgewerkt', // This is the url we gave in the route
+            data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+            success: function (data) { // What to do if we succeed
+                console.log(data)
+                new Noty({
+                    type: data.type,
+                    text: data.text
+                }).show();
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                if ($(this).is(':checked')) {
+                    $(this).prop("checked", false);
+                } else {
+                    $(this).prop("checked", true);
+                }
+            }
+
+        });
+    }
+    loadLogistiek();
+
+});
         $('tbody').on('click', '.btn-info-home', function () {
 
             // Update the modal
             let id = $(this).closest('a').data('id');
+            console.log(id);
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getinfo', // This is the url we gave in the route
@@ -174,7 +354,7 @@
 
                     var proces = data.proces;
                     var voornaam = data.voornaam;
-                    var title = "extra info chauffeur: " + voornaam + ", bedrijf: " + bedrijf
+                    var title = "extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
                     $('.modal-title').text(title);
                     $('#startTijd').text(startTijd);
                     $('#stopTijd').text(stopTijd);
@@ -201,7 +381,7 @@
                     $('#ladingDetails').text(ladingDetails);
                     $('#status').text(status);
                     $('#aantal').text(aantal);
-                    $('#voornaam').text(voornaam);
+                    $('#voornaam').text(voornaam + " " + data.naam);
                     $('#proces').text(proces);
 
 
@@ -241,6 +421,167 @@
             })
         });
 
+        function loadLogistiek() {
+
+            let id = $(`option.selected`).data('id');
+
+            if(id != null){
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/getPlanninglogistiek', // This is the url we gave in the route
+                data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+                // a JSON object to send back
+                success: function (data) {
+                    if (data.kadeID == id) {
+                        $('div#logistiekKleur').attr('data-id' , data.id);
+
+                        var startTijd = data.startTijd;
+                        var stopTijd = data.stopTijd;
+                        var bedrijf = data.bedrijfsnaam;
+                        var nummerplaat = data.plaatcombinatie;
+                        var kade = data.kadenaam;
+                        var kadeStatus = data.status;
+                        var ladingDetails = data.ladingDetails;
+                        var aantal = data.aantal;
+                        var status = data.status;
+                        var voornaam = data.voornaam;
+                        var naam = voornaam + " " + data.naam
+                        var proces = data.proces;
+                        var adres = data.land + " - " + data.gemeente + " - " + data.adres
+                        var verwerkingsstatus = '';
+                        if (data.isAfgewerkt) {
+                            verwerkingsstatus = "afgewerkt";
+                        } else {
+                            verwerkingsstatus = "niet-afgewerkt";
+                        }
+                        var text = 'planning voor kade: ' + data.kadenaam ;
+                        $('#startTijd').text(startTijd);
+                        $('#stopTijd').text(stopTijd);
+                        $('#bedrijf').text(bedrijf);
+                        $('#nummerplaat').text(nummerplaat);
+                        $('#ladingDetails').text(ladingDetails);
+                        $('#aantal').text(aantal);
+                        $('#naam').text(naam);
+                        $('#proces').text(proces);
+                        $('#info').text(text);
+
+                        if(data.isBezig == 0){
+                            $('a#btn-afgewerkt').addClass('disabled');
+                            $('a#btn-begin').removeClass('disabled');
+                        }
+                        else{
+                            $('a#btn-begin').addClass('disabled');
+                            $('a#btn-afgewerkt').removeClass('disabled');
+
+                        }
+
+
+                        if (data.isAanwezig == 1 && data.isBezig == 0) {
+                            $('body').addClass('table-warning');
+                            $('body').removeClass('table-info');
+                            $('body').removeClass('normal_body');
+
+                            $('form select option').removeClass('table-secondary');
+                            $('form select option').removeClass('table-info');
+                            $('form select option').addClass('table-warning');
+
+                            $('form select').removeClass('table-secondary');
+                            $('form select').removeClass('table-info');
+                            $('form select').addClass('table-warning');
+                        }
+                        if (data.isAanwezig == 1 && data.isBezig == 1) {
+                            $('body').removeClass('normal_body');
+                            $('body').addClass('table-info');
+                            $('body').removeClass('table-warning');
+
+                            $('form select option').removeClass('table-secondary');
+                            $('form select option').addClass('table-info');
+                            $('form select option').removeClass('table-warning');
+
+                            $('form select').removeClass('table-secondary');
+                            $('form select').addClass('table-info');
+                            $('form select').removeClass('table-warning');
+                        }
+
+
+                    } else {
+                        $('a#btn-afgewerkt').addClass('disabled');
+                        $('a#btn-begin').addClass('disabled');
+                        var text = 'Er is nog geen planning die in het kort moet beginnen voor kade: ' + data.kadenaam;
+                        $('div#logistiekKleur').attr('data-id' , 'geenProcess');
+                        $('#startTijd').text('');
+                        $('#stopTijd').text('');
+                        $('#bedrijf').text('');
+                        $('#nummerplaat').text('');
+                        $('#ladingDetails').text('');
+                        $('#aantal').text('');
+                        $('#naam').text('');
+                        $('#proces').text('');
+                        $('#info').text('');
+
+                        $('#info').text(text);
+                        $('body').addClass('normal_body');
+                        $('body').removeClass('table-warning');
+                        $('body').removeClass('table-info');
+
+                        $('form select option').addClass('table-secondary');
+                        $('form select option').removeClass('table-info');
+                        $('form select option').removeClass('table-warning');
+
+                        $('form select').addClass('table-secondary');
+                        $('form select').removeClass('table-info');
+                        $('form select').removeClass('table-warning');
+
+                    }}
+                ,
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        if ($(this).is(':checked')) {
+                            $(this).prop("checked", false);
+                        } else {
+                            $(this).prop("checked", true);
+                        }
+                    }
+                });
+            }
+                else
+                    {
+                        $('a#btn-afgewerkt').addClass('disabled');
+                        $('a#btn-begin').addClass('disabled');
+                        $('form select option').addClass('table-secondary');
+                        $('form select option').removeClass('table-info');
+                        $('form select option').removeClass('table-warning');
+                        $('form select').addClass('table-secondary');
+                        $('form select').removeClass('table-info');
+                        $('form select').removeClass('table-warning');
+
+                        var text = 'selecteer een kade voor de live planning te krijgen';
+                        $('div#logistiekKleur').attr('data-id' , 'geenProcess');
+                        $('#startTijd').text('');
+                        $('#stopTijd').text('');
+                        $('#bedrijf').text('');
+                        $('#nummerplaat').text('');
+                        $('#ladingDetails').text('');
+                        $('#aantal').text('');
+                        $('#naam').text('');
+                        $('#proces').text('');
+                        $('#info').text('');
+
+
+                        $('#info').text(text);
+                        $('body').addClass('normal_body');
+                        $('body').removeClass('table-warning');
+                        $('body').removeClass('table-info');
+                    }
+
+
+
+
+
+
+                }
+
         function loadChauffeur() {
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
@@ -256,7 +597,7 @@
                     var ladingDetails = data.ladingDetails;
                     var aantal = data.aantal;
                     var status = data.status;
-                    var voornaam = data.voornaam;
+                    var voornaam = data.voornaam + " " + data.naam;
                     var proces = data.proces;
                     var adres = data.land + " - " + data.gemeente + " - " + data.adres
                     var verwerkingsstatus = '';
@@ -322,6 +663,8 @@
             });
         }
 
+
+
         function loadTable() {
             $.getJSON('home/kade')
                 .done(function (data) {
@@ -379,7 +722,7 @@
                         let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -398,7 +741,7 @@
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -419,7 +762,7 @@
                             tr = `<tr class="table-warning">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -443,7 +786,7 @@
                             tr = `<tr class="table-success">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -465,7 +808,7 @@
                             tr = `<tr class="table-info">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam}</td>
+<td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -492,14 +835,5 @@
 
                 });
         }
-
-
-
-
-
-
-
-
-
     </script>
 @endsection

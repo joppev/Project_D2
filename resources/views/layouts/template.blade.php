@@ -8,15 +8,18 @@
 
     <title>Project2D</title>
 </head>
-<body class="">
+<body class="normal_body" >
 {{--  Navigation  --}}
 
 @include('shared.navigation')
+<div id="body">
+
 
 <main class="container size mt-3">
 
     @yield('main', 'Page under construction ...')
 </main>
+</div>
 {{--  Footer  --}}
 @include('shared.footer')
 

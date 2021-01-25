@@ -10,12 +10,12 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 @auth
-                @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
+                    @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
 
-                    <li class="nav-item">
-                    <a class="nav-link" href="/admin/OverzichtGebruiker">Overzicht gebruikers</a>
-                </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/OverzichtGebruiker">Overzicht gebruikers</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/OverzichtKades">Overzicht kades</a>
@@ -23,17 +23,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/plannings">Overzicht planning</a>
                         </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>
-                </li>
-
-                @endif
-                @if(auth()->user()->isLogistiek )
-                <li class="nav-item">
-                    <a class="nav-link" href="/OverzichtKades">Overzicht Kades</a>
-                </li>
-                @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>
+                        </li>
+                   {{--     <li class="nav-item">
+                            <a class="nav-link" href="/admin/nummerplaten">Overzicht nummerplaten</a>
+                        </li>--}}
+                    @endif
+                    @if(auth()->user()->isLogistiek )
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OverzichtKades">Overzicht Kades</a>
+                        </li>
+                    @endif
                 @endauth
             </ul>
             {{--  Auth navigation  --}}
@@ -55,7 +56,6 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/profile"><i class="fas fa-user-cog"></i>Update Profile</a>
                             <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>New Password</a>
-                            <a class="dropdown-item" href="/user/history"><i class="fas fa-box-open"></i>Order history</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 
