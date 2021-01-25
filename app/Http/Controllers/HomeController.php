@@ -52,7 +52,7 @@ class HomeController extends Controller
     public function getinfo(Request $request){
         $id = $request->request->get('id');
 
-        $planningen = Planning::orderBy('startTijd')
+        $planningen = Planning::orderBy('startTijd','id')
             ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
@@ -86,7 +86,7 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time());
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+86400);
-        $planningen = Planning::orderBy('startTijd')
+        $planningen = Planning::orderBy('startTijd','id')
             ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
@@ -118,7 +118,7 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+7200);
-        $planning = Planning::orderBy('id')
+        $planning = Planning::orderBy('startTijd','id')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
@@ -169,7 +169,7 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+7200);
-        $planning = Planning::orderBy('id')
+        $planning = Planning::orderBy('startTijd','id')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
@@ -223,7 +223,7 @@ class HomeController extends Controller
         $dt = date('Y-m-d H:i',time()-7200);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+7200);
-        $planningen = Planning::orderBy('id')
+        $planningen = Planning::orderBy('startTijd','id')
             ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
@@ -263,7 +263,7 @@ class HomeController extends Controller
         $dt2= date('Y-m-d H:i',time()+43200);
 
         //geeft alle planningen terug die 12 uur voor het huidig uur zijn en 12 uur na het huidig uur zijn
-        $planningen = Planning::orderBy('startTijd')
+        $planningen = Planning::orderBy('startTijd','id')
 
             ->Join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
