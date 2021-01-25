@@ -111,6 +111,7 @@ class HomeController extends Controller
     }
     public function begin(Request $request){
         $id = $request->request->get('id');
+
         $idkade = $request->request->get('idKade');
 
         //huidig uur
