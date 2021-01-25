@@ -21,7 +21,7 @@
                             <a class="nav-link" href="/admin/OverzichtKades">Overzicht kades</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/OverzichtPlanning">Overzicht planning</a>
+                            <a class="nav-link" href="/admin/plannings">Overzicht planning</a>
                         </li>
 
                 <li class="nav-item">
