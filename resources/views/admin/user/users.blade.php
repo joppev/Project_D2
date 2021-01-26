@@ -44,13 +44,13 @@
                 // Set some values for Noty
                 let text = `<p>Wil je gebruiker <b>${voornaam} ${naam}</b> verwijderen?</p>`;
                 let type = 'warning';
-                let btnText = 'Verwijder gebruiker';
-                let btnClass = 'btn-success';
+                let btnText = 'Verwijderen';
+                let btnClass = 'btn-danger';
 
 
                 // Show Noty
                 let modal = new Noty({
-                    type: type,
+                    type: 'error',
                     text: text,
                     buttons: [
                         Noty.button(btnText, `btn ${btnClass}`, function () {
@@ -58,7 +58,7 @@
                             deleteUser(id);
                             modal.close();
                         }),
-                        Noty.button('Cancel', 'btn btn-secondary ml-2', function () {
+                        Noty.button('Terug', 'btn btn-secondary ml-2', function () {
                             modal.close();
                         })
                     ]
@@ -71,6 +71,10 @@
                 let naam = $(this).closest('td').data('naam');
                 let voornaam = $(this).closest('td').data('voornaam');
                 let email = $(this).closest('td').data('email');
+                let bid = $(this).closest('td').data('bedrijf');
+                let rol = $(this).closest('td').data('rol');
+                console.log(bid)
+                console.log(rol)
                 // Update the modal
                 $('.modal-title').text(`Edit ${naam}`);
                 $('form').attr('action', `/admin/users/${id}`);
@@ -78,6 +82,9 @@
                 $('#naam').val(naam);
                 $('#voornaam').val(voornaam);
                 $('#email').val(email);
+                $('#bedrijf_id').val(bid)
+                $('#rol').val(rol)
+
                 $('input[name="_method"]').val('put');
 
                 // Show the modal
@@ -174,23 +181,36 @@
                         console.log(value)
                         var rol = "";
                         if(value.isAdmin == true){
-                            rol = "Admin"
+                            rol = "1"
                         } else if(value.isChauffeur){
-                            rol = "Chauffeur"
+                            rol = "2"
                         } else if(value.isReceptionist){
-                            rol = "Receptionist"
+                            rol = "3"
                         } else if(value.isLogistiek){
-                            rol = "Logistiek"
+                            rol = "4"
+                        }
+                        var functie = ""
+                        if (rol == "1"){
+                            functie = "Admin"
+                        } else if(rol == "2"){
+                            functie = "Chauffeur"
+                        } else if (rol == "3"){
+                            functie = "Receptionist"
+                        }else{
+                            functie = "Logistiek"
                         }
                         let tr = `<tr>
                                <td>${value.voornaam} ${value.naam} </td>
                                <td>${value.bedrijfsnaam}</td>
 
-                               <td>${rol}</td>
+                               <td>${functie}</td>
                                <td data-id="${value.id}"
                                    data-voornaam="${value.voornaam}"
                                    data-naam="${value.naam}"
-                                   data-email="${value.email}">
+                                   data-email="${value.email}"
+                                   data-bedrijf="${value.bedrijfsID}"
+                                   data-rol="${rol}">
+
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit">
                                             <i class="fas fa-edit"></i>
@@ -199,6 +219,7 @@
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
+
                                </td>
                            </tr>`;
                         // Append row to tbody

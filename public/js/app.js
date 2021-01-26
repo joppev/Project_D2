@@ -40471,6 +40471,11 @@ $(function () {
     $(this).tooltip('hide');
   });
 });
+$(function () {
+  $('[required]').each(function () {
+    $(this).closest('.form-group').find('label').append('<sup class="text-danger mx-1">*</sup>');
+  });
+});
 
 /***/ }),
 

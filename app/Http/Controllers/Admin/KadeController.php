@@ -92,8 +92,13 @@ class KadeController extends Controller
     public function update(Request $request, Kade $kade)
     {
         $this->validate($request,[
-            'naam' => 'required|min:3,' . $kade->id
-
+            'naam' => 'required|min:3',
+            'land' => 'required',
+            'gemeente' => 'required',
+            'adres' => 'required',
+            'latitude' => 'required',
+            'bedrijf_id' => 'digits:1',
+            'rol' => 'digits:1'
         ]);
 
         $kade->kadenaam = $request->naam;

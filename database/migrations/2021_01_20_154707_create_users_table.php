@@ -54,7 +54,7 @@ class CreateUsersTable extends Migration
                     'password' => Hash::make('admin1234'),
                     'isAdmin' => true,
                     'isChauffeur' => false,
-                    'isReceptionist' => false,
+                    'isReceptionist' => true,
                     'isLogistiek' => false,
                     'created_at' => now(),
                     'email_verified_at' => now()

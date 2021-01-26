@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -47,7 +48,11 @@ class UserController extends Controller
         $bedrijven = DB::table('bedrijfs')
             ->get();
         $this->validate($request,[
-            'naam' => 'required|min:3'
+            'naam' => 'required|min:3',
+            'voornaam' => 'required|min:3',
+            'email' => 'required|email',
+            'bedrijf_id' => 'digits:1',
+            'rol' => 'digits:1'
         ]);
 
         $user = new User();
@@ -65,19 +70,28 @@ class UserController extends Controller
 
         }
         if($rol === "1"){
-            $user->isChauffeur = true;
-            $user->isLogistiek = false;
-            $user->isReceptionist = false;
-        } elseif($rol === "2"){
-            $user->isChauffeur = false;
-            $user->isLogistiek = true;
-            $user->isReceptionist = false;
-        } else{
             $user->isChauffeur = false;
             $user->isLogistiek = false;
             $user->isReceptionist = true;
+            $user->isAdmin = true;
+        } elseif($rol === "2"){
+            $user->isChauffeur = true;
+            $user->isLogistiek = false;
+            $user->isReceptionist = false;
+            $user->isAdmin = false;
+        } elseif($rol === "3"){
+            $user->isChauffeur = false;
+            $user->isLogistiek = false;
+            $user->isReceptionist = true;
+            $user->isAdmin = false;
         }
-        $user->isAdmin = false;
+        else{
+            $user->isChauffeur = false;
+            $user->isLogistiek = true;
+            $user->isReceptionist = false;
+            $user->isAdmin = false;
+        }
+
         $user->save();
         return response()->json([
             'type' => 'success',
@@ -119,8 +133,11 @@ class UserController extends Controller
 
 
         $this->validate($request,[
-            'naam' => 'required|min:3,' . $user->id
-
+            'naam' => 'required|min:3',
+            'voornaam' => 'required|min:3',
+            'email' => 'required|email',
+            'bedrijf_id' => 'digits:1',
+            'rol' => 'digits:1'
         ]);
 
         $user->naam = $request->naam;
@@ -130,17 +147,26 @@ class UserController extends Controller
         $rol = $request->rol;
 
         if($rol === "1"){
-            $user->isChauffeur = true;
-            $user->isLogistiek = false;
-            $user->isReceptionist = false;
-        } elseif($rol === "2"){
-            $user->isChauffeur = false;
-            $user->isLogistiek = true;
-            $user->isReceptionist = false;
-        } else{
             $user->isChauffeur = false;
             $user->isLogistiek = false;
             $user->isReceptionist = true;
+            $user->isAdmin = true;
+        } elseif($rol === "2"){
+            $user->isChauffeur = true;
+            $user->isLogistiek = false;
+            $user->isReceptionist = false;
+            $user->isAdmin = false;
+        } elseif($rol === "3"){
+            $user->isChauffeur = false;
+            $user->isLogistiek = false;
+            $user->isReceptionist = true;
+            $user->isAdmin = false;
+        }
+        else{
+            $user->isChauffeur = false;
+            $user->isLogistiek = true;
+            $user->isReceptionist = false;
+            $user->isAdmin = false;
         }
         $user->save();
         return response()->json([
@@ -157,11 +183,28 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return response()->json([
-            'type' => 'success',
-            'text' => "<b>$user->voornaam $user->naam</b> is verwijderd."
-        ]);
+        if ($user->id == Auth::id()){
+            return response()->json([
+                'type' => 'error',
+                'text' => "Je kan jezelf niet verwijderen."
+            ]);
+        } elseif (! Auth::user()->isAdmin){
+            if($user->isAdmin){
+                return response()->json([
+                    'type' => 'error',
+                    'text' => "Je het geen bevoegdheid om een admin te verwijderen."
+                ]);
+            }
+        }
+
+        else{
+            $user->delete();
+            return response()->json([
+                'type' => 'success',
+                'text' => "De gebruiker <b>$user->voornaam $user->naam</b> is verwijderd."
+            ]);
+        }
+
     }
 
     public function qryUsers(){
