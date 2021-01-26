@@ -143,7 +143,9 @@ class HomeController extends Controller
 
             ->first();
 
-
+        $kade = Kade::findOrFail($idkade);
+        $kade->status = 'Niet-vrij';
+        $kade->save();
 
         if ($planning != null){
             $planningBegin = Planning::findOrFail($id);
@@ -195,6 +197,9 @@ class HomeController extends Controller
             ->first();
 
 
+        $kade = Kade::findOrFail($idkade);
+        $kade->status = 'Vrij';
+        $kade->save();
 
         if ($planning != null){
             $planningBegin = Planning::findOrFail($id);
