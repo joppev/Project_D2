@@ -27,7 +27,7 @@
                     <th>Tijdstip</th>
                     <th>Bedrijf</th>
                     <th>Chauffeur</th>
-                    <th>Nummerplaat</th>
+                    <th>Proces</th>
                     <th>Loskade</th>
                     <th>Opmerkingen</th>
                     <th>Details</th>
@@ -798,6 +798,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 data: {'text': text, _token: '{{csrf_token()}}'},
                 // a JSON object to send back
                 success: function (data) {
+                    console.log(data);
 
                     // Clear tbody tag
                     $('.tableplanning tbody').empty();
@@ -805,13 +806,14 @@ $('p').on('click', '#btn-afgewerkt', function () {
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
 
+
                             let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.plaatcombinatie}
+                                ${value.proces}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -830,7 +832,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.plaatcombinatie}
+                                ${value.proces}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -851,7 +853,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.plaatcombinatie}
+                                ${value.proces}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -875,7 +877,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.plaatcombinatie}
+                                ${value.proces}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -897,7 +899,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.plaatcombinatie}
+                                ${value.proces}
 
                                </td>
                                <td>${value.kadenaam}</td>
