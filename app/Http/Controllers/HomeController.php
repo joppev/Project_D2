@@ -39,8 +39,21 @@ class HomeController extends Controller
         return view('home', $result);
     }
 
-    public function kade(){
-        $kades = Kade::orderBy('kadeNaam')->get();
+    public function kade(Request $request){
+        $text =  '%'.$request->request->get('text').'%';
+        $text2 = $request->request->get('text');
+
+    $kades = Kade::orderBy('kadeNaam')
+        ->where(function ($query) use ($text) {
+            $query->where('kadenaam', 'like', $text)
+                ->orwhere('status', 'like', $text);
+        })
+        ->get();
+    if ($kades == null){
+        return 'geen element met ' + $text2 + ' bij de kades';
+    }
+
+
 
 
 
@@ -56,7 +69,7 @@ class HomeController extends Controller
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','kades.status as status','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
             ->get();
 
 
@@ -251,24 +264,39 @@ class HomeController extends Controller
 
 
     public function dagplanning(Request $request){
+        $text = '%' . $request->request->get('text') . '%';
+        $text2 = $request->request->get('text');
         //12 uur voor huidig uur
         $dt = date('Y-m-d H:i',time()-43200);
         //12 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+43200);
 
+
+    $planningen = Planning::orderBy('id')
+        ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+        ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+        ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+        ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+        ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+        /*->where('startTijd','<',$dt2)
+        ->where('startTijd','>',$dt)*/
+        ->where(function ($query) use ($text) {
+            $query->where('naam', 'like', $text)
+                ->orwhere('voornaam', 'like', $text)
+                ->orwhere('kadenaam', 'like', $text)
+                ->orwhere('bedrijfsnaam', 'like', $text)
+                ->orwhere('plaatcombinatie', 'like', $text)
+            ;
+
+        })
+        ->get();
+if($planningen[0]->startTijd == null){
+    return 'geen element met ' + $text2 + 'in de dagplanning';
+}
+    $planningen[0]->dt2 =$dt2;
+
         //geeft alle planningen terug die 12 uur voor het huidig uur zijn en 12 uur na het huidig uur zijn
-        $planningen = Planning::orderBy('id')
 
-            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
-            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
-            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
-            ->where('startTijd','<',$dt2)
-            ->where('startTijd','>',$dt)
-            ->get();
-
-        $planningen[0]->dt2 =$dt2;
 
 
 

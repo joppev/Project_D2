@@ -38,19 +38,21 @@ var config1 = {
 };
 
 require.config( {
-    baseUrl:'http://r0743641.eu.qlikcloud.com:443/resources',
-    //baseUrl: (config1.isSecure ? "https://" : "http://" ) + config1.host + (config1.port ? ":" + config1.port : "") + config1.prefix + "resources",
+    //baseUrl:'http://r0743641.eu.qlikcloud.com:443/resources',
+    baseUrl: (config1.isSecure ? "https://" : "http://" ) + config1.host + (config1.port ? ":" + config1.port : "") + config1.prefix + "resources",
     webIntegrationId: config1.webIntegrationId
+
 } );
 
-require( ["js/qlik"], function ( qlik ) {
+require( ["./require.js"], function ( qlik ) {
+    console.log('qlik', qlik);
     qlik.on( "error", function ( error ) {
         $( '#popupText' ).append( error.message + "<br>" );
         $( '#popup' ).fadeIn( 1000 );
     } );
     $( "#closePopup" ).click( function () {
         $( '#popup' ).hide();
-    } );
+    });
 
 
     //opend corona app

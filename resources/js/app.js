@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./qlikFile');
 
 
 
@@ -9,7 +10,6 @@ Noty.overrideDefaults({
     layout: 'center',
     modal: true,
 });
-
 import Project2d from "./project2d";
 window.Project2d = Project2d;
 

@@ -25,7 +25,7 @@
 </div>
 {{--  Footer  --}}
 @include('shared.footer')
-
+<script type="text/javascript" src="https://r0743641.eu.qlikcloud.com/resources/assets/external/requirejs/require.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js></script>
 <script type="text/javascript" charset="utf8" src=https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js></script>
