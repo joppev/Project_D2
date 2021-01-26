@@ -41598,7 +41598,7 @@ __webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_
 
   /*   app.theme.getApplied().then(function(qtheme){
      alert('Current theme background color: ' + qtheme.id);
-      });*/
+       });*/
 }).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}).catch(__webpack_require__.oe);
 
 /***/ }),

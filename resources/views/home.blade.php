@@ -47,7 +47,7 @@
 
                     <div class="col-sm-6 mb-2">
                         <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
-                               value="" placeholder="Filter planning">
+                               value="" placeholder="Filter kades">
                     </div>
 
 
@@ -894,7 +894,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                             tr = `<tr class="table-info">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam} ${value.naam}</td>
+                                <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}

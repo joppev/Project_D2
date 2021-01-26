@@ -12,15 +12,15 @@
         </p>
     </div>
 
-
-    <div class="table-responsive">
+    <div class="row">
+    <div class="table-responsive col-12">
         <table class="table">
             <thead>
             <tr>
                 <th>Tijdstip</th>
                 <th>Bedrijf</th>
                 <th>Chauffeur</th>
-                <th>Nummerplaat</th>
+                <th>Proces</th>
                 <th>Loskade</th>
                 <th>Bewerken</th>
             </tr>
@@ -29,6 +29,7 @@
 
             </tbody>
         </table>
+    </div>
     </div>
     @include('admin.planning.model')
 @endsection
@@ -180,10 +181,10 @@
 
                             let tr = `<tr>
 
-                               <td>${value.startTijd}</td>
+                               <td>${value.startTijd} - ${value.stopTijd}</td>
                                 <td>${value.bedrijfsnaam}</td>
                                <td>${value.voornaam} ${value.naam}</td>
-                                <td>${value.plaatcombinatie}</td>
+                                <td>${value.proces}</td>
                                 <td>${value.kadenaam}</td>
                                <td data-id="${value.id}"
                                     data-aantal="${value.aantal}"

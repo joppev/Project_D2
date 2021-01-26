@@ -12,6 +12,18 @@
                     @method('')
                     @csrf
 
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Datum & tijdstip</label>
+                        <input type="text" name="datetimepicker" id="datetimepicker"
+                               class="form-control"
+                               placeholder="Datum & tijdstip"
+                               required
+                               value="">
+                    </div>
+
+
+
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Chauffeur</label>
                         <select class="form-control " name="user_id" id="user_id">
@@ -24,30 +36,7 @@
                         <select class="form-control " name="kade_id" id="kade_id">
                             <option value="%">alle kades</option>
                         </select>
-
                     </div>
-                    <div class="container">
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <h1>Laravel Bootstrap Timepicker</h1>
-
-                        <input type="text" id="datetimepicker"/>
-
-                    </div>
-
-
-
 
                     <div class="form-group">
                         <label for="proces">Proces</label>

@@ -36,7 +36,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 1,
                     'kadeID' => 1,
-                    'proces' => "proces1",
+                    'proces' => "Laden",
                     'ladingDetails' => "ladingDetails1",
                     'aantal' => 2,
                     'isAanwezig' => true,
@@ -50,7 +50,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 2,
                     'kadeID' => 2,
-                    'proces' => "proces2",
+                    'proces' => "Lossen",
                     'ladingDetails' => "ladingDetails2",
                     'aantal' => 3,
                     'isAanwezig' => false,
@@ -64,7 +64,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 1,
                     'kadeID' => 3,
-                    'proces' => "proces3",
+                    'proces' => "Laden",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
@@ -78,7 +78,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 3,
                     'kadeID' => 3,
-                    'proces' => "proces3",
+                    'proces' => "Check-up",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
@@ -94,7 +94,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 3,
                     'kadeID' => 1,
-                    'proces' => "proces3",
+                    'proces' => "Lossen",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
@@ -109,7 +109,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 3,
                     'kadeID' => 3,
-                    'proces' => "proces3",
+                    'proces' => "Lossen",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
@@ -123,7 +123,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 3,
                     'kadeID' => 3,
-                    'proces' => "proces3",
+                    'proces' => "Lossen",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
@@ -138,7 +138,7 @@ class CreatePlanningsTable extends Migration
                 [
                     'gebruikerID' => 3,
                     'kadeID' => 3,
-                    'proces' => "proces3",
+                    'proces' => "Laden",
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
                     'isAanwezig' => true,
