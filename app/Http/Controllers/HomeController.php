@@ -143,7 +143,9 @@ class HomeController extends Controller
 
             ->first();
 
-
+        $kade = Kade::findOrFail($idkade);
+        $kade->status = 'Niet-vrij';
+        $kade->save();
 
         if ($planning != null){
             $planningBegin = Planning::findOrFail($id);
@@ -195,6 +197,9 @@ class HomeController extends Controller
             ->first();
 
 
+        $kade = Kade::findOrFail($idkade);
+        $kade->status = 'Vrij';
+        $kade->save();
 
         if ($planning != null){
             $planningBegin = Planning::findOrFail($id);
@@ -281,8 +286,7 @@ class HomeController extends Controller
         /*->where('startTijd','<',$dt2)
         ->where('startTijd','>',$dt)*/
         ->where(function ($query) use ($text) {
-            $query->where('naam', 'like', $text)
-                ->orwhere('voornaam', 'like', $text)
+            $query->where('volledigeNaam', 'like', $text)
                 ->orwhere('kadenaam', 'like', $text)
                 ->orwhere('bedrijfsnaam', 'like', $text)
                 ->orwhere('plaatcombinatie', 'like', $text)
@@ -290,10 +294,13 @@ class HomeController extends Controller
 
         })
         ->get();
-if($planningen[0]->startTijd == null){
-    return 'geen element met ' + $text2 + 'in de dagplanning';
-}
-    $planningen[0]->dt2 =$dt2;
+
+
+        if(!$planningen->isEmpty()){
+
+            $planningen[0]->dt2 =$dt2;
+
+        }
 
         //geeft alle planningen terug die 12 uur voor het huidig uur zijn en 12 uur na het huidig uur zijn
 

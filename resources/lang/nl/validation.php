@@ -33,7 +33,7 @@ return [
     'date_equals'          => ':Attribute moet een datum gelijk aan :date zijn.',
     'date_format'          => ':Attribute moet een geldig datum formaat bevatten.',
     'different'            => ':Attribute en :other moeten verschillend zijn.',
-    'digits'               => ':Attribute moet bestaan uit :digits cijfers.',
+    'digits'               => ':Vul de dropdown in.',
     'digits_between'       => ':Attribute moet bestaan uit minimaal :min en maximaal :max cijfers.',
     'dimensions'           => ':Attribute heeft geen geldige afmetingen voor afbeeldingen.',
     'distinct'             => ':Attribute heeft een dubbele waarde.',

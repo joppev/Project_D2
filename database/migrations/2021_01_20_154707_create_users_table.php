@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('bedrijfsID');
             $table->string('naam');
             $table->string('voornaam');
+            $table->string('volledigeNaam');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -37,6 +38,7 @@ class CreateUsersTable extends Migration
                     'bedrijfsID' => 1,
                     'naam' => 'Doe',
                     'voornaam' => 'Joe',
+                    'volledigeNaam' => 'Joe Doe',
                     'email' => 'john.doe@example.com',
                     'password' => Hash::make('user1234'),
                     'isAdmin' => false,
@@ -50,11 +52,12 @@ class CreateUsersTable extends Migration
                     'bedrijfsID' => 1,
                     'naam' => 'admin',
                     'voornaam' => 'admin',
+                    'volledigeNaam' => 'admin admin',
                     'email' => 'admin@example.com',
                     'password' => Hash::make('admin1234'),
                     'isAdmin' => true,
                     'isChauffeur' => false,
-                    'isReceptionist' => false,
+                    'isReceptionist' => true,
                     'isLogistiek' => false,
                     'created_at' => now(),
                     'email_verified_at' => now()
@@ -63,6 +66,7 @@ class CreateUsersTable extends Migration
                     'bedrijfsID' => 1,
                     'naam' => 'chauffeur',
                     'voornaam' => 'chauffeur',
+                    'volledigeNaam' => 'chauffeur chauffeur',
                     'email' => 'chauffeur@example.com',
                     'password' => Hash::make('user1234'),
                     'isAdmin' => false,
@@ -76,6 +80,7 @@ class CreateUsersTable extends Migration
                     'bedrijfsID' => 1,
                     'naam' => 'logistiek',
                     'voornaam' => 'logistiek',
+                    'volledigeNaam' => 'logistiek logistiek',
                     'email' => 'logistiek@example.com',
                     'password' => Hash::make('admin1234'),
                     'isAdmin' => false,
@@ -90,6 +95,7 @@ class CreateUsersTable extends Migration
                     'bedrijfsID' => 1,
                     'naam' => 'receptionist',
                     'voornaam' => 'receptionist',
+                    'volledigeNaam' => 'receptionist receptionist',
                     'email' => 'receptionist@example.com',
                     'password' => Hash::make('user1234'),
                     'isAdmin' => false,

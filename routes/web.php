@@ -33,10 +33,10 @@ Route::get('home/kade', 'HomeController@kade');
 
 
 Route::get('home/getPlanninglogistiek', 'HomeController@getPlanninglogistiek');
-
-
 Route::get('home/getinfo', 'HomeController@getinfo');
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
+
+Route::middleware(['auth','receptionist'])->prefix('admin')->group(function () {
     Route::resource('users', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
     Route::get('qryUsers2', 'Admin\UserController@qryUsers2');
@@ -59,5 +59,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('qryNummerplaats2', 'Admin\NummerplaatController@qryNummerplaats2');
 
 });
+
+
 
 

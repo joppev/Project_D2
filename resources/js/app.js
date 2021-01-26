@@ -1,5 +1,5 @@
 require('./bootstrap');
-require('./qlikFile');
+//require('./qlikFile');
 
 
 
@@ -24,5 +24,12 @@ $(function () {
     }).on('click', '[data-toggle="tooltip"]', function () {
         // hide tooltip when you click on it
         $(this).tooltip('hide');
+    });
+});
+$(function(){
+    $('[required]').each(function () {
+        $(this).closest('.form-group')
+            .find('label')
+            .append('<sup class="text-danger mx-1">*</sup>');
     });
 });

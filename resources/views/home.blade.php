@@ -14,7 +14,7 @@
                 <h2 id="info" name="info" class="col-12"></h2>
             </div>
                 <div class="row">
-                    <div class="col-sm-6 mb-2">
+                    <div class="col-sm-4 mb-2">
                         <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
                                value="" placeholder="Filter planning">
                     </div>
@@ -45,7 +45,7 @@
             <h2>Kadestatus</h2>
                 <div class="row">
 
-                    <div class="col-sm-6 mb-2">
+                    <div class="col-sm-12 mb-2">
                         <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
                                value="" placeholder="Filter kades">
                     </div>
