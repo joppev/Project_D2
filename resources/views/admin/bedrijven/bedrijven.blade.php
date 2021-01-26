@@ -5,15 +5,13 @@
         <h1>Bedrijven</h1>
         <p>
             <a href="#!" class="btn btn-outline-success" id="btn-create">
-                <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen
-            </a>
+                <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen</a>
         </p>
     </div>
-    <hr>
 
     <div class="row">
         <div class="table-responsive col-12">
-            <table class="table">
+            <table class="table" id="bedrijventable">
                 <thead>
                 <tr>
                     <th>Bedrijf</th>
@@ -21,10 +19,8 @@
                     <th>Bewerken</th>
                 </tr>
                 </thead>
-{{--                @foreach($bedrijven as $bedrijf)--}}
 
                 <tbody>
-{{--                <td>{{ $bedrijf->id }}</td>--}}
 
 
                 </tbody>
@@ -33,10 +29,80 @@
 
         @include('admin.bedrijven.modal')
         @endsection
+
+
+
+
+
         @section('script_after')
+
             <script>
+
+
+          /*     $(document).ready(function () {
+                    $('#bedrijventable').DataTable({
+                        serverSide: true,
+                        ajax: '/bedrijven/admin',
+                        language: {
+                            "sProcessing": "Bezig...",
+                            "sLengthMenu": "_MENU_ resultaten weergeven",
+                            "sZeroRecords": "Geen resultaten gevonden",
+                            "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                            "sInfoEmpty": "Geen resultaten om weer te geven",
+                            "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                            "sInfoPostFix": "",
+                            "sSearch": "Zoeken:",
+                            "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                            "sInfoThousands": ".",
+                            "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                            "oPaginate": {
+                                "sFirst": "Eerste",
+                                "sLast": "Laatste",
+                                "sNext": "Volgende",
+                                "sPrevious": "Vorige"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                                "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                            }
+                        }
+                    });
+                });*/
+
+
+
+
+
+
                 $(function () {
                     loadTable();
+                   /* $('#bedrijventable').DataTable({
+                        serverSide: true,
+                        ajax: '/admin/qryBedrijven',
+                        language: {
+                            "sProcessing": "Bezig...",
+                            "sLengthMenu": "_MENU_ resultaten weergeven",
+                            "sZeroRecords": "Geen resultaten gevonden",
+                            "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                            "sInfoEmpty": "Geen resultaten om weer te geven",
+                            "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                            "sInfoPostFix": "",
+                            "sSearch": "Zoeken:",
+                            "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                            "sInfoThousands": ".",
+                            "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                            "oPaginate": {
+                                "sFirst": "Eerste",
+                                "sLast": "Laatste",
+                                "sNext": "Volgende",
+                                "sPrevious": "Vorige"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                                "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                            }
+                        }
+                    });*/
 
                     //Bedrijf verwijderen
 
@@ -89,7 +155,7 @@
                     //Bedrijf toevoegen
                     $('#btn-create').click(function () {
                         // Update the modal
-                        $('.modal-title').text(`Bedrijf toevoegen`);
+                        $('.modal-title').text(`Nieuw bedrijf`);
                         $('form').attr('action', `/admin/bedrijven`);
 
                         $('#bedrijfsnaam').val('');
@@ -136,9 +202,9 @@
                                 Project2d.toast({
                                     type: 'error',
                                     text: msg
-                                    }).show();
+                                }).show();
 
-                    });
+                            });
                     });
                 });
 
@@ -176,22 +242,22 @@
                             $.each(data, function (key, value) {
                                 console.log(value)
                                 let tr = `<tr class="">
-                               <td>${value.bedrijfsnaam}</td>
-                               <td>${value.standaardWachtwoord}</td>
+                                   <td>${value.bedrijfsnaam}</td>
+                                   <td>${value.standaardWachtwoord}</td>
 
-                              <td data-id="${value.id}"
-                                   data-bedrijfsnaam="${value.bedrijfsnaam}"
-                                   data-standaardWachtwoord="${value.standaardWachtwoord}">
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                               </td>
-                           </tr>`;
+                                  <td data-id="${value.id}"
+                                       data-bedrijfsnaam="${value.bedrijfsnaam}"
+                                       data-standaardWachtwoord="${value.standaardWachtwoord}">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.bedrijfsnaam}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.bedrijfsnaam}">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                   </td>
+                               </tr>`;
                                 // Append row to tbody
                                 $('tbody').append(tr);
                             });
@@ -202,11 +268,5 @@
                 }
 
             </script>
-
-
-
-
-
-
 
 @endsection

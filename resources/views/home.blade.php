@@ -8,7 +8,19 @@
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
         <div class="row">
         <div class="table-responsive col-lg-9 col-12">
+
             <h2>Dagplanning</h2>
+            <div class="row">
+                <h2 id="info" name="info" class="col-12"></h2>
+            </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
+                               value="" placeholder="Filter planning">
+                    </div>
+
+
+                </div>
             <table class="table tableplanning">
                 <thead>
                 <tr>
@@ -16,7 +28,7 @@
                     <th>Bedrijf</th>
                     <th>Chauffeur</th>
                     <th>Nummerplaat</th>
-                    <th>Loscade</th>
+                    <th>Loskade</th>
                     <th>Opmerkingen</th>
                     <th>Details</th>
                 </tr>
@@ -30,12 +42,21 @@
 
 
         <div class="table-responsive col-lg-3 col-12">
-            <h2>kade status</h2>
-            <table class="table tablekade">
+            <h2>Kadestatus</h2>
+                <div class="row">
+
+                    <div class="col-sm-6 mb-2">
+                        <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
+                               value="" placeholder="Filter planning">
+                    </div>
+
+
+                </div>
+            <table class="table tablekade" id="tablekade">
                 <thead>
                 <tr>
-                    <th>Kade naam</th>
-                    <th>Kade status</th>
+                    <th>Kadenaam</th>
+                    <th>Kadestatus</th>
 
                 </tr>
                 </thead>
@@ -53,6 +74,9 @@
     @if(auth()->user()->isChauffeur)
         <h1>Dagplanning</h1>
         <hr>
+        <div class="row">
+            <h2 id="info" name="info" class="col-12"></h2>
+        </div>
         <div class="row">
             <label class="col-4" for="startTijd">Tijdstip: </label>
             <p id="startTijd" name="startTijd" class="col-4"></p>
@@ -210,14 +234,41 @@
 
 
 @section('script_after')
+
     <script>
+        $(function(){
+            $('body').tooltip({
+                selector: '[data-toggle="tooltip"]',
+                html : true,
+            }).on('click', '[data-toggle="tooltip"]', function () {
+                // hide tooltip when you click on it
+                $(this).tooltip('hide');
+            });
+        });
+
+
 @auth
         @if(auth()->user()->isChauffeur){
             loadChauffeur();
         }
             @endif
         @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
-            loadTable();
+                $('#planningnaam').change(function () {
+                    loadTable()
+
+                });
+                $('#kadezoeknaam').change(function () {
+                    loadTable2()
+
+                });
+                $('#kadezoeknaam').submit(function () {
+                    loadTable2()
+
+                });
+
+
+
+                loadTable();
             loadTable2();
         }
         @endif
@@ -238,25 +289,27 @@
             @if(auth()->user()->isChauffeur)
             setInterval(function(){
                 loadChauffeur();
-            }, 5000);
+            }, 1000);
 
             @endif
                 @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
-                setInterval(function(){
+               setInterval(function(){
                 loadTable();
                 loadTable2();
-            }, 5000);
+            }, 1000);
 
             @endif
             @if(auth()->user()->isLogistiek)
                 setInterval(function(){
                 loadLogistiek()
-            }, 5000);
+            }, 1000);
 
         @endif
 
 @endauth
 $('p').on('click', '#btn-begin', function () {
+
+
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
     if(id2 != 'geenProcess') {
@@ -266,7 +319,6 @@ $('p').on('click', '#btn-begin', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) { // What to do if we succeed
-                console.log(data)
                 new Noty({
                     type: data.type,
                     text: data.text,
@@ -298,10 +350,11 @@ $('p').on('click', '#btn-afgewerkt', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) { // What to do if we succeed
-                console.log(data)
                 new Noty({
                     type: data.type,
-                    text: data.text
+                    text: data.text,
+                    layout: 'topRight',
+                    timeout: 3000,
                 }).show();
             },
             error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
@@ -322,14 +375,13 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
             // Update the modal
             let id = $(this).closest('a').data('id');
-            console.log(id);
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getinfo', // This is the url we gave in the route
                 data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 success: function(data){ // What to do if we succeed
-
+                    console.log(data);
                     var startTijd = data.startTijd;
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
@@ -436,7 +488,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 // a JSON object to send back
                 success: function (data) {
                     if (data.kadeID == id) {
-                        console.log(data);
                         $('div#logistiekKleur').attr('data-id' , data.id);
 
                         var startTijd = data.startTijd;
@@ -591,68 +642,71 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 url: 'home/getPlanningChauffeur', // This is the url we gave in the route
                 // a JSON object to send back
                 success: function (data) {
-                    var startTijd = data.startTijd;
-                    var stopTijd = data.stopTijd;
-                    var bedrijf = data.bedrijfsnaam;
-                    var nummerplaat = data.plaatcombinatie;
-                    var kade = data.kadenaam;
-                    var kadeStatus = data.status;
-                    var ladingDetails = data.ladingDetails;
-                    var aantal = data.aantal;
-                    var status = data.status;
-                    var voornaam = data.voornaam + " " + data.naam;
-                    var proces = data.proces;
-                    var adres = data.land + " - " + data.gemeente + " - " + data.adres
-                    var verwerkingsstatus = '';
-                    if(data.isAfgewerkt){
-                        verwerkingsstatus = "afgewerkt";
+                    if(data.id != null) {
+                        var startTijd = data.startTijd;
+                        var stopTijd = data.stopTijd;
+                        var bedrijf = data.bedrijfsnaam;
+                        var nummerplaat = data.plaatcombinatie;
+                        var kade = data.kadenaam;
+                        var kadeStatus = data.status;
+                        var ladingDetails = data.ladingDetails;
+                        var aantal = data.aantal;
+                        var status = data.status;
+                        var voornaam = data.voornaam + " " + data.naam;
+                        var proces = data.proces;
+                        var adres = data.land + " - " + data.gemeente + " - " + data.adres
+                        var verwerkingsstatus = '';
+                        if (data.isAfgewerkt) {
+                            verwerkingsstatus = "afgewerkt";
+                        } else {
+                            verwerkingsstatus = "niet-afgewerkt";
+                        }
+
+                        $('#startTijd').text(startTijd);
+                        $('#stopTijd').text(stopTijd);
+                        $('#bedrijf').text(bedrijf);
+                        $('#nummerplaat').text(nummerplaat);
+                        $('#kade').text(kade);
+                        $('#kadeStatus').text(kadeStatus);
+                        if (kadeStatus == 'Niet-vrij' && data.isBezig == 0) {
+                            $('#kadeStatus').addClass('table-warning');
+                            $('#kadeStatus').removeClass('table-danger');
+                            $('#kadeStatus').removeClass('table-success');
+                        }
+                        if (kadeStatus == 'Buiten gebruik') {
+                            $('#kadeStatus').addClass('table-danger');
+                            $('#kadeStatus').removeClass('table-warning');
+                            $('#kadeStatus').removeClass('table-success');
+                        }
+                        if (kadeStatus == 'Vrij') {
+                            $('#kadeStatus').addClass('table-success');
+                            $('#kadeStatus').removeClass('table-danger');
+                            $('#kadeStatus').removeClass('table-warning');
+                        }
+                        $('#ladingDetails').text(ladingDetails);
+                        $('#status').text(status);
+                        $('#aantal').text(aantal);
+                        $('#voornaam').text(voornaam);
+                        $('#proces').text(proces);
+                        $('#adres').text(adres);
+                        $('#verwerkingsstatus').text(verwerkingsstatus);
+                        if (data.isAfgewerkt == 0) {
+                            $('#verwerkingsstatus').addClass('table-warning');
+                            $('#verwerkingsstatus').removeClass('table-success');
+                        }
+
+                        if (data.isAfgewerkt == 1) {
+                            $('#verwerkingsstatus').addClass('table-success');
+                            $('#verwerkingsstatus').removeClass('table-warning');
+                        }
+
+
                     }
                     else{
-                        verwerkingsstatus = "niet-afgewerkt";
+                        var text = 'geen planning vandaag';
+                        $('#info').text(text);
+
                     }
-
-                    $('#startTijd').text(startTijd);
-                    $('#stopTijd').text(stopTijd);
-                    $('#bedrijf').text(bedrijf);
-                    $('#nummerplaat').text(nummerplaat);
-                    $('#kade').text(kade);
-                    $('#kadeStatus').text(kadeStatus);
-                    if (kadeStatus == 'Niet-vrij' && data.isBezig == 0){
-                        $('#kadeStatus').addClass('table-warning');
-                        $('#kadeStatus').removeClass('table-danger');
-                        $('#kadeStatus').removeClass('table-success');
-                    }
-                    if (kadeStatus == 'Buiten gebruik'){
-                        $('#kadeStatus').addClass('table-danger');
-                        $('#kadeStatus').removeClass('table-warning');
-                        $('#kadeStatus').removeClass('table-success');
-                    }
-                    if (kadeStatus == 'Vrij'){
-                        $('#kadeStatus').addClass('table-success');
-                        $('#kadeStatus').removeClass('table-danger');
-                        $('#kadeStatus').removeClass('table-warning');
-                    }
-                    $('#ladingDetails').text(ladingDetails);
-                    $('#status').text(status);
-                    $('#aantal').text(aantal);
-                    $('#voornaam').text(voornaam);
-                    $('#proces').text(proces);
-                    $('#adres').text(adres);
-                    $('#verwerkingsstatus').text(verwerkingsstatus);
-                    if (data.isAfgewerkt == 0){
-                        $('#verwerkingsstatus').addClass('table-warning');
-                        $('#verwerkingsstatus').removeClass('table-success');
-                    }
-
-                    if (data.isAfgewerkt == 1){
-                        $('#verwerkingsstatus').addClass('table-success');
-                        $('#verwerkingsstatus').removeClass('table-warning');
-                    }
-
-
-
-
-
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
@@ -667,53 +721,83 @@ $('p').on('click', '#btn-afgewerkt', function () {
         }
 
 
-
         function loadTable() {
-            $.getJSON('home/kade')
-                .done(function (data) {
+            let text = '';
+            if(document.getElementById('kadezoeknaam').value != null || document.getElementById('kadezoeknaam').value != ''){
+
+                text = document.getElementById('kadezoeknaam').value;
+            }
+
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/kade', // This is the url we gave in the route
+                data: {'text':text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
                     // Clear tbody tag
                     $('.tablekade tbody').empty();
-                    // Loop over each item in the array
-                    $.each(data, function (key, value) {
-                    let tr = ''
+                        // Loop over each item in the array
+                        $.each(data, function (key, value) {
+                            let tr = ''
 
-                        if (value.status === "Vrij"){
-                            tr = `<tr class="table-success">
+                            if (value.status === "Vrij") {
+                                tr = `<tr class="table-success">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
 
-                        }
-                        if (value.status == "Niet-vrij"){
-                            tr = `<tr class="table-danger">
+                            }
+                            if (value.status == "Niet-vrij") {
+                                tr = `<tr class="table-danger">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
 
-                        }
-                        if (value.status === "Buiten gebruik"){
-                            tr = `<tr class="table-warning">
+                            }
+                            if (value.status === "Buiten gebruik") {
+                                tr = `<tr class="table-warning">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
 
+                            }
+                            // Append row to tbody
+                            $('.tablekade tbody').append(tr);
+                        });
+                    }
+
+                ,
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        if ($(this).is(':checked')) {
+                            $(this).prop("checked", false);
+                        } else {
+                            $(this).prop("checked", true);
                         }
-                        // Append row to tbody
-                        $('.tablekade tbody').append(tr);
-                    });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
+                    }
 
 
+
+            });
         }
         function loadTable2() {
-            $.getJSON('home/dagplanning')
-                .done(function (data) {
+            let text = '';
+            if(document.getElementById('planningzoeknaam').value != null || document.getElementById('planningzoeknaam').value != ''){
+
+                text = document.getElementById('planningzoeknaam').value;
+            }
+
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/dagplanning', // This is the url we gave in the route
+                data: {'text': text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
 
                     // Clear tbody tag
                     $('.tableplanning tbody').empty();
@@ -721,8 +805,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
 
-
-                        let tr = `<tr class="">
+                            let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
 <td>${value.voornaam} ${value.naam}</td>
@@ -740,7 +823,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                </td>
 
                            </tr>`;
-                        if (value.isAfgewerkt == 0 && data[0].dt2 >= value.startTijd){
+                        if (value.isAfgewerkt == 0 && data[0].dt2 >= value.startTijd) {
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -761,11 +844,11 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                            </tr>`;
                         }
-                        if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0){
+                        if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0) {
                             tr = `<tr class="table-warning">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam} ${value.naam}</td>
+                               <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -785,7 +868,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                            </tr>`;
                         }
-                        if (value.isAfgewerkt == 1 ){
+                        if (value.isAfgewerkt == 1) {
                             tr = `<tr class="table-success">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -807,7 +890,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                            </tr>`;
                         }
-                        if (value.isAanwezig == 1 && value.isBezig == 1){
+                        if (value.isAanwezig == 1 && value.isBezig == 1) {
                             tr = `<tr class="table-info">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -831,12 +914,19 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         }
                         // Append row to tbody
                         $('.tableplanning tbody').append(tr);
-                    });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
 
-                });
+                    });
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
         }
     </script>
 @endsection

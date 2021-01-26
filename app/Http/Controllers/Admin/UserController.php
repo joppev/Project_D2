@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Bedrijf;
-use App\Gebruiker;
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Http\Controllers\Controller;
 use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,7 +94,7 @@ class UserController extends Controller
         $user->save();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$user->voornaam $user->naam</b> is toegevoegd."
+            'text' => "Gebruiker <b>$user->voornaam $user->naam</b> is toegevoegd."
         ]);
     }
 
@@ -171,7 +170,7 @@ class UserController extends Controller
         $user->save();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$user->voornaam $user->naam</b> is aangepast. "
+            'text' => "Gebruiker <b>$user->voornaam $user->naam</b> is aangepast."
         ]);
     }
 
@@ -183,6 +182,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
         if ($user->id == Auth::id()){
             return response()->json([
                 'type' => 'error',
@@ -204,6 +204,7 @@ class UserController extends Controller
                 'text' => "De gebruiker <b>$user->voornaam $user->naam</b> is verwijderd."
             ]);
         }
+
 
     }
 

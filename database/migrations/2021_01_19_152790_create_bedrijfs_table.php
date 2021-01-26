@@ -23,26 +23,26 @@ class CreateBedrijfsTable extends Migration
             [
                 [
                     'bedrijfsnaam' => 'Apple',
-                    'standaardWachtwoord'  =>'apple123',
+                    'standaardWachtwoord'  =>'apple1234',
                     'created_at' => now(),
                     'updated_at'=> now()
 
                 ],
                 [
                     'bedrijfsnaam' => 'Samsung',
-                    'standaardWachtwoord'  =>'samsung123',
+                    'standaardWachtwoord'  =>'samsung1234',
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],
                 [
                     'bedrijfsnaam' => 'Aldi',
-                    'standaardWachtwoord'  =>'aldi123',
+                    'standaardWachtwoord'  =>'aldi1234',
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],
                 [
                     'bedrijfsnaam' => 'Dopper',
-                    'standaardWachtwoord'  =>'dopper123',
+                    'standaardWachtwoord'  =>'dopper1234',
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],

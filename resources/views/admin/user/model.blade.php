@@ -87,7 +87,7 @@
 
 
 
-                    <button type="submit" class="btn btn-success">Gebruiker aanpassen</button>
+                    <button type="submit" class="btn btn-success">Gebruiker opslaan</button>
                 </form>
             </div>
         </div>

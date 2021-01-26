@@ -1,13 +1,16 @@
 @extends('layouts.template')
 
 @section('main')
-    <h1>Alle Planningen</h1>
+    <div class="row justify-content-around">
 
-    <p>
-        <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Planning aanmaken
-        </a>
-    </p>
+        <h1>Planningen</h1>
+
+        <p>
+            <a href="#!" class="btn btn-outline-success" id="btn-create">
+                <i class="fas fa-plus-circle mr-1"></i>Planning toevoegen
+            </a>
+        </p>
+    </div>
 
 
     <div class="table-responsive">
@@ -18,8 +21,8 @@
                 <th>Bedrijf</th>
                 <th>Chauffeur</th>
                 <th>Nummerplaat</th>
-                <th>Loscade</th>
-                <th>Actions</th>
+                <th>Loskade</th>
+                <th>Bewerken</th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +35,6 @@
 
 @section('script_after')
     <script>
-
         $(function () {
             loadTable();
             loadDropdown();
@@ -141,6 +143,7 @@
                             text: msg
                         });
                     });
+
             });
 
             function deletePlanning(id) {
@@ -165,18 +168,17 @@
                     });
             }
 
+            function loadTable() {
+                $.getJSON('/admin/qryPlannings')
+                    .done(function (data) {
+                        console.log('data', data);
+                        // Clear tbody tag
+                        $('tbody').empty();
+                        // Loop over each item in the array
+                        $.each(data, function (key, value) {
+                            console.log(value)
 
-        function loadTable() {
-            $.getJSON('/admin/qryPlannings')
-                .done(function (data) {
-                    console.log('data', data);
-                    // Clear tbody tag
-                    $('tbody').empty();
-                    // Loop over each item in the array
-                    $.each(data, function (key, value) {
-                        console.log(value)
-
-                        let tr = `<tr>
+                            let tr = `<tr>
 
                                <td>${value.startTijd}</td>
                                 <td>${value.bedrijfsnaam}</td>
@@ -200,21 +202,23 @@
                                     </div>
                                </td>
                            </tr>`;
-                        // Append row to tbody
-                        $('tbody').append(tr);
-                    });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
+                            // Append row to tbody
+                            $('tbody').append(tr);
+                        });
+                    })
+                    .fail(function (e) {
+                        console.log('error', e);
+                    })
 
-        }});
-        function loadDropdown(){
+            }
+        });
+
+        function loadDropdown() {
             $.getJSON('/admin/qryPlanningsUsers')
                 .done(function (data) {
                     console.log('data', data);
                     $.each(data, function (key, value) {
-                        $('#user_id').append('<option value="'+ value.id + '">' + value.voornaam +' ' + value.naam +'</option>');
+                        $('#user_id').append('<option value="' + value.id + '">' + value.voornaam + ' ' + value.naam + '</option>');
                     })
                 });
 
@@ -222,7 +226,7 @@
                 .done(function (data) {
                     console.log('data', data);
                     $.each(data, function (key, value) {
-                        $('#kade_id').append('<option value="'+ value.id + '">' + value.kadenaam +'</option>');
+                        $('#kade_id').append('<option value="' + value.id + '">' + value.kadenaam + '</option>');
                     })
                 });
 
@@ -230,7 +234,7 @@
                 .done(function (data) {
                     console.log('data', data);
                     $.each(data, function (key, value) {
-                        $('#tijd_id').append('<option value="'+ value.id + '">' + value.startTijd +' tot ' + value.stopTijd +'</option>');
+                        $('#tijd_id').append('<option value="' + value.id + '">' + value.startTijd + ' tot ' + value.stopTijd + '</option>');
                     })
                 });
 
@@ -238,5 +242,7 @@
 
 
 
+
     </script>
+
 @endsection

@@ -50,7 +50,7 @@ class NummerplaatController extends Controller
         $nummerplaat->save();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$nummerplaat->plaatcombinatie </b> is aangepast. "
+            'text' => "De nummerplaat <b>$nummerplaat->plaatcombinatie </b> is toegevoegd. "
         ]);
     }
 
@@ -97,7 +97,7 @@ class NummerplaatController extends Controller
         $nummerplaat->save();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$nummerplaat->plaatcombinatie </b> is aangepast. "
+            'text' => "De nummerplaat <b>$nummerplaat->plaatcombinatie </b> is aangepast."
         ]);
     }
 
@@ -112,7 +112,7 @@ class NummerplaatController extends Controller
         $nummerplaat->delete();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$nummerplaat->plaatcombinatie</b> is verwijderd."
+            'text' => "De nummerplaat <b>$nummerplaat->plaatcombinatie</b> is verwijderd."
         ]);
     }
 
