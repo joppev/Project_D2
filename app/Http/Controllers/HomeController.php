@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kade;
+use App\Nummerplaat;
 use App\Planning;
 use App\User;
 use Carbon\Carbon;
@@ -39,6 +40,15 @@ class HomeController extends Controller
         return view('home', $result);
     }
 
+    public function getnummerplaten(Request $request){
+        $id = $request->request->get('id');
+        $nummerplaten = Nummerplaat::orderBy('id')
+            ->where('bedrijfID','=',$id)
+        ->get();
+
+        return $nummerplaten;
+
+    }
     public function kade(Request $request){
         $text =  '%'.$request->request->get('text').'%';
         $text2 = $request->request->get('text');
@@ -67,9 +77,9 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','kades.status as status','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->get();
 
 
@@ -100,9 +110,9 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.land as land','kades.gemeente as gemeente','kades.adres as adres','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('gebruikerID',$user->id)
@@ -131,9 +141,9 @@ class HomeController extends Controller
         $planning = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -183,9 +193,9 @@ class HomeController extends Controller
         $planning = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -239,9 +249,9 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -281,8 +291,8 @@ class HomeController extends Controller
         ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
         ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
         ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-        ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam')
-        ->where('startTijd','<',$dt2)
+        ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+->where('startTijd','<',$dt2)
         ->where('startTijd','>',$dt)
         ->where(function ($query) use ($text) {
             $query->where('volledigeNaam', 'like', $text)
