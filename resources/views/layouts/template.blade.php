@@ -26,7 +26,7 @@
 </div>
 {{--  Footer  --}}
 @include('shared.footer')
-
+<script type="text/javascript" src="https://r0743641.eu.qlikcloud.com/resources/assets/external/requirejs/require.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 
 @yield('script_after')

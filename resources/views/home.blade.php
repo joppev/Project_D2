@@ -8,7 +8,19 @@
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
         <div class="row">
         <div class="table-responsive col-lg-9 col-12">
+
             <h2>Dagplanning</h2>
+            <div class="row">
+                <h2 id="info" name="info" class="col-12"></h2>
+            </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
+                               value="" placeholder="Filter planning">
+                    </div>
+
+
+                </div>
             <table class="table tableplanning">
                 <thead>
                 <tr>
@@ -31,6 +43,15 @@
 
         <div class="table-responsive col-lg-3 col-12">
             <h2>Kadestatus</h2>
+                <div class="row">
+
+                    <div class="col-sm-6 mb-2">
+                        <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
+                               value="" placeholder="Filter planning">
+                    </div>
+
+
+                </div>
             <table class="table tablekade" id="tablekade">
                 <thead>
                 <tr>
@@ -215,6 +236,15 @@
 @section('script_after')
 
     <script>
+        $(function(){
+            $('body').tooltip({
+                selector: '[data-toggle="tooltip"]',
+                html : true,
+            }).on('click', '[data-toggle="tooltip"]', function () {
+                // hide tooltip when you click on it
+                $(this).tooltip('hide');
+            });
+        });
 
 
 @auth
@@ -223,10 +253,22 @@
         }
             @endif
         @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
+                $('#planningnaam').change(function () {
+                    loadTable()
+
+                });
+                $('#kadezoeknaam').change(function () {
+                    loadTable2()
+
+                });
+                $('#kadezoeknaam').submit(function () {
+                    loadTable2()
+
+                });
 
 
 
-            loadTable();
+                loadTable();
             loadTable2();
         }
         @endif
@@ -247,20 +289,20 @@
             @if(auth()->user()->isChauffeur)
             setInterval(function(){
                 loadChauffeur();
-            }, 5000);
+            }, 1000);
 
             @endif
                 @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
-                setInterval(function(){
+               setInterval(function(){
                 loadTable();
                 loadTable2();
-            }, 5000);
+            }, 1000);
 
             @endif
             @if(auth()->user()->isLogistiek)
                 setInterval(function(){
                 loadLogistiek()
-            }, 5000);
+            }, 1000);
 
         @endif
 
@@ -339,7 +381,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 success: function(data){ // What to do if we succeed
-
+                    console.log(data);
                     var startTijd = data.startTijd;
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
@@ -680,63 +722,82 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
 
         function loadTable() {
+            let text = '';
+            if(document.getElementById('kadezoeknaam').value != null || document.getElementById('kadezoeknaam').value != ''){
+
+                text = document.getElementById('kadezoeknaam').value;
+            }
 
 
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/kade', // This is the url we gave in the route
-                data: {'text': text, _token: '{{csrf_token()}}'},
+                data: {'text':text, _token: '{{csrf_token()}}'},
                 // a JSON object to send back
                 success: function (data) {
                     // Clear tbody tag
                     $('.tablekade tbody').empty();
-                    // Loop over each item in the array
-                    $.each(data, function (key, value) {
-                        let tr = ''
+                        // Loop over each item in the array
+                        $.each(data, function (key, value) {
+                            let tr = ''
 
-                        if (value.status === "Vrij") {
-                            tr = `<tr class="table-success">
+                            if (value.status === "Vrij") {
+                                tr = `<tr class="table-success">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
 
-                        }
-                        if (value.status == "Niet-vrij") {
-                            tr = `<tr class="table-danger">
+                            }
+                            if (value.status == "Niet-vrij") {
+                                tr = `<tr class="table-danger">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
 
-                        }
-                        if (value.status === "Buiten gebruik") {
-                            tr = `<tr class="table-warning">
+                            }
+                            if (value.status === "Buiten gebruik") {
+                                tr = `<tr class="table-warning">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
 
 
-                        }
-                        // Append row to tbody
-                        $('.tablekade tbody').append(tr);
-                    });
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                    if ($(this).is(':checked')) {
-                        $(this).prop("checked", false);
-                    } else {
-                        $(this).prop("checked", true);
+                            }
+                            // Append row to tbody
+                            $('.tablekade tbody').append(tr);
+                        });
                     }
-                }
+
+                ,
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        if ($(this).is(':checked')) {
+                            $(this).prop("checked", false);
+                        } else {
+                            $(this).prop("checked", true);
+                        }
+                    }
+
 
 
             });
         }
         function loadTable2() {
-            $.getJSON('home/dagplanning')
-                .done(function (data) {
+            let text = '';
+            if(document.getElementById('planningzoeknaam').value != null || document.getElementById('planningzoeknaam').value != ''){
+
+                text = document.getElementById('planningzoeknaam').value;
+            }
+
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/dagplanning', // This is the url we gave in the route
+                data: {'text': text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
 
                     // Clear tbody tag
                     $('.tableplanning tbody').empty();
@@ -744,8 +805,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
 
-
-                        let tr = `<tr class="">
+                            let tr = `<tr class="">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
 <td>${value.voornaam} ${value.naam}</td>
@@ -763,7 +823,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                </td>
 
                            </tr>`;
-                        if (value.isAfgewerkt == 0 && data[0].dt2 >= value.startTijd){
+                        if (value.isAfgewerkt == 0 && data[0].dt2 >= value.startTijd) {
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -784,11 +844,11 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                            </tr>`;
                         }
-                        if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0){
+                        if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0) {
                             tr = `<tr class="table-warning">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam} ${value.naam}</td>
+                               <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
                                 ${value.plaatcombinatie}
@@ -808,7 +868,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                            </tr>`;
                         }
-                        if (value.isAfgewerkt == 1 ){
+                        if (value.isAfgewerkt == 1) {
                             tr = `<tr class="table-success">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -830,7 +890,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
 
                            </tr>`;
                         }
-                        if (value.isAanwezig == 1 && value.isBezig == 1){
+                        if (value.isAanwezig == 1 && value.isBezig == 1) {
                             tr = `<tr class="table-info">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -854,12 +914,19 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         }
                         // Append row to tbody
                         $('.tableplanning tbody').append(tr);
-                    });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
 
-                });
+                    });
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
         }
     </script>
 @endsection
