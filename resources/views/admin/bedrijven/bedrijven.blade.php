@@ -26,7 +26,7 @@
                 </tbody>
             </table>
         </div>
-
+    </div>
         @include('admin.bedrijven.modal')
         @endsection
 

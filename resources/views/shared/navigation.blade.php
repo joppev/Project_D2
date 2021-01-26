@@ -16,7 +16,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/users">Overzicht gebruikers</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/kades">Overzicht kades</a>
                         </li>
