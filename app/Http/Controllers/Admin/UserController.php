@@ -80,7 +80,7 @@ class UserController extends Controller
         $user->save();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$user->voornaam $user->naam</b> is toegevoegd."
+            'text' => "Gebruiker <b>$user->voornaam $user->naam</b> is toegevoegd."
         ]);
     }
 
@@ -144,7 +144,7 @@ class UserController extends Controller
         $user->save();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$user->voornaam $user->naam</b> is aangepast. "
+            'text' => "Gebruiker <b>$user->voornaam $user->naam</b> is aangepast."
         ]);
     }
 
@@ -159,7 +159,7 @@ class UserController extends Controller
         $user->delete();
         return response()->json([
             'type' => 'success',
-            'text' => "<b>$user->voornaam $user->naam</b> is verwijderd."
+            'text' => "Gebruiker <b>$user->voornaam $user->naam</b> is verwijderd."
         ]);
     }
 

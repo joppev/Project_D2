@@ -55,7 +55,7 @@ class KadeController extends Controller
             $kade->save();
             return response()->json([
                 'type' => 'success',
-                'text' => "De kade <b> $kade->naam</b> is Toegevoegd. "
+                'text' => "De kade <b> $kade->naam</b> is toegevoegd. "
             ]);
         }
     }
@@ -122,7 +122,7 @@ class KadeController extends Controller
         $kade->delete();
         return response()->json([
             'type' => 'success',
-            'text' => "<b> $kade->kadenaam</b> is verwijderd."
+            'text' => "<b>De kade  $kade->kadenaam</b> is verwijderd."
         ]);
     }
 

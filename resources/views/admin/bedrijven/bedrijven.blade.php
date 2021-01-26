@@ -5,11 +5,9 @@
         <h1>Bedrijven</h1>
         <p>
             <a href="#!" class="btn btn-outline-success" id="btn-create">
-                <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen
-            </a>
+                <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen</a>
         </p>
     </div>
-    <hr>
 
     <div class="row">
         <div class="table-responsive col-12">
@@ -40,8 +38,71 @@
 
             <script>
 
+
+          /*     $(document).ready(function () {
+                    $('#bedrijventable').DataTable({
+                        serverSide: true,
+                        ajax: '/bedrijven/admin',
+                        language: {
+                            "sProcessing": "Bezig...",
+                            "sLengthMenu": "_MENU_ resultaten weergeven",
+                            "sZeroRecords": "Geen resultaten gevonden",
+                            "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                            "sInfoEmpty": "Geen resultaten om weer te geven",
+                            "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                            "sInfoPostFix": "",
+                            "sSearch": "Zoeken:",
+                            "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                            "sInfoThousands": ".",
+                            "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                            "oPaginate": {
+                                "sFirst": "Eerste",
+                                "sLast": "Laatste",
+                                "sNext": "Volgende",
+                                "sPrevious": "Vorige"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                                "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                            }
+                        }
+                    });
+                });*/
+
+
+
+
+
+
                 $(function () {
                     loadTable();
+                   /* $('#bedrijventable').DataTable({
+                        serverSide: true,
+                        ajax: '/admin/qryBedrijven',
+                        language: {
+                            "sProcessing": "Bezig...",
+                            "sLengthMenu": "_MENU_ resultaten weergeven",
+                            "sZeroRecords": "Geen resultaten gevonden",
+                            "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                            "sInfoEmpty": "Geen resultaten om weer te geven",
+                            "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                            "sInfoPostFix": "",
+                            "sSearch": "Zoeken:",
+                            "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                            "sInfoThousands": ".",
+                            "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                            "oPaginate": {
+                                "sFirst": "Eerste",
+                                "sLast": "Laatste",
+                                "sNext": "Volgende",
+                                "sPrevious": "Vorige"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                                "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                            }
+                        }
+                    });*/
 
                     //Bedrijf verwijderen
 
@@ -94,7 +155,7 @@
                     //Bedrijf toevoegen
                     $('#btn-create').click(function () {
                         // Update the modal
-                        $('.modal-title').text(`Bedrijf toevoegen`);
+                        $('.modal-title').text(`Nieuw bedrijf`);
                         $('form').attr('action', `/admin/bedrijven`);
 
                         $('#bedrijfsnaam').val('');

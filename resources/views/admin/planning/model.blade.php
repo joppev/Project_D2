@@ -28,17 +28,25 @@
                     </div>
                     <div class="container">
 
+
+
+
+
+
+
+
+
+
+
+
+
                         <h1>Laravel Bootstrap Timepicker</h1>
 
-                        <div style="position: relative">
-
-                            <strong>Timepicker:</strong>
-
-                            <input class="timepicker form-control" type="text">
-
-                        </div>
+                        <input type="text" id="datetimepicker"/>
 
                     </div>
+
+
 
 
                     <div class="form-group">
@@ -73,7 +81,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Status</label>
                         <select class="form-control" name="status" id="exampleFormControlSelect1">
-                            <option value="%">alle statusen</option>
+{{--                            <option value="%">alle statusen</option>--}}
                             <option value="1">Afgewerkt</option>
                             <option value="2">Bezig</option>
                             <option value="3">Aanwezig</option>

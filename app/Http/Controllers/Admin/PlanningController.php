@@ -74,7 +74,7 @@ class PlanningController extends Controller
         $planning->save();
         return response()->json([
             'type' => 'success',
-            'text' => "planning is toegevoegd. "
+            'text' => "Planning is toegevoegd. "
         ]);
     }
 
@@ -146,7 +146,7 @@ class PlanningController extends Controller
         $planning->save();
         return response()->json([
             'type' => 'success',
-            'text' => "planning is aangepast. "
+            'text' => "Planning is aangepast. "
         ]);
     }
 

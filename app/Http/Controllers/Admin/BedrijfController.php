@@ -48,7 +48,7 @@ class BedrijfController extends Controller
         $bedrijf->save();
         return response()->json([
             'type' => 'success',
-            'text' => "Het bedrijf <b>$bedrijf->bedrijfsnaam</b> is aangemaakt."
+            'text' => "Het bedrijf <b>$bedrijf->bedrijfsnaam</b> is toegevoegd."
         ]);
     }
 
@@ -95,7 +95,7 @@ class BedrijfController extends Controller
         $bedrijf->save();
         return response()->json([
             'type' => 'success',
-            'text' => "Het bedrijf <b>$bedrijf->bedrijfsnaam</b> is geüpdatet."
+            'text' => "Het bedrijf <b>$bedrijf->bedrijfsnaam</b> is aangepast."
         ]);
     }
 
@@ -118,7 +118,6 @@ class BedrijfController extends Controller
     public function qryBedrijven()
     {
         $bedrijven = Bedrijf::orderBy('bedrijfsnaam')
-//            ->LeftJoin('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->get();
 
         return $bedrijven;

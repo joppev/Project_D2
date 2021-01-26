@@ -29,9 +29,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/nummerplaats">Overzicht nummerplaten</a>
                         </li>
-                   {{--     <li class="nav-item">
-                            <a class="nav-link" href="/admin/nummerplaten">Overzicht nummerplaten</a>
-                        </li>--}}
                     @endif
 
                 @endauth
@@ -40,10 +37,10 @@
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>Login</a>
+                        <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>Inloggen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register"><i class="fas fa-signature"></i>Register</a>
+                        <a class="nav-link" href="/register"><i class="fas fa-signature"></i>Registreren</a>
                     </li>
                 @endguest
 
@@ -53,10 +50,10 @@
                             {{ auth()->user()->naam }} <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="/user/profile"><i class="fas fa-user-cog"></i>Update Profile</a>
-                            <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>New Password</a>
+                            <a class="dropdown-item" href="/user/profile"><i class="fas fa-user-cog"></i>Profiel aanpassen</a>
+                            <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>Paswoord aanpassen</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                            <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Uitloggen</a>
 
 
                         </div>
