@@ -158,14 +158,47 @@ class KadeController extends Controller
     public function qryKades(Request $request){
 
         $text =  '%'.$request->request->get('text').'%';
+        $id =  $request->request->get('id');
+        if ($id == '%'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
+                        ->orwhere('status', 'like', $text)
+                        ->orwhere('gemeente', 'like', $text);
+                })
+                ->get();
+        }
+        if ($id == 'Vrij'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
+                        ->orwhere('gemeente', 'like', $text);
+                })
+                ->where('status', '=', 'Vrij')
+                ->get();
+        }
+        if ($id == 'Niet-vrij'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
 
-        $kades = Kade::orderBy('kadeNaam')
-            ->where(function ($query) use ($text) {
-                $query->where('kadenaam', 'like', $text)
-                    ->orwhere('status', 'like', $text)
-                    ->orwhere('gemeente', 'like', $text);
-            })
-            ->get();
+                        ->orwhere('gemeente', 'like', $text);
+
+                })
+                ->where('status', '=', 'Niet-vrij')
+                ->get();
+        }
+        if ($id == 'Buiten gebruik'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
+                        ->orwhere('status', 'like', $text)
+                        ->orwhere('gemeente', 'like', $text);
+                })
+                ->where('status', '=', 'buiten gebruik')
+                ->get();
+        }
+
 
 
 

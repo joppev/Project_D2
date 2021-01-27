@@ -10,11 +10,11 @@
 
         <div class="row">
 
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-4 mb-2">
                 <input type="text" class="form-control" name="userzoeknaam" id="userzoeknaam"
                        value="" placeholder="Filter gebruikers">
             </div>
-            <div class="form-group">
+            <div class="col-sm-3 mb-2">
                 <select required class="form-control" name="userzoekrol" id="userzoekrol">
                     <option value="%">alle rollen</option>
                     <option value="1">Admin</option>
@@ -24,7 +24,7 @@
 
                 </select>
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-5 mb-2">
                 <p>
                     <a href="#!" class="btn btn-outline-success" id="btn-create">
                         <i class="fas fa-plus-circle mr-1"></i>Gebruiker toevoegen
