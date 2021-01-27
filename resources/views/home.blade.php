@@ -30,6 +30,7 @@
                     <th>Proces</th>
                     <th>Loskade</th>
                     <th>Opmerkingen</th>
+                    <th>Nummerplaat</th>
                     <th>Details</th>
                 </tr>
                 </thead>
@@ -227,7 +228,7 @@
 @section('script_after')
 
     <script>
-        
+
 
 
 @auth
@@ -855,17 +856,17 @@ $('#kade').text(kade);
                                </td>
                                <td>${value.kadenaam}</td>
                                <td>te laat</td>
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 
-                                        title="info">
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
-                                    <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        title="nummerplaten">
-                                            <<i class="fas fa-list-ul"></i>
-                                        </a>
-
                                </td>
 
                            </tr>`;
@@ -883,17 +884,17 @@ $('#kade').text(kade);
                                <td>${value.kadenaam}</td>
                                <td>Vorige planning nog niet afgewerkt</td>
 
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 
-                                        title="info">
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
-                                    <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        title="nummerplaten">
-                                            <i class="fas fa-list-ul"></i>
-                                        </a>
-
                                </td>
 
                            </tr>`;
@@ -911,17 +912,17 @@ $('#kade').text(kade);
                                <td>${value.kadenaam}</td>
                                <td>afgewerkt</td>
 
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 
-                                        title="info">
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
-                                    <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        title="nummerplaten">
-                                            <i class="fas fa-list-ul"></i>
-                                        </a>
-
                                </td>
 
                            </tr>`;
@@ -939,17 +940,17 @@ $('#kade').text(kade);
                                <td>${value.kadenaam}</td>
                                <td>Bezig</td>
 
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 
-                                        title="info">
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
-                                    <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        title="nummerplaten">
-                                           <i class="fas fa-list-ul"></i>
-                                        </a>
-
                                </td>
 
                            </tr>`;
