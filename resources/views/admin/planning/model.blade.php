@@ -11,10 +11,31 @@
                 <form action="" method="post">
                     @method('')
                     @csrf
+                    <div class="form-group">
+                        <label for="date">Startdatum: </label>
+                        <input type="date" id="startdate" name="date">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Starttijdstip: </label>
+                        <input type="time" id="starttime" name="time">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Einddatum: </label>
+                        <input type="date" id="stopdate" name="date">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Eindtijdstip: </label>
+                        <input type="time" id="stoptime" name="time">
+                        <div class="invalid-feedback"></div>
+                    </div>
 
-                             <div class="form-group">
+
+                          {{-- <div class="form-group">
                                  <label for="exampleFormControlSelect1">starten</label>
-                                 <input type="datetime-local" name="starttijd" id="starttijd"
+                                 <input type="text" name="starttijd" id="starttijd"
                                         class="form-control date"
                                         placeholder="Datum & tijdstip"
                                         required
@@ -23,12 +44,12 @@
 
                              <div class="form-group">
                                  <label for="exampleFormControlSelect1">stop</label>
-                                 <input type="datetime-local" name="stoptijd" id="stoptijd"
+                                 <input type="text" name="stoptijd" id="stoptijd"
                                         class="form-control date"
                                         placeholder="Datum & tijdstip"
                                         required
                                         value="">
-                             </div>
+                             </div>--}}
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Chauffeur</label>
                         <select class="form-control " name="user_id" id="user_id">
