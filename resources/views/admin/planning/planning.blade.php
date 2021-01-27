@@ -10,14 +10,14 @@
             </a>
         </p>
         <div class="row">
-            <div class="col-sm-4 mb-2">
+            <div class="col-sm-4 mb-2 ">
                 <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
                        value="" placeholder="Filter planning">
             </div>
 
-            <div class="col-sm-4 mb-2 date">
+            <div class="col-sm-4 mb-2 date ">
 
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" class="form-control">
                 <div class="invalid-feedback"></div>
             </div>
             <div class="col-sm-4 mb-2">
