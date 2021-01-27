@@ -5,11 +5,34 @@
 
     <h1>Gebruikers</h1>
 
-    <p>
-        <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Gebruiker toevoegen
-        </a>
-    </p>
+
+
+
+        <div class="row">
+
+            <div class="col-sm-6 mb-2">
+                <input type="text" class="form-control" name="userzoeknaam" id="userzoeknaam"
+                       value="" placeholder="Filter gebruikers">
+            </div>
+            <div class="form-group">
+                <select required class="form-control" name="userzoekrol" id="userzoekrol">
+                    <option value="%">alle rollen</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Chauffeur</option>
+                    <option value="3">Receptionist</option>
+                    <option value="4">Logistiek</option>
+
+                </select>
+            </div>
+            <div class="col-sm-6 mb-2">
+                <p>
+                    <a href="#!" class="btn btn-outline-success" id="btn-create">
+                        <i class="fas fa-plus-circle mr-1"></i>Gebruiker toevoegen
+                    </a>
+                </p>
+            </div>
+        </div>
+
     </div>
 
     <div class="table-responsive">
@@ -32,6 +55,17 @@
 
 @section('script_after')
     <script>
+
+        $( "#userzoekrol" ).change(function() {
+            loadTable();
+        });
+
+
+        jQuery('#userzoeknaam').on('input', function() {
+            loadTable();
+        });
+
+
 
         $(function () {
             loadTable();
@@ -175,8 +209,26 @@
 
 
         function loadTable() {
-            $.getJSON('/admin/qryUsers')
-                .done(function (data) {
+
+            let text = '';
+            let id = '';
+            if(document.getElementById('userzoeknaam').value != null || document.getElementById('userzoeknaam').value != ''){
+
+                text = document.getElementById('userzoeknaam').value;
+            }
+            if(document.getElementById('userzoekrol').value != null || document.getElementById('userzoekrol').value != ''){
+
+                id = document.getElementById('userzoekrol').value;
+
+            }
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: '/admin/qryUsers', // This is the url we gave in the route
+                data: {'text': text,'id':id, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
+
                     console.log('data', data);
                     // Clear tbody tag
                     $('tbody').empty();
@@ -229,10 +281,16 @@
                         // Append row to tbody
                         $('tbody').append(tr);
                     });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
 
         }
         function loadDropdown(){

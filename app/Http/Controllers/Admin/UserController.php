@@ -48,9 +48,9 @@ class UserController extends Controller
         $bedrijven = DB::table('bedrijfs')
             ->get();
         $this->validate($request,[
-            'naam' => 'required|min:3',
-            'voornaam' => 'required|min:3',
-            'email' => 'required|email',
+            'naam' => 'required|min:3|max:255',
+            'voornaam' => 'required|min:3|max:255',
+            'email' => 'required|email|max:255',
             'bedrijf_id' => 'digits:1',
             'rol' => 'digits:1'
         ]);
@@ -134,8 +134,8 @@ class UserController extends Controller
 
 
         $this->validate($request,[
-            'naam' => 'required|min:3',
-            'voornaam' => 'required|min:3',
+            'naam' => 'required|min:3|max:255',
+            'voornaam' => 'required|min:3|max:255',
             'email' => 'required|email',
             'bedrijf_id' => 'digits:1',
             'rol' => 'digits:1'
@@ -211,12 +211,71 @@ class UserController extends Controller
 
     }
 
-    public function qryUsers(){
+    public function qryUsers(Request $request){
 
-        $users = DB::table('users')
-            ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->select('users.*', 'bedrijfs.bedrijfsnaam')
-            ->get();
+        $text =  '%'.$request->request->get('text').'%';
+        $id =  $request->request->get('id');
+
+        if ($id == '%') {
+            $users = DB::table('users')
+                ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                ->select('users.*', 'bedrijfs.bedrijfsnaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('bedrijfsnaam', 'like', $text)
+                        ->orwhere('volledigeNaam', 'like', $text)
+                        ->orwhere('email', 'like', $text);
+                })
+                ->get();
+        }
+            if ($id == 1){
+                $users = DB::table('users')
+                    ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                    ->select('users.*', 'bedrijfs.bedrijfsnaam')
+                    ->where(function ($query) use ($text) {
+                        $query->where('bedrijfsnaam', 'like', $text)
+                            ->orwhere('volledigeNaam', 'like', $text)
+                            ->orwhere('email', 'like', $text);
+                    })
+                    ->where('isAdmin','=', 1)
+                    ->get();
+            }
+            if($id == 2){
+                $users = DB::table('users')
+                    ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                    ->select('users.*', 'bedrijfs.bedrijfsnaam')
+                    ->where(function ($query) use ($text) {
+                        $query->where('bedrijfsnaam', 'like', $text)
+                            ->orwhere('volledigeNaam', 'like', $text)
+                            ->orwhere('email', 'like', $text);
+                    })
+                    ->where('isChauffeur','=', 1)
+                    ->get();
+            }
+            if ($id == 3){
+                $users = DB::table('users')
+                    ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                    ->select('users.*', 'bedrijfs.bedrijfsnaam')
+                    ->where(function ($query) use ($text) {
+                        $query->where('bedrijfsnaam', 'like', $text)
+                            ->orwhere('volledigeNaam', 'like', $text)
+                            ->orwhere('email', 'like', $text);
+                    })
+                    ->where('isReceptionist','=', 1)
+                    ->where('isAdmin','=', 0)
+                    ->get();
+            }
+            if($id == 4){
+                $users = DB::table('users')
+                    ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                    ->select('users.*', 'bedrijfs.bedrijfsnaam')
+                    ->where(function ($query) use ($text) {
+                        $query->where('bedrijfsnaam', 'like', $text)
+                            ->orwhere('volledigeNaam', 'like', $text)
+                            ->orwhere('email', 'like', $text);
+                    })
+                    ->where('isLogistiek','=', 1)
+                    ->get();
+            }
 
 
         Json::dump($users);

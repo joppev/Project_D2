@@ -39,8 +39,8 @@ class BedrijfController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,
-            ['bedrijfsnaam' => 'required|min:3',
-                'standaardWachtwoord' => 'required|min:8'
+            ['bedrijfsnaam' => 'required|min:3|max:255',
+                'standaardWachtwoord' => 'required|min:8|max:255'
             ]);
 
         $bedrijf = new Bedrijf();
@@ -87,8 +87,8 @@ class BedrijfController extends Controller
     {
         $bedrijf = Bedrijf::find($id);
         $this->validate($request, [
-            'bedrijfsnaam' => 'required|min:3,' . $bedrijf->id,
-            'standaardWachtwoord' => 'required|min:8'
+            'bedrijfsnaam' => 'required|min:3|max:255,' . $bedrijf->id,
+            'standaardWachtwoord' => 'required|min:8|max:255'
         ]);
 
         $bedrijf->bedrijfsnaam = $request->bedrijfsnaam;
