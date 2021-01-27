@@ -4,14 +4,18 @@
     <div class="row justify-content-around">
 
         <h1>Planningen</h1>
-        <a href="#!" class="btn btn-info clear">clear filters</a>
+        <p>
+            <a href="#!" class="btn btn-outline-info clear" id="clear">
+                <i class="fas fa-plus-circle mr-1"></i>clear filters
+            </a>
+        </p>
         <div class="row">
             <div class="col-sm-4 mb-2">
                 <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
                        value="" placeholder="Filter planning">
             </div>
 
-            <div class="col-sm-4 mb-2">
+            <div class="col-sm-4 mb-2 date">
 
                 <input type="date" id="date" name="date">
                 <div class="invalid-feedback"></div>
@@ -56,6 +60,19 @@
 
 
         $(function () {
+
+            $('p').on('click', '#clear', function () {
+                if(document.getElementById('planningzoeknaam').value != null || document.getElementById('planningzoeknaam').value != ''){
+
+                    $("#planningzoeknaam").val("");
+                }
+                if(document.getElementById('date').value != null || document.getElementById('date').value != ''){
+
+                    $("#date").val("");
+                }
+                loadTable();
+            });
+
             jQuery('#planningzoeknaam').on('input', function() {
                 loadTable();
             });

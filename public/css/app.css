@@ -11227,7 +11227,8 @@ a.text-dark:focus {
 }
 
 .normal_bodyn,
-.form-control {
+.form-control,
+.date {
   background-color: #eaf2f8 !important;
   color: #1a2601 !important;
 }
