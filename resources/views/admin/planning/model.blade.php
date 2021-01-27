@@ -119,10 +119,4 @@
         </div>
     </div>
 </div>
-<script>
-$('.date').datepicker({
 
-format: 'Y-m-d H:i'
-
-});
-</script>
