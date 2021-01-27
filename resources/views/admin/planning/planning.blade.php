@@ -103,6 +103,15 @@
                 let user = $(this).closest('td').data('user');
                 let kade = $(this).closest('td').data('kade');
                 let status = $(this).closest('td').data('status');
+                let start = $(this).closest('td').data('start');
+                let stop = $(this).closest('td').data('stop');
+
+                var datetime= '2010-10-18 10:06 AM' // Default datetime will be like this.
+
+                var startdate =start.split(' ')[0];
+                var starttime =start.split(' ')[1];
+                var stopdate =stop.split(' ')[0];
+                var stoptime =stop.split(' ')[1];
 
 
                 // Update the modal
@@ -115,6 +124,10 @@
                 $('#user_id').val(user);
                 $('#kade_id').val(kade);
                 $('#status').val(status);
+                $('#startdate').val(startdate);
+                $('#starttime').val(starttime);
+                $('#stopdate').val(stopdate);
+                $('#stoptime').val(stoptime);
 
 
                 $('input[name="_method"]').val('put');
@@ -250,6 +263,8 @@
                                     data-user="${value.gebruikerID}"
                                     data-kade="${value.kadeID}"
                                     data-status="${status}"
+                                    data-start="${value.startTijd}"
+                                    data-stop="${value.stopTijd}"
                                    >
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit">

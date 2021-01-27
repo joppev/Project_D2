@@ -11,27 +11,39 @@
                 <form action="" method="post">
                     @method('')
                     @csrf
-                    <div class="form-group">
-                        <label for="startdate">Startdatum: </label>
-                        <input type="date" id="startdate" name="startdate">
-                        <div class="invalid-feedback"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="starttime">Starttijdstip: </label>
-                        <input type="time" id="starttime" name="starttime">
-                        <div class="invalid-feedback"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="stopdate">Stopdatum: </label>
-                        <input type="date" id="stopdate" name="stopdate">
-                        <div class="invalid-feedback"></div>
-                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="startdate">Startdatum: </label>
+                                <input class="form-control" type="date" id="startdate" name="startdate">
 
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="starttime">Starttijdstip: </label>
+                                <input  class="form-control" type="time" id="starttime" name="starttime">
 
-                    <div class="form-group">
-                        <label for="stoptime">Eindtijdstip: </label>
-                        <input type="time" id="stoptime" name="stoptime">
-                        <div class="invalid-feedback"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="stopdate">Stopdatum: </label>
+                                <input  class="form-control" type="date" id="stopdate" name="stopdate">
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="stoptime">Eindtijdstip: </label>
+                                <input  class="form-control" type="time" id="stoptime" name="stoptime">
+
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
