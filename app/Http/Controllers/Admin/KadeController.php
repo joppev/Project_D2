@@ -40,13 +40,14 @@ class KadeController extends Controller
     {
         {
             $this->validate($request,[
-                'naam' => 'required|min:3',
-                'land' => 'required|min:3',
-                'gemeente' => 'required|min:3',
-                'adres' => 'required|min:3',
+                'naam' => 'required|min:3|max:255',
+                'land' => 'required|max:255',
+                'gemeente' => 'required|max:255',
+                'adres' => 'required|max:255',
                 'latitude' => 'numeric',
                 'longitude' => 'numeric',
-                'status' => 'digits:1'
+                'bedrijf_id' => 'digits:1',
+                'rol' => 'digits:1'
             ]);
             $kade = new Kade();
             $kade->kadenaam = $request->naam;
@@ -105,11 +106,12 @@ class KadeController extends Controller
     public function update(Request $request, Kade $kade)
     {
         $this->validate($request,[
-            'naam' => 'required|min:3',
-            'land' => 'required',
-            'gemeente' => 'required',
-            'adres' => 'required',
-            'latitude' => 'required',
+            'naam' => 'required|min:3|max:255',
+            'land' => 'required|max:255',
+            'gemeente' => 'required|max:255',
+            'adres' => 'required|max:255',
+            'latitude' => 'numeric',
+            'longitude' => 'numeric',
             'bedrijf_id' => 'digits:1',
             'rol' => 'digits:1'
         ]);
@@ -156,13 +158,47 @@ class KadeController extends Controller
     public function qryKades(Request $request){
 
         $text =  '%'.$request->request->get('text').'%';
+        $id =  $request->request->get('id');
+        if ($id == '%'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
+                        ->orwhere('status', 'like', $text)
+                        ->orwhere('gemeente', 'like', $text);
+                })
+                ->get();
+        }
+        if ($id == 'Vrij'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
+                        ->orwhere('gemeente', 'like', $text);
+                })
+                ->where('status', '=', 'Vrij')
+                ->get();
+        }
+        if ($id == 'Niet-vrij'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
 
-        $kades = Kade::orderBy('kadeNaam')
-            ->where(function ($query) use ($text) {
-                $query->where('kadenaam', 'like', $text)
-                    ->orwhere('status', 'like', $text);
-            })
-            ->get();
+                        ->orwhere('gemeente', 'like', $text);
+
+                })
+                ->where('status', '=', 'Niet-vrij')
+                ->get();
+        }
+        if ($id == 'Buiten gebruik'){
+            $kades = Kade::orderBy('kadeNaam')
+                ->where(function ($query) use ($text) {
+                    $query->where('kadenaam', 'like', $text)
+                        ->orwhere('status', 'like', $text)
+                        ->orwhere('gemeente', 'like', $text);
+                })
+                ->where('status', '=', 'buiten gebruik')
+                ->get();
+        }
+
 
 
 

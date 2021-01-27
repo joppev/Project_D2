@@ -6,17 +6,26 @@
     <h1>Kades</h1>
         <div class="row">
 
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-4 mb-2">
                 <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
                        value="" placeholder="Filter kades">
             </div>
-<div class="col-sm-6 mb-2">
+            <div class="col-sm-4 mb-2">
+                <select required class="form-control" name="kadezoekrol" id="kadezoekrol">
+                    <option value="%">alle statussen</option>
+                    <option value="Vrij">Vrij</option>
+                    <option value="Niet-vrij">Niet-vrij</option>
+                    <option value="Buiten gebruik">Buiten gebruik</option>
+
+                </select>
+            </div>
+            <div class="col-sm-4 mb-2">
             <p>
                 <a href="#!" class="btn btn-outline-success" id="btn-create">
                     <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
                 </a>
             </p>
-</div>
+            </div>
         </div>
 
     </div>
@@ -44,7 +53,9 @@
 
 @section('script_after')
     <script>
-
+        $( "#kadezoekrol" ).change(function() {
+            loadTable();
+        });
 
         jQuery('#kadezoeknaam').on('input', function() {
             loadTable();
@@ -192,16 +203,21 @@
 
         function loadTable() {
             let text = '';
+            let id = '';
             if(document.getElementById('kadezoeknaam').value != null || document.getElementById('kadezoeknaam').value != ''){
 
                 text = document.getElementById('kadezoeknaam').value;
             }
 
+            if(document.getElementById('kadezoekrol').value != null || document.getElementById('kadezoekrol').value != ''){
+
+                id = document.getElementById('kadezoekrol').value;
+            }
 
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: '/admin/qryKades', // This is the url we gave in the route
-                data: {'text': text, _token: '{{csrf_token()}}'},
+                data: {'text': text,'id':id, _token: '{{csrf_token()}}'},
                 // a JSON object to send back
                 success: function (data) {
 
