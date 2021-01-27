@@ -30,6 +30,7 @@
                     <th>Proces</th>
                     <th>Loskade</th>
                     <th>Opmerkingen</th>
+                    <th>Nummerplaat</th>
                     <th>Details</th>
                 </tr>
                 </thead>
@@ -69,7 +70,8 @@
 <div class="flex-container">
     <div id="QV01" class="card-img-bottom qvplaceholder"></div>
 </div>
-@include('model')
+        @include('modelNummerplaat')
+        @include('model')
     @endif
     @if(auth()->user()->isChauffeur)
         <h1>Dagplanning</h1>
@@ -91,12 +93,7 @@
                 <label class="col-4"></label>
 
             </div>
-        <div class="row">
-            <label class="col-4" for="nummerplaat">Nummerplaat: </label>
-            <p id="nummerplaat" name="nummerplaat" class="col-4"></p>
-            <label class="col-4"></label>
 
-        </div>
         <div class="row">
             <label class="col-4" for="ladingDetails">Lading details: </label>
             <p id="ladingDetails" name="ladingDetails" class="col-4"></p>
@@ -183,12 +180,7 @@
             <label class="col-4"></label>
 
         </div>
-        <div class="row">
-            <label class="col-4" for="nummerplaat">Nummerplaat: </label>
-            <p id="nummerplaat" name="nummerplaat" class="col-4"></p>
-            <label class="col-4"></label>
 
-        </div>
         <div class="row">
             <label class="col-4" for="ladingDetails">Lading details: </label>
             <p id="ladingDetails" name="ladingDetails" class="col-4"></p>
@@ -236,15 +228,7 @@
 @section('script_after')
 
     <script>
-        $(function(){
-            $('body').tooltip({
-                selector: '[data-toggle="tooltip"]',
-                html : true,
-            }).on('click', '[data-toggle="tooltip"]', function () {
-                // hide tooltip when you click on it
-                $(this).tooltip('hide');
-            });
-        });
+
 
 
 @auth
@@ -253,19 +237,14 @@
         }
             @endif
         @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
-                $('#planningnaam').change(function () {
-                    loadTable()
 
+
+                jQuery('#planningzoeknaam').on('input', function() {
+                    loadTable2();
                 });
-                $('#kadezoeknaam').change(function () {
-                    loadTable2()
-
+                jQuery('#kadezoeknaam').on('input', function() {
+                    loadTable();
                 });
-                $('#kadezoeknaam').submit(function () {
-                    loadTable2()
-
-                });
-
 
 
                 loadTable();
@@ -289,20 +268,20 @@
             @if(auth()->user()->isChauffeur)
             setInterval(function(){
                 loadChauffeur();
-            }, 1000);
+            }, 10000);
 
             @endif
                 @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
                setInterval(function(){
                 loadTable();
                 loadTable2();
-            }, 1000);
+            }, 10000);
 
             @endif
             @if(auth()->user()->isLogistiek)
                 setInterval(function(){
                 loadLogistiek()
-            }, 1000);
+            }, 10000);
 
         @endif
 
@@ -371,6 +350,39 @@ $('p').on('click', '#btn-afgewerkt', function () {
     loadLogistiek();
 
 });
+        $('tbody').on('click', '.btn-info-nummerplaten', function () {
+
+            // Update the modal
+            let id = $(this).closest('a').data('id');
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: 'home/getnummerplaten', // This is the url we gave in the route
+                data: {'id': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
+                success: function (data) { // What to do if we succeed
+                    var nummerplaten = '';
+                    $.each(data, function (key, value) {
+                        if(key == 0){
+                            nummerplaten += (value.plaatcombinatie);
+                        }else
+                        {
+                            nummerplaten += ("/" + value.plaatcombinatie);
+                        }
+
+                    });
+                    $('#nummerplaat').text(nummerplaten);
+                    $('#model-home-nummerplaten').modal('show');
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
+        });
         $('tbody').on('click', '.btn-info-home', function () {
 
             // Update the modal
@@ -381,40 +393,37 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 success: function(data){ // What to do if we succeed
-                    console.log(data);
                     var startTijd = data.startTijd;
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
-                    var nummerplaat = data.plaatcombinatie;
                     var kade = data.kadenaam;
                     var kadeStatus = data.status;
                     var ladingDetails = data.ladingDetails;
                     var aantal = data.aantal;
                     var vrachtwagenstatus = ""
                     if(data.isAanwezig){
-                        vrachtwagenstatus = "aanwezig";
+                        vrachtwagenstatus = "Aanwezig";
                     }
                     else{
-                        vrachtwagenstatus = "niet-aanwezig";
+                        vrachtwagenstatus = "Niet-aanwezig";
                     }
                     var verwerkingsstatus = ""
                     if(data.isAfgewerkt){
-                        verwerkingsstatus = "afgewerkt";
+                        verwerkingsstatus = "Afgewerkt";
                     }
                     else{
-                        verwerkingsstatus = "niet-afgewerkt";
+                        verwerkingsstatus = "Niet-afgewerkt";
                     }
 
 
                     var proces = data.proces;
                     var voornaam = data.voornaam;
-                    var title = "extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
+                    var title = "Extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
                     $('.modal-title').text(title);
                     $('#startTijd').text(startTijd);
                     $('#stopTijd').text(stopTijd);
                     $('#bedrijf').text(bedrijf);
-                    $('#nummerplaat').text(nummerplaat);
-                    $('#kade').text(kade);
+$('#kade').text(kade);
                     $('#kadeStatus').text(kadeStatus);
                     if (kadeStatus == 'Niet-vrij' && data.isBezig == 0){
                         $('#kadeStatus').addClass('table-warning');
@@ -493,7 +502,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         var startTijd = data.startTijd;
                         var stopTijd = data.stopTijd;
                         var bedrijf = data.bedrijfsnaam;
-                        var nummerplaat = data.plaatcombinatie;
+
                         var kade = data.kadenaam;
                         var kadeStatus = data.status;
                         var ladingDetails = data.ladingDetails;
@@ -513,8 +522,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         $('#startTijd').text(startTijd);
                         $('#stopTijd').text(stopTijd);
                         $('#bedrijf').text(bedrijf);
-                        $('#nummerplaat').text(nummerplaat);
-                        $('#ladingDetails').text(ladingDetails);
+    $('#ladingDetails').text(ladingDetails);
                         $('#aantal').text(aantal);
                         $('#naam').text(naam);
                         $('#proces').text(proces);
@@ -567,7 +575,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         $('#startTijd').text('');
                         $('#stopTijd').text('');
                         $('#bedrijf').text('');
-                        $('#nummerplaat').text('');
                         $('#ladingDetails').text('');
                         $('#aantal').text('');
                         $('#naam').text('');
@@ -615,7 +622,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         $('#startTijd').text('');
                         $('#stopTijd').text('');
                         $('#bedrijf').text('');
-                        $('#nummerplaat').text('');
                         $('#ladingDetails').text('');
                         $('#aantal').text('');
                         $('#naam').text('');
@@ -646,7 +652,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         var startTijd = data.startTijd;
                         var stopTijd = data.stopTijd;
                         var bedrijf = data.bedrijfsnaam;
-                        var nummerplaat = data.plaatcombinatie;
+
                         var kade = data.kadenaam;
                         var kadeStatus = data.status;
                         var ladingDetails = data.ladingDetails;
@@ -665,8 +671,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         $('#startTijd').text(startTijd);
                         $('#stopTijd').text(stopTijd);
                         $('#bedrijf').text(bedrijf);
-                        $('#nummerplaat').text(nummerplaat);
-                        $('#kade').text(kade);
+    $('#kade').text(kade);
                         $('#kadeStatus').text(kadeStatus);
                         if (kadeStatus == 'Niet-vrij' && data.isBezig == 0) {
                             $('#kadeStatus').addClass('table-warning');
@@ -798,7 +803,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 data: {'text': text, _token: '{{csrf_token()}}'},
                 // a JSON object to send back
                 success: function (data) {
-                    console.log(data);
 
                     // Clear tbody tag
                     $('.tableplanning tbody').empty();
@@ -818,10 +822,16 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                </td>
                                <td>${value.kadenaam}</td>
                                <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-                                        data-toggle="tooltip"
+
                                         title="info">
                                             <i class="fas fa-info-circle"></i>
                                         </a>
+                                    <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
+
+                                        title="nummerplaten">
+                                            <i class="fas fa-list-ul"></i>
+                                        </a>
+
                                </td>
 
                            </tr>`;
@@ -837,9 +847,15 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                </td>
                                <td>${value.kadenaam}</td>
                                <td>te laat</td>
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-                                        data-toggle="tooltip"
-                                        title="info">
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
+
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
                                </td>
@@ -859,13 +875,17 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                <td>${value.kadenaam}</td>
                                <td>Vorige planning nog niet afgewerkt</td>
 
-                               <td><a data-id='${value.id}'class="btn btn-outline-info btn-info-home info"
-                                        data-toggle="tooltip"
-                                        title="info">
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
+
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
-
                                         </a>
-
                                </td>
 
                            </tr>`;
@@ -883,9 +903,15 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                <td>${value.kadenaam}</td>
                                <td>afgewerkt</td>
 
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-                                        data-toggle="tooltip"
-                                        title="info">
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
+
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
                                </td>
@@ -905,9 +931,15 @@ $('p').on('click', '#btn-afgewerkt', function () {
                                <td>${value.kadenaam}</td>
                                <td>Bezig</td>
 
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-                                        data-toggle="tooltip"
-                                        title="info">
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
+
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
                                             <i class="fas fa-info-circle"></i>
                                         </a>
                                </td>

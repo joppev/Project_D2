@@ -4,12 +4,21 @@
     <div class="row justify-content-around">
 
     <h1>Kades</h1>
+        <div class="row">
 
-    <p>
-        <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
-        </a>
-    </p>
+            <div class="col-sm-6 mb-2">
+                <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
+                       value="" placeholder="Filter kades">
+            </div>
+<div class="col-sm-6 mb-2">
+            <p>
+                <a href="#!" class="btn btn-outline-success" id="btn-create">
+                    <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
+                </a>
+            </p>
+</div>
+        </div>
+
     </div>
 
     <div class="table-responsive">
@@ -29,11 +38,17 @@
             </tbody>
         </table>
     </div>
+
     @include('admin.kade.model')
 @endsection
 
 @section('script_after')
     <script>
+
+
+        jQuery('#kadezoeknaam').on('input', function() {
+            loadTable();
+        });
 
         $(function () {
             loadTable();
@@ -82,7 +97,6 @@
                 // Update the modal
                 $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/kades/${id}`);
-
                 $('#naam').val(naam);
                 $('#gemeente').val(gemeente);
                 $('#land').val(land);
@@ -122,11 +136,9 @@
                 let action = $(this).attr('action');
                 // Serialize the form and send it as a parameter with the post
                 let pars = $(this).serialize();
-                console.log(pars);
                 // Post the data to the URL
                 $.post(action, pars, 'json')
                     .done(function (data) {
-                        console.log(data);
                         // show success message
                         Project2d.toast({
                             type: data.type,
@@ -164,7 +176,6 @@
             };
             $.post(`/admin/kades/${id}`, pars, 'json')
                 .done(function (data) {
-                    console.log('data', data);
 
                     Project2d.toast({
                         type: data.type,    // optional because the default type is 'success'
@@ -180,16 +191,38 @@
 
 
         function loadTable() {
-            $.getJSON('/admin/qryKades')
-                .done(function (data) {
-                    console.log('data', data);
+            let text = '';
+            if(document.getElementById('kadezoeknaam').value != null || document.getElementById('kadezoeknaam').value != ''){
+
+                text = document.getElementById('kadezoeknaam').value;
+            }
+
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: '/admin/qryKades', // This is the url we gave in the route
+                data: {'text': text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
+
+
                     // Clear tbody tag
                     $('tbody').empty();
-                    // Loop over each item in the array
-                    $.each(data, function (key, value) {
-                        console.log(value)
 
-                        let tr = `<tr>
+                        // Loop over each item in the array
+                        $.each(data, function (key, value) {
+                            var statusid = 0;
+                            if (value.status == "Vrij") {
+                                statusid = 1;
+                            } else if (value.status == "Niet-vrij") {
+                                statusid = 2;
+                            } else {
+                                statusid = 3;
+                            }
+                            let tr = ''
+
+                            if (value.status === "Vrij") {
+                                tr = `<tr class="table-success">
                                <td> ${value.kadenaam} </td>
                                <td>${value.land}</td>
                                <td>${value.gemeente}</td>
@@ -202,7 +235,7 @@
                                    data-adres="${value.adres}"
                                    data-lat="${value.latitude}"
                                     data-lon="${value.longitude}"
-                                    data-status="${value.status}">
+                                    data-status="${statusid}">
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
                                             <i class="fas fa-edit"></i>
@@ -213,14 +246,74 @@
                                     </div>
                                </td>
                            </tr>`;
-                        // Append row to tbody
-                        $('tbody').append(tr);
-                    });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
+                            }
+                            if (value.status === "Niet-vrij") {
+                                tr = `<tr class="table-danger">
+                               <td> ${value.kadenaam} </td>
+                               <td>${value.land}</td>
+                               <td>${value.gemeente}</td>
+                               <td>${value.status}</td>
 
+                               <td data-id="${value.id}"
+                                    data-naam="${value.kadenaam}"
+                                   data-land="${value.land}"
+                                   data-gemeente="${value.gemeente}"
+                                   data-adres="${value.adres}"
+                                   data-lat="${value.latitude}"
+                                    data-lon="${value.longitude}"
+                                    data-status="${statusid}">
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.kadenaam}">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                               </td>
+                           </tr>`;
+                            }
+                            if (value.status === "Buiten gebruik") {
+                                tr = `<tr class="table-warning">
+                               <td> ${value.kadenaam} </td>
+                               <td>${value.land}</td>
+                               <td>${value.gemeente}</td>
+                               <td>${value.status}</td>
+
+                               <td data-id="${value.id}"
+                                    data-naam="${value.kadenaam}"
+                                   data-land="${value.land}"
+                                   data-gemeente="${value.gemeente}"
+                                   data-adres="${value.adres}"
+                                   data-lat="${value.latitude}"
+                                    data-lon="${value.longitude}"
+                                    data-status="${statusid}">
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.kadenaam}">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                               </td>
+                           </tr>`;
+                            }
+
+                            // Append row to tbody
+                            $('tbody').append(tr);
+                        });
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
         }
 
     </script>

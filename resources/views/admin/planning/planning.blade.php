@@ -190,8 +190,7 @@
                                     data-aantal="${value.aantal}"
                                     data-lading="${value.ladingDetails}"
                                     data-proces="${value.proces}"
-
-                                   data-naam="${value.naam}"
+                                    data-naam="${value.naam}"
                                    >
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit">
@@ -228,14 +227,6 @@
                     console.log('data', data);
                     $.each(data, function (key, value) {
                         $('#kade_id').append('<option value="' + value.id + '">' + value.kadenaam + '</option>');
-                    })
-                });
-
-            $.getJSON('/admin/qryPlanningsTijdtabels')
-                .done(function (data) {
-                    console.log('data', data);
-                    $.each(data, function (key, value) {
-                        $('#tijd_id').append('<option value="' + value.id + '">' + value.startTijd + ' tot ' + value.stopTijd + '</option>');
                     })
                 });
 

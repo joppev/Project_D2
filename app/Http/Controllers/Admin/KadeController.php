@@ -40,8 +40,13 @@ class KadeController extends Controller
     {
         {
             $this->validate($request,[
-
-
+                'naam' => 'required|min:3',
+                'land' => 'required|min:3',
+                'gemeente' => 'required|min:3',
+                'adres' => 'required|min:3',
+                'latitude' => 'numeric',
+                'longitude' => 'numeric',
+                'status' => 'digits:1'
             ]);
             $kade = new Kade();
             $kade->kadenaam = $request->naam;
@@ -50,7 +55,15 @@ class KadeController extends Controller
             $kade->adres = $request->adres;
             $kade->latitude = $request->latitude;
             $kade->longitude = $request->longitude;
-            $kade->status = $request->status;
+            $status = $request->status;
+
+            if ($status == "1"){
+                $kade->status = "Vrij";
+            }elseif($status == "2"){
+                $kade->status = "Niet-vrij";
+            }else{
+                $kade->status = "Buiten gebruik";
+            }
 
             $kade->save();
             return response()->json([
@@ -107,7 +120,15 @@ class KadeController extends Controller
         $kade->adres = $request->adres;
         $kade->latitude = $request->latitude;
         $kade->longitude = $request->longitude;
-        $kade->status = $request->status;
+        $status = $request->status;
+
+        if ($status == "1"){
+            $kade->status = "Vrij";
+        }elseif($status == "2"){
+            $kade->status = "Niet-vrij";
+        }else{
+            $kade->status = "Buiten gebruik";
+        }
 
         $kade->save();
         return response()->json([
@@ -132,16 +153,21 @@ class KadeController extends Controller
     }
 
 
-    public function qryKades(){
+    public function qryKades(Request $request){
 
-        $kades = DB::table('kades')
+        $text =  '%'.$request->request->get('text').'%';
 
+        $kades = Kade::orderBy('kadeNaam')
+            ->where(function ($query) use ($text) {
+                $query->where('kadenaam', 'like', $text)
+                    ->orwhere('status', 'like', $text);
+            })
             ->get();
 
 
-        Json::dump($kades);
+
+
 
         return $kades;
-
     }
 }

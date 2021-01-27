@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Bedrijf;
+use App\Kade;
 use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 
@@ -115,9 +116,15 @@ class BedrijfController extends Controller
         ]);
     }
 
-    public function qryBedrijven()
+    public function qryBedrijven(Request $request)
     {
+
+        $text =  '%'.$request->request->get('text').'%';
+
         $bedrijven = Bedrijf::orderBy('bedrijfsnaam')
+            ->where(function ($query) use ($text) {
+                $query->where('bedrijfsnaam', 'like', $text);
+            })
             ->get();
 
         return $bedrijven;

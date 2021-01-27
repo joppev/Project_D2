@@ -3,11 +3,22 @@
 @section('main')
     <div class="row justify-content-around">
         <h1>Bedrijven</h1>
-        <p>
-            <a href="#!" class="btn btn-outline-success" id="btn-create">
-                <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen</a>
-        </p>
+
+        <div class="row">
+
+            <div class="col-sm-6 mb-2">
+                <input type="text" class="form-control" name="bedrijfzoeknaam" id="bedrijfzoeknaam"
+                       value="" placeholder="Filter bedrijven">
+            </div>
+            <div class="col-sm-6 mb-2">
+                <p>
+                    <a href="#!" class="btn btn-outline-success" id="btn-create">
+                        <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen</a>
+                </p>
+            </div>
+        </div>
     </div>
+
 
     <div class="row">
         <div class="table-responsive col-12">
@@ -37,7 +48,9 @@
         @section('script_after')
 
             <script>
-
+                jQuery('#bedrijfzoeknaam').on('input', function() {
+                    loadTable();
+                });
 
           /*     $(document).ready(function () {
                     $('#bedrijventable').DataTable({
@@ -173,11 +186,9 @@
                         let action = $(this).attr('action');
                         // Serialize the form and send it as a parameter with the post
                         let pars = $(this).serialize();
-                        console.log(pars);
                         // Post the data to the URL
                         $.post(action, pars, 'json')
                             .done(function (data) {
-                                console.log(data);
                                 // show success message
                                 Project2d.toast({
                                     type: data.type,
@@ -216,7 +227,6 @@
                     };
                     $.post(`/admin/bedrijven/${id}`, pars, 'json')
                         .done(function (data) {
-                            console.log('data', data);
 
                             Project2d.toast({
                                 type: data.type,    // optional because the default type is 'success'
@@ -232,15 +242,26 @@
 
                 //Laad bedrijven met AJAX
                 function loadTable() {
-                    $.getJSON('/admin/qryBedrijven')
-                        .done(function (data) {
-                            console.log('data', data);
+
+
+                    let text = '';
+                    if(document.getElementById('bedrijfzoeknaam').value != null || document.getElementById('bedrijfzoeknaam').value != ''){
+
+                        text = document.getElementById('bedrijfzoeknaam').value;
+                    }
+
+
+                    $.ajax({
+                        method: 'GET', // Type of response and matches what we said in the route
+                        url: '/admin/qryBedrijven', // This is the url we gave in the route
+                        data: {'text': text, _token: '{{csrf_token()}}'},
+                        // a JSON object to send back
+                        success: function (data) {
                             // Clear tbody tag
                             $('tbody').empty();
 
                             // Loop over each item in the array
                             $.each(data, function (key, value) {
-                                console.log(value)
                                 let tr = `<tr class="">
                                    <td>${value.bedrijfsnaam}</td>
                                    <td>${value.standaardWachtwoord}</td>
@@ -261,10 +282,16 @@
                                 // Append row to tbody
                                 $('tbody').append(tr);
                             });
-                        })
-                        .fail(function (e) {
-                            console.log('error', e);
-                        });
+                        },
+                            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        if ($(this).is(':checked')) {
+                            $(this).prop("checked", false);
+                        } else {
+                            $(this).prop("checked", true);
+                        }
+                    }
+                });
                 }
 
             </script>

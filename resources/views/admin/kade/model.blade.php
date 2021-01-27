@@ -69,12 +69,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Status</label>
-                        <select class="form-control" name="status" id="exampleFormControlSelect1">
+                        <label for="status">Status</label>
+                        <select class="form-control" name="status" id="status">
                             <option value="%">alle Statussen</option>
-                            <option value="Vrij">Vrij</option>
-                            <option value="Niet-vrij">Niet-vrij</option>
-                            <option value="Buiten gebruik">Buiten gebruik</option>
+                            <option value="1">Vrij</option>
+                            <option value="2">Niet-vrij</option>
+                            <option value="3">Buiten gebruik</option>
                         </select>
                     </div>
 

@@ -9,6 +9,7 @@ use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -58,13 +59,14 @@ class UserController extends Controller
 
         $user->naam = $request->naam;
         $user->voornaam = $request->voornaam;
+        $user->volledigeNaam =  $user->voornaam . " " . $user->naam;
         $user->email = $request->email;
         $user->bedrijfsID = (int)$request->bedrijf_id;
         $rol = $request->rol;
 
         foreach( $bedrijven as $bedrijf){
             if($user->bedrijfsID === $bedrijf->id){
-                $user->password = $bedrijf->standaardWachtwoord;
+                $user->password = Hash::make($bedrijf->standaardWachtwoord) ;
             }
 
         }
@@ -141,6 +143,7 @@ class UserController extends Controller
 
         $user->naam = $request->naam;
         $user->voornaam = $request->voornaam;
+        $user->volledigeNaam =  $user->voornaam . " " . $user->naam;
         $user->email = $request->email;
         $user->bedrijfsID = (int)$request->bedrijf_id;
         $rol = $request->rol;

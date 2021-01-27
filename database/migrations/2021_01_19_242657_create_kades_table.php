@@ -55,7 +55,43 @@ class CreateKadesTable extends Migration
                     'latitude' => 50.15,
                     'longitude' => 75.20,
                     'status' => 'Niet-vrij',
-                ]
+                ],
+                [
+                    'kadenaam' => "Kade 4",
+                    'land' => "België",
+                    'gemeente' => "Geel",
+                    'adres' => "Larumseweg 90",
+                    'latitude' => 51.15,
+                    'longitude' => 80.10,
+                    'status' => 'Vrij',
+                ],
+                [
+                    'kadenaam' => "Kade 5",
+                    'land' => "België",
+                    'gemeente' => "Geel",
+                    'adres' => "Larumseweg 90",
+                    'latitude' => 51.15,
+                    'longitude' => 80.10,
+                    'status' => 'Vrij',
+                ],
+                [
+                    'kadenaam' => "Kade 6",
+                    'land' => "België",
+                    'gemeente' => "Geel",
+                    'adres' => "Larumseweg 90",
+                    'latitude' => 51.15,
+                    'longitude' => 80.10,
+                    'status' => 'Vrij',
+                ],
+                [
+                    'kadenaam' => "Kade 7",
+                    'land' => "België",
+                    'gemeente' => "Geel",
+                    'adres' => "Larumseweg 90",
+                    'latitude' => 51.15,
+                    'longitude' => 80.10,
+                    'status' => 'Vrij',
+                ],
           ]);
 
     }
