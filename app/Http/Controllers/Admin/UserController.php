@@ -59,6 +59,7 @@ class UserController extends Controller
 
         $user->naam = $request->naam;
         $user->voornaam = $request->voornaam;
+        $user->volledigeNaam =  $user->voornaam . " " . $user->naam;
         $user->email = $request->email;
         $user->bedrijfsID = (int)$request->bedrijf_id;
         $rol = $request->rol;
@@ -142,6 +143,7 @@ class UserController extends Controller
 
         $user->naam = $request->naam;
         $user->voornaam = $request->voornaam;
+        $user->volledigeNaam =  $user->voornaam . " " . $user->naam;
         $user->email = $request->email;
         $user->bedrijfsID = (int)$request->bedrijf_id;
         $rol = $request->rol;

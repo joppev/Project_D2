@@ -174,9 +174,7 @@ class PlanningController extends Controller
             ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->join('kades', 'plannings.kadeID', '=', 'kades.id')
             ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
-
             ->get();
-
 
         Json::dump($planningen);
 
