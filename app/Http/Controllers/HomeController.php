@@ -295,6 +295,8 @@ class HomeController extends Controller
             $query->where('volledigeNaam', 'like', $text)
                 ->orwhere('kadenaam', 'like', $text)
                 ->orwhere('bedrijfsnaam', 'like', $text)
+                ->orwhere('proces', 'like', $text)
+
             ;
 
         })

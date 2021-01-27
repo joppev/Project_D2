@@ -160,7 +160,8 @@ class KadeController extends Controller
         $kades = Kade::orderBy('kadeNaam')
             ->where(function ($query) use ($text) {
                 $query->where('kadenaam', 'like', $text)
-                    ->orwhere('status', 'like', $text);
+                    ->orwhere('status', 'like', $text)
+                    ->orwhere('gemeente', 'like', $text);
             })
             ->get();
 
