@@ -12,18 +12,23 @@
                     @method('')
                     @csrf
 
+                             <div class="form-group">
+                                 <label for="exampleFormControlSelect1">starten</label>
+                                 <input type="datetime-local" name="starttijd" id="starttijd"
+                                        class="form-control date"
+                                        placeholder="Datum & tijdstip"
+                                        required
+                                        value="">
+                             </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Datum & tijdstip</label>
-                        <input type="text" name="datetimepicker" id="datetimepicker"
-                               class="form-control"
-                               placeholder="Datum & tijdstip"
-                               required
-                               value="">
-                    </div>
-
-
-
+                             <div class="form-group">
+                                 <label for="exampleFormControlSelect1">stop</label>
+                                 <input type="datetime-local" name="stoptijd" id="stoptijd"
+                                        class="form-control date"
+                                        placeholder="Datum & tijdstip"
+                                        required
+                                        value="">
+                             </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Chauffeur</label>
                         <select class="form-control " name="user_id" id="user_id">
@@ -37,6 +42,9 @@
                             <option value="%">alle kades</option>
                         </select>
                     </div>
+
+
+
 
                     <div class="form-group">
                         <label for="proces">Proces</label>
@@ -88,5 +96,10 @@
         </div>
     </div>
 </div>
+<script>
+$('.date').datepicker({
 
+format: 'Y-m-d H:i'
 
+});
+</script>

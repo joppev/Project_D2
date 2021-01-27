@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Planning;
+use Carbon\Carbon;
+use DateTime;
 use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +47,11 @@ class PlanningController extends Controller
         $planning = new Planning();
         $planning->gebruikerID = (int)$request->user_id;
         $planning->kadeID = (int)$request->kade_id;
-        $planning->tijdTabelID = (int)$request->tijd_id;
+     /*   $planning->startTijd = Carbon::createFromTimeString($request->starttijd)->format('d-m-Y');
+        $planning->stopTijd = Carbon::createFromTimeString($request->stoptijd)->format('d-m-Y');*/
+        $planning->startTijd =DateTime::createFromFormat('Y-m-d H:i',$request->starttijd);
+        $planning->stopTijd =DateTime::createFromFormat('Y-m-d H:i',$request->stoptijd);
+
         $planning->proces = $request->proces;
         $planning->ladingDetails = $request->lading;
         $planning->aantal = $request->aantal;
@@ -117,7 +123,9 @@ class PlanningController extends Controller
 
         $planning->gebruikerID = (int)$request->user_id;
         $planning->kadeID = (int)$request->kade_id;
-        $planning->tijdTabelID = (int)$request->tijd_id;
+        $planning->startTijd =DateTime::createFromFormat('Y-m-d H:i',$request->starttijd);
+        $planning->stopTijd =DateTime::createFromFormat('Y-m-d H:i',$request->stoptijd);
+//        $planning->stopTijd =\Carbon\Carbon::parse($request->stoptijd)->format('Y-m-d H:i');
         $planning->proces = $request->proces;
         $planning->ladingDetails = $request->lading;
         $planning->aantal = $request->aantal;
@@ -199,13 +207,4 @@ class PlanningController extends Controller
         Json::dump($kades);
         return $kades;
     }
-    public function qryPlanningsTijdtabels()
-    {
-        $tijdtabels = DB::table('tijd_tabels')
-            ->get();
-
-        Json::dump($tijdtabels);
-        return $tijdtabels;
     }
-
-}
