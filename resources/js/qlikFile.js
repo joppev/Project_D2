@@ -44,7 +44,7 @@ require.config( {
 
 } );
 
-require( ["./require.js"], function ( qlik ) {
+require( [""], function ( qlik ) {
     console.log('qlik', qlik);
     qlik.on( "error", function ( error ) {
         $( '#popupText' ).append( error.message + "<br>" );

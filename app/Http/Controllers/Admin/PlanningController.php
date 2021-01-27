@@ -167,6 +167,7 @@ class PlanningController extends Controller
 
     public function qryPlannings(){
 
+
         $planningen  = DB::table('plannings')
             ->join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')

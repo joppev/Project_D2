@@ -26,10 +26,6 @@
                     <p id="voornaam" name="voornaam" class="col-6"></p>
                 </div>
 
-                <div class="row">
-                    <label class="col-6" for="bedrijf">Nummerplaat: </label>
-                    <p id="nummerplaat" name="nummerplaat" class="col-6"></p>
-                </div>
 
                 <div class="row">
                     <label class="col-6" for="kade">Kade: </label>
