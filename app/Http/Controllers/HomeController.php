@@ -51,7 +51,6 @@ class HomeController extends Controller
     }
     public function kade(Request $request){
         $text =  '%'.$request->request->get('text').'%';
-        $text2 = $request->request->get('text');
 
     $kades = Kade::orderBy('kadeNaam')
         ->where(function ($query) use ($text) {
@@ -59,9 +58,7 @@ class HomeController extends Controller
                 ->orwhere('status', 'like', $text);
         })
         ->get();
-    if ($kades == null){
-        return 'geen element met ' + $text2 + ' bij de kades';
-    }
+
 
 
 

@@ -237,19 +237,14 @@
         }
             @endif
         @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
-                $('#planningnaam').change(function () {
-                    loadTable()
 
+
+                jQuery('#planningzoeknaam').on('input', function() {
+                    loadTable2();
                 });
-                $('#kadezoeknaam').change(function () {
-                    loadTable2()
-
+                jQuery('#kadezoeknaam').on('input', function() {
+                    loadTable();
                 });
-                $('#kadezoeknaam').submit(function () {
-                    loadTable2()
-
-                });
-
 
 
                 loadTable();
@@ -273,20 +268,20 @@
             @if(auth()->user()->isChauffeur)
             setInterval(function(){
                 loadChauffeur();
-            }, 1000);
+            }, 10000);
 
             @endif
                 @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
                setInterval(function(){
                 loadTable();
                 loadTable2();
-            }, 1000);
+            }, 10000);
 
             @endif
             @if(auth()->user()->isLogistiek)
                 setInterval(function(){
                 loadLogistiek()
-            }, 1000);
+            }, 10000);
 
         @endif
 
@@ -365,10 +360,8 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 data: {'id': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 success: function (data) { // What to do if we succeed
-                    console.log(data);
                     var nummerplaten = '';
                     $.each(data, function (key, value) {
-                        console.log(key);
                         if(key == 0){
                             nummerplaten += (value.plaatcombinatie);
                         }else
@@ -400,7 +393,6 @@ $('p').on('click', '#btn-afgewerkt', function () {
                 data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
                 success: function(data){ // What to do if we succeed
-                    console.log(data);
                     var startTijd = data.startTijd;
                     var stopTijd = data.stopTijd;
                     var bedrijf = data.bedrijfsnaam;
@@ -410,23 +402,23 @@ $('p').on('click', '#btn-afgewerkt', function () {
                     var aantal = data.aantal;
                     var vrachtwagenstatus = ""
                     if(data.isAanwezig){
-                        vrachtwagenstatus = "aanwezig";
+                        vrachtwagenstatus = "Aanwezig";
                     }
                     else{
-                        vrachtwagenstatus = "niet-aanwezig";
+                        vrachtwagenstatus = "Niet-aanwezig";
                     }
                     var verwerkingsstatus = ""
                     if(data.isAfgewerkt){
-                        verwerkingsstatus = "afgewerkt";
+                        verwerkingsstatus = "Afgewerkt";
                     }
                     else{
-                        verwerkingsstatus = "niet-afgewerkt";
+                        verwerkingsstatus = "Niet-afgewerkt";
                     }
 
 
                     var proces = data.proces;
                     var voornaam = data.voornaam;
-                    var title = "extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
+                    var title = "Extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
                     $('.modal-title').text(title);
                     $('#startTijd').text(startTijd);
                     $('#stopTijd').text(stopTijd);
@@ -811,7 +803,6 @@ $('#kade').text(kade);
                 data: {'text': text, _token: '{{csrf_token()}}'},
                 // a JSON object to send back
                 success: function (data) {
-                    console.log(data);
 
                     // Clear tbody tag
                     $('.tableplanning tbody').empty();

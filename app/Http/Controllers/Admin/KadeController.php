@@ -153,16 +153,21 @@ class KadeController extends Controller
     }
 
 
-    public function qryKades(){
+    public function qryKades(Request $request){
 
-        $kades = DB::table('kades')
+        $text =  '%'.$request->request->get('text').'%';
 
+        $kades = Kade::orderBy('kadeNaam')
+            ->where(function ($query) use ($text) {
+                $query->where('kadenaam', 'like', $text)
+                    ->orwhere('status', 'like', $text);
+            })
             ->get();
 
 
-        Json::dump($kades);
+
+
 
         return $kades;
-
     }
 }

@@ -118,17 +118,22 @@ class NummerplaatController extends Controller
         ]);
     }
 
-    public function qryNummerplaats(){
+    public function qryNummerplaats(Request $request){
+        $text =  '%'.$request->request->get('text').'%';
 
         $nrp = DB::table('nummerplaats')
             ->join('bedrijfs','nummerplaats.bedrijfID','=',"bedrijfs.id")
             ->select('nummerplaats.*','bedrijfs.bedrijfsnaam')
+            ->where(function ($query) use ($text) {
+                $query->where('plaatcombinatie', 'like', $text)
+                    ->orwhere('bedrijfsnaam', 'like', $text);
+            })
             ->get();
         Json::dump($nrp);
 
         return $nrp;
     }
-    public function qryNummerplaats2()
+    public function qryNummerplaats2(Request $request)
     {
         $bedrijven = DB::table('bedrijfs')
             ->get();

@@ -5,11 +5,21 @@
 
     <h1>Nummerplaten</h1>
 
-    <p>
-        <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Nummerplaat toevoegen
-        </a>
-    </p>
+
+        <div class="row">
+
+            <div class="col-sm-6 mb-2">
+                <input type="text" class="form-control" name="nummerplaatzoeknaam" id="nummerplaatzoeknaam"
+                       value="" placeholder="Filter nummerplaten">
+            </div>
+            <div class="col-sm-6 mb-2">
+                <p>
+                    <a href="#!" class="btn btn-outline-success" id="btn-create">
+                        <i class="fas fa-plus-circle mr-1"></i>Nummerplaat toevoegen
+                    </a>
+                </p>
+            </div>
+        </div>
     </div>
 
     <div class="table-responsive">
@@ -32,6 +42,9 @@
 
 @section('script_after')
     <script>
+        jQuery('#nummerplaatzoeknaam').on('input', function() {
+            loadTable();
+        });
 
         $(function () {
             loadTable();
@@ -72,7 +85,6 @@
                 let id = $(this).closest('td').data('id');
                 let naam = $(this).closest('td').data('plaat');
                 let bedrijf = $(this).closest('td').data('bedrijf');
-                console.log(bedrijf)
                 // Update the modal
                 $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/nummerplaats/${id}`);
@@ -107,11 +119,9 @@
                 let action = $(this).attr('action');
                 // Serialize the form and send it as a parameter with the post
                 let pars = $(this).serialize();
-                console.log(pars);
                 // Post the data to the URL
                 $.post(action, pars, 'json')
                     .done(function (data) {
-                        console.log(data);
                         // show success message
                         Project2d.toast({
                             type: data.type,
@@ -149,7 +159,6 @@
             };
             $.post(`/admin/nummerplaats/${id}`, pars, 'json')
                 .done(function (data) {
-                    console.log('data', data);
 
                     Project2d.toast({
                         type: data.type,    // optional because the default type is 'success'
@@ -165,14 +174,25 @@
 
 
         function loadTable() {
-            $.getJSON('/admin/qryNummerplaats')
-                .done(function (data) {
-                    console.log('data', data);
+
+            let text = '';
+            if(document.getElementById('nummerplaatzoeknaam').value != null || document.getElementById('nummerplaatzoeknaam').value != ''){
+
+                text = document.getElementById('nummerplaatzoeknaam').value;
+            }
+
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: '/admin/qryNummerplaats', // This is the url we gave in the route
+                data: {'text': text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
+
                     // Clear tbody tag
                     $('tbody').empty();
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
-                        console.log(value)
 
                         let tr = `<tr>
                                <td>${value.plaatcombinatie} </td>
@@ -196,16 +216,21 @@
                         // Append row to tbody
                         $('tbody').append(tr);
                     });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
 
         }
         function loadDropdown(){
             $.getJSON('/admin/qryNummerplaats2')
                 .done(function (data) {
-                    console.log('data', data);
                     $.each(data, function (key, value) {
                         $('#bedrijf_id').append('<option value="'+ value.id + '">' + value.bedrijfsnaam + '</option>');
                     })
