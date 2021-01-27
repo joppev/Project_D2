@@ -75,6 +75,9 @@
                 let aantal = $(this).closest('td').data('aantal');
                 let proces = $(this).closest('td').data('proces');
                 let lading = $(this).closest('td').data('lading');
+                let user = $(this).closest('td').data('user');
+                let kade = $(this).closest('td').data('kade');
+                let status = $(this).closest('td').data('status');
 
 
                 // Update the modal
@@ -84,6 +87,10 @@
                 $('#aantal').val(aantal);
                 $('#proces').val(proces);
                 $('#lading').val(lading);
+                $('#user_id').val(user);
+                $('#kade_id').val(kade);
+                $('#status').val(status);
+
 
                 $('input[name="_method"]').val('put');
 
@@ -175,6 +182,17 @@
                         // Loop over each item in the array
                         $.each(data, function (key, value) {
 
+            console.log(value);
+                            var status = "";
+                            if(value.isAanwezig){
+                                status = "1"
+                            } else if(value.isBezig){
+                                status = "2"
+                            } else if(value.isAfgewerkt){
+                                status = "3"
+                            } else {
+                                status = "4"
+                            }
 
                             let tr = `<tr>
 
@@ -187,7 +205,9 @@
                                     data-aantal="${value.aantal}"
                                     data-lading="${value.ladingDetails}"
                                     data-proces="${value.proces}"
-                                    data-naam="${value.naam}"
+                                    data-user="${value.gebruikerID}"
+                                    data-kade="${value.kadeID}"
+                                    data-status="${status}"
                                    >
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit">

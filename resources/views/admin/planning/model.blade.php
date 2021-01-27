@@ -34,24 +34,6 @@
                         <div class="invalid-feedback"></div>
                     </div>
 
-
-                          {{-- <div class="form-group">
-                                 <label for="exampleFormControlSelect1">starten</label>
-                                 <input type="text" name="starttijd" id="starttijd"
-                                        class="form-control date"
-                                        placeholder="Datum & tijdstip"
-                                        required
-                                        value="">
-                             </div>
-
-                             <div class="form-group">
-                                 <label for="exampleFormControlSelect1">stop</label>
-                                 <input type="text" name="stoptijd" id="stoptijd"
-                                        class="form-control date"
-                                        placeholder="Datum & tijdstip"
-                                        required
-                                        value="">
-                             </div>--}}
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Chauffeur</label>
                         <select class="form-control " name="user_id" id="user_id">
@@ -100,8 +82,8 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Status</label>
-                        <select class="form-control" name="status" id="exampleFormControlSelect1">
-{{--                            <option value="%">alle statusen</option>--}}
+                        <select class="form-control" required name="status" id="status">
+                            <option value="%">alle statusen</option>
                             <option value="1">Afgewerkt</option>
                             <option value="2">Bezig</option>
                             <option value="3">Aanwezig</option>

@@ -41,17 +41,20 @@ class PlanningController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
+            'startdate' => 'required',
+            'starttime' => 'required',
+            'stopdate' => 'required',
+            'stoptime' => 'required',
             'user_id' => 'digits:1',
             'kade_id' => 'digits:1',
             'proces' => 'required|min:3|max:255',
             'aantal' => 'required|numeric',
+            'lading' => 'required|min:3|max:255',
+            'status' => 'digits:1',
         ]);
         $planning = new Planning();
         $planning->gebruikerID = (int)$request->user_id;
         $planning->kadeID = (int)$request->kade_id;
-
-
-
 
         /*$planning->startTijd = Carbon::createFromTimeString($request->starttijd)->format('d-m-Y');
         $planning->stopTijd = Carbon::createFromTimeString($request->stoptijd)->format('d-m-Y');*/
@@ -139,8 +142,16 @@ class PlanningController extends Controller
     {
 
         $this->validate($request,[
-
-
+            'startdate' => 'required',
+            'starttime' => 'required',
+            'stopdate' => 'required',
+            'stoptime' => 'required',
+            'user_id' => 'digits:1',
+            'kade_id' => 'digits:1',
+            'proces' => 'required|min:3|max:255',
+            'aantal' => 'required|numeric',
+            'lading' => 'required|min:3|max:255',
+            'status' => 'digits:1',
         ]);
 
         $planning->gebruikerID = (int)$request->user_id;
