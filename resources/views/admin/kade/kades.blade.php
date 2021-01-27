@@ -4,12 +4,21 @@
     <div class="row justify-content-around">
 
     <h1>Kades</h1>
+        <div class="row">
 
-    <p>
-        <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
-        </a>
-    </p>
+            <div class="col-sm-6 mb-2">
+                <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
+                       value="" placeholder="Filter kades">
+            </div>
+<div class="col-sm-6 mb-2">
+            <p>
+                <a href="#!" class="btn btn-outline-success" id="btn-create">
+                    <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
+                </a>
+            </p>
+</div>
+        </div>
+
     </div>
 
     <div class="table-responsive">
@@ -34,6 +43,11 @@
 
 @section('script_after')
     <script>
+
+
+        jQuery('#kadezoeknaam').on('input', function() {
+            loadTable();
+        });
 
         $(function () {
             loadTable();
@@ -180,8 +194,21 @@
 
 
         function loadTable() {
-            $.getJSON('/admin/qryKades')
-                .done(function (data) {
+            let text = '';
+            if(document.getElementById('kadezoeknaam').value != null || document.getElementById('kadezoeknaam').value != ''){
+
+                text = document.getElementById('kadezoeknaam').value;
+            }
+
+
+            $.ajax({
+                method: 'GET', // Type of response and matches what we said in the route
+                url: '/admin/qryKades', // This is the url we gave in the route
+                data: {'text': text, _token: '{{csrf_token()}}'},
+                // a JSON object to send back
+                success: function (data) {
+
+
                     console.log('data', data);
                     // Clear tbody tag
                     $('tbody').empty();
@@ -189,9 +216,9 @@
                     $.each(data, function (key, value) {
                         console.log(value)
                         var statusid = 0;
-                        if(value.status == "Vrij"){
+                        if (value.status == "Vrij") {
                             statusid = 1;
-                        }else if(value.status == "Niet-vrij"){
+                        } else if (value.status == "Niet-vrij") {
                             statusid = 2;
                         } else {
                             statusid = 3;
@@ -224,11 +251,16 @@
                         // Append row to tbody
                         $('tbody').append(tr);
                     });
-                })
-                .fail(function (e) {
-                    console.log('error', e);
-                })
-
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    if ($(this).is(':checked')) {
+                        $(this).prop("checked", false);
+                    } else {
+                        $(this).prop("checked", true);
+                    }
+                }
+            });
         }
 
     </script>
