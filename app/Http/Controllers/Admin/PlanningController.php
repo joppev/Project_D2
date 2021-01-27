@@ -57,7 +57,6 @@ class PlanningController extends Controller
         $startdate = DateTime::createFromFormat('Y-m-d',$request->startdate);
 
         $stoptime = DateTime::createFromFormat('H:i',$request->stoptime);
-        $stopdate = DateTime::createFromFormat('Y-m-d',$request->stopdate);
 
 
 //        $planning->startTijd =DateTime::createFromFormat('Y-m-d H:i',$request->starttime);
@@ -66,8 +65,13 @@ class PlanningController extends Controller
         $planning->ladingDetails = $request->lading;
         $planning->aantal = $request->aantal;
 
-        $planning->startTijd = $startdate."".$starttime;
-        $planning->stopTijd = $stopdate."".$stoptime;
+
+
+
+        $planning->startTijd = date('Y-m-d H:i:s', $startdate.' '.$starttime);
+        $planning->stopTijd = date('Y-m-d H:i:s', $startdate.' '.$stoptime);
+
+
 
 
         $status = $request->status;

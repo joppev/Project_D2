@@ -113,7 +113,6 @@
                 let action = $(this).attr('action');
                 // Serialize the form and send it as a parameter with the post
                 let pars = $(this).serialize();
-                console.log(pars);
                 // Post the data to the URL
                 $.post(action, pars, 'json')
                     .done(function (data) {
@@ -155,7 +154,6 @@
                 };
                 $.post(`/admin/plannings/${id}`, pars, 'json')
                     .done(function (data) {
-                        console.log('data', data);
 
                         Project2d.toast({
                             type: data.type,    // optional because the default type is 'success'
@@ -172,12 +170,11 @@
             function loadTable() {
                 $.getJSON('/admin/qryPlannings')
                     .done(function (data) {
-                        console.log('data', data);
                         // Clear tbody tag
                         $('tbody').empty();
                         // Loop over each item in the array
                         $.each(data, function (key, value) {
-                            console.log(value)
+
 
                             let tr = `<tr>
 
@@ -216,7 +213,6 @@
         function loadDropdown() {
             $.getJSON('/admin/qryPlanningsUsers')
                 .done(function (data) {
-                    console.log('data', data);
                     $.each(data, function (key, value) {
                         $('#user_id').append('<option value="' + value.id + '">' + value.voornaam + ' ' + value.naam + '</option>');
                     })
@@ -224,7 +220,6 @@
 
             $.getJSON('/admin/qryPlanningsKades')
                 .done(function (data) {
-                    console.log('data', data);
                     $.each(data, function (key, value) {
                         $('#kade_id').append('<option value="' + value.id + '">' + value.kadenaam + '</option>');
                     })

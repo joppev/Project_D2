@@ -12,23 +12,19 @@
                     @method('')
                     @csrf
                     <div class="form-group">
-                        <label for="date">Startdatum: </label>
-                        <input type="date" id="startdate" name="date">
+                        <label for="startdate">Startdatum: </label>
+                        <input type="date" id="startdate" name="startdate">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group">
-                        <label for="time">Starttijdstip: </label>
-                        <input type="time" id="starttime" name="time">
+                        <label for="starttime">Starttijdstip: </label>
+                        <input type="time" id="starttime" name="starttime">
                         <div class="invalid-feedback"></div>
                     </div>
+
                     <div class="form-group">
-                        <label for="date">Einddatum: </label>
-                        <input type="date" id="stopdate" name="date">
-                        <div class="invalid-feedback"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Eindtijdstip: </label>
-                        <input type="time" id="stoptime" name="time">
+                        <label for="stoptime">Eindtijdstip: </label>
+                        <input type="time" id="stoptime" name="stoptime">
                         <div class="invalid-feedback"></div>
                     </div>
 
