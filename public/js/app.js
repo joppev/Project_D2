@@ -40592,6 +40592,135 @@ var Project2d = function () {
 
 /***/ }),
 
+/***/ "./resources/js/qlikFile.js":
+/*!**********************************!*\
+  !*** ./resources/js/qlikFile.js ***!
+  \**********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+connect();
+
+function connect() {
+  return _connect.apply(this, arguments);
+}
+
+function _connect() {
+  _connect = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    var urlQlikServer, urlLoggedIn, urlLogin, webIntegrationId;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            urlQlikServer = "https://r0743641.eu.qlikcloud.com/";
+            urlLoggedIn = "api/v1/audits"; //Use GET request to see if you are authenticated
+
+            urlLogin = "login";
+            webIntegrationId = 'Fyml_Ta_M3TY9YBzn0n2TCNaeykh5SK5'; //Check to see if logged in
+
+            _context2.next = 6;
+            return fetch("".concat(urlQlikServer).concat(urlLoggedIn), {
+              credentials: 'include',
+              headers: {
+                'Qlik-Web-Integration-ID': webIntegrationId
+              }
+            }).then( /*#__PURE__*/function () {
+              var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(response) {
+                var url;
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        //check if user is authenticated; if not, redirect to login page
+                        if (response.status === 401) {
+                          url = new URL("".concat(urlQlikServer, "login"));
+                          url.searchParams.append('returnto', 'http://localhost:3000/');
+                          url.searchParams.append('qlik-web-integration-id', webIntegrationId);
+                          window.location.href = url;
+                        }
+
+                      case 1:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee);
+              }));
+
+              return function (_x) {
+                return _ref.apply(this, arguments);
+              };
+            }())["catch"](function (error) {
+              console.error(error);
+            });
+
+          case 6:
+            return _context2.abrupt("return", _context2.sent);
+
+          case 7:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _connect.apply(this, arguments);
+}
+
+var config1 = {
+  host: "r0743641.eu.qlikcloud.com",
+  //the address of your Qlik Engine Instance
+  prefix: "/",
+  //or the virtual proxy to be used. for example "/anonymous/"
+  port: 443,
+  //or the port to be used if different from the default port
+  isSecure: false,
+  //should be true if connecting over HTTPS
+  webIntegrationId: 'Fyml_Ta_M3TY9YBzn0n2TCNaeykh5SK5' //only needed in SaaS editions and QSEoK
+
+};
+
+undefined;
+
+__webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./require.js */ "./resources/js/require.js")]; (function (qlik) {
+  console.log('qlik', qlik);
+  qlik.on("error", function (error) {
+    $('#popupText').append(error.message + "<br>");
+    $('#popup').fadeIn(1000);
+  });
+  $("#closePopup").click(function () {
+    $('#popup').hide();
+  }); //opend corona app
+
+  var app = qlik.openApp("8a89b99d-1827-43ca-9b85-adb4ce8cd5d5", config1); //tekst rijsadvies op basis van aantal nieuwe besmettingen
+
+  app.getObject('QV01', 'qdrKKC');
+  $("#clearAll").click(function () {
+    app.clearAll(true);
+  }); //geeft een lijst weer met alle qlik themas die je hebt
+  //qlik.getThemeList().then(function(list){ var str = ""; list.forEach(function(value) { str += value.name + '(' + value.id + ")\n"; }); alert(str); });
+  //applyd het genoemde thema en past het toe op de webpagina
+
+  qlik.theme.apply('project4.0').then(function (result) {//alert('theme applied with result: ' + result);
+  }); //laat zien welk thema er op de html pagina gebruikt word
+
+  /*   app.theme.getApplied().then(function(qtheme){
+     alert('Current theme background color: ' + qtheme.id);
+       });*/
+}).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}).catch(__webpack_require__.oe);
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -40610,8 +40739,8 @@ var Project2d = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\sites_laravel\Project2D\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\sites_laravel\Project2D\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\sites_laravel\project2D\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\sites_laravel\project2D\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

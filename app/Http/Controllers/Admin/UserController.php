@@ -9,6 +9,7 @@ use Facades\App\Helpers\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -64,7 +65,7 @@ class UserController extends Controller
 
         foreach( $bedrijven as $bedrijf){
             if($user->bedrijfsID === $bedrijf->id){
-                $user->password = $bedrijf->standaardWachtwoord;
+                $user->password = Hash::make($bedrijf->standaardWachtwoord) ;
             }
 
         }

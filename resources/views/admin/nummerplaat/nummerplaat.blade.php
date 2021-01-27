@@ -71,12 +71,14 @@
                 // Get data attributes from td tag
                 let id = $(this).closest('td').data('id');
                 let naam = $(this).closest('td').data('plaat');
-
+                let bedrijf = $(this).closest('td').data('bedrijf');
+                console.log(bedrijf)
                 // Update the modal
                 $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/nummerplaats/${id}`);
 
                 $('#naam').val(naam);
+                $('#bedrijf_id').val(bedrijf);
 
                 $('input[name="_method"]').val('put');
 
@@ -179,7 +181,7 @@
 
                                <td data-id="${value.id}"
                                     data-plaat="${value.plaatcombinatie}"
-
+                                    data-bedrijf="${value.bedrijfID}"
                                    >
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.plaatcombinatie}">

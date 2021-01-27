@@ -167,12 +167,14 @@ class PlanningController extends Controller
 
     public function qryPlannings(){
 
-        $planningen = Planning::orderBy('id')
-            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
-            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->Join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
-            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+
+        $planningen  = DB::table('plannings')
+            ->join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+            ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+            ->join('kades', 'plannings.kadeID', '=', 'kades.id')
+            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+
             ->get();
 
 
@@ -199,13 +201,6 @@ class PlanningController extends Controller
         Json::dump($kades);
         return $kades;
     }
-    public function qryPlanningsTijdtabels()
-    {
-        $tijdtabels = DB::table('tijd_tabels')
-            ->get();
 
-        Json::dump($tijdtabels);
-        return $tijdtabels;
-    }
 
 }

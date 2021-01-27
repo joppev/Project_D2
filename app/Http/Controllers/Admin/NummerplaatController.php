@@ -39,7 +39,8 @@ class NummerplaatController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-
+            'naam' => 'required|min:3',
+            'bedrijf_id' => 'digits:1',
 
         ]);
 
@@ -87,7 +88,8 @@ class NummerplaatController extends Controller
     {
 
         $this->validate($request,[
-
+            'naam' => 'required|min:3',
+            'bedrijf_id' => 'digits:1',
 
         ]);
 

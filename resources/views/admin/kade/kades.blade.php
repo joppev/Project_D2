@@ -82,7 +82,7 @@
                 // Update the modal
                 $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/kades/${id}`);
-
+                console.log(status)
                 $('#naam').val(naam);
                 $('#gemeente').val(gemeente);
                 $('#land').val(land);
@@ -188,6 +188,14 @@
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
                         console.log(value)
+                        var statusid = 0;
+                        if(value.status == "Vrij"){
+                            statusid = 1;
+                        }else if(value.status == "Niet-vrij"){
+                            statusid = 2;
+                        } else {
+                            statusid = 3;
+                        }
 
                         let tr = `<tr>
                                <td> ${value.kadenaam} </td>
@@ -202,7 +210,7 @@
                                    data-adres="${value.adres}"
                                    data-lat="${value.latitude}"
                                     data-lon="${value.longitude}"
-                                    data-status="${value.status}">
+                                    data-status="${statusid}">
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
                                             <i class="fas fa-edit"></i>
