@@ -11,47 +11,41 @@
                 <form action="" method="post">
                     @method('')
                     @csrf
-                    <div class="form-group">
-                        <label for="startdate">Startdatum: </label>
-                        <input type="date" id="startdate" name="startdate">
-                        <div class="invalid-feedback"></div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="startdate">Startdatum: </label>
+                                <input class="form-control" type="date" id="startdate" name="startdate">
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="starttime">Starttijdstip: </label>
+                                <input  class="form-control" type="time" id="starttime" name="starttime">
+
+                            </div>
+
+                        </div>
+
                     </div>
-                    <div class="form-group">
-                        <label for="starttime">Starttijdstip: </label>
-                        <input type="time" id="starttime" name="starttime">
-                        <div class="invalid-feedback"></div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="stopdate">Stopdatum: </label>
+                                <input  class="form-control" type="date" id="stopdate" name="stopdate">
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="stoptime">Eindtijdstip: </label>
+                                <input  class="form-control" type="time" id="stoptime" name="stoptime">
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="stopdate">Stopdatum: </label>
-                        <input type="date" id="stopdate" name="stopdate">
-                        <div class="invalid-feedback"></div>
-                    </div>
 
-
-                    <div class="form-group">
-                        <label for="stoptime">Eindtijdstip: </label>
-                        <input type="time" id="stoptime" name="stoptime">
-                        <div class="invalid-feedback"></div>
-                    </div>
-
-
-                          {{-- <div class="form-group">
-                                 <label for="exampleFormControlSelect1">starten</label>
-                                 <input type="text" name="starttijd" id="starttijd"
-                                        class="form-control date"
-                                        placeholder="Datum & tijdstip"
-                                        required
-                                        value="">
-                             </div>
-
-                             <div class="form-group">
-                                 <label for="exampleFormControlSelect1">stop</label>
-                                 <input type="text" name="stoptijd" id="stoptijd"
-                                        class="form-control date"
-                                        placeholder="Datum & tijdstip"
-                                        required
-                                        value="">
-                             </div>--}}
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Chauffeur</label>
                         <select class="form-control " name="user_id" id="user_id">
@@ -100,8 +94,8 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Status</label>
-                        <select class="form-control" name="status" id="exampleFormControlSelect1">
-{{--                            <option value="%">alle statusen</option>--}}
+                        <select class="form-control" required name="status" id="status">
+                            <option value="%">alle statusen</option>
                             <option value="1">Afgewerkt</option>
                             <option value="2">Bezig</option>
                             <option value="3">Aanwezig</option>
