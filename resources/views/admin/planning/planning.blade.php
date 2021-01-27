@@ -4,12 +4,28 @@
     <div class="row justify-content-around">
 
         <h1>Planningen</h1>
+        <a href="#!" class="btn btn-info clear">clear filters</a>
+        <div class="row">
+            <div class="col-sm-4 mb-2">
+                <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
+                       value="" placeholder="Filter planning">
+            </div>
 
-        <p>
-            <a href="#!" class="btn btn-outline-success" id="btn-create">
-                <i class="fas fa-plus-circle mr-1"></i>Planning toevoegen
-            </a>
-        </p>
+            <div class="col-sm-4 mb-2">
+
+                <input type="date" id="date" name="date">
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="col-sm-4 mb-2">
+                <p>
+                    <a href="#!" class="btn btn-outline-success" id="btn-create">
+                        <i class="fas fa-plus-circle mr-1"></i>Planning toevoegen
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
     </div>
 
     <div class="row">
@@ -36,7 +52,16 @@
 
 @section('script_after')
     <script>
+
+
+
         $(function () {
+            jQuery('#planningzoeknaam').on('input', function() {
+                loadTable();
+            });
+            jQuery('#date').on('input', function() {
+                loadTable();
+            });
             loadTable();
             loadDropdown();
 
@@ -175,8 +200,25 @@
             }
 
             function loadTable() {
-                $.getJSON('/admin/qryPlannings')
-                    .done(function (data) {
+                let text = '';
+                if(document.getElementById('planningzoeknaam').value != null || document.getElementById('planningzoeknaam').value != ''){
+
+                    text = document.getElementById('planningzoeknaam').value;
+                }
+                let text2 = '';
+                if(document.getElementById('date').value != null || document.getElementById('date').value != ''){
+
+                    text2 = document.getElementById('date').value;
+                    console.log(text2)
+                }
+
+                $.ajax({
+                    method: 'GET', // Type of response and matches what we said in the route
+                    url: '/admin/qryPlannings', // This is the url we gave in the route
+                    data: {'text': text,'text2': text2, _token: '{{csrf_token()}}'},
+                    // a JSON object to send back
+                    success: function (data) {
+                        console.log(data)
                         // Clear tbody tag
                         $('tbody').empty();
                         // Loop over each item in the array
@@ -222,10 +264,16 @@
                             // Append row to tbody
                             $('tbody').append(tr);
                         });
-                    })
-                    .fail(function (e) {
-                        console.log('error', e);
-                    })
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        if ($(this).is(':checked')) {
+                            $(this).prop("checked", false);
+                        } else {
+                            $(this).prop("checked", true);
+                        }
+                    }
+                });
 
             }
         });

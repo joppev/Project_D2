@@ -156,8 +156,18 @@ class PlanningController extends Controller
 
         $planning->gebruikerID = (int)$request->user_id;
         $planning->kadeID = (int)$request->kade_id;
-        $planning->startTijd =DateTime::createFromFormat('Y-m-d H:i',$request->starttijd);
-        $planning->stopTijd =DateTime::createFromFormat('Y-m-d H:i',$request->stoptijd);
+
+
+        $time = date('H:i:s', strtotime($request->starttime));
+        $begin = $request->startdate." ".$time;
+
+        $time2 = date('H:i:s', strtotime($request->stoptime));
+        $stop = $request->stopdate." ".$time2;
+
+        $planning->startTijd = $begin;
+        $planning->stopTijd = $stop;
+
+
 //        $planning->stopTijd =\Carbon\Carbon::parse($request->stoptijd)->format('Y-m-d H:i');
         $planning->proces = $request->proces;
         $planning->ladingDetails = $request->lading;
@@ -206,16 +216,44 @@ class PlanningController extends Controller
         ]);
     }
 
-    public function qryPlannings(){
+    public function qryPlannings(Request $request){
+        $text =  '%'.$request->request->get('text').'%';
+        $date = $request->request->get('text2').'%';
+        if($date != ''){
+            $planningen  = DB::table('plannings')
+                ->join('users', 'plannings.gebruikerID', '=', 'users.id')
+                ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+                ->join('kades', 'plannings.kadeID', '=', 'kades.id')
+                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+                ->where(function ($query) use ($text) {
+                    $query->where('bedrijfsnaam', 'like', $text)
+                        ->orwhere('volledigeNaam', 'like', $text)
+                        ->orwhere('kadenaam', 'like', $text)
+                        ->orwhere('proces', 'like', $text);
 
+                })
+                ->where('startTijd','like',$date)
+                ->get();
 
-        $planningen  = DB::table('plannings')
-            ->join('users', 'plannings.gebruikerID', '=', 'users.id')
-            ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-            ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
-            ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
-            ->get();
+        }
+        else{
+            $planningen  = DB::table('plannings')
+                ->join('users', 'plannings.gebruikerID', '=', 'users.id')
+                ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+                ->join('kades', 'plannings.kadeID', '=', 'kades.id')
+                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+                ->where(function ($query) use ($text) {
+                    $query->where('bedrijfsnaam', 'like', $text)
+                        ->orwhere('volledigeNaam', 'like', $text)
+                        ->orwhere('kadenaam', 'like', $text)
+                        ->orwhere('proces', 'like', $text);
+
+                })
+                ->get();
+
+        }
 
         Json::dump($planningen);
 
@@ -225,6 +263,7 @@ class PlanningController extends Controller
 
     public function qryPlanningsUsers()
     {
+
         $users = DB::table('users')
             ->where('isChauffeur','=',true)
             ->get();
