@@ -168,12 +168,11 @@ class PlanningController extends Controller
     public function qryPlannings(){
 
         $planningen  = DB::table('plannings')
-            ->join('tijd_tabels', 'plannings.tijdTabelID', '=', 'tijd_tabels.id')
             ->join('users', 'plannings.gebruikerID', '=', 'users.id')
-            ->join('bedrijfs', 'users.bedrijfs_id', '=', 'bedrijfs.id')
+            ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
             ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
             ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.kadenaam as kadenaam','tijd_tabels.startTijd as startTijd','tijd_tabels.stopTijd as stopTijd','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+            ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
 
             ->get();
 
@@ -201,13 +200,6 @@ class PlanningController extends Controller
         Json::dump($kades);
         return $kades;
     }
-    public function qryPlanningsTijdtabels()
-    {
-        $tijdtabels = DB::table('tijd_tabels')
-            ->get();
 
-        Json::dump($tijdtabels);
-        return $tijdtabels;
-    }
 
 }
