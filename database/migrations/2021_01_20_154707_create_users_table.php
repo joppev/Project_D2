@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->boolean('isChauffeur');
             $table->boolean('isReceptionist');
             $table->boolean('isLogistiek');
+
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('bedrijfsID')->references('id')->on('bedrijfs')->onDelete('cascade')->onUpdate('cascade');
