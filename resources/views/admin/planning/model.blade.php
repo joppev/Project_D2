@@ -21,6 +21,12 @@
                         <input type="time" id="starttime" name="starttime">
                         <div class="invalid-feedback"></div>
                     </div>
+                    <div class="form-group">
+                        <label for="stopdate">Stopdatum: </label>
+                        <input type="date" id="stopdate" name="stopdate">
+                        <div class="invalid-feedback"></div>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="stoptime">Eindtijdstip: </label>

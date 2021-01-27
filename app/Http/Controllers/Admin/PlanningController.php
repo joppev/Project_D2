@@ -51,20 +51,29 @@ class PlanningController extends Controller
         $planning->kadeID = (int)$request->kade_id;
 
 
-        $starttime = DateTime::createFromFormat('H:i',$request->starttime);
+
+
+        /*$planning->startTijd = Carbon::createFromTimeString($request->starttijd)->format('d-m-Y');
+        $planning->stopTijd = Carbon::createFromTimeString($request->stoptijd)->format('d-m-Y');*/
+        /*$starttime = DateTime::createFromFormat('H:i',$request->starttime);
+
         $startdate = DateTime::createFromFormat('Y-m-d',$request->startdate);
 
-        $stoptime = DateTime::createFromFormat('H:i',$request->stoptime);
+        $stoptime = DateTime::createFromFormat('H:i',$request->stoptime);*/
 
         $planning->proces = $request->proces;
         $planning->ladingDetails = $request->lading;
         $planning->aantal = $request->aantal;
 
 
+        $time = date('H:i:s', strtotime($request->starttime));
+        $begin = $request->startdate." ".$time;
 
+        $time2 = date('H:i:s', strtotime($request->stoptime));
+        $stop = $request->stopdate." ".$time2;
 
-        $planning->startTijd = date('Y-m-d H:i:s', $startdate.' '.$starttime);
-        $planning->stopTijd = date('Y-m-d H:i:s', $startdate.' '.$stoptime);
+        $planning->startTijd = $begin;
+        $planning->stopTijd = $stop;
 
 
 
