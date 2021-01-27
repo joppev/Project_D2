@@ -41,26 +41,26 @@ class PlanningController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-
-            ]);
+            'user_id' => 'digits:1',
+            'kade_id' => 'digits:1',
+            'proces' => 'required|min:3|max:255',
+            'aantal' => 'required|numeric',
+        ]);
         $planning = new Planning();
         $planning->gebruikerID = (int)$request->user_id;
         $planning->kadeID = (int)$request->kade_id;
 
-//        $time = date('H:i:s', strtotime($request->starttime));
-//        $dateTime = $request->date." ".$time;
+
 
 
         /*$planning->startTijd = Carbon::createFromTimeString($request->starttijd)->format('d-m-Y');
         $planning->stopTijd = Carbon::createFromTimeString($request->stoptijd)->format('d-m-Y');*/
         /*$starttime = DateTime::createFromFormat('H:i',$request->starttime);
+
         $startdate = DateTime::createFromFormat('Y-m-d',$request->startdate);
 
         $stoptime = DateTime::createFromFormat('H:i',$request->stoptime);*/
 
-
-//        $planning->startTijd =DateTime::createFromFormat('Y-m-d H:i',$request->starttime);
-//        $planning->stopTijd =DateTime::createFromFormat('Y-m-d H:i',$request->stoptijd);
         $planning->proces = $request->proces;
         $planning->ladingDetails = $request->lading;
         $planning->aantal = $request->aantal;
