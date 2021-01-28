@@ -15,14 +15,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="startdate">Startdatum: </label>
-                                <input class="form-control" type="date" id="startdate" name="startdate">
+                                <input class="form-control" type="date" id="startdate" name="startdatum">
 
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="starttime">Starttijdstip: </label>
-                                <input  class="form-control" type="time" id="starttime" name="starttime">
+                                <input  class="form-control" type="time" id="starttime" name="starttijd">
 
                             </div>
 
@@ -33,14 +33,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stopdate">Stopdatum: </label>
-                                <input  class="form-control" type="date" id="stopdate" name="stopdate">
+                                <input  class="form-control" type="date" id="stopdate" name="stopdatum">
 
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stoptime">Eindtijdstip: </label>
-                                <input  class="form-control" type="time" id="stoptime" name="stoptime">
+                                <input  class="form-control" type="time" id="stoptime" name="stoptijd">
 
                             </div>
                         </div>
@@ -75,7 +75,7 @@
 
                     <div class="form-group">
                         <label for="lading">Lading details</label>
-                        <input type="text" name="lading" id="lading"
+                        <input type="text" name="ladingdetails" id="lading"
                                class="form-control"
                                placeholder="Lading details"
                                minlength="3"

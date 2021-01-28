@@ -58,8 +58,8 @@ return [
     'in'                   => ':Attribute is ongeldig.',
     'in_array'             => ':Attribute bestaat niet in :other.',
     'integer'              => ':Attribute moet een getal zijn.',
-    'ip'                   => ':Je kan een kade niet dubbel boeken.',
-    'ipv4'                 => ':Attribute moet een geldig IPv4-adres zijn.',
+    'ip'                   => 'Je kan een kade niet dubbel boeken.',
+    'ipv4'                 => 'Deze kade is buiten gebruik.',
     'ipv6'                 => ':Attribute moet een geldig IPv6-adres zijn.',
     'json'                 => ':Attribute moet een geldige JSON-string zijn.',
     'lt'                   => [

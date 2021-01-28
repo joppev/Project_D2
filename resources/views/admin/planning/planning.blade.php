@@ -90,7 +90,7 @@
                 // Set some values for Noty
                 let text = `<p>Wil je deze planning verwijderen?</p>`;
                 let type = 'warning';
-                let btnText = 'Verwijder gebruiker';
+                let btnText = 'Verwijder planning';
                 let btnClass = 'btn-success';
 
 

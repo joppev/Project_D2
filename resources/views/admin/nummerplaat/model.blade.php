@@ -14,7 +14,7 @@
 
                     <div class="form-group">
                         <label for="naam">Plaatcombinatie</label>
-                        <input type="text" name="naam" id="naam"
+                        <input type="text" name="plaatcombinatie" id="naam"
                                class="form-control"
                                placeholder="Plaatcombinatie"
                                minlength="3"

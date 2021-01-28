@@ -227,6 +227,7 @@
 
                         // Loop over each item in the array
                         $.each(data, function (key, value) {
+                            console.log(value);
                             var statusid = 0;
                             if (value.status == "Vrij") {
                                 statusid = 1;
