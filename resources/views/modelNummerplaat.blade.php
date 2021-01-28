@@ -2,7 +2,7 @@
     <div class="modal-dialog-centered modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">modal-help-title</h5>
+                <h5 class="modal-title">Nummerplaten</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
