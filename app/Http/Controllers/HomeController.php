@@ -109,7 +109,7 @@ class HomeController extends Controller
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
 
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID', 'kades.gemeente as gemeente','kades.adres as adres','kades.land as land')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('gebruikerID',$user->id)
