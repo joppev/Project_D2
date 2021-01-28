@@ -313,7 +313,7 @@ class PlanningController extends Controller
             $planningen  = DB::table('plannings')
                 ->join('users', 'plannings.gebruikerID', '=', 'users.id')
                 ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-                ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
                 ->join('kades', 'plannings.kadeID', '=', 'kades.id')
                 ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
                 ->where(function ($query) use ($text) {
@@ -331,7 +331,7 @@ class PlanningController extends Controller
             $planningen  = DB::table('plannings')
                 ->join('users', 'plannings.gebruikerID', '=', 'users.id')
                 ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-                ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
+
                 ->join('kades', 'plannings.kadeID', '=', 'kades.id')
                 ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
                 ->where(function ($query) use ($text) {
