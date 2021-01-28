@@ -84,7 +84,7 @@ class PlanningController extends Controller
         foreach($planningen as $p){
             if($p->kadeID == $planning->kadeID){
 
-                if($p->startTijd >= $planning->startTijd && $p->startTijd < $planning->stopTijd){
+                if($planning->startTijd < $p->startTijd  && $planning->stopTijd > $p->startTijd ){
                     $fout = true;
 
                 }else if($planning->startTijd < $p->stopTijd && $planning->stopTijd > $p->stopTijd){
@@ -93,7 +93,10 @@ class PlanningController extends Controller
                     $fout = true;
                 }  else if ($planning->startTijd < $p->startTijd && $planning->stopTijd > $p->stopTijd){
                     $fout = true;
-                } else {
+                } else if ($planning->startTijd = $p->startTijd && $planning->stopTijd = $p->stopTijd){
+                    $fout = true;
+                }
+                else {
                     $fout = false;
                 }
             }
