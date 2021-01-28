@@ -312,7 +312,7 @@ class PlanningController extends Controller
                 ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
                 ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
                 ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
                 ->where(function ($query) use ($text) {
                     $query->where('bedrijfsnaam', 'like', $text)
                         ->orwhere('volledigeNaam', 'like', $text)
@@ -330,7 +330,7 @@ class PlanningController extends Controller
                 ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
                 ->join('nummerplaats', 'bedrijfs.id', '=', 'nummerplaats.bedrijfID')
                 ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','nummerplaats.plaatcombinatie as plaatcombinatie')
+                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
                 ->where(function ($query) use ($text) {
                     $query->where('bedrijfsnaam', 'like', $text)
                         ->orwhere('volledigeNaam', 'like', $text)

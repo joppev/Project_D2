@@ -370,6 +370,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                         }
 
                     });
+                    $('.modal-title').text('nummerplaten');
                     $('#nummerplaat').text(nummerplaten);
                     $('#model-home-nummerplaten').modal('show');
                 },
