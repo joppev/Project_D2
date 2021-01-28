@@ -821,6 +821,7 @@ $('#kade').text(kade);
 
                                </td>
                                <td>${value.kadenaam}</td>
+<td>in afwachting</td>
                                <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
 
                                         title="info">
