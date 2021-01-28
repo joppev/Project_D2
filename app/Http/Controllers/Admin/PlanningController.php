@@ -226,7 +226,10 @@ class PlanningController extends Controller
                     $fout = true;
                 }  else if ($planning->startTijd < $p->startTijd && $planning->stopTijd > $p->stopTijd){
                     $fout = true;
-                } else {
+                } else if ($planning->startTijd = $p->startTijd && $planning->stopTijd = $p->stopTijd){
+                    $fout = true;
+                }
+                else {
                     $fout = false;
                 }
             }
