@@ -41,7 +41,7 @@ class PlanningController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'startdate' => 'required',
+            'startdate' => 'required|before_or_equal:stopdate',
             'starttime' => 'required',
             'stopdate' => 'required',
             'stoptime' => 'required',
@@ -80,6 +80,57 @@ class PlanningController extends Controller
 
 
 
+        if($request->stopdate = $request->startdate){
+            $this->validate($request,[
+                'startdate' => 'required|before_or_equal:stopdate',
+                'starttime' => 'required|before:stoptime',
+                'stopdate' => 'required',
+                'stoptime' => 'required',
+                'user_id' => 'digits:1',
+                'kade_id' => 'digits:1',
+                'proces' => 'required|min:3|max:255',
+                'aantal' => 'required|numeric',
+                'lading' => 'required|min:3|max:255',
+                'status' => 'digits:1',
+            ]);
+        }
+        $planningen  = DB::table('plannings')
+                        ->get();
+        $fout = false;
+        foreach($planningen as $p){
+            if($p->kadeID == $planning->kadeID){
+                Json::dump($planning->kadeID);
+                if($p->startTijd > $planning->startTijd && $p->startTijd < $planning->stopTijd){
+                    $fout = true;
+
+                }else if($planning->startTijd < $p->stopTijd && $planning->stopTijd > $p->stopTijd){
+                    $fout = true;
+                } else if ($planning->startTijd > $p->startTijd && $planning->stopTijd < $p->stopTijd){
+                    $fout = true;
+                }  else if ($planning->startTijd < $p->startTijd && $planning->stopTijd > $p->stopTijd){
+                    $fout = true;
+                } else {
+                    $fout = false;
+                }
+            }
+        }
+
+        if ($fout){
+            $this->validate($request,[
+                'startdate' => 'required',
+                'starttime' => 'required',
+                'stopdate' => 'required',
+                'stoptime' => 'required',
+                'user_id' => 'digits:1',
+                'kade_id' => 'digits:1|ip',
+                'proces' => 'required|min:3|max:255',
+                'aantal' => 'required|numeric',
+                'lading' => 'required|min:3|max:255',
+                'status' => 'digits:1',
+            ]);
+        }
+
+
 
         $status = $request->status;
 
@@ -108,6 +159,8 @@ class PlanningController extends Controller
             'text' => "Planning is toegevoegd. "
         ]);
     }
+
+
 
     /**
      * Display the specified resource.
@@ -279,5 +332,9 @@ class PlanningController extends Controller
         Json::dump($kades);
         return $kades;
     }
+
+
+
+
 }
 
