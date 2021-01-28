@@ -93,7 +93,7 @@ class PlanningController extends Controller
                     $fout = true;
                 }  else if ($planning->startTijd < $p->startTijd && $planning->stopTijd > $p->stopTijd){
                     $fout = true;
-                } else if ($planning->startTijd = $p->startTijd && $planning->stopTijd = $p->stopTijd){
+                } else if ($planning->startTijd == $p->startTijd && $planning->stopTijd == $p->stopTijd){
                     $fout = true;
                 }
                 else {
@@ -229,7 +229,7 @@ class PlanningController extends Controller
                     $fout = true;
                 }  else if ($planning->startTijd < $p->startTijd && $planning->stopTijd > $p->stopTijd){
                     $fout = true;
-                } else if ($planning->startTijd = $p->startTijd && $planning->stopTijd = $p->stopTijd){
+                } else if ($planning->startTijd == $p->startTijd && $planning->stopTijd ==$p->stopTijd){
                     $fout = true;
                 }
                 else {
