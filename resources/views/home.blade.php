@@ -822,11 +822,7 @@ $('#kade').text(kade);
                                </td>
                                <td>${value.kadenaam}</td>
 <td>in afwachting</td>
-                               <td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-
-                                        title="info">
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>
+                               <td>
                                     <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 
                                         title="nummerplaten">
@@ -834,9 +830,14 @@ $('#kade').text(kade);
                                         </a>
 
                                </td>
+<td><a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        title="info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a></td>
 
                            </tr>`;
-                        if (value.isAfgewerkt == 0 && data[0].dt2 <= value.startTijd) {
+                        if (value.isAfgewerkt == 0 && data[0].dt2 > value.startTijd) {
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
