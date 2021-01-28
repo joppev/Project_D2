@@ -39,14 +39,19 @@ class NummerplaatController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'naam' => 'required|min:3',
+
+            'plaatcombinatie' => 'required|regex:/[1-2]{1}-[a-z]{3}-[0-9]{3}$/i',
             'bedrijf_id' => 'digits:1',
 
         ]);
 
+
+
         $nummerplaat = new Nummerplaat();
-        $nummerplaat->plaatcombinatie = $request->naam;
+        $nummerplaat->plaatcombinatie = $request->plaatcombinatie;
         $nummerplaat->bedrijfID = $request->bedrijf_id;
+
+
 
         $nummerplaat->save();
         return response()->json([
@@ -88,12 +93,12 @@ class NummerplaatController extends Controller
     {
 
         $this->validate($request,[
-            'naam' => 'required|min:3',
+            'plaatcombinatie' => 'required|min:3',
             'bedrijf_id' => 'digits:1',
 
         ]);
 
-        $nummerplaat->plaatcombinatie = $request->naam;
+        $nummerplaat->plaatcombinatie = $request->plaatcombinatie;
         $nummerplaat->bedrijfID = $request->bedrijf_id;
 
         $nummerplaat->save();

@@ -41,57 +41,41 @@ class PlanningController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'startdate' => 'required|before_or_equal:stopdate',
-            'starttime' => 'required',
-            'stopdate' => 'required',
-            'stoptime' => 'required',
+            'startdatum' => 'required|before_or_equal:stopdatum',
+            'starttijd' => 'required',
+            'stopdatum' => 'required',
+            'stoptijd' => 'required',
             'user_id' => 'digits:1',
             'kade_id' => 'digits:1',
             'proces' => 'required|min:3|max:255',
             'aantal' => 'required|numeric',
-            'lading' => 'required|min:3|max:255',
+            'ladingdetails' => 'required|min:3|max:255',
             'status' => 'digits:1',
         ]);
         $planning = new Planning();
-        $planning->gebruikerID = (int)$request->user_id;
-        $planning->kadeID = (int)$request->kade_id;
-
-        /*$planning->startTijd = Carbon::createFromTimeString($request->starttijd)->format('d-m-Y');
-        $planning->stopTijd = Carbon::createFromTimeString($request->stoptijd)->format('d-m-Y');*/
-        /*$starttime = DateTime::createFromFormat('H:i',$request->starttime);
-
-        $startdate = DateTime::createFromFormat('Y-m-d',$request->startdate);
-
-        $stoptime = DateTime::createFromFormat('H:i',$request->stoptime);*/
-
+        $planning->gebruikerID = $request->user_id;
+        $planning->kadeID = $request->kade_id;
         $planning->proces = $request->proces;
-        $planning->ladingDetails = $request->lading;
+        $planning->ladingDetails = $request->ladingdetails;
         $planning->aantal = $request->aantal;
 
 
-        $time = date('H:i:s', strtotime($request->starttime));
-        $begin = $request->startdate." ".$time;
+        $time = date('H:i:s', strtotime($request->starttijd));
+        $begin = $request->startdatum." ".$time;
 
-        $time2 = date('H:i:s', strtotime($request->stoptime));
-        $stop = $request->stopdate." ".$time2;
+        $time2 = date('H:i:s', strtotime($request->stoptijd));
+        $stop = $request->stopdatum." ".$time2;
 
         $planning->startTijd = $begin;
         $planning->stopTijd = $stop;
 
 
 
-        if($request->stopdate = $request->startdate){
+        if($request->stopdatum = $request->startdatum){
             $this->validate($request,[
-                'startdate' => 'required|before_or_equal:stopdate',
-                'starttime' => 'required|before:stoptime',
-                'stopdate' => 'required',
-                'stoptime' => 'required',
-                'user_id' => 'digits:1',
-                'kade_id' => 'digits:1',
-                'proces' => 'required|min:3|max:255',
-                'aantal' => 'required|numeric',
-                'lading' => 'required|min:3|max:255',
-                'status' => 'digits:1',
+                'startdatum' => 'required|before_or_equal:stopdatum',
+                'starttijd' => 'required|before:stoptijd',
+
             ]);
         }
         $planningen  = DB::table('plannings')
@@ -99,8 +83,8 @@ class PlanningController extends Controller
         $fout = false;
         foreach($planningen as $p){
             if($p->kadeID == $planning->kadeID){
-                Json::dump($planning->kadeID);
-                if($p->startTijd > $planning->startTijd && $p->startTijd < $planning->stopTijd){
+
+                if($p->startTijd >= $planning->startTijd && $p->startTijd < $planning->stopTijd){
                     $fout = true;
 
                 }else if($planning->startTijd < $p->stopTijd && $planning->stopTijd > $p->stopTijd){
@@ -117,20 +101,22 @@ class PlanningController extends Controller
 
         if ($fout){
             $this->validate($request,[
-                'startdate' => 'required',
-                'starttime' => 'required',
-                'stopdate' => 'required',
-                'stoptime' => 'required',
-                'user_id' => 'digits:1',
                 'kade_id' => 'digits:1|ip',
-                'proces' => 'required|min:3|max:255',
-                'aantal' => 'required|numeric',
-                'lading' => 'required|min:3|max:255',
-                'status' => 'digits:1',
             ]);
         }
 
+        $kades  = DB::table('kades')
+            ->get();
 
+        foreach($kades as $kade){
+            if($planning->kadeID == $kade->id){
+                if($kade->status == "Buiten gebruik"){
+                    $this->validate($request,[
+                        'kade_id' => 'digits:1|ipv4',
+                    ]);
+                }
+            }
+        }
 
         $status = $request->status;
 
@@ -195,35 +181,80 @@ class PlanningController extends Controller
     {
 
         $this->validate($request,[
-            'startdate' => 'required',
-            'starttime' => 'required',
-            'stopdate' => 'required',
-            'stoptime' => 'required',
+            'startdatum' => 'required|before_or_equal:stopdatum',
+            'starttijd' => 'required',
+            'stopdatum' => 'required',
+            'stoptijd' => 'required',
             'user_id' => 'digits:1',
             'kade_id' => 'digits:1',
             'proces' => 'required|min:3|max:255',
             'aantal' => 'required|numeric',
-            'lading' => 'required|min:3|max:255',
+            'ladingdetails' => 'required|min:3|max:255',
             'status' => 'digits:1',
         ]);
+        if($request->stopdatum = $request->startdatum){
+            $this->validate($request,[
+                'startdatum' => 'required|before_or_equal:stopdatum',
+                'starttijd' => 'required|before:stoptijd',
 
+            ]);
+        }
         $planning->gebruikerID = (int)$request->user_id;
         $planning->kadeID = (int)$request->kade_id;
 
 
-        $time = date('H:i:s', strtotime($request->starttime));
-        $begin = $request->startdate." ".$time;
+        $time = date('H:i:s', strtotime($request->starttijd));
+        $begin = $request->startdatum." ".$time;
 
-        $time2 = date('H:i:s', strtotime($request->stoptime));
-        $stop = $request->stopdate." ".$time2;
+        $time2 = date('H:i:s', strtotime($request->stoptijd));
+        $stop = $request->stopdatum." ".$time2;
 
         $planning->startTijd = $begin;
         $planning->stopTijd = $stop;
 
+        $planningen  = DB::table('plannings')
+            ->get();
+        $fout = false;
+        foreach($planningen as $p){
+            if($p->id != $planning->id){
+                if($planning->startTijd < $p->startTijd  && $planning->stopTijd > $p->startTijd ){
+                    $fout = true;
+
+                }else if($planning->startTijd < $p->stopTijd && $planning->stopTijd > $p->stopTijd){
+                    $fout = true;
+                } else if ($planning->startTijd > $p->startTijd && $planning->stopTijd < $p->stopTijd){
+                    $fout = true;
+                }  else if ($planning->startTijd < $p->startTijd && $planning->stopTijd > $p->stopTijd){
+                    $fout = true;
+                } else {
+                    $fout = false;
+                }
+            }
+        }
+
+
+        if ($fout){
+            $this->validate($request,[
+                'kade_id' => 'digits:1|ip',
+            ]);
+        }
+
+        $kades  = DB::table('kades')
+            ->get();
+
+        foreach($kades as $kade){
+            if($planning->kadeID == $kade->id){
+                if($kade->status == "Buiten gebruik"){
+                    $this->validate($request,[
+                        'kade_id' => 'digits:1|ipv4',
+                    ]);
+                }
+            }
+        }
 
 //        $planning->stopTijd =\Carbon\Carbon::parse($request->stoptijd)->format('Y-m-d H:i');
         $planning->proces = $request->proces;
-        $planning->ladingDetails = $request->lading;
+        $planning->ladingDetails = $request->ladingdetails;
         $planning->aantal = $request->aantal;
 
         $status = $request->status;
