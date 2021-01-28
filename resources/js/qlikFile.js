@@ -44,8 +44,10 @@ require.config( {
 
 } );
 
-require( [""], function ( qlik ) {
-    console.log('qlik', qlik);
+require( ["./require"], function ( qlik ) {
+        //foo is now loaded.
+
+    console.log('', qlik);
     qlik.on( "error", function ( error ) {
         $( '#popupText' ).append( error.message + "<br>" );
         $( '#popup' ).fadeIn( 1000 );
