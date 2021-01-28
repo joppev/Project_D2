@@ -307,7 +307,7 @@ class HomeController extends Controller
         if(!$planningen->isEmpty()){
 
 
-            $planningen[0]->dt2 =$dt2;
+            $planningen[0]->dt2 =date('Y-m-d H:i',time());
 
         }
 

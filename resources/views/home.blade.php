@@ -835,7 +835,7 @@ $('#kade').text(kade);
                                </td>
 
                            </tr>`;
-                        if (value.isAfgewerkt == 0 && data[0].dt2 >= value.startTijd) {
+                        if (value.isAfgewerkt == 0 && data[0].dt2 <= value.startTijd) {
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
