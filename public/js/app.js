@@ -40450,6 +40450,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _project2d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project2d */ "./resources/js/project2d.js");
+//require('./require');
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //require('./qlikFile');
 
 
@@ -40610,8 +40611,8 @@ var Project2d = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\sites_laravel\project2D\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\sites_laravel\project2D\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\sites_laravel\Project2D\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\sites_laravel\Project2D\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

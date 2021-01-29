@@ -11227,9 +11227,15 @@ a.text-dark:focus {
 }
 
 .normal_bodyn,
-.form-control {
+.form-control,
+body {
   background-color: #eaf2f8 !important;
   color: #1a2601 !important;
+}
+
+.hidden-screen-reader-label {
+  background-color: #eaf2f8 !important;
+  color: #eaf2f8 !important;
 }
 
 .size {
@@ -11283,8 +11289,18 @@ navbar-toggler:hover {
 .qvplaceholder,
 .qvobject {
   flex: 1 1 auto;
-  height: 300px;
-  min-width: 400px;
+  height: 250px;
+  min-width: 100px;
   margin: 45px 0 0 45px;
+  padding: 40px;
+}
+
+.qvplaceholder2,
+.qvobject2 {
+  flex: 1 1 auto;
+  height: 500px;
+  min-width: 100px;
+  margin: 45px 0 0 45px;
+  padding: 40px;
 }
 

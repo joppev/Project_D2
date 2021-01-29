@@ -67,9 +67,12 @@
             </table>
         </div>
 </div>
-<div class="flex-container">
-    <div id="QV01" class="card-img-bottom qvplaceholder"></div>
+        <div class="row">
+            <div class="col-8"></div>
+<div class="flex-container col-4">
+    <div id="QV01" class="qvobject qvplaceholder"></div>
 </div>
+        </div>
         @include('modelNummerplaat')
         @include('model')
     @endif
@@ -135,8 +138,9 @@
             <label class="col-4"></label>
 
         </div>
-
-
+        <div>
+        <div id="QV02" class="qvobject2 qvplaceholder2"></div>
+        </div>
     @endif
 
     @if(auth()->user()->isLogistiek)

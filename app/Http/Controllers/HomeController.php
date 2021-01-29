@@ -107,7 +107,6 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
             ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID', 'kades.gemeente as gemeente','kades.adres as adres','kades.land as land')
             ->where('startTijd','<',$dt2)
