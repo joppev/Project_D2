@@ -51,7 +51,6 @@ Route::middleware(['auth','receptionist'])->prefix('admin')->group(function () {
 
     Route::resource('soorts', 'Admin\SoortController');
     Route::get('qrySoorts', 'Admin\SoortController@qrySoorts');
-
     Route::resource('plannings', 'Admin\PlanningController');
     Route::get('qryPlannings', 'Admin\PlanningController@qryPlannings');
     Route::get('qryPlanningsUsers', 'Admin\PlanningController@qryPlanningsUsers');
@@ -62,6 +61,10 @@ Route::middleware(['auth','receptionist'])->prefix('admin')->group(function () {
     Route::resource('nummerplaats', 'Admin\NummerplaatController');
     Route::get('qryNummerplaats', 'Admin\NummerplaatController@qryNummerplaats');
     Route::get('qryNummerplaats2', 'Admin\NummerplaatController@qryNummerplaats2');
+
+
+    Route::resource('inzichten', 'Admin\InzichtenController');
+
 
 });
 

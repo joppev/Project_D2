@@ -65,14 +65,12 @@
 
                 </tbody>
             </table>
+            <div class="flex-container ">
+                <div id="QV01" class="qvobject qvplaceholder"></div>
+            </div>
         </div>
 </div>
-        <div class="row">
-            <div class="col-8"></div>
-<div class="flex-container col-4">
-    <div id="QV01" class="qvobject qvplaceholder"></div>
-</div>
-        </div>
+
         @include('modelNummerplaat')
         @include('model')
     @endif
@@ -225,8 +223,8 @@
     @endif
 
     @endauth
-
 @endsection
+
 
 
 @section('script_after')
