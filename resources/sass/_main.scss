@@ -1,9 +1,12 @@
-.normal_bodyn, .form-control{
+.normal_bodyn, .form-control,body{
     background-color: $achtergrondkleur !important;
     color: $tekstkleur!important;
 }
 
-
+.hidden-screen-reader-label{
+    background-color: $achtergrondkleur !important;
+    color: $achtergrondkleur !important;
+}
 
 
 
@@ -52,12 +55,19 @@ a.info:hover{
     background-color: $achtergrondkleur!important;
 }
 
-.qvplaceholder, .qvobject {
+.qvplaceholder, .qvobject{
     flex: 1 1 auto;
-    height: 300px;
-    min-width: 400px;
+    height: 250px;
+    min-width: 100px;
     margin: 45px 0 0 45px;
+    padding: 40px;
 }
 
-
+.qvplaceholder2, .qvobject2{
+    flex: 1 1 auto;
+    height: 500px;
+    min-width: 100px;
+    margin: 45px 0 0 45px;
+    padding: 40px;
+}
 

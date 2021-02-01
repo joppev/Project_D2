@@ -14,10 +14,9 @@ class CreateSensordatasTable extends Migration
     public function up()
     {
         Schema::create('sensordatas', function (Blueprint $table) {
-            $table->integer('afstand1');
-            $table->integer('afstand2');
-            $table->boolean('kade1');
-            $table->boolean('kade2');
+            $table->string('kadeNaam');
+            $table->integer('afstand');
+            $table->boolean('kadeVrij');
             $table->timestamp('tijdstip');
         });
         DB::table('sensordatas')->insert(
