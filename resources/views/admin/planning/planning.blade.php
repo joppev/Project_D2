@@ -130,13 +130,13 @@
                 var stopdate =stop.split(' ')[0];
                 var stoptime =stop.split(' ')[1];
 
-
+                console.log(proces);
                 // Update the modal
                 $('.modal-title').text(`Edit Planning`);
                 $('form').attr('action', `/admin/plannings/${id}`);
 
                 $('#aantal').val(aantal);
-                $('#proces').val(proces);
+                $('#soort_id').val(proces);
                 $('#lading').val(lading);
                 $('#user_id').val(user);
                 $('#kade_id').val(kade);
@@ -271,12 +271,12 @@
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                 <td>${value.bedrijfsnaam}</td>
                                <td>${value.voornaam} ${value.naam}</td>
-                                <td>${value.proces}</td>
+                                <td>${value.soortNaam}</td>
                                 <td>${value.kadenaam}</td>
                                <td data-id="${value.id}"
                                     data-aantal="${value.aantal}"
                                     data-lading="${value.ladingDetails}"
-                                    data-proces="${value.proces}"
+                                    data-proces="${value.soort_id}"
                                     data-user="${value.gebruikerID}"
                                     data-kade="${value.kadeID}"
                                     data-status="${status}"
@@ -322,6 +322,14 @@
                 .done(function (data) {
                     $.each(data, function (key, value) {
                         $('#kade_id').append('<option value="' + value.id + '">' + value.kadenaam + '</option>');
+                    })
+                });
+
+            $.getJSON('/admin/qryPlanningsSoorts')
+                .done(function (data) {
+                    $.each(data, function (key, value) {
+                        console.log("hallo"+ value)
+                        $('#soort_id').append('<option value="' + value.id + '">' + value.soortNaam + '</option>');
                     })
                 });
 

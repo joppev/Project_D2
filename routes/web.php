@@ -49,9 +49,13 @@ Route::middleware(['auth','receptionist'])->prefix('admin')->group(function () {
     Route::resource('kades', 'Admin\KadeController');
     Route::get('qryKades', 'Admin\KadeController@qryKades');
 
+    Route::resource('soorts', 'Admin\SoortController');
+    Route::get('qrySoorts', 'Admin\SoortController@qrySoorts');
+
     Route::resource('plannings', 'Admin\PlanningController');
     Route::get('qryPlannings', 'Admin\PlanningController@qryPlannings');
     Route::get('qryPlanningsUsers', 'Admin\PlanningController@qryPlanningsUsers');
+    Route::get('qryPlanningsSoorts', 'Admin\PlanningController@qryPlanningsSoorts');
     Route::get('qryPlanningsKades', 'Admin\PlanningController@qryPlanningsKades');
     Route::get('qryPlanningsTijdtabels', 'Admin\PlanningController@qryPlanningsTijdtabels');
 

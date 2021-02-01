@@ -11,6 +11,11 @@ class Planning extends Model
         return $this->belongsTo('App\Gebruiker')->withDefault();
     }
 
+    public function soort()
+    {
+        return $this->belongsTo('App\Soort')->withDefault();
+    }
+
     public function kade()
     {
         return $this->belongsTo('App\Kade')->withDefault();

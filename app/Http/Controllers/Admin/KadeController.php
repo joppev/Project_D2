@@ -46,8 +46,11 @@ class KadeController extends Controller
                 'adres' => 'required|max:255',
                 'latitude' => 'numeric',
                 'longitude' => 'numeric',
-                'bedrijf_id' => 'digits:1',
-                'rol' => 'digits:1'
+                'bedrijf_id' => 'numeric',
+                'rol' => 'numeric'
+            ],[
+                'bedrijf_id.numeric' => 'Vul een bedrijf in.',
+                'rol.numeric' => 'Vul een rol in.'
             ]);
             $kade = new Kade();
             $kade->kadenaam = $request->naam;
@@ -112,8 +115,11 @@ class KadeController extends Controller
             'adres' => 'required|max:255',
             'latitude' => 'numeric',
             'longitude' => 'numeric',
-            'bedrijf_id' => 'digits:1',
-            'rol' => 'digits:1'
+            'bedrijf_id' => 'numeric',
+            'rol' => 'numeric'
+        ],[
+            'bedrijf_id.numeric' => 'Vul een bedrijf in.',
+            'rol.numeric' => 'Vul een rol in.'
         ]);
 
         $kade->kadenaam = $request->naam;

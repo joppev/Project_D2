@@ -28,6 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/nummerplaats">Overzicht nummerplaten</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/soorts">Overzicht proces</a>
+                        </li>
                     @endif
 
                 @endauth

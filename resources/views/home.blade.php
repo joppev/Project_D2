@@ -417,7 +417,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
                     }
 
 
-                    var proces = data.proces;
+                    var proces = data.soortNaam;
                     var voornaam = data.voornaam;
                     var title = "Extra info chauffeur: " + voornaam + " " + data.naam + ", bedrijf: " + bedrijf
                     $('.modal-title').text(title);
@@ -511,7 +511,7 @@ $('#kade').text(kade);
                         var status = data.status;
                         var voornaam = data.voornaam;
                         var naam = voornaam + " " + data.naam
-                        var proces = data.proces;
+                        var proces = data.soortNaam;
                         var adres = data.land + " - " + data.gemeente + " - " + data.adres
                         var verwerkingsstatus = '';
                         if (data.isAfgewerkt) {
@@ -660,7 +660,7 @@ $('#kade').text(kade);
                         var aantal = data.aantal;
                         var status = data.status;
                         var voornaam = data.voornaam + " " + data.naam;
-                        var proces = data.proces;
+                        var proces = data.soortNaam;
                         var adres = data.land + " - " + data.gemeente + " - " + data.adres
                         var verwerkingsstatus = '';
                         if (data.isAfgewerkt) {
@@ -818,7 +818,7 @@ $('#kade').text(kade);
 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.proces}
+                                ${value.soortNaam}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -845,7 +845,7 @@ $('#kade').text(kade);
 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.proces}
+                                ${value.soortNaam}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -872,7 +872,7 @@ $('#kade').text(kade);
                                <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.proces}
+                                ${value.soortNaam}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -900,7 +900,7 @@ $('#kade').text(kade);
 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.proces}
+                                ${value.soortNaam}
 
                                </td>
                                <td>${value.kadenaam}</td>
@@ -928,7 +928,7 @@ $('#kade').text(kade);
                                 <td>${value.voornaam} ${value.naam}</td>
                                <td>
 
-                                ${value.proces}
+                                ${value.soortNaam}
 
                                </td>
                                <td>${value.kadenaam}</td>
