@@ -23,6 +23,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="rol">Afkomst nummerplaat</label>
+                        <select required class="form-control" name="land" id="land">
+                            <option value="%">alle Landen</option>
+                            <option value="België">België</option>
+                            <option value="Nederland">Nederland</option>
+                            <option value="Frankrijk">Frankrijk</option>
+                            <option value="Duitsland">Duitsland</option>
+                            <option value="Gepersonaliseerd">Gepersonaliseerd</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="exampleFormControlSelect1">Bedrijf</label>
                         <select class="form-control " name="bedrijf_id" id="bedrijf_id">
                             <option value="%">alle bedrijven</option>

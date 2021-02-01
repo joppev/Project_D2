@@ -17,6 +17,7 @@ class CreateNummerplaatsTable extends Migration
             $table->id();
             $table->foreignId('bedrijfID');
             $table->string('plaatcombinatie');
+            $table->string('land');
             $table->timestamps();
 
             $table->foreign('bedrijfID')->references('id')->on('bedrijfs')->onDelete('cascade')->onUpdate('cascade');
@@ -27,22 +28,27 @@ class CreateNummerplaatsTable extends Migration
                 [
                     'bedrijfID' => 1,
                     'plaatcombinatie' => "1-ABC-123",
+                    'land' => "België"
                 ],
                 [
                     'bedrijfID' => 2,
                     'plaatcombinatie' => "1-DEF-456",
+                    'land' => "België"
                 ],
                 [
                     'bedrijfID' => 3,
                     'plaatcombinatie' => "1-GHI-789",
+                    'land' => "België"
                 ],
                 [
                     'bedrijfID' => 4,
                     'plaatcombinatie' => "1-JKL-123",
+                    'land' => "België"
                 ],
                 [
                     'bedrijfID' => 4,
                     'plaatcombinatie' => "1-MNO-456",
+                    'land' => "België"
                 ],
             ]);
     }

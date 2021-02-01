@@ -38,18 +38,48 @@ class NummerplaatController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
-
-            'plaatcombinatie' => 'required|regex:/[1-2]{1}-[a-z]{3}-[0-9]{3}$/i',
+            'plaatcombinatie' => 'required',
             'bedrijf_id' => 'numeric',
-
+            'land' => 'alpha_num'
         ],[
-        'bedrijf_id.numeric' => 'Vul een bedrijf in.'
+            'bedrijf_id.numeric' => 'Vul een bedrijf in.',
+            'land.alpha_num' => 'Vul een land in.'
         ]);
+
+        if($request->land == "België"){
+            $this->validate($request,[
+                'plaatcombinatie' => 'required|regex:/[1-2]{1}-[A-Z]{3}-[0-9]{3}$/i',
+            ],[
+                'plaatcombinatie.reqex' => 'Dit is geen geldig belgische nummerplaat.'
+            ]);
+        } elseif ($request->land == "Nederland"){
+            $this->validate($request,[
+                'plaatcombinatie' => 'required|regex:/^[0-9]{2}-[A-Z]{3}-[0-9]{1}$/i',
+            ],[
+                'plaatcombinatie.reqex' => 'Dit is geen geldig nederlands nummerplaat.'
+            ]);
+        } elseif ($request->land == "Frankrijk"){
+            $this->validate($request,[
+                'plaatcombinatie' => 'required|regex:/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/i',
+            ],[
+                'plaatcombinatie.reqex' => 'Dit is geen geldig frans nummerplaat.'
+            ]);
+        } elseif ($request->land == "Duitsland"){
+            $this->validate($request,[
+                'plaatcombinatie' => 'required|regex:/^[A-Z]{1-3}-[A-Z]{1-2}-[0-9]{2-4}$/i',
+            ],[
+                'plaatcombinatie.reqex' => 'Dit is geen geldig duits nummerplaat.'
+            ]);
+        }
+
+
 
 
 
         $nummerplaat = new Nummerplaat();
+        $nummerplaat->land = $request->land;
         $nummerplaat->plaatcombinatie = $request->plaatcombinatie;
         $nummerplaat->bedrijfID = $request->bedrijf_id;
 
