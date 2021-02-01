@@ -60,18 +60,14 @@
                         </select>
                     </div>
 
-
-
-
                     <div class="form-group">
-                        <label for="proces">Proces</label>
-                        <input type="text" name="proces" id="proces"
-                               class="form-control"
-                               placeholder="Proces"
-                               minlength="3"
-                               required
-                               value="">
+                        <label for="exampleFormControlSelect1">Proces</label>
+                        <select class="form-control " name="soort_id" id="soort_id">
+                            <option value="%">alle processen</option>
+                        </select>
                     </div>
+
+
 
                     <div class="form-group">
                         <label for="lading">Lading details</label>

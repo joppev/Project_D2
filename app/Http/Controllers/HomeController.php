@@ -75,9 +75,10 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+            ->Join('soorts','plannings.soort_id','=','soorts.id')
 
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+            ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->get();
 
 
@@ -108,8 +109,11 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+
+            ->Join('soorts','plannings.soort_id','=','soorts.id')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID', 'kades.gemeente as gemeente','kades.adres as adres','kades.land as land')
+            ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('gebruikerID',$user->id)
@@ -131,9 +135,26 @@ class HomeController extends Controller
 
         $idkade = $request->request->get('idKade');
 
+
+        //huidig uur
+        $dt = date('Y-m-d H:i',time()-7200);
+        //24 uur na huidig uur
+        $dt2= date('Y-m-d H:i',time()+7200);
+        $planning = Planning::orderBy('id')
+            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+            ->Join('soorts','plannings.soort_id','=','soorts.id')
+            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+            ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+            ->where('startTijd','<',$dt2)
+            ->where('startTijd','>',$dt)
+            ->where('isAanwezig', '=',1)
+            ->where('isAfgewerkt', '=', 0)
+            ->where('kadeID', 'like',$idkade)
+            ->where('plannings.id','like',$id)
+            ->get();
+
         //kade zoeken met idkade
-
-
 
         $kade = Kade::findOrFail($idkade);
 
@@ -203,9 +224,9 @@ class HomeController extends Controller
         $planning = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-
+            ->Join('soorts','plannings.soort_id','=','soorts.id')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+            ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -259,9 +280,9 @@ class HomeController extends Controller
         $planningen = Planning::orderBy('id')
             ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
             ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-
+            ->Join('soorts','plannings.soort_id','=','soorts.id')
             ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+            ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
             ->where('isAanwezig', '=',1)
@@ -301,14 +322,15 @@ class HomeController extends Controller
         ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
         ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
         ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-        ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
+        ->Join('soorts','plannings.soort_id','=','soorts.id')
+        ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
 ->where('startTijd','<',$dt2)
         ->where('startTijd','>',$dt)
         ->where(function ($query) use ($text) {
             $query->where('volledigeNaam', 'like', $text)
                 ->orwhere('kadenaam', 'like', $text)
                 ->orwhere('bedrijfsnaam', 'like', $text)
-                ->orwhere('proces', 'like', $text)
+                ->orwhere('soortNaam', 'like', $text)
 
             ;
 

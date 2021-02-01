@@ -41,8 +41,10 @@ class NummerplaatController extends Controller
         $this->validate($request,[
 
             'plaatcombinatie' => 'required|regex:/[1-2]{1}-[a-z]{3}-[0-9]{3}$/i',
-            'bedrijf_id' => 'digits:1',
+            'bedrijf_id' => 'numeric',
 
+        ],[
+        'bedrijf_id.numeric' => 'Vul een bedrijf in.'
         ]);
 
 
@@ -94,8 +96,10 @@ class NummerplaatController extends Controller
 
         $this->validate($request,[
             'plaatcombinatie' => 'required|min:3',
-            'bedrijf_id' => 'digits:1',
+            'bedrijf_id' => 'numeric',
 
+        ],[
+            'bedrijf_id.numeric' => 'Vul een bedrijf in.'
         ]);
 
         $nummerplaat->plaatcombinatie = $request->plaatcombinatie;

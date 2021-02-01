@@ -51,8 +51,11 @@ class UserController extends Controller
             'naam' => 'required|min:3|max:255',
             'voornaam' => 'required|min:3|max:255',
             'email' => 'required|email|max:255',
-            'bedrijf_id' => 'digits:1',
-            'rol' => 'digits:1'
+            'bedrijf_id' => 'numeric',
+            'rol' => 'numeric'
+        ],[
+            'bedrijf_id.numeric' => 'Vul een bedrijf in.',
+            'rol.numeric' => 'Vul een rol in.'
         ]);
 
         $user = new User();
@@ -137,8 +140,11 @@ class UserController extends Controller
             'naam' => 'required|min:3|max:255',
             'voornaam' => 'required|min:3|max:255',
             'email' => 'required|email',
-            'bedrijf_id' => 'digits:1',
-            'rol' => 'digits:1'
+            'bedrijf_id' => 'numeric',
+            'rol' => 'numeric'
+        ],[
+            'bedrijf_id.numeric' => 'Vul een bedrijf in.',
+            'rol.numeric' => 'Vul een rol in.'
         ]);
 
         $user->naam = $request->naam;

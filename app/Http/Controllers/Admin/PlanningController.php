@@ -38,24 +38,31 @@ class PlanningController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
         $this->validate($request,[
             'startdatum' => 'required|before_or_equal:stopdatum',
             'starttijd' => 'required',
             'stopdatum' => 'required',
             'stoptijd' => 'required',
-            'user_id' => 'digits:1',
-            'kade_id' => 'digits:1',
-            'proces' => 'required|min:3|max:255',
+            'user_id' => 'numeric',
+            'kade_id' => 'numeric',
+            'soort_id' => 'numeric',
             'aantal' => 'required|numeric',
             'ladingdetails' => 'required|min:3|max:255',
-            'status' => 'digits:1',
+            'status' => 'numeric',
+        ],[
+            'soort_id.numeric' => 'Vul een proces in.',
+            'user_id.numeric' => 'Vul een chauffeur in.',
+            'kade_id.numeric' => 'Vul een kade in.',
+            'status.numeric' => 'Vul een kade in.'
         ]);
+
+
         $planning = new Planning();
         $planning->gebruikerID = $request->user_id;
         $planning->kadeID = $request->kade_id;
-        $planning->proces = $request->proces;
+        $planning->soort_id = $request->soort_id;
         $planning->ladingDetails = $request->ladingdetails;
         $planning->aantal = $request->aantal;
 
@@ -104,7 +111,7 @@ class PlanningController extends Controller
 
         if ($fout){
             $this->validate($request,[
-                'kade_id' => 'digits:1|ip',
+                'kade_id' => 'numeric|ip',
             ]);
         }
 
@@ -115,7 +122,7 @@ class PlanningController extends Controller
             if($planning->kadeID == $kade->id){
                 if($kade->status == "Buiten gebruik"){
                     $this->validate($request,[
-                        'kade_id' => 'digits:1|ipv4',
+                        'kade_id' => 'numeric|ipv4',
                     ]);
                 }
             }
@@ -148,6 +155,7 @@ class PlanningController extends Controller
             'text' => "Planning is toegevoegd. "
         ]);
     }
+
 
 
 
@@ -188,12 +196,17 @@ class PlanningController extends Controller
             'starttijd' => 'required',
             'stopdatum' => 'required',
             'stoptijd' => 'required',
-            'user_id' => 'digits:1',
-            'kade_id' => 'digits:1',
-            'proces' => 'required|min:3|max:255',
+            'user_id' => 'numeric',
+            'kade_id' => 'numeric',
+            'soort_id' => 'numeric',
             'aantal' => 'required|numeric',
             'ladingdetails' => 'required|min:3|max:255',
-            'status' => 'digits:1',
+            'status' => 'numeric',
+        ],[
+            'soort_id.numeric' => 'Vul een proces in.',
+            'user_id.numeric' => 'Vul een chauffeur in.',
+            'kade_id.numeric' => 'Vul een kade in.',
+            'status.numeric' => 'Vul een status in.'
         ]);
         if($request->stopdatum = $request->startdatum){
             $this->validate($request,[
@@ -241,7 +254,7 @@ class PlanningController extends Controller
 
         if ($fout){
             $this->validate($request,[
-                'kade_id' => 'digits:1|ip',
+                'kade_id' => 'numeric|ip',
             ]);
         }
 
@@ -252,14 +265,14 @@ class PlanningController extends Controller
             if($planning->kadeID == $kade->id){
                 if($kade->status == "Buiten gebruik"){
                     $this->validate($request,[
-                        'kade_id' => 'digits:1|ipv4',
+                        'kade_id' => 'numeric|ipv4',
                     ]);
                 }
             }
         }
 
 //        $planning->stopTijd =\Carbon\Carbon::parse($request->stoptijd)->format('Y-m-d H:i');
-        $planning->proces = $request->proces;
+        $planning->soort_id = $request->soort_id;
         $planning->ladingDetails = $request->ladingdetails;
         $planning->aantal = $request->aantal;
 
@@ -313,14 +326,14 @@ class PlanningController extends Controller
             $planningen  = DB::table('plannings')
                 ->join('users', 'plannings.gebruikerID', '=', 'users.id')
                 ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-
                 ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
+                ->join('soorts','plannings.soort_id','=',"soorts.id")
+                ->select('plannings.*','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
                 ->where(function ($query) use ($text) {
                     $query->where('bedrijfsnaam', 'like', $text)
                         ->orwhere('volledigeNaam', 'like', $text)
-                        ->orwhere('kadenaam', 'like', $text)
-                        ->orwhere('proces', 'like', $text);
+                        ->orwhere('kadenaam', 'like', $text);
+
 
                 })
                 ->where('startTijd','like',$date)
@@ -331,14 +344,14 @@ class PlanningController extends Controller
             $planningen  = DB::table('plannings')
                 ->join('users', 'plannings.gebruikerID', '=', 'users.id')
                 ->join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
-
+                ->join('soorts','plannings.soort_id','=',"soorts.id")
                 ->join('kades', 'plannings.kadeID', '=', 'kades.id')
-                ->select('plannings.*','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
+                ->select('plannings.*','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam' )
                 ->where(function ($query) use ($text) {
                     $query->where('bedrijfsnaam', 'like', $text)
                         ->orwhere('volledigeNaam', 'like', $text)
                         ->orwhere('kadenaam', 'like', $text)
-                        ->orwhere('proces', 'like', $text);
+                        ->orwhere('soortNaam', 'like', $text);
 
                 })
                 ->get();
@@ -368,6 +381,15 @@ class PlanningController extends Controller
 
         Json::dump($kades);
         return $kades;
+    }
+
+    public function qryPlanningsSoorts()
+    {
+        $soorts = DB::table('soorts')
+            ->get();
+
+        Json::dump($soorts);
+        return $soorts;
     }
 
 
