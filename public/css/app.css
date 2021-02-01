@@ -11303,3 +11303,23 @@ navbar-toggler:hover {
   padding: 40px;
 }
 
+.qvplaceholder3,
+.qvobject3 {
+  flex: 1 1 auto;
+  height: 200px;
+  min-width: 150px;
+  max-width: 200px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+#body {
+  width: 60%;
+}
+

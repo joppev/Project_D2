@@ -118,8 +118,10 @@
         app.getObject('QV03', 'hPpAzna');
         // stok bijhouden van alle afgewerkte producten
         app.getObject('QV04', 'PyBPvw');
-
-
+        // filter op bedrijf
+        app.getObject('QV05', 'RAbGER');
+        // filer op kade
+        app.getObject('QV06', 'eJfMLwH');
 
 
         //clear all functie werkt niet omdat ik met verschillende alternet states heb
