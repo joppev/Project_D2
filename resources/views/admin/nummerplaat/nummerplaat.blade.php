@@ -27,6 +27,7 @@
             <thead>
             <tr>
                 <th>Nummerplaat</th>
+                <th>Land</th>
                 <th>Bedrijf</th>
 <th>Bewerken</th>
 
@@ -85,12 +86,14 @@
                 let id = $(this).closest('td').data('id');
                 let naam = $(this).closest('td').data('plaat');
                 let bedrijf = $(this).closest('td').data('bedrijf');
+                let land = $(this).closest('td').data('land');
                 // Update the modal
                 $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/nummerplaats/${id}`);
 
                 $('#naam').val(naam);
                 $('#bedrijf_id').val(bedrijf);
+                $('#land').val(land);
 
                 $('input[name="_method"]').val('put');
 
@@ -194,14 +197,17 @@
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
 
+                        console.log(value)
                         let tr = `<tr>
                                <td>${value.plaatcombinatie} </td>
+                                <td>${value.land} </td>
                                <td>${value.bedrijfsnaam}</td>
 
 
                                <td data-id="${value.id}"
                                     data-plaat="${value.plaatcombinatie}"
                                     data-bedrijf="${value.bedrijfID}"
+                                    data-land="${value.land}"
                                    >
                                     <div class="btn-group btn-group-sm">
                                         <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.plaatcombinatie}">

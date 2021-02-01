@@ -48,7 +48,7 @@ class CreatePlanningsTable extends Migration
                     'updated_at'=> now()
                 ],
                 [
-                    'gebruikerID' => 2,
+                    'gebruikerID' => 3,
                     'kadeID' => 2,
                     'soort_id' => 2,
                     'ladingDetails' => "ladingDetails2",
@@ -120,7 +120,7 @@ class CreatePlanningsTable extends Migration
                     'updated_at'=> now()
                 ],
                 [
-                    'gebruikerID' => 3,
+                    'gebruikerID' => 1,
                     'kadeID' => 6,
                     'soort_id' => 1,
                     'ladingDetails' => "ladingDetails3",
