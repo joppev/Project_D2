@@ -87,4 +87,26 @@ a.info:hover{
 }
 #body{
     width: 60%;
+.kadestatus{
+    min-width: 130px;
+    max-width: 130px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+.bg-groen{
+    background-color: #28a745;
+}
+.bg-oranje{
+    background-color: #ffc107;
+}
+.bg-rood{
+    background-color: #dc3545;
+
 }

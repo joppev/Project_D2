@@ -11303,6 +11303,7 @@ navbar-toggler:hover {
   padding: 40px;
 }
 
+<<<<<<< HEAD
 .qvplaceholder3,
 .qvobject3 {
   flex: 1 1 auto;
@@ -11321,5 +11322,31 @@ navbar-toggler:hover {
 
 #body {
   width: 60%;
+=======
+.kadestatus {
+  min-width: 130px;
+  max-width: 130px;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  vertical-align: middle;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.bg-groen {
+  background-color: #28a745;
+}
+
+.bg-oranje {
+  background-color: #ffc107;
+}
+
+.bg-rood {
+  background-color: #dc3545;
+>>>>>>> 52797c11608fae7f955e1bde4278391c05fc1404
 }
 

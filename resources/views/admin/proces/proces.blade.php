@@ -3,20 +3,34 @@
 
 
 @section('main')
-    <h1>Processen</h1>
-    <p>
-        <a href="#!" class="btn btn-outline-success" id="btn-create">
-            <i class="fas fa-plus-circle mr-1"></i>Proces toevoegen
-        </a>
-    </p>
+
+    <div class="row justify-content-around mt-5 mb-2">
+
+        <div class="col-sm-9 mb-2">
+            <h1 class="ml-2">Processen</h1>
+        </div>
+
+
+
+
+        <div class="col-sm-3 mb-2">
+            <p>
+                <a href="#!" class="btn btn-outline-success" id="btn-create">
+                    <i class="fas fa-plus-circle mr-1"></i>Proces toevoegen
+                </a>
+            </p>
+        </div>
+    </div>
+
+
     <div class="table-responsive">
         <table class="table">
             <thead>
             <tr>
 
-                <th>Naam</th>
+                <th width="75%">Naam</th>
 
-                <th>Bewerken</th>
+                <th width="25%">Bewerken</th>
             </tr>
             </thead>
             <tbody>

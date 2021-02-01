@@ -31,7 +31,7 @@
 
     <h1>Inzichten</h1>
     <hr>
-    
+
     <div class="row">
         <h2>Aanwezigheid</h2>
         <div id="QV03" class="qvobject qvplaceholder "></div>

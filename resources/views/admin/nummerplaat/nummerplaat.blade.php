@@ -1,18 +1,21 @@
 @extends('layouts.template')
 
 @section('main')
-    <div class="row justify-content-around">
+    <div class="row justify-content-around mt-5 mb-2">
 
-    <h1>Nummerplaten</h1>
+        <div class="col-sm-6 mb-2">
+            <h1 class="ml-2">Nummerplaten</h1>
+        </div>
 
 
-        <div class="row">
 
-            <div class="col-sm-6 mb-2">
+
+
+            <div class="col-sm-3 mb-2">
                 <input type="text" class="form-control" name="nummerplaatzoeknaam" id="nummerplaatzoeknaam"
                        value="" placeholder="Filter nummerplaten">
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-3 mb-2">
                 <p>
                     <a href="#!" class="btn btn-outline-success" id="btn-create">
                         <i class="fas fa-plus-circle mr-1"></i>Nummerplaat toevoegen
@@ -20,16 +23,16 @@
                 </p>
             </div>
         </div>
-    </div>
+
 
     <div class="table-responsive">
         <table class="table">
             <thead>
             <tr>
-                <th>Nummerplaat</th>
-                <th>Land</th>
-                <th>Bedrijf</th>
-<th>Bewerken</th>
+                <th width="25%">Nummerplaat</th>
+                <th width="25%">Land</th>
+                <th width="25%">Bedrijf</th>
+                <th width="25%">Bewerken</th>
 
             </tr>
             </thead>

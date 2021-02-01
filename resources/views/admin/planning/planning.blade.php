@@ -1,26 +1,32 @@
 @extends('layouts.template')
 
 @section('main')
-    <div class="row justify-content-around">
+    <div class="row justify-content-around mt-5 mb-2">
 
-        <h1>Planningen</h1>
-        <p>
-            <a href="#!" class="btn btn-outline-info clear" id="clear">
-                <i class="fas fa-plus-circle mr-1"></i>clear filters
-            </a>
-        </p>
-        <div class="row">
-            <div class="col-sm-4 mb-2 ">
-                <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
-                       value="" placeholder="Filter planning">
+
+
+            <div class="col-sm-3 mb-2  ">
+                <h1 class="ml-2">Planningen</h1>
             </div>
 
-            <div class="col-sm-4 mb-2 date ">
+            <div class="col-sm-2 mb-2  ">
 
                 <input type="date" id="date" name="date" class="form-control">
                 <div class="invalid-feedback"></div>
+
             </div>
-            <div class="col-sm-4 mb-2">
+        <div class="col-sm-2 mb-2  ">
+            <input type="text" class="form-control" name="planningzoeknaam" id="planningzoeknaam"
+                   value="" placeholder="Filter planning">
+        </div>
+
+            <div class="col-sm-2 mb-2">
+                <a href="#!" class="btn btn-outline-info clear" id="clear">
+                    <i class="fas fa-plus-circle mr-1"></i>clear filters
+                </a>
+            </div>
+
+            <div class="col-sm-3 mb-2">
                 <p>
                     <a href="#!" class="btn btn-outline-success" id="btn-create">
                         <i class="fas fa-plus-circle mr-1"></i>Planning toevoegen
@@ -28,7 +34,7 @@
                 </p>
             </div>
 
-        </div>
+
 
     </div>
 
@@ -37,12 +43,12 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Tijdstip</th>
-                <th>Bedrijf</th>
-                <th>Chauffeur</th>
-                <th>Proces</th>
-                <th>Loskade</th>
-                <th>Bewerken</th>
+                <th width="30%">Tijdstip</th>
+                <th width="14%">Bedrijf</th>
+                <th width="14%">Chauffeur</th>
+                <th width="14%">Proces</th>
+                <th width="14%">Loskade</th>
+                <th width="14%">Bewerken</th>
             </tr>
             </thead>
             <tbody>

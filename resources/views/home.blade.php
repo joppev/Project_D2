@@ -1,12 +1,10 @@
 @extends('layouts.template')
 
 @section('main')
-    <h1>Homepage</h1>
-    <br>
-    <hr>
+
     @auth
     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
-        <div class="row">
+        <div class="row mt-5">
         <div class="table-responsive col-lg-9 col-12">
 
             <h2>Dagplanning</h2>

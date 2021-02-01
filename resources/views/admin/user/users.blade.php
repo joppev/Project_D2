@@ -1,16 +1,19 @@
 @extends('layouts.template')
 
 @section('main')
-    <div class="row justify-content-around">
+    <div class="row justify-content-around mt-5 mb-2">
 
-    <h1>Gebruikers</h1>
+        <div class="col-sm-3 mb-2">
+            <h1 class="ml-2">Gebruikers</h1>
+        </div>
 
 
 
 
-        <div class="row">
 
-            <div class="col-sm-4 mb-2">
+
+
+            <div class="col-sm-3 mb-2">
                 <input type="text" class="form-control" name="userzoeknaam" id="userzoeknaam"
                        value="" placeholder="Filter gebruikers">
             </div>
@@ -24,14 +27,14 @@
 
                 </select>
             </div>
-            <div class="col-sm-5 mb-2">
+            <div class="col-sm-3 mb-2">
                 <p>
                     <a href="#!" class="btn btn-outline-success" id="btn-create">
                         <i class="fas fa-plus-circle mr-1"></i>Gebruiker toevoegen
                     </a>
                 </p>
             </div>
-        </div>
+
 
     </div>
 
@@ -39,10 +42,10 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Voor- & achternaam</th>
-                <th>Bedrijf</th>
-                <th>Rol</th>
-                <th>Bewerken</th>
+                <th width="25%">Voor- & achternaam</th>
+                <th width="25%">Bedrijf</th>
+                <th width="25%">Rol</th>
+                <th width="25%">Bewerken</th>
             </tr>
             </thead>
             <tbody>
