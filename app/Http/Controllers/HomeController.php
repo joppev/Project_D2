@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Kade;
 use App\Nummerplaat;
 use App\Planning;
+use App\sensordata;
 use App\User;
 use Carbon\Carbon;
 use Facades\App\Helpers\Json;
@@ -130,52 +131,65 @@ class HomeController extends Controller
 
         $idkade = $request->request->get('idKade');
 
-        //huidig uur
-        $dt = date('Y-m-d H:i',time()-7200);
-        //24 uur na huidig uur
-        $dt2= date('Y-m-d H:i',time()+7200);
-        $planning = Planning::orderBy('id')
-            ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
-            ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+        //kade zoeken met idkade
 
-            ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
-            ->select('plannings.*','kades.status as status','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
-            ->where('startTijd','<',$dt2)
-            ->where('startTijd','>',$dt)
-            ->where('isAanwezig', '=',1)
-            ->where('isAfgewerkt', '=', 0)
-            ->where('kadeID', 'like',$idkade)
-            ->where('plannings.id','like',$id)
 
-            ->first();
 
         $kade = Kade::findOrFail($idkade);
-        $kade->status = 'Niet-vrij';
-        $kade->save();
 
-        if ($planning != null){
-            $planningBegin = Planning::findOrFail($id);
-            $planningBegin->isBezig = 1  ;
-            $planningBegin->isAfgewerkt = 0 ;
+        $sensordata = sensordata::orderby('tijdstip', 'desc')
+        ->where('kadeNaam','like',$kade->kadenaam)
+        ->first();
+
+        if($sensordata->kadeVrij == true) {
+            //huidig uur
+            $dt = date('Y-m-d H:i', time() - 7200);
+            //24 uur na huidig uur
+            $dt2 = date('Y-m-d H:i', time() + 7200);
+            $planning = Planning::orderBy('id')
+                ->Join('users', 'plannings.gebruikerID', '=', 'users.id')
+                ->Join('bedrijfs', 'users.bedrijfsID', '=', 'bedrijfs.id')
+                ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
+                ->select('plannings.*', 'kades.status as status', 'kades.kadenaam as kadenaam', 'bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam', 'bedrijfs.id as bedrijfsID')
+                ->where('startTijd', '<', $dt2)
+                ->where('startTijd', '>', $dt)
+                ->where('isAanwezig', '=', 1)
+                ->where('isAfgewerkt', '=', 0)
+                ->where('kadeID', 'like', $idkade)
+                ->where('plannings.id', 'like', $id)
+                ->first();
 
 
-            //$planningBegin->update();
-            $planningBegin->save();
+            $kade->status = 'Niet-vrij';
+            $kade->save();
+
+            if ($planning != null) {
+                $planningBegin = Planning::findOrFail($id);
+                $planningBegin->isBezig = 1;
+                $planningBegin->isAfgewerkt = 0;
 
 
-            return response()->json([
-                'type' => 'success',
-                'text' => "Begonnen aan proces bedrijf: <b>$planning->bedrijfsnaam</b> aan kade <b>$planning->kadenaam</b>"
-            ]);
-        }else{
+                //$planningBegin->update();
+                $planningBegin->save();
 
-            return response()->json([
-                'type' => 'error',
-                'text' => "geen planning gevonden die aan deze kadeid <b>$idkade</b> en id <b>$id</b> heeft"
-            ]);
 
+                return response()->json([
+                    'type' => 'success',
+                    'text' => "Begonnen aan proces bedrijf: <b>$planning->bedrijfsnaam</b> aan kade <b>$planning->kadenaam</b>"
+                ]);
+            } else {
+
+                return response()->json([
+                    'type' => 'error',
+                    'text' => "geen planning gevonden die aan deze kadeid <b>$idkade</b> en id <b>$id</b> heeft"
+                ]);
+
+            }
         }
-
+        return response()->json([
+            'type' => 'error',
+            'text' => "Er staat nog geen vrachtwagen voor de kade"
+        ]);
 
     }
     public function afgewerkt(Request $request){

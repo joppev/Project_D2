@@ -15,7 +15,6 @@ class CreateSensordatasTable extends Migration
     {
         Schema::create('sensordatas', function (Blueprint $table) {
             $table->string('kadeNaam');
-
             $table->integer('afstand');
             $table->boolean('kadeVrij');
             $table->timestamp('tijdstip');
