@@ -1,23 +1,26 @@
 @extends('layouts.template')
 
 @section('main')
-    <div class="row justify-content-around">
-        <h1>Bedrijven</h1>
+    <div class="row justify-content-around mt-5 mb-2">
 
-        <div class="row">
+        <div class="col-sm-6 mb-2">
+            <h1 class="ml-2">Bedrijven</h1>
+        </div>
 
-            <div class="col-sm-6 mb-2">
+
+
+            <div class="col-sm-3 mb-2">
                 <input type="text" class="form-control" name="bedrijfzoeknaam" id="bedrijfzoeknaam"
                        value="" placeholder="Filter bedrijven">
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-3 mb-2">
                 <p>
                     <a href="#!" class="btn btn-outline-success" id="btn-create">
                         <i class="fas fa-plus-circle mr-1"></i>Bedrijf toevoegen</a>
                 </p>
             </div>
         </div>
-    </div>
+
 
 
     <div class="row">
@@ -25,9 +28,9 @@
             <table class="table" id="bedrijventable">
                 <thead>
                 <tr>
-                    <th>Bedrijf</th>
-                    <th>Standaard wachtwoord</th>
-                    <th>Bewerken</th>
+                    <th width="37.5%">Bedrijf</th>
+                    <th width="37.5%">Standaard wachtwoord</th>
+                    <th width="25%">Bewerken</th>
                 </tr>
                 </thead>
 

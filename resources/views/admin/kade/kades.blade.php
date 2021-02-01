@@ -1,16 +1,19 @@
 @extends('layouts.template')
 
 @section('main')
-    <div class="row justify-content-around">
+    <div class="row justify-content-around mt-5 mb-2">
 
-    <h1>Kades</h1>
-        <div class="row">
+        <div class="col-sm-3 mb-2">
+            <h1 class="ml-2">Kades</h1>
+        </div>
 
-            <div class="col-sm-4 mb-2">
+
+
+            <div class="col-sm-3 mb-2">
                 <input type="text" class="form-control" name="kadezoeknaam" id="kadezoeknaam"
                        value="" placeholder="Filter kades">
             </div>
-            <div class="col-sm-4 mb-2">
+            <div class="col-sm-3 mb-2">
                 <select required class="form-control" name="kadezoekrol" id="kadezoekrol">
                     <option value="%">alle statussen</option>
                     <option value="Vrij">Vrij</option>
@@ -19,7 +22,7 @@
 
                 </select>
             </div>
-            <div class="col-sm-4 mb-2">
+            <div class="col-sm-3 mb-2">
             <p>
                 <a href="#!" class="btn btn-outline-success" id="btn-create">
                     <i class="fas fa-plus-circle mr-1"></i>Kade toevoegen
@@ -28,17 +31,17 @@
             </div>
         </div>
 
-    </div>
+
 
     <div class="table-responsive">
         <table class="table">
             <thead>
             <tr>
-                <th>Naam</th>
-                <th>Land</th>
-                <th>Gemeente</th>
-                <th>Status</th>
-                <th>Bewerken</th>
+                <th width="20%">Naam</th>
+                <th width="20%">Land</th>
+                <th width="20%">Gemeente</th>
+                <th width="20%">Status</th>
+                <th width="20%">Bewerken</th>
 
             </tr>
             </thead>
@@ -229,21 +232,26 @@
                         $.each(data, function (key, value) {
                             console.log(value);
                             var statusid = 0;
+                            var bg = ""
                             if (value.status == "Vrij") {
                                 statusid = 1;
+                                bg ="bg-groen"
                             } else if (value.status == "Niet-vrij") {
                                 statusid = 2;
+                                bg ="bg-rood"
                             } else {
                                 statusid = 3;
+                                bg ="bg-oranje"
                             }
                             let tr = ''
 
-                            if (value.status === "Vrij") {
-                                tr = `<tr class="table-success">
+
+
+                                tr = `<tr >
                                <td> ${value.kadenaam} </td>
                                <td>${value.land}</td>
                                <td>${value.gemeente}</td>
-                               <td>${value.status}</td>
+                               <td class="pl-0"><div class="kadestatus ${bg}">${value.status}</div></td>
 
                                <td data-id="${value.id}"
                                     data-naam="${value.kadenaam}"
@@ -263,59 +271,7 @@
                                     </div>
                                </td>
                            </tr>`;
-                            }
-                            if (value.status === "Niet-vrij") {
-                                tr = `<tr class="table-danger">
-                               <td> ${value.kadenaam} </td>
-                               <td>${value.land}</td>
-                               <td>${value.gemeente}</td>
-                               <td>${value.status}</td>
 
-                               <td data-id="${value.id}"
-                                    data-naam="${value.kadenaam}"
-                                   data-land="${value.land}"
-                                   data-gemeente="${value.gemeente}"
-                                   data-adres="${value.adres}"
-                                   data-lat="${value.latitude}"
-                                    data-lon="${value.longitude}"
-                                    data-status="${statusid}">
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.kadenaam}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                               </td>
-                           </tr>`;
-                            }
-                            if (value.status === "Buiten gebruik") {
-                                tr = `<tr class="table-warning">
-                               <td> ${value.kadenaam} </td>
-                               <td>${value.land}</td>
-                               <td>${value.gemeente}</td>
-                               <td>${value.status}</td>
-
-                               <td data-id="${value.id}"
-                                    data-naam="${value.kadenaam}"
-                                   data-land="${value.land}"
-                                   data-gemeente="${value.gemeente}"
-                                   data-adres="${value.adres}"
-                                   data-lat="${value.latitude}"
-                                    data-lon="${value.longitude}"
-                                    data-status="${statusid}">
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#!" class="btn btn-outline-success btn-edit" data-toggle="tooltip" title="Bewerk ${value.kadenaam}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#!" class="btn btn-outline-danger btn-delete" data-toggle="tooltip" title="Verwijder ${value.kadenaam}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                               </td>
-                           </tr>`;
-                            }
 
                             // Append row to tbody
                             $('tbody').append(tr);
