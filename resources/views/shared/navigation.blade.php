@@ -51,6 +51,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>Paswoord aanpassen</a>
+                            <a class="dropdown-item" href="/admin/inzichten"><i class="fas fa-key"></i>inzichten</a>
+
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Uitloggen</a>
                         </div>
