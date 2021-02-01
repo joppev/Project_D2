@@ -32,7 +32,9 @@
 
 {{--<script type="text/javascript" src="https://r0743641.eu.qlikcloud.com/resources/assets/external/requirejs/require.js"></script>--}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js%22%3E"></script>
-<script>
+@auth
+    @if(auth()->user()->isAdmin or auth()->user()->isReceptionist or auth()->user()->isChauffeur){
+    <script>
     /*
  * Basic responsive mashup template
  * @owner Enter you name here (xxx)
@@ -62,7 +64,7 @@
                 //check if user is authenticated; if not, redirect to login page
                 if(response.status===401){
                     const url = new URL(`${urlQlikServer}login`);
-                    url.searchParams.append('returnto', 'http://projectd2.westeurope.cloudapp.azure.com/');
+                    url.searchParams.append('returnto', 'http://projectd2.westeurope.cloudapp.azure.com');
                     url.searchParams.append('qlik-web-integration-id', webIntegrationId);
                     window.location.href = url;
                 }
@@ -127,7 +129,9 @@
     } );
 
 </script>
+        @endif
 
+@endauth
 @yield('script_after')
 @if(env('APP_DEBUG'))
     <script>
