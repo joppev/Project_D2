@@ -33,7 +33,7 @@
 {{--<script type="text/javascript" src="https://r0743641.eu.qlikcloud.com/resources/assets/external/requirejs/require.js"></script>--}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js%22%3E"></script>
 @auth
-    @if(auth()->user()->isAdmin or auth()->user()->isReceptionist){
+    @if(auth()->user()->isAdmin or auth()->user()->isReceptionist or auth()->user()->isChauffeur){
     <script>
     /*
  * Basic responsive mashup template
