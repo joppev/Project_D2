@@ -42,8 +42,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => true,
                     'isBezig' => true,
                     'isAfgewerkt' => false,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 12:30'),
-                    'stopTijd'  => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 13:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 10:00'),
+                    'stopTijd'  => DateTime::createFromFormat('Y-m-d H:i','2021-01-22 11:00'),
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],
@@ -70,8 +70,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => true,
                     'isBezig' => false,
                     'isAfgewerkt' => false,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 10:00'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-01 11:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-02 10:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-02 11:00'),
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],
@@ -84,8 +84,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => false,
                     'isBezig' => false,
                     'isAfgewerkt' => false,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 12:00'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-01 13:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-02 12:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-02 11:00'),
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],
@@ -99,8 +99,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => true,
                     'isBezig' => false,
                     'isAfgewerkt' => false,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 10:00'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-01 11:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-02 10:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-02 11:00'),
 
                     'created_at' => now(),
                     'updated_at'=> now()
@@ -114,8 +114,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => true,
                     'isBezig' => false,
                     'isAfgewerkt' => true,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 14:00'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-01 15:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-02 14:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-02 15:00'),
                     'created_at' => now(),
                     'updated_at'=> now()
                 ],
@@ -128,8 +128,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => true,
                     'isBezig' => false,
                     'isAfgewerkt' => true,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 14:00'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-01 15:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-02 14:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-02 15:00'),
 
                     'created_at' => now(),
                     'updated_at'=> now()
@@ -143,8 +143,8 @@ class CreatePlanningsTable extends Migration
                     'isAanwezig' => true,
                     'isBezig' => true,
                     'isAfgewerkt' => false,
-                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 15:00'),
-                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-01 16:00'),
+                    'startTijd' => DateTime::createFromFormat('Y-m-d H:i','2021-02-02 15:00'),
+                    'stopTijd'  =>DateTime::createFromFormat('Y-m-d H:i','2021-02-02 16:00'),
 
                     'created_at' => now(),
                     'updated_at'=> now()
