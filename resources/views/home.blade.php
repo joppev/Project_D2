@@ -75,6 +75,26 @@
     @if(auth()->user()->isChauffeur)
         <h1>Dagplanning</h1>
         <hr>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-3">
+
+                    <div id="QV02" class="qvobject2 qvplaceholder2"></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Proces: </h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
         <div class="row">
             <h2 id="info" name="info" class="col-12"></h2>
         </div>
@@ -135,7 +155,7 @@
 
         </div>
         <div>
-        <div id="QV02" class="qvobject2 qvplaceholder2"></div>
+
         </div>
     @endif
 
@@ -155,6 +175,8 @@
         </form>
         </div>
         <br>
+
+
         <div class="row">
             <h2 id="info" name="info" class="col-12"></h2>
         </div>
@@ -642,6 +664,8 @@ $('#kade').text(kade);
 
 
                 }
+
+                
 
         function loadChauffeur() {
             $.ajax({
