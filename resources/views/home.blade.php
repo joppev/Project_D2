@@ -838,7 +838,7 @@ $('#kade').text(kade);
                                         </a></td>
 
                            </tr>`;
-                        if (value.isAfgewerkt == 0 && data[0].dt2 > value.startTijd && value.isAanwezig == 0) {
+                        if (data[0].dt2 > value.startTijd && value.isAanwezig == 0) {
                             tr = `<tr class="table-danger">
                                <td>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
@@ -933,6 +933,34 @@ $('#kade').text(kade);
                                </td>
                                <td>${value.kadenaam}</td>
                                <td>Bezig</td>
+
+                               <td>
+<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
+
+                                        >
+                                            <i class="fas fa-list-ul"></i>
+                                        </a></td> <td>
+                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
+
+                                        >
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                               </td>
+
+                           </tr>`;
+                        }
+                        if (value.isAanwezig == 1 && value.isBezig == 0) {
+                            tr = `<tr class="table-active">
+                               <td>${value.startTijd} - ${value.stopTijd}</td>
+                               <td>${value.bedrijfsnaam}</td>
+                                <td>${value.voornaam} ${value.naam}</td>
+                               <td>
+
+                                ${value.soortNaam}
+
+                               </td>
+                               <td>${value.kadenaam}</td>
+                               <td>Aanwezig</td>
 
                                <td>
 <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
