@@ -769,32 +769,27 @@ $('#kade').text(kade);
                     $('.tablekade tbody').empty();
                         // Loop over each item in the array
                         $.each(data, function (key, value) {
-                            let tr = ''
 
                             if (value.status === "Vrij") {
-                                tr = `<tr class="table-success">
-                               <td>${value.kadenaam}</td>
-                               <td>${value.status}</td>
-                           </tr>`;
+                                bg ="table-success";
+
 
 
                             }
                             if (value.status == "Niet-vrij") {
-                                tr = `<tr class="table-danger">
-                               <td>${value.kadenaam}</td>
-                               <td>${value.status}</td>
-                           </tr>`;
+                                bg ="table-danger";
+
 
 
                             }
                             if (value.status === "Buiten gebruik") {
-                                tr = `<tr class="table-warning">
+                                bg ="table-warning";
+
+                            }
+                            var tr = `<tr class="${bg}">
                                <td>${value.kadenaam}</td>
                                <td>${value.status}</td>
                            </tr>`;
-
-
-                            }
                             // Append row to tbody
                             $('.tablekade tbody').append(tr);
                         });
@@ -836,7 +831,31 @@ $('#kade').text(kade);
                     $.each(data, function (key, value) {
 
 
-                            let tr = `<tr class="">
+
+                        if (data[0].dt2 > value.startTijd && value.isAanwezig == 0) {
+                            bg ="table-danger";
+                            info = "te laat"
+                        }
+                        if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0) {
+                            bg ="table-warning";
+                            info = "Vorige planning nog niet afgewerkt"
+                        }
+                        if (value.isAfgewerkt == 1) {
+                            bg = "table-success";
+                            info = "afgewerkt"
+                        }
+                        if (value.isAanwezig == 1 && value.isBezig == 1) {
+                            bg = "table-info";
+                            info = "bezig"
+                        }
+                        if (value.isAanwezig == 1 && value.isBezig == 0) {
+                            bg = "table-info";
+                            info = "aanwzig"
+                        }
+                        if(info == ''){
+                            info = 'geen info';
+                        }
+                        let tr = `<tr class="${bg}">
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
 <td>${value.voornaam} ${value.naam}</td>
@@ -846,7 +865,7 @@ $('#kade').text(kade);
 
                                </td>
                                <td>${value.kadenaam}</td>
-<td>in afwachting</td>
+<td>${info}</td>
                                <td>
                                     <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 
@@ -862,117 +881,10 @@ $('#kade').text(kade);
                                         </a></td>
 
                            </tr>`;
-                        if (value.isAfgewerkt == 0 && data[0].dt2 > value.startTijd) {
-                            tr = `<tr class="table-danger">
-                               <td>${value.startTijd} - ${value.stopTijd}</td>
-                               <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam} ${value.naam}</td>
-                               <td>
+                        bg = '';
+                        info = '';
 
-                                ${value.soortNaam}
 
-                               </td>
-                               <td>${value.kadenaam}</td>
-                               <td>te laat</td>
-                               <td>
-<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        >
-                                            <i class="fas fa-list-ul"></i>
-                                        </a></td> <td>
-                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-
-                                        >
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>
-                               </td>
-
-                           </tr>`;
-                        }
-                        if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0) {
-                            tr = `<tr class="table-warning">
-                               <td>${value.startTijd} - ${value.stopTijd}</td>
-                               <td>${value.bedrijfsnaam}</td>
-                               <td>${value.voornaam} ${value.naam}</td>
-                               <td>
-
-                                ${value.soortNaam}
-
-                               </td>
-                               <td>${value.kadenaam}</td>
-                               <td>Vorige planning nog niet afgewerkt</td>
-
-                               <td>
-<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        >
-                                            <i class="fas fa-list-ul"></i>
-                                        </a></td> <td>
-                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-
-                                        >
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>
-                               </td>
-
-                           </tr>`;
-                        }
-                        if (value.isAfgewerkt == 1) {
-                            tr = `<tr class="table-success">
-                               <td>${value.startTijd} - ${value.stopTijd}</td>
-                               <td>${value.bedrijfsnaam}</td>
-<td>${value.voornaam} ${value.naam}</td>
-                               <td>
-
-                                ${value.soortNaam}
-
-                               </td>
-                               <td>${value.kadenaam}</td>
-                               <td>afgewerkt</td>
-
-                               <td>
-<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        >
-                                            <i class="fas fa-list-ul"></i>
-                                        </a></td> <td>
-                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-
-                                        >
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>
-                               </td>
-
-                           </tr>`;
-                        }
-                        if (value.isAanwezig == 1 && value.isBezig == 1) {
-                            tr = `<tr class="table-info">
-                               <td>${value.startTijd} - ${value.stopTijd}</td>
-                               <td>${value.bedrijfsnaam}</td>
-                                <td>${value.voornaam} ${value.naam}</td>
-                               <td>
-
-                                ${value.soortNaam}
-
-                               </td>
-                               <td>${value.kadenaam}</td>
-                               <td>Bezig</td>
-
-                               <td>
-<a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
-
-                                        >
-                                            <i class="fas fa-list-ul"></i>
-                                        </a></td> <td>
-                                    <a data-id='${value.id}' class="btn btn-outline-info btn-info-home info"
-
-                                        >
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>
-                               </td>
-
-                           </tr>`;
-                        }
                         // Append row to tbody
                         $('.tableplanning tbody').append(tr);
 

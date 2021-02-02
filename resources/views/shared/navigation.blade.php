@@ -63,3 +63,8 @@
         </div>
     </div>
 </nav>
+
+@yield('sidebar')
+
+
+

@@ -21,14 +21,14 @@
 {{--  Navigation  --}}
 
 @include('shared.navigation')
-<div id="body">
+
 
 
 <main class="container size mt-3">
 
     @yield('main', 'Page under construction ...')
 </main>
-</div>
+
 {{--  Footer  --}}
 @include('shared.footer')
 <script type="text/javascript" src="https://r0743641.eu.qlikcloud.com/resources/assets/external/requirejs/require.js"></script>
@@ -70,7 +70,7 @@
                 //check if user is authenticated; if not, redirect to login page
                 if(response.status===401){
                     const url = new URL(`${urlQlikServer}login`);
-                    url.searchParams.append('returnto', 'http://projectd2.westeurope.cloudapp.azure.com');
+                    url.searchParams.append('returnto', 'https://projectd2.westeurope.cloudapp.azure.com');
                     url.searchParams.append('qlik-web-integration-id', webIntegrationId);
                     url.searchParams.append('userid','nnMKzAMxnNTn9lWuKJfWnDEXbdd6MTaN');
 
@@ -118,8 +118,10 @@
         app.getObject('QV03', 'hPpAzna');
         // stok bijhouden van alle afgewerkte producten
         app.getObject('QV04', 'PyBPvw');
-
-
+        // filter op bedrijf
+        app.getObject('QV05', 'RAbGER');
+        // filer op kade
+        app.getObject('QV06', 'eJfMLwH');
 
 
         //clear all functie werkt niet omdat ik met verschillende alternet states heb

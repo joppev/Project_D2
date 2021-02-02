@@ -103,7 +103,7 @@ class HomeController extends Controller
     public function planningChauffeur(Request $request){
         $user = Auth::user();
         //huidig uur
-        $dt = date('Y-m-d H:i',time());
+        $dt = date('Y-m-d H:i',time()-10800);
         //24 uur na huidig uur
         $dt2= date('Y-m-d H:i',time()+86400);
         $planningen = Planning::orderBy('id')

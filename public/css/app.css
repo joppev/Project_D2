@@ -11292,6 +11292,26 @@ navbar-toggler:hover {
   min-width: 100px;
 }
 
+.qvplaceholder3,
+.qvobject3 {
+  flex: 1 1 auto;
+  height: 200px;
+  min-width: 150px;
+  max-width: 200px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+#body {
+  width: 60%;
+}
+
 .kadestatus {
   min-width: 130px;
   max-width: 130px;
