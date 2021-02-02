@@ -25,7 +25,7 @@
 
 
 
-
+<div id="body">
 
 
 
@@ -43,4 +43,5 @@
         <div id="QV04" class="qvobject2 qvplaceholder2 "></div>
 
     </div>
+</div>
 @endsection

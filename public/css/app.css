@@ -11303,7 +11303,6 @@ navbar-toggler:hover {
   padding: 40px;
 }
 
-<<<<<<< HEAD
 .qvplaceholder3,
 .qvobject3 {
   flex: 1 1 auto;
@@ -11322,7 +11321,8 @@ navbar-toggler:hover {
 
 #body {
   width: 60%;
-=======
+}
+
 .kadestatus {
   min-width: 130px;
   max-width: 130px;
@@ -11347,6 +11347,5 @@ navbar-toggler:hover {
 
 .bg-rood {
   background-color: #dc3545;
->>>>>>> 52797c11608fae7f955e1bde4278391c05fc1404
 }
 
