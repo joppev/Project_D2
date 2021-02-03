@@ -665,7 +665,7 @@ $('#kade').text(kade);
 
                 }
 
-                
+
 
         function loadChauffeur() {
             $.ajax({
@@ -850,7 +850,7 @@ $('#kade').text(kade);
                         }
                         if (value.isAanwezig == 1 && value.isBezig == 0) {
                             bg = "table-info";
-                            info = "aanwzig"
+                            info = "aanwezig"
                         }
                         if(info == ''){
                             info = 'geen info';
