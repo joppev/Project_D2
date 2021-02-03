@@ -68,7 +68,7 @@
             <div class="row">
                 <div class="col-3 offset-9">
                     <div class="flex-container ">
-                        <div id="QV01" class="qvobject qvplaceholder"></div>
+                        <div id="QV01" class="qvobject3 qvplaceholder3"></div>
                     </div>
                 </div>
 
@@ -201,18 +201,20 @@
         @endif
 
 @endauth
-$('p').on('click', '#btn-begin', function () {
+$(document).on('click', '#btn-begin', function () {
 
 
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
+    console.log(id2, '  ',id);
     if(id2 != 'geenProcess') {
         $.ajax({
             method: 'GET', // Type of response and matches what we said in the route
             url: 'home/begin', // This is the url we gave in the route
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
-            success: function (data) { // What to do if we succeed
+            success: function (data) {
+                loadLogistiek2;// What to do if we succeed
                 new Noty({
                     type: data.type,
                     text: data.text,
@@ -230,10 +232,13 @@ $('p').on('click', '#btn-begin', function () {
             }
 
         });
-        loadLogistiek2;
     }
+else{
+            loadLogistiek2;
+        }
+
 });
-$('p').on('click', '#btn-afgewerkt', function () {
+$(document).on('click', '#btn-afgewerkt', function () {
 
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
@@ -244,6 +249,7 @@ $('p').on('click', '#btn-afgewerkt', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) { // What to do if we succeed
+                loadLogistiek2();
                 new Noty({
                     type: data.type,
                     text: data.text,
@@ -261,8 +267,10 @@ $('p').on('click', '#btn-afgewerkt', function () {
             }
 
         });
+    }else{
+        loadLogistiek2();
     }
-    loadLogistiek2();
+
 
 });
         $('tbody').on('click', '.btn-info-nummerplaten', function () {
@@ -647,7 +655,7 @@ function loadLogistiek2() {
             // Clear tbody tag
             $('div.logistiek').empty();
             // Loop over each item in the array
-
+                $('div#logistiekKleur').attr('data-id' , data.id);
                 let tr2 = `
                            <div class="row">
                             <div class="col-12">
@@ -676,25 +684,47 @@ function loadLogistiek2() {
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
-                                <a href="#!" class="btn btn-outline-success" id="btn-begin">
-                                        <i class="fas fa-play"></i> Begin proces
-                                    </a>
-
-                                        <a href="#!" class="btn float-right mr-5 btn-outline-danger" id="btn-afgewerkt">
-                                         <i class="fas fa-stop"></i> Proces afgewerkt
-                                        </a>
-                                </div>
+                            <div class="col-6">
+            <p class="align-content-center">
+                <a href="#!" class="btn btn-outline-success" id="btn-begin">
+                    <i class="fas fa-play"></i> Begin proces
+                </a>
+            </p>
+            </div>
+            <div class="col-6">
+            <p class="align-content-center">
+                <a href="#!" class="btn btn-outline-danger" id="btn-afgewerkt">
+                    <i class="fas fa-stop"></i> Proces afgewerkt
+                </a>
+            </p>
+            </div>
                             </div>
                            </div>
 
 
                       `;
             // Append row to tbody
+
+
+
                 if(data.startTijd == null){
                     $('.logistiek').append(tr2);
+
+                    $('a#btn-afgewerkt').addClass('disabled');
+                    $('a#btn-begin').addClass('disabled');
                 } else{
                     $('.logistiek').append(tr);
+
+                    if(data.isBezig == 0){
+                        $('a#btn-afgewerkt').addClass('disabled');
+                        $('a#btn-begin').removeClass('disabled');
+                        console.log('aangekomen')
+                    }
+                    else{
+                        $('a#btn-begin').addClass('disabled');
+                        $('a#btn-afgewerkt').removeClass('disabled');
+                        console.log('bezig')
+                    }
                 }
 
 

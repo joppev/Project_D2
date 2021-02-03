@@ -35,7 +35,7 @@ class CreateKadesTable extends Migration
                 'adres' => "Larumseweg 90",
                 'latitude' => 51.16,
                 'longitude' => 4.96,
-                'status' => 'Vrij',
+                'status' => 'Niet-vrij',
             ],
                 [
 
