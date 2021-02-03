@@ -35,8 +35,10 @@ Route::get('home/kade', 'HomeController@kade');
 
 Route::get('home/getPlanninglogistiek', 'HomeController@getPlanninglogistiek');
 Route::get('home/getinfo', 'HomeController@getinfo');
-
-
+Route::middleware(['auth'])->prefix('user')->group(function () {
+    Route::get('password', 'User\PasswordController@edit');
+    Route::post('password', 'User\PasswordController@update');
+});
 Route::middleware(['auth','receptionist'])->prefix('admin')->group(function () {
     Route::resource('users', 'Admin\UserController');
     Route::get('qryUsers', 'Admin\UserController@qryUsers');
