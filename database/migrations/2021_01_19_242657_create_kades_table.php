@@ -33,8 +33,8 @@ class CreateKadesTable extends Migration
                 'land' => "België",
                 'gemeente' => "Geel",
                 'adres' => "Larumseweg 90",
-                'latitude' => 51.15,
-                'longitude' => 80.10,
+                'latitude' => 51.16,
+                'longitude' => 4.96,
                 'status' => 'Vrij',
             ],
                 [
@@ -43,8 +43,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => 55.15,
-                    'longitude' => 90.20,
+                    'latitude' => 51.16,
+                    'longitude' => 4.96,
                     'status' => 'Buiten gebruik'
                 ],
                 [
@@ -52,8 +52,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => 50.15,
-                    'longitude' => 75.20,
+                    'latitude' => 51.16,
+                    'longitude' => 4.96,
                     'status' => 'Niet-vrij',
                 ],
                 [
@@ -61,8 +61,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => 51.15,
-                    'longitude' => 80.10,
+                    'latitude' => 51.16,
+                    'longitude' => 4.96,
                     'status' => 'Vrij',
                 ],
                 [
@@ -70,8 +70,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => 51.15,
-                    'longitude' => 80.10,
+                    'latitude' => 51.16,
+                    'longitude' => 4.96,
                     'status' => 'Vrij',
                 ],
                 [
@@ -79,8 +79,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => 51.15,
-                    'longitude' => 80.10,
+                    'latitude' => 51.16,
+                    'longitude' => 4.96,
                     'status' => 'Vrij',
                 ],
                 [
@@ -88,8 +88,8 @@ class CreateKadesTable extends Migration
                     'land' => "België",
                     'gemeente' => "Geel",
                     'adres' => "Larumseweg 90",
-                    'latitude' => 51.15,
-                    'longitude' => 80.10,
+                    'latitude' => 51.16,
+                    'longitude' => 4.96,
                     'status' => 'Vrij',
                 ],
           ]);
