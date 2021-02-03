@@ -86,7 +86,7 @@ class NummerplaatController extends Controller
             $nummerplaatzonderstreepjes += $row;
         }
 
-        $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes
+        $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes;
         $nummerplaat->bedrijfID = $request->bedrijf_id;
 
 
