@@ -466,11 +466,15 @@ function loadChauffeur2() {
                 // Append row to tbody
                 $('.card-body').append(tr);
 
+
         })
         .fail(function (e) {
             console.log('error', e);
         })
 }
+
+
+
 
 
 
