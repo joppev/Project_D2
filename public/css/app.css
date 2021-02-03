@@ -11326,6 +11326,19 @@ navbar-toggler:hover {
   border-radius: 0.25rem;
 }
 
+.planningstatus {
+  width: 100%;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  vertical-align: middle;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
 .bg-groen {
   background-color: #28a745;
 }
