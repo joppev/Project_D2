@@ -82,9 +82,11 @@ class NummerplaatController extends Controller
         $nummerplaat->land = $request->land;
         $nummerplaat->plaatcombinatie = $request->plaatcombinatie;
         $nummerplaatzonderstreepjes = "";
+
+        if (strpos($nummerplaat, '-') !== false) {
         foreach(explode('-',$nummerplaat->plaatcombinatie) as $row){
             $nummerplaatzonderstreepjes += $row;
-        }
+        }}
 
         $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes;
         $nummerplaat->bedrijfID = $request->bedrijf_id;
@@ -141,9 +143,13 @@ class NummerplaatController extends Controller
         $nummerplaat->plaatcombinatie = $request->plaatcombinatie;
         $nummerplaat->bedrijfID = $request->bedrijf_id;
         $nummerplaatzonderstreepjes = "";
-        foreach(explode('-',$nummerplaat->plaatcombinatie) as $row){
-            $nummerplaatzonderstreepjes += $row;
-        }
+
+        if (strpos($nummerplaat, '-') !== false) {
+            foreach(explode('-',$nummerplaat->plaatcombinatie) as $row){
+                $nummerplaatzonderstreepjes += $row;
+            }}
+
+        $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes;
 
         $nummerplaat->save();
         return response()->json([
