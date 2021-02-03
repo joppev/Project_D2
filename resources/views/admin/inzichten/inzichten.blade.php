@@ -38,7 +38,7 @@
 
     </div>
     <hr>
-    <h2>Stok</h2>
+    <h2>Stock</h2>
     <div class="row">
         <div id="QV04" class="qvobject2 qvplaceholder2 "></div>
 
