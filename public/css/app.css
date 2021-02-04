@@ -11237,6 +11237,10 @@ a.text-dark:focus {
   color: #eaf2f8 !important;
 }
 
+.logo {
+  max-width: 50px;
+}
+
 .size {
   min-height: 500px;
 }
