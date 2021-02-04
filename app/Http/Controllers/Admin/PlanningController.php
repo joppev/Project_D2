@@ -131,11 +131,11 @@ class PlanningController extends Controller
         $status = $request->status;
 
         if($status === "1"){
-            $planning->isAanwezig = false;
-            $planning->isBezig = false;
+            $planning->isAanwezig = true;
+            $planning->isBezig = true;
             $planning->isAfgewerkt = true;
         } elseif($status === "2"){
-            $planning->isAanwezig = false;
+            $planning->isAanwezig = true;
             $planning->isBezig = true;
             $planning->isAfgewerkt = false;
         }
@@ -279,11 +279,11 @@ class PlanningController extends Controller
         $status = $request->status;
 
         if($status === "1"){
-            $planning->isAanwezig = false;
-            $planning->isBezig = false;
+            $planning->isAanwezig = true;
+            $planning->isBezig = true;
             $planning->isAfgewerkt = true;
         } elseif($status === "2"){
-            $planning->isAanwezig = false;
+            $planning->isAanwezig = true;
             $planning->isBezig = true;
             $planning->isAfgewerkt = false;
         }

@@ -202,8 +202,8 @@
 
 @endauth
 $(document).on('click', '#btn-begin', function () {
-
-
+            $('.progress-bar').addClass('progress66');
+            $('.progress-bar').removeClass('progress33');
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
     console.log(id2, '  ',id);
@@ -229,8 +229,8 @@ $(document).on('click', '#btn-begin', function () {
                 } else {
                     $(this).prop("checked", true);
                 }
-            }
-
+            },
+            loadLogistiek2
         });
     }
 else{
@@ -240,10 +240,16 @@ else{
 });
 $(document).on('click', '#btn-afgewerkt', function () {
 
+
+    $('.progress-bar').addClass('progress100');
+    $('.progress-bar').removeClass('progress66');
+
+
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
     if(id2 != 'geenProcess') {
         $.ajax({
+
             method: 'GET', // Type of response and matches what we said in the route
             url: 'home/afgewerkt', // This is the url we gave in the route
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
@@ -312,10 +318,12 @@ $(document).on('click', '#btn-afgewerkt', function () {
 
             // Update the modal
             let id = $(this).closest('a').data('id');
+           
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getinfo', // This is the url we gave in the route
                 data: {'id' : id, _token: '{{csrf_token()}}'}, // a JSON object to send back
+
 
                 success: function(data){ // What to do if we succeed
                     var startTijd = data.startTijd;
@@ -567,8 +575,10 @@ function loadChauffeur2() {
 
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
+                        console.log(value)
 
-
+                        bg = '';
+                        info = '';
 
                         if (data[0].dt2 > value.startTijd && value.isAanwezig == 0) {
                             bg ="table-danger";
@@ -578,10 +588,7 @@ function loadChauffeur2() {
                             bg ="table-warning";
                             info = "Vorige planning nog niet afgewerkt"
                         }
-                        if (value.isAfgewerkt == 1) {
-                            bg = "table-success";
-                            info = "afgewerkt"
-                        }
+
                         if (value.isAanwezig == 1 && value.isBezig == 1) {
                             bg = "table-info";
                             info = "bezig"
@@ -590,7 +597,12 @@ function loadChauffeur2() {
                             bg = "table-info";
                             info = "aanwezig"
                         }
+                        if (value.isAfgewerkt == 1) {
+                            bg = "table-success";
+                            info = "afgewerkt"
+                        }
                         if(info == ''){
+                            bg = ''
                             info = 'geen info';
                         }
                         let tr = `<tr class="${bg}">
@@ -619,8 +631,7 @@ function loadChauffeur2() {
                                         </a></td>
 
                            </tr>`;
-                        bg = '';
-                        info = '';
+
 
 
                         // Append row to tbody
@@ -657,6 +668,17 @@ function loadLogistiek2() {
             $('div.logistiek').empty();
             // Loop over each item in the array
                 $('div#logistiekKleur').attr('data-id' , data.id);
+
+                var bar = 0;
+
+                if(data.isAanwezig == 0 && data.isBezig == 0 && data.isAfgewerkt == 0){
+                    bar = 'progress10';
+                } else if(data.isAanwezig == 1 && data.isBezig == 0 && data.isAfgewerkt == 0){
+                    bar = 'progress33';
+                } else if(data.isAanwezig == 1 && data.isBezig == 1 && data.isAfgewerkt == 0){
+                    bar = 'progress66'
+                }
+
                 let tr2 = `
                            <div class="row">
                             <div class="col-12">
@@ -668,9 +690,10 @@ function loadLogistiek2() {
 
             let tr = `
                            <div class="row">
-                            <div class="col-12">
+                            <div class="col-8">
                             <h3 class="card-title"> ${data.startTijd} - ${data.stopTijd}  </h3>
                             </div>
+
 
                             <div class="col-12 ">
                             <h5 class="card-title mt-2">Chauffeur: ${data.voornaam} ${data.naam} </h5>
@@ -678,9 +701,16 @@ function loadLogistiek2() {
                             <div class="col-12 mt-1 ">
                                 <h5>Proces: ${data.soortNaam} </h5>
                             </div>
-                              <div class="col-12 mt-1 mb-2">
-                                <h5>Goederen: ${data.aantal} ${data.ladingDetails}</h5>
+                            <div class="col-12 mt-1 mb-2">
+                                <h5>Status: ${data.aantal} ${data.ladingDetails}</h5>
                             </div>
+
+                            <div class="col-12 mb-4">
+                            <div class="progress">
+                                <div id="bar" class="progress-bar progress-bar-striped bg-groen  ${bar} progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                                </div>
+                            </div>
+
 
                         </div>
 

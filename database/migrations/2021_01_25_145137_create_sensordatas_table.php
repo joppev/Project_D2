@@ -28,15 +28,12 @@ class CreateSensordatasTable extends Migration
                 'tijdstip' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 09:40'),
             ],
                 [
-                    'kadeNaam' => 'Kade 4',
+                    'kadeNaam' => 'Kade 3',
                     'afstand' => 200,
                     'kadeVrij' => true,
                     'tijdstip' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 09:40'),
                 ],
                 ]);
-
-
-
     }
 
     /**
