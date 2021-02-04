@@ -285,7 +285,7 @@ class HomeController extends Controller
             ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
             ->where('startTijd','<',$dt2)
             ->where('startTijd','>',$dt)
-            ->where('isAanwezig', '=',1)
+
             ->where('isAfgewerkt', '=', 0)
             ->where('kadeID', 'like', $id)
         ->get();

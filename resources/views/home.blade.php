@@ -567,7 +567,8 @@ function loadChauffeur2() {
                     // Loop over each item in the array
                     $.each(data, function (key, value) {
 
-
+                        bg = '';
+                        info = '';
 
                         if (data[0].dt2 > value.startTijd && value.isAanwezig == 0) {
                             bg ="table-danger";
@@ -577,10 +578,7 @@ function loadChauffeur2() {
                             bg ="table-warning";
                             info = "Vorige planning nog niet afgewerkt"
                         }
-                        if (value.isAfgewerkt == 1) {
-                            bg = "table-success";
-                            info = "afgewerkt"
-                        }
+
                         if (value.isAanwezig == 1 && value.isBezig == 1) {
                             bg = "table-info";
                             info = "bezig"
@@ -588,6 +586,10 @@ function loadChauffeur2() {
                         if (value.isAanwezig == 1 && value.isBezig == 0) {
                             bg = "table-info";
                             info = "aanwezig"
+                        }
+                        if (value.isAfgewerkt == 1) {
+                            bg = "table-success";
+                            info = "afgewerkt"
                         }
                         if(info == ''){
                             info = 'geen info';
@@ -618,8 +620,7 @@ function loadChauffeur2() {
                                         </a></td>
 
                            </tr>`;
-                        bg = '';
-                        info = '';
+
 
 
                         // Append row to tbody
@@ -667,9 +668,10 @@ function loadLogistiek2() {
 
             let tr = `
                            <div class="row">
-                            <div class="col-12">
+                            <div class="col-8">
                             <h3 class="card-title"> ${data.startTijd} - ${data.stopTijd}  </h3>
                             </div>
+
 
                             <div class="col-12 ">
                             <h5 class="card-title mt-2">Chauffeur: ${data.voornaam} ${data.naam} </h5>
@@ -677,9 +679,10 @@ function loadLogistiek2() {
                             <div class="col-12 mt-1 ">
                                 <h5>Proces: ${data.soortNaam} </h5>
                             </div>
-                              <div class="col-12 mt-1 mb-2">
-                                <h5>Goederen: ${data.aantal} ${data.ladingDetails}</h5>
+                            <div class="col-12 mt-1 mb-2">
+                                <h5>Status: ${data.aantal} ${data.ladingDetails}</h5>
                             </div>
+
 
                         </div>
 
