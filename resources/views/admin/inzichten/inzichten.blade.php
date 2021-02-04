@@ -11,6 +11,10 @@
                 <div class="sidebar-nav">
                     <br>
                     <br>
+
+                    <button id="clearAll" class="btn btn-outline-info clear">clear</button>
+                    <br>
+                    <br>
                     <div id="QV06" class="qvobject3 qvplaceholder3 "></div>
                     <div id="QV05" class="qvobject3 qvplaceholder3 "></div>
 
@@ -41,6 +45,12 @@
     <h2>Stock</h2>
     <div class="row">
         <div id="QV04" class="qvobject2 qvplaceholder2 "></div>
+
+    </div>
+    <hr>
+    <h2>Gescande nummerplaten</h2>
+    <div class="row">
+        <div id="QV07" class="qvobject2 qvplaceholder2 "></div>
 
     </div>
 </div>
