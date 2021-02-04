@@ -51,8 +51,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>Paswoord aanpassen</a>
+                            @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
                             <a class="dropdown-item" href="/admin/inzichten"><i class="fas fa-chart-bar"></i>inzichten</a>
-
+                            @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Uitloggen</a>
                         </div>
