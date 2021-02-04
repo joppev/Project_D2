@@ -122,6 +122,8 @@
         app.getObject('QV05', 'RAbGER');
         // filer op kade
         app.getObject('QV06', 'eJfMLwH');
+        //gescande nummerplaten
+        app.getObject('QV07', 'YXSfypC');
 
 
         //clear all functie werkt niet omdat ik met verschillende alternet states heb
