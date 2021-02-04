@@ -249,6 +249,7 @@ $(document).on('click', '#btn-afgewerkt', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) { // What to do if we succeed
+
                 loadLogistiek2();
                 new Noty({
                     type: data.type,
