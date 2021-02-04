@@ -24,7 +24,7 @@ class CreateSensordatasTable extends Migration
                 [
                 'kadeNaam' => 'Kade 1',
                 'afstand' => 200,
-                'kadeVrij' => false,
+                'kadeVrij' => true,
                 'tijdstip' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 09:40'),
             ],
                 [

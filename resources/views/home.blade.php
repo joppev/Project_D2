@@ -204,8 +204,7 @@
 
 @endauth
 $(document).on('click', '#btn-begin', function () {
-            $('.progress-bar').addClass('progress66');
-            $('.progress-bar').removeClass('progress33');
+
     let id2 = $(`div#logistiekKleur`).data('id');
     let id = $(`option.selected`).data('id');
     console.log(id2, '  ',id);
@@ -216,6 +215,11 @@ $(document).on('click', '#btn-begin', function () {
             data: {'id': id2, 'idKade': id, _token: '{{csrf_token()}}'}, // a JSON object to send back
 
             success: function (data) {
+                if(data.type == 'success'){
+                    $('.progress-bar').addClass('progress66');
+                    $('.progress-bar').removeClass('progress33');
+                }
+
                 loadLogistiek2;// What to do if we succeed
                 new Noty({
                     type: data.type,

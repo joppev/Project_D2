@@ -91,7 +91,6 @@ class CreateUsersTable extends Migration
                     'created_at' => now(),
                     'email_verified_at' => now()
                 ],
-
                 [
                     'bedrijfsID' => 1,
                     'naam' => 'De Vroet',
