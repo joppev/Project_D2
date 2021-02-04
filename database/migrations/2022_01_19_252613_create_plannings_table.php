@@ -77,7 +77,7 @@ class CreatePlanningsTable extends Migration
                 ],
                 [
                     'gebruikerID' => 3,
-                    'kadeID' => 4,
+                    'kadeID' => 1,
                     'soort_id' => 2,
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
@@ -107,7 +107,7 @@ class CreatePlanningsTable extends Migration
                 ],
                 [
                     'gebruikerID' => 3,
-                    'kadeID' => 5,
+                    'kadeID' => 3,
                     'soort_id' => 1,
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,
@@ -121,7 +121,7 @@ class CreatePlanningsTable extends Migration
                 ],
                 [
                     'gebruikerID' => 1,
-                    'kadeID' => 6,
+                    'kadeID' => 2,
                     'soort_id' => 1,
                     'ladingDetails' => "ladingDetails3",
                     'aantal' => 3,

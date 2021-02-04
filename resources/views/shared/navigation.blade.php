@@ -12,25 +12,25 @@
                 @auth
                     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/plannings">Planning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/users">Gebruikers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/kades">Kades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/soorts">Proces</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/bedrijven">Bedrijven</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/nummerplaats">Nummerplaten</a>
+                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/users">Overzicht gebruikers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/kades">Overzicht kades</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/plannings">Overzicht planning</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/nummerplaats">Overzicht nummerplaten</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/soorts">Overzicht proces</a>
-                        </li>
                     @endif
 
                 @endauth
