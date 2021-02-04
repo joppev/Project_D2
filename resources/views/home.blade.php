@@ -125,7 +125,9 @@
 
                     <div class="card-body logistiek">
                         <h3>Kies een kade!</h3>
+
                     </div>
+
                 </div>
             </div>
 
@@ -318,7 +320,7 @@ $(document).on('click', '#btn-afgewerkt', function () {
 
             // Update the modal
             let id = $(this).closest('a').data('id');
-           
+
             $.ajax({
                 method: 'GET', // Type of response and matches what we said in the route
                 url: 'home/getinfo', // This is the url we gave in the route
