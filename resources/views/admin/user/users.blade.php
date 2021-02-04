@@ -6,13 +6,6 @@
         <div class="col-sm-3 mb-2">
             <h1 class="ml-2">Gebruikers</h1>
         </div>
-
-
-
-
-
-
-
             <div class="col-sm-3 mb-2">
                 <input type="text" class="form-control" name="userzoeknaam" id="userzoeknaam"
                        value="" placeholder="Filter gebruikers">
@@ -39,7 +32,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th width="25%">Voor- & achternaam</th>
