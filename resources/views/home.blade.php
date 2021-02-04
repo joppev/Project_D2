@@ -718,15 +718,20 @@ function loadLogistiek2() {
                 } else{
                     $('.logistiek').append(tr);
 
-                    if(data.isBezig == 0){
+                    if (data.isAanwezig == 1 && data.isBezig == 0) {
                         $('a#btn-afgewerkt').addClass('disabled');
                         $('a#btn-begin').removeClass('disabled');
                         console.log('aangekomen')
                     }
                     else{
-                        $('a#btn-begin').addClass('disabled');
-                        $('a#btn-afgewerkt').removeClass('disabled');
-                        console.log('bezig')
+                        if (data.isAanwezig == 1 && data.isBezig == 1) {
+                            $('a#btn-begin').addClass('disabled');
+                            $('a#btn-afgewerkt').removeClass('disabled');
+                            console.log('bezig')
+                        }else{
+                            $('a#btn-afgewerkt').addClass('disabled');
+                            $('a#btn-begin').addClass('disabled');
+                        }
                     }
                 }
 
