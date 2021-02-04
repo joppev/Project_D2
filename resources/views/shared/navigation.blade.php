@@ -12,25 +12,25 @@
                 @auth
                     @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/plannings">Planning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/users">Gebruikers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/kades">Kades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/soorts">Proces</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/bedrijven">Bedrijven</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/nummerplaats">Nummerplaten</a>
+                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/users">Overzicht gebruikers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/kades">Overzicht kades</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/plannings">Overzicht planning</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/bedrijven">Overzicht bedrijven</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/nummerplaats">Overzicht nummerplaten</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/soorts">Overzicht proces</a>
-                        </li>
                     @endif
 
                 @endauth
@@ -51,8 +51,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/password"><i class="fas fa-key"></i>Paswoord aanpassen</a>
+                            @if(auth()->user()->isAdmin or auth()->user()->isReceptionist)
                             <a class="dropdown-item" href="/admin/inzichten"><i class="fas fa-chart-bar"></i>inzichten</a>
-
+                            @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Uitloggen</a>
                         </div>
