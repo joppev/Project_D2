@@ -324,8 +324,8 @@ class HomeController extends Controller
         ->Join('kades', 'plannings.kadeID', '=', 'kades.id')
         ->Join('soorts','plannings.soort_id','=','soorts.id')
         ->select('plannings.*','kades.status as status','soorts.soortNaam as soortNaam','kades.kadenaam as kadenaam','bedrijfs.bedrijfsnaam as bedrijfsnaam', 'users.voornaam as voornaam', 'users.naam as naam','bedrijfs.id as bedrijfsID')
-/*->where('startTijd','<',$dt2)
-        ->where('startTijd','>',$dt)*/
+        ->where('startTijd','<',$dt2)
+        ->where('startTijd','>',$dt)
         ->where(function ($query) use ($text) {
             $query->where('volledigeNaam', 'like', $text)
                 ->orwhere('kadenaam', 'like', $text)
