@@ -18,13 +18,7 @@ class CreateGescandeNummerplatensTable extends Migration
             $table->timestamp('tijdstip');
         });
 
-        DB::table('gescande_nummerplatens')->insert(
-            [
-                [
-                    'plaatcombinatie' => "1ABC123",
-                    'tijdstip' => now(),
 
-                ]]);
     }
 
     /**

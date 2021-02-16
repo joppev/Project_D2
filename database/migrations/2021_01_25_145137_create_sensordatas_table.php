@@ -19,21 +19,6 @@ class CreateSensordatasTable extends Migration
             $table->boolean('kadeVrij');
             $table->timestamp('tijdstip');
         });
-        DB::table('sensordatas')->insert(
-            [
-                [
-                'kadeNaam' => 'Kade 1',
-                'afstand' => 200,
-                'kadeVrij' => true,
-                'tijdstip' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 09:40'),
-            ],
-                [
-                    'kadeNaam' => 'Kade 3',
-                    'afstand' => 200,
-                    'kadeVrij' => true,
-                    'tijdstip' => DateTime::createFromFormat('Y-m-d H:i','2021-02-01 09:40'),
-                ],
-                ]);
     }
 
     /**

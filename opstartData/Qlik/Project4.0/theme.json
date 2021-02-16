@@ -1,0 +1,189 @@
+{
+  "object": {
+    "title": {
+      "main": {
+        "color": "@TitleColor",
+        "fontSize": "@TitleSize"
+      },
+      "subTitle": {
+        "color": "@SubtitleColor",
+        "fontSize": "@SubtitleSize"
+      },
+      "footer": {
+        "color": "@FooterColor",
+        "fontSize": "@FooterSize",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "label": {
+      "name": {
+        "color": "@TextColor",
+        "fontSize": "@TextSize"
+      },
+      "value": {
+        "color": "@TextColor",
+        "fontSize": "@TextSize"
+      }
+    },
+    "axis": {
+      "title": {
+        "color": "@TextColor",
+        "fontSize": "@TextSize"
+      },
+      "label": {
+        "name": {
+          "color": "@TextColor",
+          "fontSize": "@TextSize"
+        }
+      },
+      "line": {
+        "major": {
+          "color": "#012340"
+        },
+        "minor": {
+          "color": "#012340"
+        }
+      }
+    },
+    "grid": {
+      "line": {
+        "highContrast": {
+          "color": "#012340"
+        },
+        "major": {
+          "color": "#012340"
+        },
+        "minor": {
+          "color": "#012340"
+        }
+      }
+    },
+    "referenceLine": {
+      "label": {
+        "name": {
+          "color": "@TextColor",
+          "fontSize": "@TextSize"
+        }
+      },
+      "outOfBounds": {
+        "color": "@TextColor",
+        "backgroundColor": "#012340",
+        "fontSize": "@TextSize"
+      }
+    },
+    "legend": {
+      "title": {
+        "color": "@TextColor",
+        "fontSize": "@TextSize"
+      },
+      "label": {
+        "color": "@TextColor",
+        "fontSize": "@TextSize"
+      }
+    }
+  },
+  "dataColors": {
+    "primaryColor": "#049f95",
+    "othersColor": "#d6d257",
+    "errorColor": "#B3001B",
+    "nullColor": "#000000"
+  },
+  "palettes": {
+    "data": [
+      {
+        "scale": [
+          "#392539",
+          "#720012",
+          "#083F6F",
+          "#378979",
+          "#9B8043",
+          "#492F49",
+          "#930017",
+          "#0A518F",
+          "#46B09C",
+          "#C7A556",
+          "#593959",
+          "#B3001B",
+          "#0B62AE",
+          "#55D6BE",
+          "#F3C969",
+          "#775D77",
+          "#C02E44",
+          "#377EBC",
+          "#73DDC9",
+          "#F5D284",
+          "#958195",
+          "#CE5C6D",
+          "#639BCB",
+          "#92E4D5",
+          "#F7DC9F"
+        ],
+        "name": "Bitmetric FlatUI",
+        "translation": "This is a flat ui pallet bassed on the main bitmetric color",
+        "propertyValue": "ikrbg9",
+        "type": "row",
+        "_id": "5ab0ebccbe1a68155e395fe1"
+      }
+    ],
+    "ui": [
+      {
+        "colors": [
+          "#392539",
+          "#720012",
+          "#083F6F",
+          "#378979",
+          "#9B8043",
+          "#492F49",
+          "#930017",
+          "#0A518F",
+          "#46B09C",
+          "#C7A556",
+          "#593959",
+          "#B3001B",
+          "#0B62AE",
+          "#55D6BE",
+          "#F3C969"
+        ],
+        "name": "Bitmetric Falt UI colours",
+        "_id": "5ab0ebccbe1a68155e395fe2"
+      }
+    ]
+  },
+  "customStyles": [
+    {
+      "cssRef": "theme.css",
+      "classRef": "sense-theme"
+    }
+  ],
+  "scales": [
+    {
+      "scale": [
+        "#6F1E51",
+        "#0B62AE",
+        "#12CBC4"
+      ],
+      "name": "Measure Gradient",
+      "translation": "Measure Gradiant Based on the Bitmetric main color",
+      "type": "gradient",
+      "propertyValue": "64gsn5",
+      "_id": "5ab0ebccbe1a68155e395fe3"
+    }
+  ],
+  "_inherit": true,
+  "_variables": {
+    "@TitleSize": "24px",
+    "@SubtitleSize": "18px",
+    "@TextSize": "12px",
+    "@FooterSize": "10px",
+    "@TitleColor": "#1A2601",
+    "@SubtitleColor": "#1A2601",
+    "@TextColor": "#1A2601",
+    "@FooterColor": "#1A2601",
+    "@BackgroundColor": "#eaf2f8",
+    "@AxisMajorColor": "#1A2601",
+    "@AxisMinorColor": "#1A2601"
+  },
+  "color": "@TextColor",
+  "fontSize": "@TextSize",
+  "backgroundColor": "@BackgroundColor"
+}
