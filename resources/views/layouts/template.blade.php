@@ -56,7 +56,7 @@
         const urlQlikServer = "https://r0743641.eu.qlikcloud.com/";
         const urlLoggedIn = "api/v1/audits";//Use GET request to see if you are authenticated
         const urlLogin = "login";
-        const webIntegrationId = 'Fyml_Ta_M3TY9YBzn0n2TCNaeykh5SK5';
+        const webIntegrationId = 'cK9TyumJP0zKJwLCbjMFdr63KV9Wv0_R';
 
         //Check to see if logged in
         return await fetch(`${urlQlikServer}${urlLoggedIn}`, {
@@ -72,7 +72,6 @@
                     const url = new URL(`${urlQlikServer}login`);
                     url.searchParams.append('returnto', 'https://projectd2.westeurope.cloudapp.azure.com');
                     url.searchParams.append('qlik-web-integration-id', webIntegrationId);
-                    url.searchParams.append('userid','nnMKzAMxnNTn9lWuKJfWnDEXbdd6MTaN');
 
                     window.location.href = url;
                 }
@@ -88,7 +87,7 @@
         prefix: "/", //or the virtual proxy to be used. for example "/anonymous/"
         port: 443, //or the port to be used if different from the default port
         isSecure: true, //should be true if connecting over HTTPS
-        webIntegrationId: 'Fyml_Ta_M3TY9YBzn0n2TCNaeykh5SK5' //only needed in SaaS editions and QSEoK
+        webIntegrationId: 'cK9TyumJP0zKJwLCbjMFdr63KV9Wv0_R' //only needed in SaaS editions and QSEoK
     };
 
     require.config( {
@@ -108,7 +107,7 @@
 
 
         //opend corona app
-        var app = qlik.openApp("8a89b99d-1827-43ca-9b85-adb4ce8cd5d5", config1);
+        var app = qlik.openApp("a3833f7e-6ba8-4084-be3c-f40e6d52ee04", config1);
 
         //gemiddelde tijd in het bedrijf
         app.getObject('QV01', 'qdrKKC');
