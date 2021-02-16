@@ -150,6 +150,7 @@ class NummerplaatController extends Controller
         $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes;
 
         $nummerplaat->save();
+
         return response()->json([
             'type' => 'success',
             'text' => "De nummerplaat <b>$nummerplaat->plaatcombinatie </b> is aangepast."
