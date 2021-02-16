@@ -19,7 +19,7 @@
 
 
                 </div>
-            <table class="table tableplanning">
+            <table class="table table-striped tableplanning">
                 <thead>
                 <tr>
                     <th>Tijdstip</th>
@@ -51,7 +51,7 @@
 
 
                 </div>
-            <table class="table tablekade" id="tablekade">
+            <table class="table tablekade table-striped" id="tablekade">
                 <thead>
                 <tr>
                     <th>Kadenaam</th>
@@ -523,24 +523,24 @@ function loadChauffeur2() {
                         $.each(data, function (key, value) {
 
                             if (value.status === "Vrij") {
-                                bg ="table-success";
+                                bg ="bg-groen";
 
 
 
                             }
                             if (value.status == "Niet-vrij") {
-                                bg ="table-danger";
+                                bg ="bg-rood";
 
 
 
                             }
                             if (value.status === "Buiten gebruik") {
-                                bg ="table-warning";
+                                bg ="bg-oranje";
 
                             }
-                            var tr = `<tr class="${bg}">
+                            var tr = `<tr >
                                <td>${value.kadenaam}</td>
-                               <td>${value.status}</td>
+                               <td><div class="kadestatus ${bg}">${value.status}</div></td>
                            </tr>`;
                             // Append row to tbody
                             $('.tablekade tbody').append(tr);
@@ -587,31 +587,31 @@ function loadChauffeur2() {
                         info = '';
 
                         if (data[0].dt2 > value.startTijd && value.isAanwezig == 0) {
-                            bg ="table-danger";
+                            bg ="bg-rood";
                             info = "te laat"
                         }
                         if (value.isAanwezig == 1 && value.status == "Niet-vrij" && value.isBezig == 0) {
-                            bg ="table-warning";
+                            bg ="bg-warning";
                             info = "Vorige planning nog niet afgewerkt"
                         }
 
                         if (value.isAanwezig == 1 && value.isBezig == 1) {
-                            bg = "table-info";
+                            bg = "bg-info";
                             info = "bezig"
                         }
                         if (value.isAanwezig == 1 && value.isBezig == 0) {
-                            bg = "table-info";
+                            bg = "bg-info";
                             info = "aanwezig"
                         }
                         if (value.isAfgewerkt == 1) {
-                            bg = "table-success";
+                            bg = "bg-success";
                             info = "afgewerkt"
                         }
                         if(info == ''){
                             bg = ''
                             info = 'geen info';
                         }
-                        let tr = `<tr class="${bg}">
+                        let tr = `<tr>
                                <td class=>${value.startTijd} - ${value.stopTijd}</td>
                                <td>${value.bedrijfsnaam}</td>
 <td>${value.voornaam} ${value.naam}</td>
@@ -621,7 +621,7 @@ function loadChauffeur2() {
 
                                </td>
                                <td>${value.kadenaam}</td>
-<td>${info}</td>
+<td><div class=" kadestatus2 ${bg}">${info}</div></td>
                                <td>
                                     <a data-id='${value.bedrijfsID}' class="btn btn-outline-info btn-info-nummerplaten info"
 

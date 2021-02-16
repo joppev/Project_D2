@@ -25,7 +25,7 @@
 
     <div class="row">
         <div class="table-responsive col-12">
-            <table class="table" id="bedrijventable">
+            <table class="table table-striped" id="bedrijventable">
                 <thead>
                 <tr>
                     <th width="37.5%">Bedrijf</th>

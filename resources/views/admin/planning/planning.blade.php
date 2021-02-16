@@ -40,7 +40,7 @@
 
     <div class="row">
     <div class="table-responsive col-12">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th width="30%">Tijdstip</th>

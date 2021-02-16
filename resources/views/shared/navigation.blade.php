@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md shadow-sm navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/"></a>
+        <a class="navbar-brand" href="/"><img class="logo " src="../assets/icons/logo.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsNav">
             <span class="navbar-toggler-icon"></span>
         </button>

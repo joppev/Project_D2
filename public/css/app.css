@@ -11237,6 +11237,10 @@ a.text-dark:focus {
   color: #eaf2f8 !important;
 }
 
+.logo {
+  max-width: 50px;
+}
+
 .size {
   min-height: 500px;
 }
@@ -11324,6 +11328,20 @@ navbar-toggler:hover {
 .kadestatus {
   min-width: 130px;
   max-width: 130px;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  vertical-align: middle;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.kadestatus2 {
+  min-width: 100px;
+  max-width: 100px;
   display: inline-block;
   font-weight: 400;
   text-align: center;
