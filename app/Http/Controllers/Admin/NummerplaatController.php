@@ -141,10 +141,11 @@ class NummerplaatController extends Controller
         $nummerplaat->bedrijfID = $request->bedrijf_id;
         $nummerplaatzonderstreepjes = "";
 
-        if (strpos($nummerplaat, '-') !== false) {
-            foreach(explode('-',$nummerplaat->plaatcombinatie) as $row){
-                $nummerplaatzonderstreepjes += $row;
-            }}
+        $streepjes = explode("-", $nummerplaat->plaatcombinatie);
+
+        if (strpos($nummerplaat->plaatcombinatie, '-') !== false) {
+            $nummerplaatzonderstreepjes = $nummerplaatzonderstreepjes . implode($streepjes);
+        }
 
         $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes;
 
