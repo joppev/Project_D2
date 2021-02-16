@@ -73,20 +73,17 @@ class NummerplaatController extends Controller
                 'plaatcombinatie.reqex' => 'Dit is geen geldig duits nummerplaat.'
             ]);
         }
-
-
-
-
-
         $nummerplaat = new Nummerplaat();
         $nummerplaat->land = $request->land;
         $nummerplaat->plaatcombinatie = $request->plaatcombinatie;
         $nummerplaatzonderstreepjes = "";
 
-        if (strpos($nummerplaat, '-') !== false) {
-        foreach(explode('-',$nummerplaat->plaatcombinatie) as $row){
-            $nummerplaatzonderstreepjes += $row;
-        }}
+        $streepjes = explode("-", $nummerplaat->plaatcombinatie);
+
+        if (strpos($nummerplaat->plaatcombinatie, '-') !== false) {
+            $nummerplaatzonderstreepjes = $nummerplaatzonderstreepjes . implode($streepjes);
+        }
+
 
         $nummerplaat->plaatcombinatieZonderStreepjes = $nummerplaatzonderstreepjes;
         $nummerplaat->bedrijfID = $request->bedrijf_id;

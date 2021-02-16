@@ -94,6 +94,8 @@
                 $('.modal-title').text(`Bewerk ${naam}`);
                 $('form').attr('action', `/admin/nummerplaats/${id}`);
 
+
+
                 $('#naam').val(naam);
                 $('#bedrijf_id').val(bedrijf);
                 $('#land').val(land);
